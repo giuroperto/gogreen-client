@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 
-class Navbar extends Component {
+class Home extends Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    return()
+    return(
+      <div className="home-container">
+        <h2>Go Green</h2>
+      </div>
+    )
   }
 }
 
-export default Navbar;
+export default Home;
