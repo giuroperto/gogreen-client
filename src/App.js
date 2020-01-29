@@ -32,7 +32,7 @@ class App extends Component {
           <Route exact path='/login' component={Login}/>
           <Route exact path='/signup' component={Signup}/>
           <Route exact path='/aboutus' component={AboutUs}/>
-          <Route exact path='/main' component={AllRecipes}/>
+          <Route exact path='/main' render={(props) => <AllRecipes recipes={[{name: 'Apple Pie'}, {name: 'Banana Split'}, {name: 'Feijoada'} ]} {...props} />} />
           <Route exact path='/addrecipe' component={AddRecipe}/>
           <Route exact path='/user/:username' component={Profile}/> 
           <Route exact path='/user/:username/edit' component={EditProfile}/> 
