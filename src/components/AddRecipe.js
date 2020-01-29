@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MasterForm from './recipe-forms/MasterForm'
 
 class Navbar extends Component {
   constructor(props) {
@@ -6,7 +7,11 @@ class Navbar extends Component {
   }
 
   render() {
-    return()
+    return(
+      <div className="background">
+        <MasterForm />
+      </div>
+    )
   }
 }
 
