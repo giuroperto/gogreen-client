@@ -3,25 +3,24 @@ import { Link } from "react-router-dom";
 import SearchButtons from "./SearchButtons";
 import FilterRender from "./FilterRender";
 
-
 class Navbar extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      showFilterRender: false,
-    }
+      showFilterRender: false
+    };
     this.filterRender = this.filterRender.bind(this);
   }
 
-  filterRender(){
+  filterRender() {
     this.setState({
-      showFilterRender: !this.state.showFilterRender,
-    })
+      showFilterRender: !this.state.showFilterRender
+    });
   }
 
   render() {
-    console.log('yesss')
+    console.log("yesss");
     return (
       <div className="nav-container">
         <nav className="navbar navbar-expand-lg navbar-light my-1">
@@ -114,17 +113,13 @@ class Navbar extends Component {
               <img src="./images/vegetarian-icon.png" alt="vegetarian-icon" />
               <p>Vegetarian</p>
             </a>
+
+            <SearchButtons showFilter={this.filterRender} />
+
           </div>
 
-          <SearchButtons showFilter={this.filterRender}/>
-
-          <div className='filter-render'>
-            {
-              this.state.showFilterRender ? <FilterRender /> : <h2>no filter</h2>
-            }
-          </div>
-          
         </nav>
+        <div>{this.state.showFilterRender && <FilterRender allData={this.props.allData}/>}</div>
       </div>
     );
   }
