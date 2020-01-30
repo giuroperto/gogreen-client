@@ -20,7 +20,7 @@ class Step2 extends Component {
         <label htmlFor="dishTypes">What <strong>dish type</strong> is your recipe?</label>
         <select value={this.props.dishTypes} name="dishTypes" onChange={this.props.handleChange} className="custom-select">
           <option value=''>Choose a dish type</option>
-          {this.props.allData.dishTypesArr.map(dishType => <option value={dishType}>{dishType}</option>)}
+          {this.props.allData.dishTypesArr.map((dishType, idx) => <option key={idx} value={dishType}>{dishType}</option>)}
         </select>
       </div>
 
@@ -28,7 +28,7 @@ class Step2 extends Component {
         <label htmlFor="cuisines">Your recipe belongs to which <strong>cuisine</strong>?</label>
         <select value={this.props.cuisine} name="cuisines" onChange={this.props.handleChange} className="custom-select">
           <option value=''>Choose a cuisine</option>
-          {this.props.allData.cuisinesArr.map(cuisine => <option value={cuisine}>{cuisine}</option>)}
+          {this.props.allData.cuisinesArr.map((cuisine, idx) => <option key={idx} value={cuisine}>{cuisine}</option>)}
         </select>
       </div>
 
