@@ -57,3 +57,37 @@ img {
   margin: 0;
 
 }
+
+/* SEARCH BAR */
+
+.search-bar-container {
+  background: #fff;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border: 1px solid #dfe1e5;
+  box-shadow: none;
+  height: 6vh;
+  width: 25vw;
+  border-radius: 24px;
+  z-index: 3;
+}
+
+.search-bar-container input {
+margin: 0.6rem;
+width: 100%;
+border: transparent;
+}
+
+.search-bar-container button {
+margin: 0.6rem;
+border: transparent;
+}
+
+/* FILTER RENDER */
+
+.filter-render{
+  border: solid 0.1rem;
+}
+
+
