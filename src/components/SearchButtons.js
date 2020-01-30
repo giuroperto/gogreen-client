@@ -25,29 +25,21 @@ class SearchButtons extends Component {
 
   render() {
     return (
-      <div className="search-button">
-        <form className="form-inline my-2 my-lg-0">
-          <input
-            class="form-control mr-sm-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button
-            className="btn btn-outline-success my-2 my-sm-0"
-            type="submit"
-            onClick={this.clickOnFilter}
-          >
-            +
-          </button>
-          <button
-            className="btn btn-outline-success my-2 my-sm-0"
-            type="submit"
-            onClick={this.clickOnSearchButton}
-          >
-            Search
-          </button>
-        </form>
+      <div>
+
+  <div class="search-bar-container">
+   <input 
+    type="search"
+    placeholder='Search by recipe or ingredient'
+   />
+   <button type="submit" onClick={this.clickOnFilter}>
+    <i className="fas fa-filter"></i>
+   </button>
+   <button type="submit" onClick={this.clickOnSearchButton}>
+    <i className="fas fa-search"></i>
+   </button>
+  </div>
+
       </div>
     );
   }

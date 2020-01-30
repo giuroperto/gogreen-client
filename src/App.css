@@ -42,7 +42,7 @@ img {
 .nav-icon-container{
   display: flex;
   align-items: center;
-  margin-right: 2vw;
+  margin-right: 3vw;
 
 }
 
@@ -55,5 +55,55 @@ img {
   font-size: 0.9rem;
   font-weight: 400;
   margin: 0;
+  width: 7vw;
 
+}
+
+/* SEARCH BAR */
+
+.search-bar-container {
+  background: #fff;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border: 1px solid #dfe1e5;
+  box-shadow: none;
+  height: 6vh;
+  width: 25vw;
+  border-radius: 24px;
+  z-index: 3;
+}
+
+.search-bar-container input {
+margin: 0.6rem;
+width: 100%;
+border: transparent;
+}
+
+.search-bar-container button {
+margin: 0.6rem;
+border: transparent;
+}
+
+/* FILTER RENDER */
+
+.filter-render{
+  border: solid 0.1rem;
+}
+
+
+/* HOME PAGE */
+
+.recipe-name {
+  color: white;
+}
+
+.text-box {
+  background-color: rgba(0,0,0,0.5);
+  width: 100%;
+  padding: 3% 0;
+}
+
+.difficulty-text {
+  margin: 0;
 }

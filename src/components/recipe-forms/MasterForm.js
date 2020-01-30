@@ -4,6 +4,8 @@ import Step2 from './Step2';
 import Step3 from './Step3';
 import Step4 from './Step4';
 
+//TODO add picture
+
 class MasterForm extends Component {
   constructor(props) {
     super(props);
@@ -38,14 +40,15 @@ class MasterForm extends Component {
   }
 
   receiveArray(obj) {
-    const {name, value} = obj
+    const {name, values} = obj
     this.setState({
-      [name]: value
+      [name]: values
     })
   }
   
   handleSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
+    console.log(this.state);
     const { name, description, dishTypes, cuisines, servings, ingredients, instructions, isVegan } = this.state;
     //TODO axios post
   }
@@ -110,6 +113,7 @@ class MasterForm extends Component {
           dishTypes={this.state.dishTypes}
           cuisines={this.state.cuisines}
           servings={this.state.servings}
+          allData={this.props.allData}
         />
         <Step3 
           currentStep={this.state.currentStep} 
@@ -124,10 +128,10 @@ class MasterForm extends Component {
           passInstructions={this.receiveArray}
           instructions={this.state.instructions}
           difficulty={this.state.difficulty}
-          submit={this.handleSubmit}
         />
         {this.previousButton}
         {this.nextButton}
+        {this.state.currentStep === 4 && <button type="submit">Submit Recipe</button>}
       </form>
     )
   }
