@@ -133,8 +133,6 @@ class Step4 extends Component {
           <option value='hard'>Hard</option>
         </select>
       </div>
-      
-      <button type="submit">Submit Recipe</button>
       </>
     )
   }
