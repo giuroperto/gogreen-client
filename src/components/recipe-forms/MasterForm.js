@@ -36,13 +36,14 @@ class MasterForm extends Component {
     const name = target.name;
     this.setState({
       [name]: value
-    });
+    }, 
+    () => console.log(this.state));
   }
 
   receiveArray(obj) {
-    const {name, value} = obj
+    const {name, values} = obj
     this.setState({
-      [name]: value
+      [name]: values
     })
   }
   
@@ -112,6 +113,7 @@ class MasterForm extends Component {
           dishTypes={this.state.dishTypes}
           cuisines={this.state.cuisines}
           servings={this.state.servings}
+          allData={this.props.allData}
         />
         <Step3 
           currentStep={this.state.currentStep} 
