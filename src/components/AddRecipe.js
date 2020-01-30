@@ -9,7 +9,7 @@ class Navbar extends Component {
   render() {
     return(
       <div className="background">
-        <MasterForm />
+        <MasterForm allData={this.props.allData} />
       </div>
     )
   }

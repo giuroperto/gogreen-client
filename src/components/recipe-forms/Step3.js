@@ -16,6 +16,7 @@ class Step3 extends Component {
     // this.removeInput = this.removeInput.bind(this);
     this.renderInputs = this.renderInputs.bind(this);
     this.handleIngredients = this.handleIngredients.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   addInput() {
@@ -46,6 +47,7 @@ class Step3 extends Component {
   }
 
   handleIngredients() {
+    console.log('hi')
     this.props.passIngredients(this.state.ingredients);
   }
 
@@ -77,7 +79,7 @@ class Step3 extends Component {
           id="isVegan"
           checked={this.props.isVegan}
           onChange={this.props.handleChange}/>
-        <label className="form-check-label" for="isVegan">This is a <strong>vegan</strong> recipe</label>
+        <label className="form-check-label" htmlFor="isVegan">This is a <strong>vegan</strong> recipe</label>
       </div>
       </>
     )

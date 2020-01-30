@@ -35,7 +35,7 @@ class FilterRender extends Component {
                 <h3>Cooking Level</h3>
                 <select>
                   <option selected="selected"></option>
-                  {this.props.allData.difficultLevelArr.sort().map(level => {
+                  {this.props.allData.difficultLevelArr.map(level => {
                     return <option> {level} </option>;
                   })}
                 </select>
