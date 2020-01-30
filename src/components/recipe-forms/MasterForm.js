@@ -4,6 +4,8 @@ import Step2 from './Step2';
 import Step3 from './Step3';
 import Step4 from './Step4';
 
+//TODO add picture
+
 class MasterForm extends Component {
   constructor(props) {
     super(props);
@@ -124,10 +126,10 @@ class MasterForm extends Component {
           passInstructions={this.receiveArray}
           instructions={this.state.instructions}
           difficulty={this.state.difficulty}
-          submit={this.handleSubmit}
         />
         {this.previousButton}
         {this.nextButton}
+        {this.state.currentStep === 4 && <button type="submit">Submit Recipe</button>}
       </form>
     )
   }
