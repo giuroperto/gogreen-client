@@ -91,3 +91,18 @@ border: transparent;
 }
 
 
+/* HOME PAGE */
+
+.recipe-name {
+  color: white;
+}
+
+.text-box {
+  background-color: rgba(0,0,0,0.5);
+  width: 100%;
+  padding: 3% 0;
+}
+
+.difficulty-text {
+  margin: 0;
+}
