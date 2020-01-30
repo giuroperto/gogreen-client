@@ -12,12 +12,12 @@ class AllRecipes extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  // handleChange(event) {
-  //   const { value } = event.target;
-  //   this.setState({
-  //     searchWord: value,
-  //   });
-  // }
+  handleChange(event) {
+    const { value } = event.target;
+    this.setState({
+      searchWord: value,
+    });
+  }
 
   render() {
     return(
