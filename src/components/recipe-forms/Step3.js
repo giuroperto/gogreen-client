@@ -41,13 +41,13 @@ class Step3 extends Component {
     ingredientsCopy[myKey] = value;
     this.setState({
       ingredients: {
+        name: 'ingredients',
         values: ingredientsCopy
       }
     }, this.handleIngredients)
   }
 
   handleIngredients() {
-    console.log('hi')
     this.props.passIngredients(this.state.ingredients);
   }
 
@@ -78,6 +78,7 @@ class Step3 extends Component {
           className="form-check-input"
           id="isVegan"
           checked={this.props.isVegan}
+          name="isVegan"
           onChange={this.props.handleChange}/>
         <label className="form-check-label" htmlFor="isVegan">This is a <strong>vegan</strong> recipe</label>
       </div>

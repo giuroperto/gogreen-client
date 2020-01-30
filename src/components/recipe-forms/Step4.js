@@ -34,53 +34,66 @@ class Step4 extends Component {
     }
     this.addInput = this.addInput.bind(this);
     // this.removeInput = this.removeInput.bind(this);
-    this.renderInputs = this.renderInputs.bind(this);
+    // this.renderInputs = this.renderInputs.bind(this);
     this.handleInstructions = this.handleInstructions.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
   addInput() {
-    let newInputNumber = this.state.inputNumber + 1;
+    let index = this.state.inputNumber;
     let inputsCopy = [...this.state.inputs];
-    inputsCopy.push({ key: newInputNumber, textName: 'instruction' + newInputNumber, timeName: 'timeMinutes' + newInputNumber })
+    inputsCopy.push({ key: index, textName: 'instruction' + index, timeName: 'timeMinutes' + index })
     let instructionsValuesCopy = [...this.state.instructions.values];
-    instructionsValuesCopy[newInputNumber] = {...instructionsValuesCopy[newInputNumber]};
+    instructionsValuesCopy[index] = {
+      step: index,
+      text: '',
+      timeMinutes: 0,
+    };
+    console.log(inputsCopy);
+    console.log(instructionsValuesCopy);
     this.setState({
-      inputNumber: newInputNumber,
+      inputNumber: this.state.inputNumber + 1,
       inputs: inputsCopy,
       instructions: {
+        name: 'instructions',
         values: instructionsValuesCopy
       }
     })
   }
 
-  renderInputs() {
-    let inputs = [];
-    for (let i = 0; i < this.state.inputNumber; i += 1) {
-      let textName = 'instruction' + i;
-      let timeName = 'timeMinutes' + i;
-      inputs.push({ key: i, textName, timeName })
-    }
-    this.setState({
-      inputs: inputs
-    }) 
-  }
+  // renderInputs() {
+  //   let inputs = [];
+  //   for (let i = 0; i < this.state.inputNumber; i += 1) {
+  //     let textName = 'instruction' + i;
+  //     let timeName = 'timeMinutes' + i;
+  //     inputs.push({ key: i, textName, timeName })
+  //   }
+  //   this.setState({
+  //     inputs: inputs
+  //   }) 
+  // }
 
   handleChange(event) {
     const { value, name } = event.target;
     const myKey = event.target.dataset.key;
-    let instructionsCopy = [...this.state.instructions.values];
-    instructionsCopy[myKey] = {...instructionsCopy[myKey]}
+    let instructionsValuesCopy = [...this.state.instructions.values];
+    instructionsValuesCopy[myKey] = {...instructionsValuesCopy[myKey]}
+
     if (name.includes('instruction')) {
-      instructionsCopy[myKey].text = value;
+      instructionsValuesCopy[myKey].text = value;
       this.setState({
-        step: myKey + 1,
-        instructions: instructionsCopy
+        instructions: {
+          name: 'instructions',
+          values: instructionsValuesCopy
+        }
       }, this.handleInstructions);
     } else if (name.includes('time')) {
-      instructionsCopy[myKey].timeMinutes = value;
+      instructionsValuesCopy[myKey].timeMinutes = value;
       this.setState({
-        instructions: instructionsCopy
+        instructions: {
+          name: 'instructions',
+          values: instructionsValuesCopy
+        }
       }, this.handleInstructions);
     }
   }
@@ -99,7 +112,7 @@ class Step4 extends Component {
       <div className="form-group">
         <label htmlFor="instructions">Detail your recipe <strong>instructions</strong> here.</label>
         {this.state.inputs.map(input => (
-          <div className="form-row">
+          <div key={input.key} className="form-row">
             <div class="col-md-9 mb-3">
               <label>Step</label>
               <input key={input.key} data-key={input.key} className="form-control" type="text" name={input.textName} value={this.state.instructions.values[input.key].text} onChange={this.handleChange}/>
@@ -114,19 +127,10 @@ class Step4 extends Component {
           className="btn btn-secondary"
           type="button" onClick={this.addInput}>+</button>
       </div>
-      <div class="form-group form-check">
-        <input
-          type="checkbox"
-          className="form-check-input"
-          id="isVegan"
-          checked={this.props.isVegan}
-          onChange={this.props.handleChange}/>
-        <label className="form-check-label" for="isVegan">This is a <strong>vegan</strong> recipe</label>
-      </div>
 
       <div className="form-group">
         <label htmlFor="difficulty">How <strong>difficult</strong> is this recipe?</label>
-        <select value={this.props.difficulty} onChange={this.props.handleChange} class="custom-select">
+        <select value={this.props.difficulty} onChange={this.props.handleChange} name="difficulty" class="custom-select">
           <option value=''>Choose a difficulty</option>
           <option value='easy'>Easy</option>
           <option value='medium'>Medium</option>

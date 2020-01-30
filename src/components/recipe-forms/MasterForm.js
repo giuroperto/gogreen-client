@@ -36,8 +36,7 @@ class MasterForm extends Component {
     const name = target.name;
     this.setState({
       [name]: value
-    }, 
-    () => console.log(this.state));
+    });
   }
 
   receiveArray(obj) {
@@ -48,7 +47,8 @@ class MasterForm extends Component {
   }
   
   handleSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
+    console.log(this.state);
     const { name, description, dishTypes, cuisines, servings, ingredients, instructions, isVegan } = this.state;
     //TODO axios post
   }
