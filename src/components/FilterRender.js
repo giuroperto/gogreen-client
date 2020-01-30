@@ -13,7 +13,7 @@ class FilterRender extends Component {
             <div class="row">
               <div class="col-sm">
                 <h3>By Dish Type</h3>
-                <select>
+                <select className='form-control'>
                   <option selected="selected"></option>
                   {this.props.allData.dishTypesArr.sort().map(dishType => {
                     return <option> {dishType} </option>;
@@ -23,7 +23,7 @@ class FilterRender extends Component {
 
               <div class="col-sm">
                 <h3>By Cousine</h3>
-                <select>
+                <select className='form-control'>
                   <option selected="selected"></option>
                   {this.props.allData.cuisinesArr.sort().map(cuisinesType => {
                     return <option> {cuisinesType} </option>;
@@ -33,7 +33,7 @@ class FilterRender extends Component {
 
               <div class="col-sm">
                 <h3>Cooking Level</h3>
-                <select>
+                <select className='form-control'>
                   <option selected="selected"></option>
                   {this.props.allData.difficultLevelArr.map(level => {
                     return <option> {level} </option>;
