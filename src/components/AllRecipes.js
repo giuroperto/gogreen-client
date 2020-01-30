@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import recipeCard from './RecipeCard.js'
-import axios from 'axios';
-const recipesCleanTestAlex = require('./AlexTestInput.js');
+import RecipeCard from './RecipeCard.js'
+// import axios from 'axios';
+const recipesCleanTestAlex = require('./AlexInput.js');
 
 
 class AllRecipes extends Component {
@@ -14,7 +14,7 @@ class AllRecipes extends Component {
       searchWord: '',
     };
 
-    this.handleChange = this.handleChange.bind(this);
+    // this.handleChange = this.handleChange.bind(this);
   }
 
   // handleChange(event) {
@@ -42,13 +42,17 @@ render(){
       <div className='all-recipes-full-list'>
           <div className='all-recipes-each-listed'>
             {this.state.recipes.map(element => {
+              
                 let determinedOwner = '';
                 if (element.owner === undefined){
                   determinedOwner = element.ownerAPI
                 } else {
-                  determinedOwner = element.owner
+                  determinedOwner = element.owner.replace(element.owner)
                 }
-                return (<RecipeCard name={element.name} picture={element.picture} description={element.description} owner={determinedOwner} link={element._id} />);
+
+                let cleanDishType = (element.dishTypes[0]).slice(0,1).toUpperCase()+(element.dishTypes[0]).slice(1,(element.dishTypes[0]).length);
+
+                return (<RecipeCard name={element.name} image={element.picture} description={element.description} owner={determinedOwner} link={element._id} time={element.totalTimeMinutes} vegan={element.vegan} cuisines={element.cuisines} dishTypes={cleanDishType}/>);
             })}  
           </div>
       </div>
