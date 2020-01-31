@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import RecipeCard from './RecipeCard.js'
-// import axios from 'axios';
+import axios from 'axios';
 const recipesCleanTestAlex = require('./AlexInput.js');
 
 
