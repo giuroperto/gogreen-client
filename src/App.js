@@ -8,8 +8,8 @@ import Signup from './components/auth/Signup'
 import AboutUs from './components/AboutUs'
 import AllRecipes from './components/AllRecipes'
 import AddRecipe from './components/AddRecipe'
-// import Profile from './components/Profile'
-// import EditProfile from './components/EditProfile'
+import Profile from './components/Profile'
+import EditProfile from './components/EditProfile'
 import RecipeDetails from './components/RecipeDetails'
 // import EditRecipe from './components/EditRecipe'
 
@@ -52,8 +52,8 @@ class App extends Component {
           <Route exact path='/aboutus' component={AboutUs}/>
           <Route exact path='/allrecipes' render={(props) => <AllRecipes recipes={[{name: 'Apple Pie'}, {name: 'Banana Split'}, {name: 'Feijoada'} ]} {...props} />} />
           <Route exact path='/addrecipe' render={(props) => <AddRecipe allData={this.state} {...props} /> } />
-          {/* <Route exact path='/user/:username' component={Profile}/>  */}
-          {/* <Route exact path='/user/:username/edit' component={EditProfile}/>  */}
+          <Route exact path='/user/:username' component={Profile}/> 
+          <Route exact path='/user/:username/edit' component={EditProfile}/> 
           <Route exact path='/recipe/:recipeID' component={RecipeDetails}/>
           {/* <Route exact path='/recipe/:id/edit' component={EditRecipe}/> */}
         </Switch>

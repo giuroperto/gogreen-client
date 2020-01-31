@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class EditProfile extends Component {
   constructor(props) {
@@ -15,14 +16,14 @@ class EditProfile extends Component {
 
   componentDidMount() {
     const {username} = this.props.match.params;
-    axios.get(`/user/${username}`)
-    .then(response => this.setState({
-      firstName: response.data.firstName,
-      lastName: response.data.lastName,
-      email: response.data.email,
-      username: response.data.username
-    }))
-    .catch(error => console.log(error));
+    // axios.get(`/user/${username}`)
+    // .then(response => this.setState({
+    //   firstName: response.data.firstName,
+    //   lastName: response.data.lastName,
+    //   email: response.data.email,
+    //   username: response.data.username
+    // }))
+    // .catch(error => console.log(error));
   }
 
   handleChange(event) {

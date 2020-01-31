@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import RecipeCard from '../components/RecipeCard';
 
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      uniqueUser: {},
+      uniqueUser: {recipes: []},
       recipesToShow: []
     }
     this.favoritesToggle = this.favoritesToggle.bind(this);
@@ -13,12 +14,12 @@ class Profile extends Component {
 
   componentDidMount() {
     const {username} = this.props.match.params;
-    axios.get(`/user/${username}`)
-    .then(response => this.setState({
-      uniqueUser: response.data,
-      recipesToShow: response.data.recipes
-    }))
-    .catch(error => console.log(error));
+    // axios.get(`/user/${username}`)
+    // .then(response => this.setState({
+    //   uniqueUser: response.data,
+    //   recipesToShow: response.data.recipes
+    // }))
+    // .catch(error => console.log(error));
   }
 
   favoritesToggle() {
