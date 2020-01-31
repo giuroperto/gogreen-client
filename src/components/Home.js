@@ -69,39 +69,63 @@ class Home extends Component {
           </div>
         </div>
 
-        <div className="category-links">
+        <div className="container-fluid category-links" style={{width: '85%'}}>
           <div className="dish-types-links">
             <h4>Dish Types</h4>
             <div className="row">
-              <div className="dish-type-figure col-xs-6 col-sm-4">
-
+              <div className="cuisine-figure col-xs-6 col-sm-3">
+                <a href="">
+                  <img src="./images/home-images/maincourse.jpg" alt="Main Course"/>
+                  <h5>Main Course</h5>
+                </a>
               </div>
-              <div className="dish-type-figure col-xs-6 col-sm-4">
-
+              <div className="cuisine-figure col-xs-6 col-sm-3">
+                <a href="">
+                  <img src="./images/home-images/maincourse.jpg" alt="Main Course"/>
+                  <h5>Main Course</h5>
+                </a>
               </div>
-              <div className="dish-type-figure col-xs-6 col-sm-4">
-
+              <div className="cuisine-figure col-xs-6 col-sm-3">
+                <a href="">
+                  <img src="./images/home-images/maincourse.jpg" alt="Main Course"/>
+                  <h5>Main Course</h5>
+                </a>
               </div>
-              <div className="dish-type-figure col-xs-6 col-sm-4">
-
+              <div className="cuisine-figure col-xs-6 col-sm-3">
+                <a href="">
+                  <img src="./images/home-images/maincourse.jpg" alt="Main Course"/>
+                  <h5>Main Course</h5>
+                </a>
               </div>
             </div>
           </div>
 
-          <div className="cuisines-links">
+          <div className="container-fluid cuisines-links">
             <h4>Cuisines</h4>
             <div className="row">
-              <div className="cuisine-figure col-xs-6 col-sm-4">
-
+              <div className="cuisine-figure col-xs-6 col-sm-3">
+                <a href="">
+                  <img src="./images/home-images/maincourse.jpg" alt="Main Course"/>
+                  <h5>Main Course</h5>
+                </a>
               </div>
-              <div className="cuisine-figure col-xs-6 col-sm-4">
-
+              <div className="cuisine-figure col-xs-6 col-sm-3">
+                <a href="">
+                  <img src="./images/home-images/maincourse.jpg" alt="Main Course"/>
+                  <h5>Main Course</h5>
+                </a>
               </div>
-              <div className="cuisine-figure col-xs-6 col-sm-4">
-
+              <div className="cuisine-figure col-xs-6 col-sm-3">
+                <a href="">
+                  <img src="./images/home-images/maincourse.jpg" alt="Main Course"/>
+                  <h5>Main Course</h5>
+                </a>
               </div>
-              <div className="cuisine-figure col-xs-6 col-sm-4">
-
+              <div className="cuisine-figure col-xs-6 col-sm-3">
+                <a href="">
+                  <img src="./images/home-images/maincourse.jpg" alt="Main Course"/>
+                  <h5>Main Course</h5>
+                </a>
               </div>
             </div>
           </div>
