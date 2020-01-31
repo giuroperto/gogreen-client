@@ -8,7 +8,8 @@ class Navbar extends Component {
     super(props);
 
     this.state = {
-      showFilterRender: false
+      showFilterRender: false,
+      loggedInUser: null,
     };
     this.filterRender = this.filterRender.bind(this);
   }
@@ -17,6 +18,12 @@ class Navbar extends Component {
     this.setState({
       showFilterRender: !this.state.showFilterRender
     });
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.loggedInUser !== prevProps.loggedInUser) {
+      this.setState({loggedInUser: this.props.loggedInUser});
+    }
   }
 
   render() {

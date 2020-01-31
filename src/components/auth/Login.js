@@ -1,23 +1,60 @@
 import React, { Component } from 'react';
+import AuthService from './auth-services';
 
-class Navbar extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      username: '',
+      password: '',
+    }
+
+    this.service = new AuthService();
+    this.handleLoginFormSubmit = this.handleLoginFormSubmit.bind(this);
+    this.handleLoginChange = this.handleLoginChange.bind(this);
+
   }
 
+  handleLoginFormSubmit(event){
+    event.preventDefault();
+    const username = this.state.username;
+    const password = this.state.password;
+
+    this.service
+    .signup(username, password)
+    .then(response => {
+      this.setState({
+        username: '',
+        password: '',
+      })
+      this.props.getUser(response)
+      this.props.history.push(`/user/${this.props.loggedInUser}`)
+    .catch(err => console.log(err))
+    })
+  }
+
+  handleLoginChange(event){
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    })
+  }
+  
   render() {
+    console.log(this.state)
     return(
       <div className="form-background">
         <div className="form-container">
         <h2>Welcome back</h2>
-        <form>
+        <form onSubmit={this.handleLoginFormSubmit}>
           <div className="form-group">
             <label for="username">Username</label>
-            <input type="text" className="form-control" id="username" aria-describedby="emailHelp"/>
+            <input name='username' value={this.state.username} type="text" className="form-control" id="username" aria-describedby="emailHelp" onChange={this.handleLoginChange} required />
           </div>
           <div className="form-group">
             <label for="exampleInputPassword1">Password</label>
-            <input type="password" className="form-control" id="password"/>
+            <input name='password' value={this.state.password} type="password" className="form-control" id="password" onChange={this.handleLoginChange} required/>
           </div>
           <button type="submit" className="btn btn-primary">Login</button>
         </form>
@@ -27,4 +64,4 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+export default Login;

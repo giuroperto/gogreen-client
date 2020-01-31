@@ -23,17 +23,24 @@ class App extends Component {
       dishTypesArr: ["Main Course", "Side Dish", "Dessert", "Appetizer", "Salad", "Bread", "Breakfast", "Soup", "Beverage", "Sauce", "Marinade", "Fingerfood", "Snack", "Drink"],
       cuisinesArr: ["African", "American", "British", "Cajun", "Caribbean", "Chinese", "Eastern European", "European", "French", "German", "Greek", "Indian", "Irish", "Italian", "Japanese", "Jewish", "Korean", "Latin American", "Mediterranean", "Mexican", "Middle Eastern", "Nordic", "Southern", "Spanish", "Thai", "Vietnamese"],
       difficultLevelArr: ['Easy', 'Medium', 'Hard'],
-      
+      loggedInUser: null,
     }
   }
+
+  getUser(user) {
+    this.setState({
+      loggedInUser: user,
+    });
+  }
+
   render(){
     return (
       <div className="App">
-        <Navbar allData={this.state} />
+        <Navbar allData={this.state} loggedInUser={this.state.loggedInUser} />
         <Switch>
           <Route exact path='/' component={Home}/>
-          <Route exact path='/login' component={Login}/>
-          <Route exact path='/signup' component={Signup}/>
+          <Route exact path='/login' render={(props) => <Login loggedInUser={this.state.loggedInUser} getUser={this.getUser} {...props} />} />
+          <Route exact path='/signup' render={(props) => <Signup loggedInUser={this.state.loggedInUser} getUser={this.getUser} {...props} />}/>
           <Route exact path='/aboutus' component={AboutUs}/>
           <Route exact path='/allrecipes' render={(props) => <AllRecipes recipes={[{name: 'Apple Pie'}, {name: 'Banana Split'}, {name: 'Feijoada'} ]} {...props} />} />
           <Route exact path='/addrecipe' render={(props) => <AddRecipe allData={this.state} {...props} /> } />
