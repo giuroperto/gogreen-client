@@ -26,7 +26,7 @@ class RecipeDetails extends Component {
 
     let givenCuisine = '';
       if (givenUniqueRecipe.cuisines[0] === undefined){
-        givenCuisine = "Not Specified"
+        givenCuisine = "Not specified"
       } else {
         givenCuisine = givenUniqueRecipe.cuisines[0]
       }
@@ -74,18 +74,40 @@ class RecipeDetails extends Component {
                     </div>          
                 </div>
             </div>
-
-            <div className="row">
-              <h3>Ingredients</h3>
+            <div>
+              <div className="row">
+                <h3>Ingredients</h3>
+              </div>
+              <div className="row">
                 <div>
-                  {this.state.uniqueRecipe.ingredients[0].split("\n").map((i) => {
-                      return <div>{i}</div>;
+                  <ul>
+                  {this.state.uniqueRecipe.ingredients[0].split("\n").map(i => {
+                      return <li>{i}</li>;
                   })}
+                  </ul>
                 </div>
+              </div>
             </div>
 
             <div className="row">
               <h3>Instructions</h3>
+              {this.state.uniqueRecipe.instructions.map(i => {
+                let timeRendered = "";
+                i.stepTimeMinutes ? (timeRendered = `${i.stepTimeMinutes} minutes`) : (timeRendered = "");
+                return (
+                  <div className="container-fluid">
+                    <div className="row">
+                      <div className="col-sm col-4">
+                        <div className="row"><b>Step {i.step}</b></div>
+                        <div className="row"><i>{timeRendered}</i></div>
+                      </div>
+                      <div className="col-sm col-8">{i.text}</div>
+                    </div>
+                    <hr /> 
+                  </div>
+
+                )
+              })}
             </div>
 
 
