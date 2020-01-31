@@ -27,7 +27,7 @@ class SearchButtons extends Component {
     return (
       <div>
 
-  <div class="search-bar-container">
+  <div className="search-bar-container">
    <input 
     type="search"
     placeholder='Search by recipe or ingredient'

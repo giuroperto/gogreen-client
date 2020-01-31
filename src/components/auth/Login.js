@@ -17,21 +17,22 @@ class Login extends Component {
   }
 
   handleLoginFormSubmit(event){
+    console.log(this.state)
     event.preventDefault();
     const username = this.state.username;
     const password = this.state.password;
 
     this.service
-    .signup(username, password)
+    .login(username, password)
     .then(response => {
       this.setState({
         username: '',
         password: '',
       })
       this.props.getUser(response)
-      this.props.history.push(`/user/${this.props.loggedInUser}`)
-    .catch(err => console.log(err))
+      this.props.history.push(`/user/${this.props.loggedInUser.username}`)
     })
+    .catch(err => console.log(err))
   }
 
   handleLoginChange(event){
@@ -49,11 +50,11 @@ class Login extends Component {
         <h2>Welcome back</h2>
         <form onSubmit={this.handleLoginFormSubmit}>
           <div className="form-group">
-            <label for="username">Username</label>
+            <label htmlFor="username">Username</label>
             <input name='username' value={this.state.username} type="text" className="form-control" id="username" aria-describedby="emailHelp" onChange={this.handleLoginChange} required />
           </div>
           <div className="form-group">
-            <label for="exampleInputPassword1">Password</label>
+            <label htmlFor="exampleInputPassword1">Password</label>
             <input name='password' value={this.state.password} type="password" className="form-control" id="password" onChange={this.handleLoginChange} required/>
           </div>
           <button type="submit" className="btn btn-primary">Login</button>
