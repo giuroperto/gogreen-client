@@ -30,7 +30,7 @@ class Navbar extends Component {
     console.log("yesss");
     return (
       <div className="nav-container">
-        <nav className="navbar navbar-expand-lg navbar-light my-1">
+        <nav className="navbar navbar-expand-lg navbar-light">
           <a className="navbar-brand" href="/">
             GoGreen
           </a>
@@ -46,23 +46,31 @@ class Navbar extends Component {
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          <div className="collapse navbar-collapse d-flex justify-content-between" id="navbarSupportedContent">
-            <div className='d-flex flex-direction-start'>
-              <a className="nav-navbar nav-link" href="/login">
+          <div
+            className="collapse navbar-collapse d-flex justify-content-between"
+            id="navbarSupportedContent"
+          >
+            <div className="d-flex flex-direction-start nav-buttons">
+              <a className="nav-navbar nav-link" href="/">
                 Why GoGreen?
               </a>
-              <a className="nav-navbar nav-link" href="/login">
+              <a className="nav-navbar nav-link" href="/aboutus">
                 About Us
               </a>
             </div>
 
-            <div className='d-flex flex-direction-end'>
-              <a className="nav-navbar nav-link" href="/signup">
-                Sign Up
-              </a>
-              <a className="nav-navbar nav-link" href="/login">
-                Login
-              </a>
+            <div className="d-flex flex-direction-between">
+                
+                <a className="nav-navbar nav-link d-flex align-items-center mr-3 nav-icon-container" href="/signup">
+                <img src="./images/recipe.png" alt="recipe-icon" />
+                  <p>Sign Up</p>
+                </a>
+
+                <a className="nav-navbar nav-link d-flex align-items-center nav-icon-container" href="/login">
+                <img src="./images/chef.png" alt="chef-icon" />
+                <p>Login</p>
+                </a>
+
             </div>
           </div>
         </nav>
@@ -71,8 +79,8 @@ class Navbar extends Component {
           <div className="split-bar"></div>
         </div>
 
-        <nav className="navbar navbar-light second-navbar d-flex justify-content-start align-items-center mt-1">
-          <div className="second-nav-icon-div d-flex align-items-center">
+        <nav className="navbar navbar-light second-navbar d-flex align-items-center mt-1">
+          <div className="second-nav-icon-div d-flex align-items-center ml-2">
             <a href="/allrecipes" className="nav-icon-container">
               <img src="./images/cook-book.png" alt="book-icon" />
               <p>All Recipes</p>
@@ -87,7 +95,9 @@ class Navbar extends Component {
               <img src="./images/vegetarian-icon.png" alt="vegetarian-icon" />
               <p>Vegetarian</p>
             </a>
+          </div>
 
+          <div className="mr-3">
             <SearchButtons showFilter={this.filterRender} />
           </div>
         </nav>

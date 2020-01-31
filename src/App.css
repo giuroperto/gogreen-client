@@ -24,6 +24,10 @@ img {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
+.nav-buttons a {
+  color: rgba(72, 151, 75, 0.9);
+  font-weight: 600;
+}
 
 .split-container div {
   height: 0.1vh;
@@ -42,20 +46,20 @@ img {
 .nav-icon-container{
   display: flex;
   align-items: center;
-  margin-right: 3vw;
+  margin-right: 2vw;
+  color: rgba(72, 151, 75, 0.9);
 
 }
 
 .nav-icon-container img {
   width: 2.5vw;
-  margin-right: 0.5vw;
 }
 
 .nav-icon-container p {
   font-size: 0.9rem;
-  font-weight: 400;
+  font-weight: 600;
   margin: 0;
-  width: 7vw;
+  width: 6vw;
 
 }
 
