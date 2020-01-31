@@ -11,10 +11,12 @@ class RecipeDetails extends Component {
       uniqueRecipe: {},
       determinedOwner: '',
       cleanDishType: '',
+      ingredients: '',
     };
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     const givenUniqueRecipe = recipesCleanTestAlex.find(x => x._id === this.props.match.params.recipeID)
     let givenDeterminedOwner = '';
       if (givenUniqueRecipe.owner === undefined){
@@ -30,12 +32,20 @@ class RecipeDetails extends Component {
       } else {
         givenCuisine = givenUniqueRecipe.cuisines[0]
       }
+
+    let givenIngredients = [];
+      if (givenUniqueRecipe.ingredients[0] === undefined){
+      } else {
+        givenIngredients = givenUniqueRecipe.ingredients[0].split("\n");
+        let removed = givenIngredients.splice(givenIngredients.length -1 ,1);
+      }
     
     this.setState({
       uniqueRecipe: givenUniqueRecipe,
       determinedOwner: givenDeterminedOwner,
       cleanDishType: givenCleanDishType,
-      cuisine: givenCuisine
+      cuisine: givenCuisine,
+      ingredients: givenIngredients
     })
 
   }
@@ -47,41 +57,38 @@ class RecipeDetails extends Component {
       {this.state.uniqueRecipe.ingredients ? (
 
         <div id="detailed-recipe" className="container-fluid" style={{width: '85%'}}>
-          <div className="row">
-              <h3>{this.state.uniqueRecipe.name}</h3>
+          <div className="row d-flex justify-content-center mb-4 mt-4">
+             <div><h3><b>{this.state.uniqueRecipe.name}</b></h3></div>
+             <div><h5>{this.state.uniqueRecipe.description}</h5></div>         
           </div>
 
             <div className="row">
                 <div id="individual-left" className="col-sm">
                     <img src={this.state.uniqueRecipe.picture} alt="Recipe-Text"></img>
                 </div>
-                <div id="individual-right" className="col-sm">
-
-                    <div className="row">
-                        <h4>{this.state.uniqueRecipe.description}</h4>
-                    </div>
-                    <div className="row">
+                <div id="individual-right" className="col-sm d-flex flex-column justify-content-around">
+                    <div>
                         <p><b>Created by: </b>{this.state.determinedOwner}</p> 
                     </div>
-                    <div className="row">
+                    <div>
                         <p><b>Prep time: </b>{this.state.uniqueRecipe.totalTimeMinutes} minutes</p> 
                     </div>
-                    <div className="row">
+                    <div>
                         <p><b>Dish type: </b>{this.state.cleanDishType}</p> 
                     </div>       
-                    <div className="row">
+                    <div>
                         <p><b>Cuisine: </b>{this.state.cuisine}</p> 
                     </div>          
                 </div>
             </div>
-            <div>
-              <div className="row">
-                <h3>Ingredients</h3>
+            <div className="align-center">
+              <div className="row d-flex justify-content-center">
+                <h4 className="mb-4 mt-4">Ingredients</h4>
               </div>
-              <div className="row">
-                <div>
+              <div className="row d-flex justify-content-center mr-1 ml-1">
+                <div className="row text-left">
                   <ul>
-                  {this.state.uniqueRecipe.ingredients[0].split("\n").map(i => {
+                  {this.state.ingredients.map(i => {
                       return <li>{i}</li>;
                   })}
                   </ul>
@@ -89,19 +96,19 @@ class RecipeDetails extends Component {
               </div>
             </div>
 
-            <div className="row">
-              <h3>Instructions</h3>
+            <div className="row d-flex justify-content-center">
+              <h4 className="mb-4 mt-4">Instructions</h4>
               {this.state.uniqueRecipe.instructions.map(i => {
                 let timeRendered = "";
                 i.stepTimeMinutes ? (timeRendered = `${i.stepTimeMinutes} minutes`) : (timeRendered = "");
                 return (
                   <div className="container-fluid">
                     <div className="row">
-                      <div className="col-sm col-4">
-                        <div className="row"><b>Step {i.step}</b></div>
-                        <div className="row"><i>{timeRendered}</i></div>
+                      <div className="col-xs-6 col-sm-3 d-flex flex-column justify-content-center">
+                        <div><p className="step mb-0"><b>Step {i.step}</b></p></div>
+                        <div><p className="step mb-0"><i>{timeRendered}</i></p></div>
                       </div>
-                      <div className="col-sm col-8">{i.text}</div>
+                      <div className="col-xs-6 col-sm-9">{i.text}</div>
                     </div>
                     <hr /> 
                   </div>
@@ -111,7 +118,9 @@ class RecipeDetails extends Component {
             </div>
 
 
-          <h1>Recipe Details!</h1>
+          <a href="/allrecipes">
+            <button>Return to all recipes</button>
+          </a>
         </div>
       ) : (
       <h1>Loading!!!</h1>)

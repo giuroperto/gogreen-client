@@ -57,6 +57,9 @@ render(){
                 return (<RecipeCard name={element.name} image={element.picture} description={element.description} owner={determinedOwner} link={cleanLink} time={element.totalTimeMinutes} vegan={element.vegan} cuisines={element.cuisines} dishTypes={cleanDishType}/>);
             })}  
           </div>
+          <a href="/">
+            <button>Return home</button>
+          </a>
       </div>
     )
   }
