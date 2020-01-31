@@ -13,6 +13,8 @@ import AddRecipe from './components/AddRecipe'
 import RecipeDetails from './components/RecipeDetails'
 // import EditRecipe from './components/EditRecipe'
 
+
+
 //Test
 
 class App extends Component {
@@ -25,15 +27,21 @@ class App extends Component {
       difficultLevelArr: ['Easy', 'Medium', 'Hard'],
       loggedInUser: null,
     }
+
+    this.getUser = this.getUser.bind(this);
   }
 
+  
+  
   getUser(user) {
     this.setState({
       loggedInUser: user,
-    });
-  }
+    })
+}
+
 
   render(){
+    console.log('logged out')
     return (
       <div className="App">
         <Navbar allData={this.state} loggedInUser={this.state.loggedInUser} />

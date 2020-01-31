@@ -9,7 +9,7 @@ class Navbar extends Component {
 
     this.state = {
       showFilterRender: false,
-      loggedInUser: null,
+      loggedInUser: null
     };
     this.filterRender = this.filterRender.bind(this);
   }
@@ -22,7 +22,7 @@ class Navbar extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.loggedInUser !== prevProps.loggedInUser) {
-      this.setState({loggedInUser: this.props.loggedInUser});
+      this.setState({ loggedInUser: this.props.loggedInUser });
     }
   }
 
@@ -46,32 +46,24 @@ class Navbar extends Component {
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav mr-auto">
-              <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Why GoGreen?
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/aboutus">
-                  About Us
-                </a>
-              </li>
+          <div className="collapse navbar-collapse d-flex justify-content-between" id="navbarSupportedContent">
+            <div className='d-flex flex-direction-start'>
+              <a className="nav-navbar nav-link" href="/login">
+                Why GoGreen?
+              </a>
+              <a className="nav-navbar nav-link" href="/login">
+                About Us
+              </a>
+            </div>
 
-              <li className="nav-item">
-                <a className="nav-link" href="/login">
-                  Login
-                </a>
-              </li>
-
-              <li className="nav-item">
-                <a className="nav-link" href="/signup">
-                  Sign Up
-                </a>
-              </li>
-
-            </ul>
+            <div className='d-flex flex-direction-end'>
+              <a className="nav-navbar nav-link" href="/signup">
+                Sign Up
+              </a>
+              <a className="nav-navbar nav-link" href="/login">
+                Login
+              </a>
+            </div>
           </div>
         </nav>
 
@@ -97,11 +89,13 @@ class Navbar extends Component {
             </a>
 
             <SearchButtons showFilter={this.filterRender} />
-
           </div>
-
         </nav>
-        <div>{this.state.showFilterRender && <FilterRender allData={this.props.allData}/>}</div>
+        <div>
+          {this.state.showFilterRender && (
+            <FilterRender allData={this.props.allData} />
+          )}
+        </div>
       </div>
     );
   }

@@ -24,18 +24,25 @@ class Signup extends Component {
     event.preventDefault();
     const username = this.state.username;
     const password = this.state.password;
+    const firstName = this.state.firstName;
+    const lastName = this.state.lastName;
+    const email = this.state.email;
+
 
     this.service
-    .signup(username, password)
+    .signup(email, firstName, lastName, username, password)
     .then(response => {
       this.setState({
+        firstName: '',
+        lastName: '',
+        email: '',
         username: '',
         password: '',
       })
       this.props.getUser(response)
-      this.props.history.push(`/user/${this.props.loggedInUser}`)
-    .catch(err => console.log(err))
+      this.props.history.push(`/user/${this.props.loggedInUser.username}`)
     })
+    .catch(err => console.log(err))
   }
 
   handleSignupChange(event){
