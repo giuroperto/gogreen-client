@@ -4,7 +4,7 @@ import { Link, Switch, Route } from 'react-router-dom';
 const RecipeCard = props => {
     return (
 <div id="individual-recipe" className="container-fluid" style={{width: '85%'}}>
-    
+
     <div className="row">
         <Link to={props.link}>
         <div id="individual-left" className="col-sm">
