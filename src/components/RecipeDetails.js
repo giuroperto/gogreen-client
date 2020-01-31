@@ -8,19 +8,101 @@ class RecipeDetails extends Component {
   this.state = {
       recipes: recipesCleanTestAlex,
       searchWord: '',
-      uniqueRecipe: recipesCleanTestAlex.find(x => x._id === ':id')
+      uniqueRecipe: {},
+      determinedOwner: '',
+      cleanDishType: '',
     };
   }
 
+  componentDidMount() {
+    const givenUniqueRecipe = recipesCleanTestAlex.find(x => x._id === this.props.match.params.recipeID)
+    let givenDeterminedOwner = '';
+      if (givenUniqueRecipe.owner === undefined){
+        givenDeterminedOwner = givenUniqueRecipe.ownerAPI
+      } else {
+        givenDeterminedOwner = givenUniqueRecipe.owner.replace(givenUniqueRecipe.owner)
+      }
+    let givenCleanDishType = (givenUniqueRecipe.dishTypes[0]).slice(0,1).toUpperCase()+(givenUniqueRecipe.dishTypes[0]).slice(1,(givenUniqueRecipe.dishTypes[0]).length);
+
+    let givenCuisine = '';
+      if (givenUniqueRecipe.cuisines[0] === undefined){
+        givenCuisine = "Not Specified"
+      } else {
+        givenCuisine = givenUniqueRecipe.cuisines[0]
+      }
+    
+    this.setState({
+      uniqueRecipe: givenUniqueRecipe,
+      determinedOwner: givenDeterminedOwner,
+      cleanDishType: givenCleanDishType,
+      cuisine: givenCuisine
+    })
+
+  }
+
   render(){
-    console.log(this.state.uniqueRecipe)
+    console.log(this.state.uniqueRecipe.ingredients)
     return(
-      <div>
-        <h1>Recipe Details!</h1>
-      </div>
+      <>
+      {this.state.uniqueRecipe.ingredients ? (
+
+        <div id="detailed-recipe" className="container-fluid" style={{width: '85%'}}>
+          <div className="row">
+              <h3>{this.state.uniqueRecipe.name}</h3>
+          </div>
+
+            <div className="row">
+                <div id="individual-left" className="col-sm">
+                    <img src={this.state.uniqueRecipe.picture} alt="Recipe-Text"></img>
+                </div>
+                <div id="individual-right" className="col-sm">
+
+                    <div className="row">
+                        <h4>{this.state.uniqueRecipe.description}</h4>
+                    </div>
+                    <div className="row">
+                        <p><b>Created by: </b>{this.state.determinedOwner}</p> 
+                    </div>
+                    <div className="row">
+                        <p><b>Prep time: </b>{this.state.uniqueRecipe.totalTimeMinutes} minutes</p> 
+                    </div>
+                    <div className="row">
+                        <p><b>Dish type: </b>{this.state.cleanDishType}</p> 
+                    </div>       
+                    <div className="row">
+                        <p><b>Cuisine: </b>{this.state.cuisine}</p> 
+                    </div>          
+                </div>
+            </div>
+
+            <div className="row">
+              <h3>Ingredients</h3>
+                <div>
+                  {this.state.uniqueRecipe.ingredients[0].split("\n").map((i) => {
+                      return <div>{i}</div>;
+                  })}
+                </div>
+            </div>
+
+            <div className="row">
+              <h3>Instructions</h3>
+            </div>
+
+
+          <h1>Recipe Details!</h1>
+        </div>
+      ) : (
+      <h1>Loading!!!</h1>)
+      //Loader
+    }
+    </>
     )
   }
 }
+
+{/* <p>{this.state.uniqueRecipe.ingredients}</p>  */}
+
+
 
 // export default RecipeDetails;
 
