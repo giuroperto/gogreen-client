@@ -30,6 +30,13 @@ class MasterForm extends Component {
     this._prev = this._prev.bind(this)
   }
 
+  componentDidMount() {
+    if (this.props.params.recipe) {
+      const {name, description, dishTypes, cuisines, servings, ingredients, instructions, difficulty, isVegan} = this.props.params.recipe;
+      this.setState({name, description, dishTypes, cuisines, servings, ingredients, instructions, difficulty, isVegan});
+    }
+  }
+
   handleChange(event) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -48,7 +55,11 @@ class MasterForm extends Component {
   
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log(this.state);
+    if (this.props.params.recipe) {
+      //edit recipe route
+    } else {
+      //add recipe route
+    }
     const { name, description, dishTypes, cuisines, servings, ingredients, instructions, isVegan } = this.state;
     //TODO axios post
   }
