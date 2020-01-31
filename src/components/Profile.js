@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import RecipeCard from '../components/RecipeCard';
+import APIAccess from './api/api-access';
 
 class Profile extends Component {
   constructor(props) {
@@ -8,18 +9,19 @@ class Profile extends Component {
       uniqueUser: {recipes: []},
       recipesToShow: []
     }
+    this.apiEndpoints = new APIAccess();
     this.favoritesToggle = this.favoritesToggle.bind(this);
     this.myRecipesToggle = this.myRecipesToggle.bind(this);
   }
 
   componentDidMount() {
     const {username} = this.props.match.params;
-    // axios.get(`/user/${username}`)
-    // .then(response => this.setState({
-    //   uniqueUser: response.data,
-    //   recipesToShow: response.data.recipes
-    // }))
-    // .catch(error => console.log(error));
+    this.apiEndpoints.getOneUser(username)
+      .then(response => this.setState({
+          uniqueUser: response.data,
+          recipesToShow: response.data.recipes
+        }))
+      .catch(err => console.log(err));
   }
 
   favoritesToggle() {
