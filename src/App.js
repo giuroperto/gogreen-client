@@ -12,6 +12,7 @@ import Profile from './components/Profile';
 import EditProfile from './components/EditProfile';
 import RecipeDetails from './components/RecipeDetails';
 import AuthService from './components/auth/auth-services';
+import APIAccess from './components/api/api-access';
 // import EditRecipe from './components/EditRecipe'
 
 
@@ -25,10 +26,25 @@ class App extends Component {
       dishTypesArr: ["Main Course", "Side Dish", "Dessert", "Appetizer", "Salad", "Bread", "Breakfast", "Soup", "Beverage", "Sauce", "Marinade", "Fingerfood", "Snack", "Drink"],
       cuisinesArr: ["African", "American", "British", "Cajun", "Caribbean", "Chinese", "Eastern European", "European", "French", "German", "Greek", "Indian", "Irish", "Italian", "Japanese", "Jewish", "Korean", "Latin American", "Mediterranean", "Mexican", "Middle Eastern", "Nordic", "Southern", "Spanish", "Thai", "Vietnamese"],
       difficultLevelArr: ['Easy', 'Medium', 'Hard'],
+
       loggedInUser: null,
+      // info from API
+      allRecipes: [],
     }
     this.service = new AuthService();
+    this.apiEndpoints = new APIAccess();
     this.getUser = this.getUser.bind(this);
+    this.fetchUser = this.fetchUser.bind(this);
+  }
+
+  componentDidMount() {
+    this.apiEndpoints.getAllRecipes()
+      .then(response => {
+        this.setState({
+          allRecipes: response,
+        })
+      })
+      .catch(err => console.log(err));
   }
 
   fetchUser() {
@@ -66,7 +82,7 @@ class App extends Component {
           <Route exact path='/aboutus' component={AboutUs}/>
           <Route exact path='/allrecipes' render={(props) => <AllRecipes recipes={[{name: 'Apple Pie'}, {name: 'Banana Split'}, {name: 'Feijoada'} ]} {...props} />} />
           <Route exact path='/addrecipe' render={(props) => <AddRecipe allData={this.state} {...props} /> } />
-          <Route exact path='/user/:username' component={Profile} /> 
+          <Route exact path='/user/:username' render={(props) => <Profile allRecipes={this.state.allRecipes} {...props} />} /> 
           <Route exact path='/user/:username/edit' component={EditProfile}/> 
           <Route exact path='/recipe/:recipeID' component={RecipeDetails}/>
           {/* <Route exact path='/recipe/:id/edit' component={EditRecipe}/> */}
