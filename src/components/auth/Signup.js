@@ -22,6 +22,7 @@ class Signup extends Component {
   handleSignupFormSubmit(event){
 
     event.preventDefault();
+    //TODO refatorar
     const username = this.state.username;
     const password = this.state.password;
     const firstName = this.state.firstName;
