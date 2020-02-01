@@ -19,6 +19,7 @@ class Login extends Component {
   handleLoginFormSubmit(event){
     console.log(this.state)
     event.preventDefault();
+    //TODO refactor
     const username = this.state.username;
     const password = this.state.password;
 
@@ -43,7 +44,6 @@ class Login extends Component {
   }
   
   render() {
-    console.log(this.state)
     return(
       <div className="form-background">
         <div className="form-container">

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import SearchButtons from "./SearchButtons";
 import FilterRender from "./FilterRender";
+import AuthService from './auth/auth-services';
 
 class Navbar extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class Navbar extends Component {
       showFilterRender: false,
       loggedInUser: null
     };
+    this.service = new AuthService();
     this.filterRender = this.filterRender.bind(this);
   }
 
@@ -20,9 +22,23 @@ class Navbar extends Component {
     });
   }
 
+  logoutUser() {
+    this.service
+      .logout()
+      .then(() => {
+        this.setState({
+          loggedInUser: null
+        });
+        this.props.getUser(null);
+      })
+      .catch(err => console.log(err));
+  }
+
+  //TODO add conditional rendering according to whether a person is logged in or not
+
   componentDidUpdate(prevProps) {
-    if (this.props.loggedInUser !== prevProps.loggedInUser) {
-      this.setState({ loggedInUser: this.props.loggedInUser });
+    if (this.props.allData.loggedInUser !== prevProps.allData.loggedInUser) {
+      this.setState({ loggedInUser: this.props.allData.loggedInUser });
     }
   }
 
@@ -69,6 +85,12 @@ class Navbar extends Component {
                 <a className="nav-navbar nav-link d-flex align-items-center nav-icon-container" href="/login">
                 <img src="./images/chef.png" alt="chef-icon" />
                 <p>Login</p>
+                </a>
+
+                {/* TODO ADJUST - JUST TESTING LOGOUT */}
+                <a className="nav-navbar nav-link d-flex align-items-center nav-icon-container" onClick={this.logoutUser} href="/logout">
+                {/* <img src="./images/chef.png" alt="chef-icon" /> */}
+                <p>Logout</p>
                 </a>
 
             </div>
