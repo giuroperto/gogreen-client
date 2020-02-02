@@ -9,6 +9,7 @@ import Step4 from './Step4';
 class MasterForm extends Component {
   constructor(props) {
     super(props);
+    
     this.state = {
       currentStep: 1,
       name: '',

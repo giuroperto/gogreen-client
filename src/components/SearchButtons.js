@@ -5,8 +5,13 @@ class SearchButtons extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      searchWord: '',
+    }
+
     this.clickOnSearchButton = this.clickOnSearchButton.bind(this);
     this.clickOnFilter = this.clickOnFilter.bind(this);
+    this.handleChange = this.handleChange.bind(this);
 
   }
 
@@ -23,22 +28,42 @@ class SearchButtons extends Component {
     this.props.showFilter();
   }
 
+  handleChange(event) {
+    const { name, value } = event.target;
+
+    this.setState({
+      [name]: value,
+    });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    this.props.getSearchWord(this.state.searchWord);
+  }
+
   render() {
+    console.log(this.state)
     return (
       <div>
 
-  <div className="search-bar-container">
-   <input 
-    type="search"
-    placeholder='Search by recipe or ingredient'
-   />
-   <button type="submit" onClick={this.clickOnFilter}>
-    <i className="fas fa-filter"></i>
-   </button>
-   <button type="submit" onClick={this.clickOnSearchButton}>
-    <i className="fas fa-search"></i>
-   </button>
-  </div>
+        <div className="search-bar-container">
+        {/* created form to deal with submit */}
+          <form className="search-bar-container" onSubmit={this.handleSubmit}>
+            <input 
+              type="search"
+              name="searchWord"
+              placeholder='Search by recipe or ingredient'
+              value={this.state.searchWord}
+              onChange={this.handleChange}
+            />
+            <button onClick={this.clickOnFilter}>
+              <i className="fas fa-filter"></i>
+            </button>
+            <button type="submit" onClick={this.clickOnSearchButton}>
+              <i className="fas fa-search"></i>
+            </button>
+          </form>
+        </div>
 
       </div>
     );
