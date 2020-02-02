@@ -27,6 +27,9 @@ class App extends Component {
       cuisinesArr: ["African", "American", "British", "Cajun", "Caribbean", "Chinese", "Eastern European", "European", "French", "German", "Greek", "Indian", "Irish", "Italian", "Japanese", "Jewish", "Korean", "Latin American", "Mediterranean", "Mexican", "Middle Eastern", "Nordic", "Southern", "Spanish", "Thai", "Vietnamese"],
       difficultLevelArr: ['Easy', 'Medium', 'Hard'],
 
+      //info from search in Navbar
+      searchWord: '',
+
       loggedInUser: null,
       // info from API
       allRecipes: [],
@@ -35,16 +38,28 @@ class App extends Component {
     this.apiEndpoints = new APIAccess();
     this.getUser = this.getUser.bind(this);
     this.fetchUser = this.fetchUser.bind(this);
+    this.getRecipes = this.getRecipes.bind(this);
+    this.getSearchWord = this.getSearchWord.bind(this);
   }
-
+  
   componentDidMount() {
+    this.getRecipes();
+  }
+  
+  getSearchWord(word) {
+    this.setState({
+      searchWord: word,
+    });
+  }
+  
+  getRecipes() {
     this.apiEndpoints.getAllRecipes()
-      .then(response => {
-        this.setState({
-          allRecipes: response,
-        })
+    .then(response => {
+      this.setState({
+        allRecipes: response,
       })
-      .catch(err => console.log(err));
+    })
+    .catch(err => console.log(err));
   }
 
   fetchUser() {
@@ -71,16 +86,18 @@ class App extends Component {
 
   render(){
     console.log(this.state.loggedInUser);
+    console.log(this.state.allRecipes);
+    console.log(this.state.searchWord);
     this.fetchUser();
     return (
       <div className="App">
-        <Navbar allData={this.state} getUser={this.getUser}/>
+        <Navbar allData={this.state} getUser={this.getUser} getSearchWord={this.getSearchWord} />
         <Switch>
           <Route exact path='/' component={Home}/>
           <Route exact path='/login' render={(props) => <Login loggedInUser={this.state.loggedInUser} getUser={this.getUser} {...props} />} />
           <Route exact path='/signup' render={(props) => <Signup loggedInUser={this.state.loggedInUser} getUser={this.getUser} {...props} />}/>
           <Route exact path='/aboutus' component={AboutUs}/>
-          <Route exact path='/allrecipes' render={(props) => <AllRecipes recipes={[{name: 'Apple Pie'}, {name: 'Banana Split'}, {name: 'Feijoada'} ]} {...props} />} />
+          <Route exact path='/allrecipes' render={(props) => <AllRecipes allRecipes={this.state.allRecipes} {...props} />} />
           <Route exact path='/addrecipe' render={(props) => <AddRecipe allData={this.state} {...props} /> } />
           <Route exact path='/user/:username' render={(props) => <Profile allRecipes={this.state.allRecipes} {...props} />} /> 
           <Route exact path='/user/:username/edit' component={EditProfile}/> 

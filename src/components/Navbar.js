@@ -120,7 +120,7 @@ class Navbar extends Component {
           </div>
 
           <div className="mr-3">
-            <SearchButtons showFilter={this.filterRender} />
+            <SearchButtons showFilter={this.filterRender} getSearchWord={this.props.getSearchWord} />
           </div>
         </nav>
         <div>
