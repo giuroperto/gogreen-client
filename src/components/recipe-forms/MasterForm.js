@@ -149,40 +149,42 @@ class MasterForm extends Component {
 
   render() {
     return(
-      <form onSubmit={this.handleSubmit}>
-        <Step1 
-          currentStep={this.state.currentStep} 
-          handleChange={this.handleChange}
-          name={this.state.name}
-          description={this.state.description}
-        />
-        <Step2 
-          currentStep={this.state.currentStep} 
-          handleChange={this.handleChange}
-          dishTypes={this.state.dishTypes}
-          cuisines={this.state.cuisines}
-          servings={this.state.servings}
-          allData={this.props.allData}
-        />
-        <Step3 
-          currentStep={this.state.currentStep} 
-          handleChange={this.handleChange}
-          passIngredients={this.receiveArray}
-          ingredients={this.state.ingredients}
-          vegan={this.state.vegan}
-        />
-        <Step4
-          currentStep={this.state.currentStep} 
-          handleChange={this.handleChange}
-          passInstructions={this.receiveArray}
-          instructions={this.state.instructions}
-          picture={this.state.picture}
-          handleFileUpload={this.handleFileUpload}
-        />
-        {this.previousButton}
-        {this.nextButton}
-        {this.state.currentStep === 4 && <button type="submit" className="btn btn-primary">Submit Recipe</button>}
-      </form>
+      <div className="w-50">
+        <form onSubmit={this.handleSubmit}>
+          <Step1 
+            currentStep={this.state.currentStep} 
+            handleChange={this.handleChange}
+            name={this.state.name}
+            description={this.state.description}
+          />
+          <Step2 
+            currentStep={this.state.currentStep} 
+            handleChange={this.handleChange}
+            dishTypes={this.state.dishTypes}
+            cuisines={this.state.cuisines}
+            servings={this.state.servings}
+            allData={this.props.allData}
+          />
+          <Step3 
+            currentStep={this.state.currentStep} 
+            handleChange={this.handleChange}
+            passIngredients={this.receiveArray}
+            ingredients={this.state.ingredients}
+            vegan={this.state.vegan}
+          />
+          <Step4
+            currentStep={this.state.currentStep} 
+            handleChange={this.handleChange}
+            passInstructions={this.receiveArray}
+            instructions={this.state.instructions}
+            picture={this.state.picture}
+            handleFileUpload={this.handleFileUpload}
+          />
+          {this.previousButton}
+          {this.nextButton}
+          {this.state.currentStep === 4 && <button type="submit" className="btn btn-primary">Submit Recipe</button>}
+        </form>
+      </div>
     )
   }
 }
