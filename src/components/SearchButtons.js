@@ -34,11 +34,11 @@ class SearchButtons extends Component {
     this.setState({
       [name]: value,
     });
+    this.props.getSearchWord(this.state.searchWord);
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.getSearchWord(this.state.searchWord);
   }
 
   render() {
