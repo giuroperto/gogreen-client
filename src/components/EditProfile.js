@@ -43,14 +43,18 @@ class EditProfile extends Component {
     });
   }
 
-  handleSubmit() {
+  handleSubmit(event) {
+    event.preventDefault();
+    console.log('submit');
     let { firstName, lastName, email, usernameForm, oldPassword, newPassword } = this.state;
     const { username } = this.props.match.params;
 
     this.apiEndpoints.editUser(username, firstName, lastName, email, usernameForm, oldPassword, newPassword)
       .then(response => {
+        console.log(response);
         this.props.getMessage(response);
-        this.props.history.push(`/user/${this.props.loggedInUser.username}`);
+        //TODO redirect to the right page -> get username properly
+        this.props.history.push(`/user/${this.props.username}`);
       })
       .catch(err => console.log(err));
   }

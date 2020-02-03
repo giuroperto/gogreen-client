@@ -13,6 +13,7 @@ class APIAccess {
   }
 
   editUser(username, firstName, lastName, email, usernameForm, oldPassword, newPassword) {
+    console.log('editing user');
     return this.APIAccess.put(`/user/${username}`, { firstName, lastName, email, usernameForm, oldPassword, newPassword }).then(response => response.data);
   }
 
