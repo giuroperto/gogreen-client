@@ -19,6 +19,19 @@ class Step3 extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  componentDidMount() {
+    console.log('ingredients', this.props);
+    if (this.props.ingredients.length !== 0) {
+      this.setState({
+        inputNumber: 3,
+        ingredients: {
+          name: "ingredients",
+          values: this.props.ingredients
+      }
+      })
+    }
+  }
+
   addInput() {
     this.setState({
       inputNumber: this.state.inputNumber + 1
@@ -27,7 +40,7 @@ class Step3 extends Component {
 
   renderInputs() {
     let inputs = [];
-    for (let i = 0; i <= this.state.inputNumber; i += 1) {
+    for (let i = 0; i < this.state.inputNumber; i += 1) {
       let inputName = 'ingredient' + i;
       inputs.push({ key: i, name: inputName })
     }
@@ -72,15 +85,15 @@ class Step3 extends Component {
           className="btn btn-secondary"
           type="button" onClick={this.addInput}>+</button>
       </div>
-      <div class="form-group form-check">
+      <div className="form-group form-check">
         <input
           type="checkbox"
           className="form-check-input"
-          id="isVegan"
-          checked={this.props.isVegan}
-          name="isVegan"
+          id="vegan"
+          checked={this.props.vegan}
+          name="vegan"
           onChange={this.props.handleChange}/>
-        <label className="form-check-label" htmlFor="isVegan">This is a <strong>vegan</strong> recipe</label>
+        <label className="form-check-label" htmlFor="vegan">This is a <strong>vegan</strong> recipe</label>
       </div>
       </>
     )

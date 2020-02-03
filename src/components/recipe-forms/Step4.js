@@ -113,11 +113,11 @@ class Step4 extends Component {
         <label htmlFor="instructions">Detail your recipe <strong>instructions</strong> here.</label>
         {this.state.inputs.map(input => (
           <div key={input.key} className="form-row">
-            <div class="col-md-9 mb-3">
+            <div className="col-md-9 mb-3">
               <label>Step</label>
               <input key={input.key} data-key={input.key} className="form-control" type="text" name={input.textName} value={this.state.instructions.values[input.key].text} onChange={this.handleChange}/>
             </div>
-            <div class="col-md-3 mb-3">
+            <div className="col-md-3 mb-3">
               <label htmlFor="time">Time (minutes)</label>
               <input key={input.key} data-key={input.key} className="form-control" type="number" name={input.timeName} value={this.state.instructions.values[input.key].timeMinutes} onChange={this.handleChange}/>
             </div>
@@ -126,16 +126,6 @@ class Step4 extends Component {
         <button 
           className="btn btn-secondary"
           type="button" onClick={this.addInput}>+</button>
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="difficulty">How <strong>difficult</strong> is this recipe?</label>
-        <select value={this.props.difficulty} onChange={this.props.handleChange} name="difficulty" class="custom-select">
-          <option value=''>Choose a difficulty</option>
-          <option value='easy'>Easy</option>
-          <option value='medium'>Medium</option>
-          <option value='hard'>Hard</option>
-        </select>
       </div>
       </>
     )
