@@ -53,7 +53,8 @@ class EditProfile extends Component {
       .then(response => {
         console.log(response);
         this.props.getMessage(response);
-        this.props.history.push(`/user/${this.props.usernameForm}`);
+        //TODO redirect to the right page -> get username properly
+        this.props.history.push(`/user/${this.props.username}`);
       })
       .catch(err => console.log(err));
   }
