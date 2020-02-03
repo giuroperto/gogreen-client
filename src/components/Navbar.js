@@ -125,7 +125,7 @@ class Navbar extends Component {
         </nav>
         <div>
           {this.state.showFilterRender && (
-            <FilterRender allData={this.props.allData} />
+            <FilterRender allData={this.props.allData} getFilters={this.props.getFilters}/>
           )}
         </div>
       </div>

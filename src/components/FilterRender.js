@@ -3,7 +3,14 @@ import React, { Component } from "react";
 class FilterRender extends Component {
   constructor(props) {
     super(props);
+
+    this.handleChange = this.handleChange.bind(this);
   }
+
+  handleChange(event) {
+
+  }
+
   render() {
     return (
       <div className="filter-render">
@@ -13,7 +20,7 @@ class FilterRender extends Component {
             <div class="row">
               <div class="col-sm">
                 <h3>By Dish Type</h3>
-                <select className='form-control'>
+                <select className='form-control' onChange={this.handleChange}>
                   <option selected="selected"></option>
                   {this.props.allData.dishTypesArr.sort().map(dishType => {
                     return <option> {dishType} </option>;
@@ -23,7 +30,7 @@ class FilterRender extends Component {
 
               <div class="col-sm">
                 <h3>By Cousine</h3>
-                <select className='form-control'>
+                <select className='form-control' onChange={this.handleChange}>
                   <option selected="selected"></option>
                   {this.props.allData.cuisinesArr.sort().map(cuisinesType => {
                     return <option> {cuisinesType} </option>;
@@ -33,7 +40,7 @@ class FilterRender extends Component {
 
               <div class="col-sm">
                 <h3>Cooking Level</h3>
-                <select className='form-control'>
+                <select className='form-control' onChange={this.handleChange}>
                   <option selected="selected"></option>
                   {this.props.allData.difficultLevelArr.map(level => {
                     return <option> {level} </option>;
@@ -49,3 +56,5 @@ class FilterRender extends Component {
 }
 
 export default FilterRender;
+
+//TODO handle changes, so when we select an option from the list it will be saved in the state and we can render the AllRecipes page using this filter -> APP.js
