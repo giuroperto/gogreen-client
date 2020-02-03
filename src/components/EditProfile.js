@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import APIAccess from './api/api-access';
+import Message from './Message';
 
 class EditProfile extends Component {
   constructor(props) {
@@ -54,15 +55,17 @@ class EditProfile extends Component {
         console.log(response);
         this.props.getMessage(response);
         //TODO redirect to the right page -> get username properly
-        this.props.history.push(`/user/${this.props.username}`);
+        // this.props.history.push(`/user/${this.props.username}`);
       })
       .catch(err => console.log(err));
   }
 
   render() {
     console.log(this.state);
+    console.log(this.props.message);
     return(
       <div className="container-fluid profile-edit-form" style={{width: '85%'}}>
+      <Message />
         <form onSubmit={this.handleSubmit}>
           <h3>Edit profile</h3>
           <div className="form-row">
@@ -85,7 +88,7 @@ class EditProfile extends Component {
           </div>
           <div className="form-group">
             <label for="oldPassword">Current Password</label>
-            <input type="password" className="form-control" id="oldPassword" name="oldPassword" onChange={this.handleChange} value={this.state.oldPassword}/>
+            <input type="password" className="form-control" id="oldPassword" name="oldPassword" onChange={this.handleChange} value={this.state.oldPassword} required/>
           </div>
           <div className="form-group">
             <label for="newPassword">New Password</label>

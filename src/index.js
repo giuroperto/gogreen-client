@@ -6,6 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css'; 
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 
 ReactDOM.render((
 <Router>
