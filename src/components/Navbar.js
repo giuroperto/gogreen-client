@@ -28,6 +28,7 @@ class Navbar extends Component {
   }
 
   logoutUser() {
+    console.log('logging out')
     this.setState({
       loader: true,
     })
@@ -45,7 +46,13 @@ class Navbar extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.allData.loggedInUser !== prevProps.allData.loggedInUser) {
-      this.props.allData.loggedInUser ? this.setState({ loggedInUser: this.props.allData.loggedInUser, showLoginAndSignupButtons: false, showLogoutAndOtherButtons: true, }) : this.setState({ loggedInUser: this.props.allData.loggedInUser })
+      console.log('fernando vacilao');
+      console.log('fernando vacilao');
+      console.log('fernando vacilao');
+      console.log('fernando vacilao');
+      console.log('fernando vacilao');
+      console.log('fernando vacilao');
+      this.props.allData.loggedInUser ? this.setState({ loggedInUser: this.props.allData.loggedInUser, showLoginAndSignupButtons: false, showLogoutAndOtherButtons: true, }) : this.setState({ loggedInUser: this.props.allData.loggedInUser, showLoginAndSignupButtons: true, showLogoutAndOtherButtons: false,  })
     }
   }
 
@@ -110,7 +117,7 @@ class Navbar extends Component {
               )}
               
               {
-                this.state.showLogoutAndOtherButtons && 
+                this.state.loggedInUser && this.state.showLogoutAndOtherButtons && 
                 <>
               <NavLink
                 className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
@@ -122,7 +129,7 @@ class Navbar extends Component {
 
               <NavLink
                 className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
-                to={`/user/${this.props.allData.loggedInUser.username}`}
+                to={`/user/${this.state.loggedInUser.username}`}
               >
                 <img src="images/kitchen.png" alt="profile-icon" />
                 <p>My Profile</p>
