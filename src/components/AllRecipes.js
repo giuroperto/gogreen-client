@@ -14,24 +14,24 @@ class AllRecipes extends Component {
 
   componentDidUpdate() {
 
-    // if (this.props.allData.searchWord != '') {
-    //   displayedRecipeDatabase = displayedRecipeDatabase.filter(e => {
-    //     let givenSearchWord = this.props.allData.searchWord.toUpperCase();
-    //     return (e.ingredients.toUpperCase().includes(givenSearchWord) || e.name.toUpperCase().includes(givenSearchWord) || e.description.toUpperCase().includes(givenSearchWord))
-    //   })
-    // }
+    if (this.props.allData.searchWord != '') {
+      displayedRecipeDatabase = displayedRecipeDatabase.filter(e => {
+        let givenSearchWord = this.props.allData.searchWord.toUpperCase();
+        return (e.ingredients.toUpperCase().includes(givenSearchWord) || e.name.toUpperCase().includes(givenSearchWord) || e.description.toUpperCase().includes(givenSearchWord))
+      })
+    }
 
-    // if (this.props.allData.searchDishType != '') {
-    //   displayedRecipeDatabase = displayedRecipeDatabase.filter(e => {
-    //     return (e.dishTypes.includes(this.props.allData.searchDishType))
-    //   })
-    // }
+    if (this.props.allData.searchDishType != '') {
+      displayedRecipeDatabase = displayedRecipeDatabase.filter(e => {
+        return (e.dishTypes.includes(this.props.allData.searchDishType))
+      })
+    }
 
-    // if (this.props.allData.searchCuisine != '') {
-    //   displayedRecipeDatabase = displayedRecipeDatabase.filter(e => {
-    //     return (e.cuisines.includes(this.props.allData.searchCuisine))
-    //   })
-    // }
+    if (this.props.allData.searchCuisine != '') {
+      displayedRecipeDatabase = displayedRecipeDatabase.filter(e => {
+        return (e.cuisines.includes(this.props.allData.searchCuisine))
+      })
+    }
 
     // Difficulty TBD
     // if (this.props.allData.searchCookingLevel != '') {
