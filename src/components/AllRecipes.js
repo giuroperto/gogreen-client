@@ -4,25 +4,60 @@ import RecipeCard from './RecipeCard.js'
 import axios from 'axios';
 const recipesCleanTestAlex = require('./AlexInput.js');
 
+let fullRecipeDatabase = recipesCleanTestAlex;
+let displayedRecipeDatabase = fullRecipeDatabase;
 
 class AllRecipes extends Component {
   constructor(props) {
     super(props);
+  }
+
+  componentDidUpdate() {
+
+    // if (this.props.allData.searchWord != '') {
+    //   displayedRecipeDatabase = displayedRecipeDatabase.filter(e => {
+    //     let givenSearchWord = this.props.allData.searchWord.toUpperCase();
+    //     return (e.ingredients.toUpperCase().includes(givenSearchWord) || e.name.toUpperCase().includes(givenSearchWord) || e.description.toUpperCase().includes(givenSearchWord))
+    //   })
+    // }
+
+    // if (this.props.allData.searchDishType != '') {
+    //   displayedRecipeDatabase = displayedRecipeDatabase.filter(e => {
+    //     return (e.dishTypes.includes(this.props.allData.searchDishType))
+    //   })
+    // }
+
+    // if (this.props.allData.searchCuisine != '') {
+    //   displayedRecipeDatabase = displayedRecipeDatabase.filter(e => {
+    //     return (e.cuisines.includes(this.props.allData.searchCuisine))
+    //   })
+    // }
+
+    // Difficulty TBD
+    // if (this.props.allData.searchCookingLevel != '') {
+    //   displayedRecipeDatabase = displayedRecipeDatabase.filter(e => {
+    //     return (e.dishTypes.includes(this.props.allData.searchCookingLevel))
+    //   })
+    // }
 
   }
+
+
 
 
   // PREVIOUS
   //       <input type="text" name="searchWord" id="searchWord" value={this.state.searchWord} placeholder="Search recipe..." onChange={this.handleChange} />
   //       {
-  //         this.props.recipes.filter(recipe => recipe.name.toLowerCase().includes(this.state.searchWord.toLowerCase())).map(recipe => <Link to="/main" className="recipes-link">{recipe.name} </Link>)
+  //         this.props.allData.recipes.filter(recipe => recipe.name.toLowerCase().includes(this.state.searchWord.toLowerCase())).map(recipe => <Link to="/main" className="recipes-link">{recipe.name} </Link>)
 
+  // this.props.allData.allRecipes
 
 render(){
+  console.log(this.props.allData.searchWord);
     return(
       <div className='all-recipes-full-list'>
           <div className='all-recipes-each-listed'>
-            {this.props.allRecipes && this.props.allRecipes.map(element => {
+            {displayedRecipeDatabase && displayedRecipeDatabase.map(element => {
               
                 let determinedOwner = '';
                 if (element.owner === undefined){
@@ -40,7 +75,7 @@ render(){
                
                 let cleanLink = "/recipe/"+ element._id
 
-                return (<RecipeCard name={element.name} image={element.picture} description={element.description} owner={determinedOwner} link={cleanLink} time={element.totalTimeMinutes} vegan={element.vegan} cuisines={element.cuisines} dishTypes={cleanDishType} allRecipes = {this.props.allRecipes}/>);
+                return (<RecipeCard name={element.name} image={element.picture} description={element.description} owner={determinedOwner} link={cleanLink} time={element.totalTimeMinutes} vegan={element.vegan} cuisines={element.cuisines} dishTypes={cleanDishType} allRecipes = {this.props.allData.allRecipes}/>);
 
             })}  
           </div>
