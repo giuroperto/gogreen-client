@@ -27,12 +27,17 @@ class App extends Component {
       cuisinesArr: ["African", "American", "British", "Cajun", "Caribbean", "Chinese", "Eastern European", "European", "French", "German", "Greek", "Indian", "Irish", "Italian", "Japanese", "Jewish", "Korean", "Latin American", "Mediterranean", "Mexican", "Middle Eastern", "Nordic", "Southern", "Spanish", "Thai", "Vietnamese"],
       difficultLevelArr: ['Easy', 'Medium', 'Hard'],
 
-      //info from search in Navbar
+      //info from search and filters in Navbar
       searchWord: '',
-
+      searchDishType: '',
+      searchCuisine: '',
+      searchCookingLevel: '',
+      //auth info
       loggedInUser: null,
       // info from API
       allRecipes: [],
+      // messages from API
+      message: '',
     }
     this.service = new AuthService();
     this.apiEndpoints = new APIAccess();
@@ -40,15 +45,36 @@ class App extends Component {
     this.fetchUser = this.fetchUser.bind(this);
     this.getRecipes = this.getRecipes.bind(this);
     this.getSearchWord = this.getSearchWord.bind(this);
+    this.getMessage = this.getMessage.bind(this);
   }
   
   componentDidMount() {
     this.getRecipes();
   }
+
+  getFilters(filter, option) {
+    switch (filter) {
+      case 'dishType':
+        break;
+      case 'cuisine':
+        break;
+      case 'level':
+        break;
+      default:
+        break;
+    }
+  }
   
   getSearchWord(word) {
     this.setState({
       searchWord: word,
+    });
+  }
+
+  getMessage(apiMessage) {
+    console.log(apiMessage);
+    this.setState({
+      message: apiMessage,
     });
   }
   
@@ -91,7 +117,7 @@ class App extends Component {
     this.fetchUser();
     return (
       <div className="App">
-        <Navbar allData={this.state} getUser={this.getUser} getSearchWord={this.getSearchWord} />
+        <Navbar allData={this.state} getUser={this.getUser} getSearchWord={this.getSearchWord} getFilters={this.getFilters} />
         <Switch>
           <Route exact path='/' component={Home}/>
           <Route exact path='/login' render={(props) => <Login loggedInUser={this.state.loggedInUser} getUser={this.getUser} {...props} />} />
@@ -100,9 +126,8 @@ class App extends Component {
           <Route exact path='/allrecipes' render={(props) => <AllRecipes allRecipes={this.state.allRecipes} {...props} />} />
           <Route exact path='/addrecipe' render={(props) => <AddRecipe allData={this.state} {...props} /> } />
           <Route exact path='/user/:username' render={(props) => <Profile allRecipes={this.state.allRecipes} {...props} />} /> 
-          <Route exact path='/user/:username/edit' component={EditProfile}/> 
+          <Route exact path='/user/:username/edit' render={(props) => <EditProfile getMessage={this.getMessage} {...props} />} /> 
           <Route exact path='/recipe/:recipeID' render={(props) => <RecipeDetails allRecipes={this.state.allRecipes} {...props} />} />
-          {/* <Route exact path='/recipe/:recipeID' component={RecipeDetails}/> */}
           {/* <Route exact path='/recipe/:id/edit' component={EditRecipe}/> */}
         </Switch>
       </div>
