@@ -99,7 +99,7 @@ class App extends Component {
         })
         .catch(err => {
           this.setState({
-            loggedInUser:false
+            loggedInUser: false
           });
         });
     }
@@ -123,6 +123,7 @@ class App extends Component {
           <Route exact path='/' component={Home}/>
           <Route exact path='/login' render={(props) => <Login loggedInUser={this.state.loggedInUser} getUser={this.getUser} {...props} />} />
           <Route exact path='/signup' render={(props) => <Signup loggedInUser={this.state.loggedInUser} getUser={this.getUser} {...props} />}/>
+          {/* <Route exact path='/logout' render={{props}} => <Home loggoutUser={} /> */}
           <Route exact path='/aboutus' component={AboutUs}/>
           <Route exact path='/allrecipes' render={(props) => <AllRecipes allData={this.state} {...props} />} />
           <Route exact path='/addrecipe' render={(props) => <AddRecipe allData={this.state} {...props} /> } />
