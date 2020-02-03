@@ -4,28 +4,45 @@ import RecipeCard from './RecipeCard.js'
 import axios from 'axios';
 const recipesCleanTestAlex = require('./AlexInput.js');
 
+let fullRecipeDatabase = recipesCleanTestAlex;
+let displayedRecipeDatabase = fullRecipeDatabase;
 
 class AllRecipes extends Component {
   constructor(props) {
     super(props);
   }
 
-  componentDidMount() {
-    (this.props.allData.searchWord == null) ? (
-      this.props.allData.displayedRecipes = this.props.allData.allRecipes
-    ) : (
-      this.props.allData.displayedRecipes = this.props.allData.allRecipes
-      // ALEX Re-build displayed Recipes after checking title, description, and ingredients
-    );
+  componentDidUpdate() {
+
+    // if (this.props.allData.searchWord != '') {
+    //   displayedRecipeDatabase = displayedRecipeDatabase.filter(e => {
+    //     let givenSearchWord = this.props.allData.searchWord.toUpperCase();
+    //     return (e.ingredients.toUpperCase().includes(givenSearchWord) || e.name.toUpperCase().includes(givenSearchWord) || e.description.toUpperCase().includes(givenSearchWord))
+    //   })
+    // }
+
+    // if (this.props.allData.searchDishType != '') {
+    //   displayedRecipeDatabase = displayedRecipeDatabase.filter(e => {
+    //     return (e.dishTypes.includes(this.props.allData.searchDishType))
+    //   })
+    // }
+
+    // if (this.props.allData.searchCuisine != '') {
+    //   displayedRecipeDatabase = displayedRecipeDatabase.filter(e => {
+    //     return (e.cuisines.includes(this.props.allData.searchCuisine))
+    //   })
+    // }
+
+    // Difficulty TBD
+    // if (this.props.allData.searchCookingLevel != '') {
+    //   displayedRecipeDatabase = displayedRecipeDatabase.filter(e => {
+    //     return (e.dishTypes.includes(this.props.allData.searchCookingLevel))
+    //   })
+    // }
+
   }
 
-  componentDidUpdate() {
-    (this.props.allData.searchWord == null) ? (
-      this.props.allData.displayedRecipes = this.props.allData.allRecipes
-    ) : (
-      this.props.allData.displayedRecipes = this.props.allData.allRecipes
-    );
-  }
+
 
 
   // PREVIOUS
@@ -33,12 +50,14 @@ class AllRecipes extends Component {
   //       {
   //         this.props.allData.recipes.filter(recipe => recipe.name.toLowerCase().includes(this.state.searchWord.toLowerCase())).map(recipe => <Link to="/main" className="recipes-link">{recipe.name} </Link>)
 
+  // this.props.allData.allRecipes
 
 render(){
+  console.log(this.props.allData.searchWord);
     return(
       <div className='all-recipes-full-list'>
           <div className='all-recipes-each-listed'>
-            {this.props.allData.allRecipes && this.props.allData.allRecipes.map(element => {
+            {displayedRecipeDatabase && displayedRecipeDatabase.map(element => {
               
                 let determinedOwner = '';
                 if (element.owner === undefined){

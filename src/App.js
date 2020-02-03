@@ -67,6 +67,8 @@ class App extends Component {
   }
   
   getSearchWord(word) {
+    console.log('Sou Alex the word is:')
+    console.log(word)
     this.setState({
       searchWord: word,
     });
