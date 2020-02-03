@@ -21,7 +21,7 @@ class MasterForm extends Component {
       ingredients: [],
       instructions: [],
       vegan: false,
-      // picture: '',
+      picture: '',
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -29,6 +29,7 @@ class MasterForm extends Component {
     this.receiveArray = this.receiveArray.bind(this)
     this._next = this._next.bind(this)
     this._prev = this._prev.bind(this)
+    this.handleFileUpload = this.handleFileUpload.bind(this)
     this.apiEndpoints = new APIAccess();
   }
 
@@ -40,22 +41,22 @@ class MasterForm extends Component {
     return arr.join(" ");
   }
 
-  componentDidMount() {
-    if (this.props.recipe !== null && this.props.recipe !== undefined) {
-      let {name, description, dishTypes, cuisines, servings, ingredients, instructions, vegan} = this.props.recipe;
+  // componentDidMount() {
+  //   if (this.props.recipe !== null && this.props.recipe !== undefined) {
+  //     let {name, description, dishTypes, cuisines, servings, ingredients, instructions, vegan} = this.props.recipe;
       
-      // normalize dishTypes and cuisines string to uppercase initials
-      if (typeof (dishTypes) === 'object' && dishTypes.length !== 0) {
-        let firstDishType = dishTypes[0];
-        dishTypes = this.capitalizeData(firstDishType);
-      }
-      if (typeof (cuisines) === 'object' && cuisines.length !== 0) {
-        let firstCuisine = cuisines[0];
-        cuisines = this.capitalizeData(firstCuisine);
-      }
-      this.setState({currentStep: 1, name, description, dishTypes, cuisines, servings, ingredients, instructions, vegan}, () => console.log('meu log', this.state));
-    }
-  }
+  //     // normalize dishTypes and cuisines string to uppercase initials
+  //     if (typeof (dishTypes) === 'object' && dishTypes.length !== 0) {
+  //       let firstDishType = dishTypes[0];
+  //       dishTypes = this.capitalizeData(firstDishType);
+  //     }
+  //     if (typeof (cuisines) === 'object' && cuisines.length !== 0) {
+  //       let firstCuisine = cuisines[0];
+  //       cuisines = this.capitalizeData(firstCuisine);
+  //     }
+  //     this.setState({currentStep: 1, name, description, dishTypes, cuisines, servings, ingredients, instructions, vegan}, () => console.log('meu log', this.state));
+  //   }
+  // }
 
   handleChange(event) {
     const target = event.target;
@@ -73,16 +74,32 @@ class MasterForm extends Component {
     })
   }
   
-  handleSubmit = (event) => {
+  handleSubmit (event) {
     event.preventDefault();
-    const { name, description, dishTypes, cuisines, servings, ingredients, instructions, vegan } = this.state;
+    const { name, description, dishTypes, cuisines, servings, ingredients, instructions, vegan, picture } = this.state;
     let totalTimeMinutes = ingredients.reduce((acc, item) => acc + item.timeMinutes, 0);
     let owner = this.props.allData.loggedInUser._id;
 
-    this.apiEndpoints.addNewRecipe(owner, name, description, ingredients, dishTypes, vegan, cuisines, totalTimeMinutes, servings, instructions)
-    .then(response => this.props.history.push(`/recipe/${response.newRecipe._id}`))
+    this.apiEndpoints.addNewRecipe(owner, name, description, ingredients, dishTypes, vegan, cuisines, totalTimeMinutes, servings, instructions, picture)
+    .then(response => {
+      console.log(response);
+      this.props.history.push(`/recipe/${response.newRecipe._id}`)
+    })
     .catch(err => console.log(err));
 
+  }
+
+  handleFileUpload (event) {
+    const uploadData = new FormData();
+    uploadData.append("imageUrl", event.target.files[0]);
+    console.log('hi!', event.target.files)
+    this.apiEndpoints.handleUpload(uploadData)
+    .then(response => {
+        this.setState({ picture: response.secure_url });
+      })
+      .catch(err => {
+        console.log("Error while uploading the file: ", err);
+      });
   }
 
   _next() {
@@ -159,10 +176,12 @@ class MasterForm extends Component {
           handleChange={this.handleChange}
           passInstructions={this.receiveArray}
           instructions={this.state.instructions}
+          picture={this.state.picture}
+          handleFileUpload={this.handleFileUpload}
         />
         {this.previousButton}
         {this.nextButton}
-        {this.state.currentStep === 4 && <button type="submit">Submit Recipe</button>}
+        {this.state.currentStep === 4 && <button type="submit" className="btn btn-primary">Submit Recipe</button>}
       </form>
     )
   }

@@ -127,6 +127,10 @@ class Step4 extends Component {
           className="btn btn-secondary"
           type="button" onClick={this.addInput}>+</button>
       </div>
+      <div className="form-group">
+        <label htmlFor="file">Finally, add a <strong>picture</strong></label>
+        <input type="file" class="form-control-file" id="file" onChange={this.props.handleFileUpload}/>
+      </div>
       </>
     )
   }

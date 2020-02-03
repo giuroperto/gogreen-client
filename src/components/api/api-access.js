@@ -35,13 +35,19 @@ class APIAccess {
     return this.APIAccess.get(`/recipe/${recipeID}`).then(response => response.data);
   }
 
-  addNewRecipe(name, description, ingredients, dishTypes, vegan, cuisines, totalTimeMinutes, servings, instructions, picture) {
-    return this.APIAccess.post('/add-a-new-recipe', { name, description, ingredients, dishTypes, vegan, cuisines, totalTimeMinutes, servings, instructions, picture }).then(response => response.data);
+  addNewRecipe(owner, name, description, ingredients, dishTypes, vegan, cuisines, totalTimeMinutes, servings, instructions, picture) {
+    return this.APIAccess.post('/add-a-new-recipe', { owner, name, description, ingredients, dishTypes, vegan, cuisines, totalTimeMinutes, servings, instructions, picture }).then(response => response.data);
   }
   
   deleteRecipe(recipeID) {
     return this.APIAccess.delete(`/recipe/${recipeID}/delete`).then(response => response.data);
   }
+
+  handleUpload (theFile) {
+    // console.log('file in service: ', theFile)
+    return this.APIAccess.post('/upload', theFile).then(res => res.data);
+  }
+
 }
 
 export default APIAccess;
