@@ -34,7 +34,11 @@ class SearchButtons extends Component {
     this.setState({
       [name]: value,
     });
-    this.props.getSearchWord(value);
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    this.props.getSearchWord(this.state.searchWord);
   }
 
   render() {
@@ -44,7 +48,7 @@ class SearchButtons extends Component {
 
         <div className="search-bar-container">
         {/* created form to deal with submit */}
-          <form className="search-bar-container">
+          <form className="search-bar-container" onSubmit={this.handleSubmit}>
             <input 
               type="search"
               name="searchWord"

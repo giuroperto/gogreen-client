@@ -3,11 +3,9 @@ import { Link, NavLink } from "react-router-dom";
 import SearchButtons from "./SearchButtons";
 import FilterRender from "./FilterRender";
 import AuthService from "./auth/auth-services";
-
 class Navbar extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       showFilterRender: false,
       loggedInUser: null,
@@ -18,15 +16,12 @@ class Navbar extends Component {
     this.service = new AuthService();
     this.filterRender = this.filterRender.bind(this);
     this.logoutUser = this.logoutUser.bind(this);
-
   }
-
   filterRender() {
     this.setState({
       showFilterRender: !this.state.showFilterRender
     });
   }
-
   logoutUser() {
     this.setState({
       loader: true,
@@ -42,13 +37,11 @@ class Navbar extends Component {
       })
       .catch(err => console.log(err));
   }
-
   componentDidUpdate(prevProps) {
     if (this.props.allData.loggedInUser !== prevProps.allData.loggedInUser) {
       this.props.allData.loggedInUser ? this.setState({ loggedInUser: this.props.allData.loggedInUser, showLoginAndSignupButtons: false, showLogoutAndOtherButtons: true, }) : this.setState({ loggedInUser: this.props.allData.loggedInUser })
     }
   }
-
   render() {
     console.log(this.state)
     return (
@@ -68,7 +61,6 @@ class Navbar extends Component {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-
           <div
             className="collapse navbar-collapse d-flex justify-content-between"
             id="navbarSupportedContent"
@@ -78,7 +70,6 @@ class Navbar extends Component {
                 Why GoGreen?
               </NavLink>
             </div>
-
             <div className="d-flex flex-direction-between navbar-list">
               {
                 this.state.loggedInUser && 
@@ -88,7 +79,6 @@ class Navbar extends Component {
               </div>
               </>
               }
-
               {this.state.showLoginAndSignupButtons && (
                 <>
                   <NavLink
@@ -98,7 +88,6 @@ class Navbar extends Component {
                     <img src="images/recipe.png" alt="recipe-icon" />
                     <p>Sign Up</p>
                   </NavLink>
-
                   <NavLink
                     className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
                     to="/login"
@@ -119,7 +108,6 @@ class Navbar extends Component {
                 <img className="mr-1" src="images/add.png" alt="add-icon" />
                 <p>Add Recipe</p>
               </NavLink>
-
               <NavLink
                 className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
                 to={`/user/${this.props.allData.loggedInUser.username}`}
@@ -127,7 +115,6 @@ class Navbar extends Component {
                 <img src="images/kitchen.png" alt="profile-icon" />
                 <p>My Profile</p>
               </NavLink>
-
               <NavLink
                 className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
                 onClick={this.logoutUser}
@@ -138,15 +125,12 @@ class Navbar extends Component {
               </NavLink>
                 </>
               }
-
             </div>
           </div>
         </nav>
-
         <div className="split-container d-flex justify-content-center">
           <div className="split-bar"></div>
         </div>
-
         <nav className="navbar navbar-light second-navbar d-flex align-items-center mt-1 navbar-list">
           <div className="second-nav-icon-div d-flex align-items-center ml-2">
             <NavLink
@@ -156,7 +140,6 @@ class Navbar extends Component {
               <img src="images/cook-book.png" alt="book-icon" />
               <p>All Recipes</p>
             </NavLink>
-
             <NavLink
               className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
               to="/"
@@ -164,7 +147,6 @@ class Navbar extends Component {
               <img src="images/vegetables-icon.png" alt="vegetables-icon" />
               <p>Vegan</p>
             </NavLink>
-
             <NavLink
               className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
               to="/"
@@ -173,7 +155,6 @@ class Navbar extends Component {
               <p>Vegetarian</p>
             </NavLink>
           </div>
-
           <div className="mr-3">
             <SearchButtons
               showFilter={this.filterRender}
@@ -193,5 +174,4 @@ class Navbar extends Component {
     );
   }
 }
-
 export default Navbar;

@@ -16,13 +16,10 @@ import AuthService from "./components/auth/auth-services";
 import APIAccess from "./components/api/api-access";
 // import EditRecipe from './components/EditRecipe'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-
 //Test
-
 class App extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       dishTypesArr: [
         "Main Course",
@@ -69,7 +66,6 @@ class App extends Component {
         "Vietnamese"
       ],
       difficultLevelArr: ["Easy", "Medium", "Hard"],
-
       //info from search and filters in Navbar
       searchWord: "",
       searchDishType: "",
@@ -92,12 +88,9 @@ class App extends Component {
     this.getSearchWord = this.getSearchWord.bind(this);
     this.getMessage = this.getMessage.bind(this);
   }
-
   componentDidMount() {
     this.getRecipes();
   }
-
-
   getFilters(filter, option) {
     switch (filter) {
       case "dishType":
@@ -110,7 +103,6 @@ class App extends Component {
         break;
     }
   }
-
   getSearchWord(word) {
     console.log("Sou Alex the word is:");
     console.log(word);
@@ -118,14 +110,12 @@ class App extends Component {
       searchWord: word
     });
   }
-
   getMessage(apiMessage) {
     console.log(apiMessage);
     this.setState({
       message: apiMessage
     });
   }
-
   getRecipes() {
     this.apiEndpoints
       .getAllRecipes()
@@ -137,7 +127,6 @@ class App extends Component {
       })
       .catch(err => console.log(err));
   }
-
   fetchUser() {
     if (this.state.loggedInUser === null) {
       this.service
@@ -154,13 +143,11 @@ class App extends Component {
         });
     }
   }
-
   getUser(user) {
     this.setState({
       loggedInUser: user
     });
   }
-
   render() {
     console.log(this.state.loggedInUser);
     console.log(this.state.allRecipes);
@@ -247,5 +234,4 @@ class App extends Component {
     );
   }
 }
-
 export default App;
