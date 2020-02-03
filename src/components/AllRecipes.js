@@ -8,21 +8,37 @@ const recipesCleanTestAlex = require('./AlexInput.js');
 class AllRecipes extends Component {
   constructor(props) {
     super(props);
+  }
 
+  componentDidMount() {
+    (this.props.allData.searchWord == null) ? (
+      this.props.allData.displayedRecipes = this.props.allData.allRecipes
+    ) : (
+      this.props.allData.displayedRecipes = this.props.allData.allRecipes
+      // ALEX Re-build displayed Recipes after checking title, description, and ingredients
+    );
+  }
+
+  componentDidUpdate() {
+    (this.props.allData.searchWord == null) ? (
+      this.props.allData.displayedRecipes = this.props.allData.allRecipes
+    ) : (
+      this.props.allData.displayedRecipes = this.props.allData.allRecipes
+    );
   }
 
 
   // PREVIOUS
   //       <input type="text" name="searchWord" id="searchWord" value={this.state.searchWord} placeholder="Search recipe..." onChange={this.handleChange} />
   //       {
-  //         this.props.recipes.filter(recipe => recipe.name.toLowerCase().includes(this.state.searchWord.toLowerCase())).map(recipe => <Link to="/main" className="recipes-link">{recipe.name} </Link>)
+  //         this.props.allData.recipes.filter(recipe => recipe.name.toLowerCase().includes(this.state.searchWord.toLowerCase())).map(recipe => <Link to="/main" className="recipes-link">{recipe.name} </Link>)
 
 
 render(){
     return(
       <div className='all-recipes-full-list'>
           <div className='all-recipes-each-listed'>
-            {this.props.allRecipes && this.props.allRecipes.map(element => {
+            {this.props.allData.allRecipes && this.props.allData.allRecipes.map(element => {
               
                 let determinedOwner = '';
                 if (element.owner === undefined){
@@ -40,7 +56,7 @@ render(){
                
                 let cleanLink = "/recipe/"+ element._id
 
-                return (<RecipeCard name={element.name} image={element.picture} description={element.description} owner={determinedOwner} link={cleanLink} time={element.totalTimeMinutes} vegan={element.vegan} cuisines={element.cuisines} dishTypes={cleanDishType} allRecipes = {this.props.allRecipes}/>);
+                return (<RecipeCard name={element.name} image={element.picture} description={element.description} owner={determinedOwner} link={cleanLink} time={element.totalTimeMinutes} vegan={element.vegan} cuisines={element.cuisines} dishTypes={cleanDishType} allRecipes = {this.props.allData.allRecipes}/>);
 
             })}  
           </div>
