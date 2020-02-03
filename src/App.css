@@ -28,7 +28,7 @@ img {
 .nav-container{
   box-shadow: 0 4px 2px -2px rgba(0,0,0,.2);
   width: 100vw;
-  background-color: rgba(240, 245, 230, 0.3);
+  background-color: rgba(240, 245, 230, 0.1);
   
 }
 
@@ -56,7 +56,6 @@ img {
   align-items: center;
   margin-right: 1vw;
   color: rgba(72, 151, 75, 0.9);
-
 }
 
 .nav-icon-container img {
@@ -75,6 +74,14 @@ img {
 .navbar-list a.chosen,
 .navbar-list a:hover {
   border-bottom: 1px solid lightgreen;
+}
+
+.logged-in-welcome {
+  display: flex;
+  align-items: center;
+  margin-right: 1vw;
+  font-weight: bold;
+  color: rgba(95, 59, 19, 0.863);
 }
 /* SEARCH BAR */
 

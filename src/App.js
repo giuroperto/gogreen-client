@@ -1,45 +1,89 @@
-import React, { Component, useLayoutEffect } from 'react';
-import { Switch, Route } from 'react-router-dom';
-import './App.css';
-import Navbar from './components/Navbar';
-import Home from './components/Home';
-import Login from './components/auth/Login';
-import Signup from './components/auth/Signup';
-import AboutUs from './components/AboutUs';
-import AllRecipes from './components/AllRecipes';
-import AddRecipe from './components/AddRecipe';
-import Profile from './components/Profile';
-import EditProfile from './components/EditProfile';
-import RecipeDetails from './components/RecipeDetails';
-import AuthService from './components/auth/auth-services';
-import APIAccess from './components/api/api-access';
+import React, { Component, useLayoutEffect } from "react";
+import { Switch, Route } from "react-router-dom";
+import "./App.css";
+import Loader from "react-loader-spinner";
+import Navbar from "./components/Navbar";
+import Home from "./components/Home";
+import Login from "./components/auth/Login";
+import Signup from "./components/auth/Signup";
+import AboutUs from "./components/AboutUs";
+import AllRecipes from "./components/AllRecipes";
+import AddRecipe from "./components/AddRecipe";
+import Profile from "./components/Profile";
+import EditProfile from "./components/EditProfile";
+import RecipeDetails from "./components/RecipeDetails";
+import AuthService from "./components/auth/auth-services";
+import APIAccess from "./components/api/api-access";
 // import EditRecipe from './components/EditRecipe'
-
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 //Test
 
 class App extends Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
 
     this.state = {
-      dishTypesArr: ["Main Course", "Side Dish", "Dessert", "Appetizer", "Salad", "Bread", "Breakfast", "Soup", "Beverage", "Sauce", "Marinade", "Fingerfood", "Snack", "Drink"],
-      cuisinesArr: ["African", "American", "British", "Cajun", "Caribbean", "Chinese", "Eastern European", "European", "French", "German", "Greek", "Indian", "Irish", "Italian", "Japanese", "Jewish", "Korean", "Latin American", "Mediterranean", "Mexican", "Middle Eastern", "Nordic", "Southern", "Spanish", "Thai", "Vietnamese"],
-      difficultLevelArr: ['Easy', 'Medium', 'Hard'],
+      dishTypesArr: [
+        "Main Course",
+        "Side Dish",
+        "Dessert",
+        "Appetizer",
+        "Salad",
+        "Bread",
+        "Breakfast",
+        "Soup",
+        "Beverage",
+        "Sauce",
+        "Marinade",
+        "Fingerfood",
+        "Snack",
+        "Drink"
+      ],
+      cuisinesArr: [
+        "African",
+        "American",
+        "British",
+        "Cajun",
+        "Caribbean",
+        "Chinese",
+        "Eastern European",
+        "European",
+        "French",
+        "German",
+        "Greek",
+        "Indian",
+        "Irish",
+        "Italian",
+        "Japanese",
+        "Jewish",
+        "Korean",
+        "Latin American",
+        "Mediterranean",
+        "Mexican",
+        "Middle Eastern",
+        "Nordic",
+        "Southern",
+        "Spanish",
+        "Thai",
+        "Vietnamese"
+      ],
+      difficultLevelArr: ["Easy", "Medium", "Hard"],
 
       //info from search and filters in Navbar
-      searchWord: '',
-      searchDishType: '',
-      searchCuisine: '',
-      searchCookingLevel: '',
+      searchWord: "",
+      searchDishType: "",
+      searchCuisine: "",
+      searchCookingLevel: "",
       //auth info
       loggedInUser: null,
       // info from API
       allRecipes: [],
       displayedRecipes: [],
       // messages from API
-      message: '',
-    }
+      message: "",
+      loader: true,
+    };
     this.service = new AuthService();
     this.apiEndpoints = new APIAccess();
     this.getUser = this.getUser.bind(this);
@@ -48,52 +92,56 @@ class App extends Component {
     this.getSearchWord = this.getSearchWord.bind(this);
     this.getMessage = this.getMessage.bind(this);
   }
-  
+
   componentDidMount() {
     this.getRecipes();
   }
 
+
   getFilters(filter, option) {
     switch (filter) {
-      case 'dishType':
+      case "dishType":
         break;
-      case 'cuisine':
+      case "cuisine":
         break;
-      case 'level':
+      case "level":
         break;
       default:
         break;
     }
   }
-  
+
   getSearchWord(word) {
-    console.log('Sou Alex the word is:')
-    console.log(word)
+    console.log("Sou Alex the word is:");
+    console.log(word);
     this.setState({
-      searchWord: word,
+      searchWord: word
     });
   }
 
   getMessage(apiMessage) {
     console.log(apiMessage);
     this.setState({
-      message: apiMessage,
+      message: apiMessage
     });
   }
-  
+
   getRecipes() {
-    this.apiEndpoints.getAllRecipes()
-    .then(response => {
-      this.setState({
-        allRecipes: response,
+    this.apiEndpoints
+      .getAllRecipes()
+      .then(response => {
+        this.setState({
+          allRecipes: response,
+          loader: false,
+        });
       })
-    })
-    .catch(err => console.log(err));
+      .catch(err => console.log(err));
   }
 
   fetchUser() {
     if (this.state.loggedInUser === null) {
-      this.service.loggedin()
+      this.service
+        .loggedin()
         .then(response => {
           this.setState({
             loggedInUser: response
@@ -109,31 +157,92 @@ class App extends Component {
 
   getUser(user) {
     this.setState({
-      loggedInUser: user,
+      loggedInUser: user
     });
   }
 
-  render(){
+  render() {
     console.log(this.state.loggedInUser);
     console.log(this.state.allRecipes);
     console.log(this.state.searchWord);
     this.fetchUser();
     return (
       <div className="App">
-        <Navbar allData={this.state} getUser={this.getUser} getSearchWord={this.getSearchWord} getFilters={this.getFilters} />
-        <Switch>
-          <Route exact path='/' component={Home}/>
-          <Route exact path='/login' render={(props) => <Login loggedInUser={this.state.loggedInUser} getUser={this.getUser} {...props} />} />
-          <Route exact path='/signup' render={(props) => <Signup loggedInUser={this.state.loggedInUser} getUser={this.getUser} {...props} />}/>
-          {/* <Route exact path='/logout' render={{props}} => <Home loggoutUser={} /> */}
-          <Route exact path='/aboutus' component={AboutUs}/>
-          <Route exact path='/allrecipes' render={(props) => <AllRecipes allData={this.state} {...props} />} />
-          <Route exact path='/addrecipe' render={(props) => <AddRecipe allData={this.state} {...props} /> } />
-          <Route exact path='/user/:username' render={(props) => <Profile allRecipes={this.state.allRecipes} {...props} />} /> 
-          <Route exact path='/user/:username/edit' render={(props) => <EditProfile getMessage={this.getMessage} {...props} />} /> 
-          <Route exact path='/recipe/:recipeID' render={(props) => <RecipeDetails allRecipes={this.state.allRecipes} {...props} />} />
-          {/* <Route exact path='/recipe/:id/edit' component={EditRecipe}/> */}
-        </Switch>
+        {this.state.loader ? (
+          <div className='d-flex align-items-center justify-content-center' style={{ height:'80vh'}}>
+            <Loader type="Puff" color="#76ff03" height={200} width={200} />
+          </div>
+        ) : (
+          <>  
+            <Navbar
+              allData={this.state}
+              getUser={this.getUser}
+              getSearchWord={this.getSearchWord}
+              getFilters={this.getFilters}
+            />
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route
+                exact
+                path="/login"
+                render={props => (
+                  <Login
+                    loggedInUser={this.state.loggedInUser}
+                    getUser={this.getUser}
+                    {...props}
+                  />
+                )}
+              />
+              <Route
+                exact
+                path="/signup"
+                render={props => (
+                  <Signup
+                    loggedInUser={this.state.loggedInUser}
+                    getUser={this.getUser}
+                    {...props}
+                  />
+                )}
+              />
+              <Route exact path="/aboutus" component={AboutUs} />
+              <Route
+                exact
+                path="/allrecipes"
+                render={props => <AllRecipes allData={this.state} {...props} />}
+              />
+              <Route
+                exact
+                path="/addrecipe"
+                render={props => <AddRecipe allData={this.state} {...props} />}
+              />
+              <Route
+                exact
+                path="/user/:username"
+                render={props => (
+                  <Profile allRecipes={this.state.allRecipes} {...props} />
+                )}
+              />
+              <Route
+                exact
+                path="/user/:username/edit"
+                render={props => (
+                  <EditProfile getMessage={this.getMessage} {...props} />
+                )}
+              />
+              <Route
+                exact
+                path="/recipe/:recipeID"
+                render={props => (
+                  <RecipeDetails
+                    allRecipes={this.state.allRecipes}
+                    {...props}
+                  />
+                )}
+              />
+              {/* <Route exact path='/recipe/:id/edit' component={EditRecipe}/> */}
+            </Switch>
+          </>
+        )}
       </div>
     );
   }

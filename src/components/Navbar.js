@@ -13,10 +13,10 @@ class Navbar extends Component {
       loggedInUser: null,
       showLoginAndSignupButtons: true,
       showLogoutAndOtherButtons: false,
+      loader: true,
     };
     this.service = new AuthService();
     this.filterRender = this.filterRender.bind(this);
-    this.buttonsToggle = this.buttonsToggle.bind(this);
     this.logoutUser = this.logoutUser.bind(this);
 
   }
@@ -28,42 +28,35 @@ class Navbar extends Component {
   }
 
   logoutUser() {
+    this.setState({
+      loader: true,
+    })
     this.service
       .logout()
       .then(() => {
         this.setState({
-          loggedInUser: null
+          loggedInUser: null,
+          loader: false,
         });
         this.props.getUser(null);
       })
       .catch(err => console.log(err));
   }
 
-  buttonsToggle() {
-    if (this.state.loggedInUser !== null) {
-      this.setState({
-        showLoginAndSignupButtons: false,
-        showLogoutAndOtherButtons: true,
-      });
-    }
-  }
-
   componentDidUpdate(prevProps) {
     if (this.props.allData.loggedInUser !== prevProps.allData.loggedInUser) {
-      this.setState({ loggedInUser: this.props.allData.loggedInUser });
-      this.buttonsToggle();
+      this.props.allData.loggedInUser ? this.setState({ loggedInUser: this.props.allData.loggedInUser, showLoginAndSignupButtons: false, showLogoutAndOtherButtons: true, }) : this.setState({ loggedInUser: this.props.allData.loggedInUser })
     }
   }
 
   render() {
-    console.log("yesss");
     console.log(this.state)
     return (
       <div className="nav-container">
         <nav className="navbar navbar-expand-lg navbar-light">
-          <a className="navbar-brand" href="/">
+          <NavLink className="navbar-brand" to="/">
             GoGreen
-          </a>
+          </NavLink>
           <button
             className="navbar-toggler"
             type="button"
@@ -87,13 +80,22 @@ class Navbar extends Component {
             </div>
 
             <div className="d-flex flex-direction-between navbar-list">
+              {
+                this.state.loggedInUser && 
+              <>
+              <div className="nav-navbar nav-link d-flex align-items-center mr-3 logged-in-welcome">
+              Welcome, {this.state.loggedInUser.username.charAt(0).toUpperCase() + this.state.loggedInUser.username.slice(1)} ! 
+              </div>
+              </>
+              }
+
               {this.state.showLoginAndSignupButtons && (
                 <>
                   <NavLink
                     className="nav-navbar nav-link d-flex align-items-center mr-3 nav-icon-container"
                     to="/signup"
                   >
-                    <img src="./images/recipe.png" alt="recipe-icon" />
+                    <img src="images/recipe.png" alt="recipe-icon" />
                     <p>Sign Up</p>
                   </NavLink>
 
@@ -101,7 +103,7 @@ class Navbar extends Component {
                     className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
                     to="/login"
                   >
-                    <img src="./images/chef.png" alt="chef-icon" />
+                    <img src="images/chef.png" alt="chef-icon" />
                     <p>Login</p>
                   </NavLink>
                 </>
@@ -114,24 +116,24 @@ class Navbar extends Component {
                 className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
                 to="/addrecipe"
               >
-                <img className="mr-1" src="./images/add.png" alt="add-icon" />
+                <img className="mr-1" src="images/add.png" alt="add-icon" />
                 <p>Add Recipe</p>
               </NavLink>
 
               <NavLink
                 className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
-                to="/:username"
+                to={`/user/${this.props.allData.loggedInUser.username}`}
               >
-                <img src="./images/kitchen.png" alt="profile-icon" />
+                <img src="images/kitchen.png" alt="profile-icon" />
                 <p>My Profile</p>
               </NavLink>
 
               <NavLink
                 className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
                 onClick={this.logoutUser}
-                to="/logout"
+                to="/"
               >
-                <img src="./images/logout.png" alt="chef-icon" />
+                <img src="images/logout.png" alt="chef-icon" />
                 <p>Logout</p>
               </NavLink>
                 </>
@@ -149,25 +151,25 @@ class Navbar extends Component {
           <div className="second-nav-icon-div d-flex align-items-center ml-2">
             <NavLink
               className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
-              to="/login"
+              to="/allrecipes"
             >
-              <img src="./images/cook-book.png" alt="book-icon" />
+              <img src="images/cook-book.png" alt="book-icon" />
               <p>All Recipes</p>
             </NavLink>
 
             <NavLink
               className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
-              to="/login"
+              to="/"
             >
-              <img src="./images/vegetables-icon.png" alt="vegetables-icon" />
+              <img src="images/vegetables-icon.png" alt="vegetables-icon" />
               <p>Vegan</p>
             </NavLink>
 
             <NavLink
               className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
-              to="/login"
+              to="/"
             >
-              <img src="./images/vegetarian-icon.png" alt="vegetarian-icon" />
+              <img src="images/vegetarian-icon.png" alt="vegetarian-icon" />
               <p>Vegetarian</p>
             </NavLink>
           </div>
