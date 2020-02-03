@@ -29,7 +29,8 @@ class Profile extends Component {
       })
       .catch(err => console.log(err));
 
-    this.getUserRecipes();
+      //FIXME username undefined
+    // this.getUserRecipes();
   }
 
   getUserRecipes() {
