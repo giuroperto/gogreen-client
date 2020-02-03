@@ -3,6 +3,7 @@ import Step1 from './Step1';
 import Step2 from './Step2';
 import Step3 from './Step3';
 import Step4 from './Step4';
+import APIAccess from '../api/api-access'
 
 //TODO add picture
 
@@ -19,8 +20,7 @@ class MasterForm extends Component {
       servings: 0,
       ingredients: [],
       instructions: [],
-      difficulty: '',
-      isVegan: false,
+      vegan: false,
       // picture: '',
     }
 
@@ -29,12 +29,31 @@ class MasterForm extends Component {
     this.receiveArray = this.receiveArray.bind(this)
     this._next = this._next.bind(this)
     this._prev = this._prev.bind(this)
+    this.apiEndpoints = new APIAccess();
+  }
+
+  capitalizeData(str) {
+    let arr = str.split(" ");
+    for (let i = 0; i < arr.length; i += 1) {
+        arr[i] = arr[i][0].toUpperCase() + arr[i].substr(1);
+    }
+    return arr.join(" ");
   }
 
   componentDidMount() {
-    if (this.props.params.recipe) {
-      const {name, description, dishTypes, cuisines, servings, ingredients, instructions, difficulty, isVegan} = this.props.params.recipe;
-      this.setState({name, description, dishTypes, cuisines, servings, ingredients, instructions, difficulty, isVegan});
+    if (this.props.recipe !== null && this.props.recipe !== undefined) {
+      let {name, description, dishTypes, cuisines, servings, ingredients, instructions, vegan} = this.props.recipe;
+      
+      // normalize dishTypes and cuisines string to uppercase initials
+      if (typeof (dishTypes) === 'object' && dishTypes.length !== 0) {
+        let firstDishType = dishTypes[0];
+        dishTypes = this.capitalizeData(firstDishType);
+      }
+      if (typeof (cuisines) === 'object' && cuisines.length !== 0) {
+        let firstCuisine = cuisines[0];
+        cuisines = this.capitalizeData(firstCuisine);
+      }
+      this.setState({currentStep: 1, name, description, dishTypes, cuisines, servings, ingredients, instructions, vegan}, () => console.log('meu log', this.state));
     }
   }
 
@@ -56,13 +75,14 @@ class MasterForm extends Component {
   
   handleSubmit = (event) => {
     event.preventDefault();
-    if (this.props.params.recipe) {
-      //edit recipe route
-    } else {
-      //add recipe route
-    }
-    const { name, description, dishTypes, cuisines, servings, ingredients, instructions, isVegan } = this.state;
-    //TODO axios post
+    const { name, description, dishTypes, cuisines, servings, ingredients, instructions, vegan } = this.state;
+    let totalTimeMinutes = ingredients.reduce((acc, item) => acc + item.timeMinutes, 0);
+    let owner = this.props.allData.loggedInUser._id;
+
+    this.apiEndpoints.addNewRecipe(owner, name, description, ingredients, dishTypes, vegan, cuisines, totalTimeMinutes, servings, instructions)
+    .then(response => this.props.history.push(`/recipe/${response.newRecipe._id}`))
+    .catch(err => console.log(err));
+
   }
 
   _next() {
@@ -132,14 +152,13 @@ class MasterForm extends Component {
           handleChange={this.handleChange}
           passIngredients={this.receiveArray}
           ingredients={this.state.ingredients}
-          isVegan={this.state.isVegan}
+          vegan={this.state.vegan}
         />
         <Step4
           currentStep={this.state.currentStep} 
           handleChange={this.handleChange}
           passInstructions={this.receiveArray}
           instructions={this.state.instructions}
-          difficulty={this.state.difficulty}
         />
         {this.previousButton}
         {this.nextButton}

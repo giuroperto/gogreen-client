@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MasterForm from './recipe-forms/MasterForm'
 
-class Navbar extends Component {
+class AddRecipe extends Component {
   constructor(props) {
     super(props);
   }
@@ -9,10 +9,10 @@ class Navbar extends Component {
   render() {
     return(
       <div className="background">
-        <MasterForm allData={this.props.allData} />
+        <MasterForm allData={this.props.allData} {...this.props} />
       </div>
     )
   }
 }
 
-export default Navbar;
+export default AddRecipe;

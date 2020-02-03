@@ -13,7 +13,7 @@ import EditProfile from './components/EditProfile';
 import RecipeDetails from './components/RecipeDetails';
 import AuthService from './components/auth/auth-services';
 import APIAccess from './components/api/api-access';
-// import EditRecipe from './components/EditRecipe'
+import EditRecipe from './components/EditRecipe'
 
 
 //Test
@@ -129,7 +129,7 @@ class App extends Component {
           <Route exact path='/user/:username' render={(props) => <Profile allRecipes={this.state.allRecipes} {...props} />} /> 
           <Route exact path='/user/:username/edit' render={(props) => <EditProfile getMessage={this.getMessage} {...props} />} /> 
           <Route exact path='/recipe/:recipeID' render={(props) => <RecipeDetails allRecipes={this.state.allRecipes} {...props} />} />
-          {/* <Route exact path='/recipe/:id/edit' component={EditRecipe}/> */}
+          <Route exact path='/recipe/:recipeID/edit' render={(props) => <EditRecipe allData={this.state} {...props} />}/>
         </Switch>
       </div>
     );
