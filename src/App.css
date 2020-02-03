@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Hanuman&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Jomolhari&display=swap');
+
+
 * {
   margin: 0;
   padding: 0;
@@ -5,6 +9,9 @@
 
 body {
   font-size: 10px;
+  /* font-family: 'Hanuman', serif; */
+  font-family: 'Jomolhari', serif;
+
 }
 
 img {
@@ -21,7 +28,7 @@ img {
 .nav-container{
   box-shadow: 0 4px 2px -2px rgba(0,0,0,.2);
   width: 100vw;
-  background-color: rgb(240, 245, 230, 0.3);
+  background-color: rgba(240, 245, 230, 0.3);
   
 }
 
@@ -100,10 +107,28 @@ border: transparent;
 /* HOME PAGE */
 
 .section1-container {
-  color: red;
   background-image: url('/images/home-images/home.jpeg');
   background-size: cover;
   height: 80vh;
+  font-weight: 700;
+}
+
+.section1-div h2 {
+  color: rgb(52, 122, 69);
+  font-size: 4rem;
+}
+
+.section1-div h4 {
+  font-size: 2rem;
+  color: rgb(54, 121, 70);
+
+}
+
+.section1-div button {
+  font-size: 1.7rem;
+  color: white;
+  background-color: rgba(111, 224, 88, 0.904);
+  border: solid rgb(240, 245, 230, 0.3);;
 }
 
 .recipe-name {
@@ -120,3 +145,30 @@ border: transparent;
   margin: 0;
 }
 
+
+/* SECTION 2 */
+
+.section2-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.section2-container img {
+  width: 10vw;
+}
+
+.section2-container h4 {
+  margin: 1rem;
+}
+
+.section2-container p {
+  width: 11rem;
+}
+
+.div-bar {
+  height: 3px;
+  width: 135px;
+  background: orangered;
+  margin-bottom: 2vh;
+}
