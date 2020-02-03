@@ -4,43 +4,61 @@ import RecipeCard from './RecipeCard.js'
 import axios from 'axios';
 const recipesCleanTestAlex = require('./AlexInput.js');
 
-let fullRecipeDatabase = recipesCleanTestAlex;
-let displayedRecipeDatabase = fullRecipeDatabase;
 
 class AllRecipes extends Component {
   constructor(props) {
     super(props);
+    this.props.getRecipes();
+    console.log('Alex look here 1');
+    console.log(props);
+    this.state = {
+      displayedRecipeDatabase: {...this.props.allData.allRecipes}
+    };
+    
+  }
+  componentDidMount(){
+    this.setState({
+      displayedRecipeDatabase: {...this.props.allData.allRecipes},
+    })
+      console.log('Alex look here')
+      console.log(this.state)
+
+    // this.setState({
+    //   fullRecipeDatabase: this.props.allData.allRecipes,
+    //   displayedRecipeDatabase: this.state.fullRecipeDatabase
+    // });
+    
   }
 
-  componentDidUpdate() {
+  // componentDidUpdate() {
+  //   let displayedRecipeDatabase = this.state.fullRecipeDatabase
+  //   if (this.props.allData.searchWord != '') {
+  //     displayedRecipeDatabase = displayedRecipeDatabase.filter(e => {
+  //       let givenSearchWord = this.props.allData.searchWord.toUpperCase();
+  //       return (e.ingredients.toUpperCase().includes(givenSearchWord) || e.name.toUpperCase().includes(givenSearchWord) || e.description.toUpperCase().includes(givenSearchWord))
+  //     })
+  //   }
 
-    if (this.props.allData.searchWord != '') {
-      displayedRecipeDatabase = displayedRecipeDatabase.filter(e => {
-        let givenSearchWord = this.props.allData.searchWord.toUpperCase();
-        return (e.ingredients.toUpperCase().includes(givenSearchWord) || e.name.toUpperCase().includes(givenSearchWord) || e.description.toUpperCase().includes(givenSearchWord))
-      })
-    }
+  //   if (this.props.allData.searchDishType != '') {
+  //     displayedRecipeDatabase = displayedRecipeDatabase.filter(e => {
+  //       return (e.dishTypes.includes(this.props.allData.searchDishType))
+  //     })
+  //   }
 
-    if (this.props.allData.searchDishType != '') {
-      displayedRecipeDatabase = displayedRecipeDatabase.filter(e => {
-        return (e.dishTypes.includes(this.props.allData.searchDishType))
-      })
-    }
+  //   if (this.props.allData.searchCuisine != '') {
+  //     displayedRecipeDatabase = displayedRecipeDatabase.filter(e => {
+  //       return (e.cuisines.includes(this.props.allData.searchCuisine))
+  //     })
+  //   }
 
-    if (this.props.allData.searchCuisine != '') {
-      displayedRecipeDatabase = displayedRecipeDatabase.filter(e => {
-        return (e.cuisines.includes(this.props.allData.searchCuisine))
-      })
-    }
+  //         // Difficulty TBD
+  //         // if (this.props.allData.searchCookingLevel != '') {
+  //         //   displayedRecipeDatabase = displayedRecipeDatabase.filter(e => {
+  //         //     return (e.dishTypes.includes(this.props.allData.searchCookingLevel))
+  //         //   })
+  //         // }
 
-    // Difficulty TBD
-    // if (this.props.allData.searchCookingLevel != '') {
-    //   displayedRecipeDatabase = displayedRecipeDatabase.filter(e => {
-    //     return (e.dishTypes.includes(this.props.allData.searchCookingLevel))
-    //   })
-    // }
-
-  }
+  // }
 
 
 
@@ -53,12 +71,15 @@ class AllRecipes extends Component {
   // this.props.allData.allRecipes
 
 render(){
-  console.log(this.props.allData.searchWord);
+
     return(
+      <>
+      {(this.state.displayedRecipeDatabase.length>0) ? (
+
       <div className='all-recipes-full-list'>
           <div className='all-recipes-each-listed'>
-            {displayedRecipeDatabase && displayedRecipeDatabase.map(element => {
-              
+            {this.state.displayedRecipeDatabase && this.state.displayedRecipeDatabase.map(element => {
+                
                 let determinedOwner = '';
                 if (element.owner === undefined){
                   determinedOwner = element.ownerAPI
@@ -83,9 +104,13 @@ render(){
             <button>Return home</button>
           </a>
       </div>
+      ) : (
+        <h1>Loading!!!</h1>
+        //Loader
+      )}
+      </>
     )
   }
-
 }
 
 export default AllRecipes;
