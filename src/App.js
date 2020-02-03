@@ -127,7 +127,7 @@ class App extends Component {
           <Route exact path='/addrecipe' render={(props) => <AddRecipe allData={this.state} {...props} /> } />
           <Route exact path='/user/:username' render={(props) => <Profile allRecipes={this.state.allRecipes} {...props} />} /> 
           <Route exact path='/user/:username/edit' render={(props) => <EditProfile getMessage={this.getMessage} {...props} />} /> 
-          <Route exact path='/recipe/:recipeID' component={RecipeDetails}/>
+          <Route exact path='/recipe/:recipeID' render={(props) => <RecipeDetails allRecipes={this.state.allRecipes} {...props} />} />
           {/* <Route exact path='/recipe/:id/edit' component={EditRecipe}/> */}
         </Switch>
       </div>

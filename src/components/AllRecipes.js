@@ -31,13 +31,17 @@ render(){
                   determinedOwner = element.owner.replace(element.owner)
                 }
 
-                {/* let cleanDishType = (element.dishTypes[0]).slice(0,1).toUpperCase()+(element.dishTypes[0]).slice(1,(element.dishTypes[0]).length);
-
+                let cleanDishType = '';
+                if (element.dishTypes[0] === undefined) {
+                  cleanDishType = "N/A"
+                } else {
+                  cleanDishType = (element.dishTypes[0]).slice(0,1).toUpperCase()+(element.dishTypes[0]).slice(1,(element.dishTypes[0]).length)
+                }
+               
                 let cleanLink = "/recipe/"+ element._id
 
-                return (<RecipeCard name={element.name} image={element.picture} description={element.description} owner={determinedOwner} link={cleanLink} time={element.totalTimeMinutes} vegan={element.vegan} cuisines={element.cuisines} dishTypes={cleanDishType}/>); */}
+                return (<RecipeCard name={element.name} image={element.picture} description={element.description} owner={determinedOwner} link={cleanLink} time={element.totalTimeMinutes} vegan={element.vegan} cuisines={element.cuisines} dishTypes={cleanDishType} allRecipes = {this.props.allRecipes}/>);
 
-                return (<RecipeCard name={element.name} image={element.picture} description={element.description} owner={determinedOwner} time={element.totalTimeMinutes} vegan={element.vegan} cuisines={element.cuisines}/>);
             })}  
           </div>
           <a href="/">

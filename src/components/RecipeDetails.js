@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-const recipesCleanTestAlex = require('./AlexInput.js');
 
 class RecipeDetails extends Component {
   constructor(props) {
     super(props);
 
   this.state = {
-      recipes: recipesCleanTestAlex,
       searchWord: '',
       uniqueRecipe: {},
       determinedOwner: '',
@@ -17,7 +15,11 @@ class RecipeDetails extends Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    const givenUniqueRecipe = recipesCleanTestAlex.find(x => x._id === this.props.match.params.recipeID)
+    
+    let recipesDB = this.props.allRecipes;
+    // NOTE: IF DATABASE CUTS givenUniqueRecipe WILL NOT BE DEFINED, AS SUCH givenUniqueRecipe.owner CAUSES ERROR
+    // Review -> Potential unique error message catch based on defined?
+    const givenUniqueRecipe = recipesDB.find(x => x._id === this.props.match.params.recipeID)
     let givenDeterminedOwner = '';
       if (givenUniqueRecipe.owner === undefined){
         givenDeterminedOwner = givenUniqueRecipe.ownerAPI
@@ -108,7 +110,7 @@ class RecipeDetails extends Component {
                         <div><p className="step mb-0"><b>Step {i.step}</b></p></div>
                         <div><p className="step mb-0"><i>{timeRendered}</i></p></div>
                       </div>
-                      <div className="col-xs-6 col-sm-9">{i.text}</div>
+                      <div className="col-xs-6 col-xs-mt-2 col-sm-9 text-left">{i.text}</div>
                     </div>
                     <hr /> 
                   </div>
@@ -130,28 +132,5 @@ class RecipeDetails extends Component {
     )
   }
 }
-
-{/* <p>{this.state.uniqueRecipe.ingredients}</p>  */}
-
-
-
-// export default RecipeDetails;
-
-// <div className='one-recipe-detailed'>
-      
-// {this.state.recipes.map(element => {
-  
-//     let determinedOwner = '';
-//     if (element.owner === undefined){
-//       determinedOwner = element.ownerAPI
-//     } else {
-//       determinedOwner = element.owner.replace(element.owner)
-//     }
-
-//     let cleanDishType = (element.dishTypes[0]).slice(0,1).toUpperCase()+(element.dishTypes[0]).slice(1,(element.dishTypes[0]).length);
-
-//     return (<RecipeCard name={element.name} image={element.picture} description={element.description} owner={determinedOwner} link={element._id} time={element.totalTimeMinutes} vegan={element.vegan} cuisines={element.cuisines} dishTypes={cleanDishType}/>);
-// })}  
-// </div>
 
 export default RecipeDetails;
