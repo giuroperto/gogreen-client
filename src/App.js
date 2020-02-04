@@ -80,6 +80,8 @@ class App extends Component {
       displayedRecipes: [],
       // messages from API
       message: "",
+      successMessage: false,
+  
       loader: true,
     };
     this.service = new AuthService();
@@ -91,6 +93,7 @@ class App extends Component {
     this.getMessage = this.getMessage.bind(this);
     this.filterNavBar = this.filterNavBar.bind(this);
     this.resetNavBar = this.resetNavBar.bind(this);
+    this.clearMessage = this.clearMessage.bind(this);
   }
 
   resetNavBar(){
@@ -152,12 +155,33 @@ class App extends Component {
     this.getRecipes();
     this.filterNavBar();
   }
-  getMessage(apiMessage) {
-    console.log(apiMessage);
+
+  getMessage(type, apiMessage) {
+    //TODO ajustar para quando for sucesso our nao
+
+    let typeOfMessage = false;
+
+    if (type === 200) {
+      typeOfMessage = true;
+    } else {
+      typeOfMessage = false;
+    }
+
     this.setState({
-      message: apiMessage
+      message: apiMessage,
+      successMessage: typeOfMessage,
+    });
+
+    setTimeout(this.clearMessage, 5000);
+  }
+
+  clearMessage(){
+    this.setState({
+      message: '',
+      successMessage: false,
     });
   }
+
   getRecipes() {
     this.apiEndpoints
       .getAllRecipes()
@@ -254,14 +278,14 @@ class App extends Component {
                 exact
                 path="/user/:username"
                 render={props => (
-                  <Profile allRecipes={this.state.allRecipes} {...props} />
+                  <Profile message={this.state.message} successMessage={this.state.successMessage} allRecipes={this.state.allRecipes} {...props} />
                 )}
               />
               <Route
                 exact
                 path="/user/:username/edit"
                 render={props => (
-                  <EditProfile message={this.state.message} getMessage={this.getMessage} {...props} />
+                  <EditProfile message={this.state.message} successMessage={this.state.successMessage} getMessage={this.getMessage} {...props} />
                 )}
               />
               <Route
