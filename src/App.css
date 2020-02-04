@@ -190,3 +190,35 @@ border: transparent;
   background: orangered;
   margin-bottom: 2vh;
 }
+
+/* LOGIN FORM*/
+
+.login-container {
+  margin: 6vh 0;
+}
+
+.login-form{
+  border: solid 0.1rem grey;
+  border-radius: 0.8rem;
+  width: 30vw;
+  height: 60vh;
+  outline: 0;
+}
+
+.login-form input{
+  width: 20vw;
+  border-width: 0;
+  outline:0px !important;
+  -webkit-appearance:none;
+  box-shadow: none !important;
+}
+
+
+.div-bar-form {
+  height: 0.1vh;
+  width: 20vw;
+  background: greenyellow;
+}
+
+
+
