@@ -229,6 +229,8 @@ class App extends Component {
 
   render() {
     console.log(this.state.loggedInUser);
+    console.log(this.state.message);
+    // console.log(this.state.successMessage);
     this.fetchUser();
     return (
       <div className="App">
@@ -245,11 +247,13 @@ class App extends Component {
               getFilters={this.getFilters}
             />
             <Switch>
-              <Route exact path="/" component={Home} />
+              <Route exact path="/" render={(props) => (
+                <Home getMessage={this.getMessage} message={this.state.message} successMessage={this.state.successMessage} {...props} />
+              )} />
               <Route
                 exact
                 path="/login"
-                render={props => (
+                render={(props) => (
                   <Login
                     loggedInUser={this.state.loggedInUser}
                     getUser={this.getUser}
@@ -316,13 +320,15 @@ class App extends Component {
                   />
                 )}
               />
+
               <Route
                 exact
                 path="/user/:username/delete"
                 render={(props) => (
-                  <ConfirmDelete loggedInUser={this.state.loggedInUser} {...props} />
+                  <ConfirmDelete loggedInUser={this.state.loggedInUser} getMessage={this.getMessage} successMessage={this.successMessage} getUser={this.getUser} {...props} />
                 )}
               />
+
             </Switch>
           </>
         )}
