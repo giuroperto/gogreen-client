@@ -15,7 +15,11 @@ class RecipeDetails extends Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    
+
+    // ao adicionar receita, redirecionamos pra cá
+    // o que dá um erro
+    //TODO resolver esse problema
+
     let recipesDB = this.props.allRecipes;
     // NOTE: IF DATABASE CUTS givenUniqueRecipe WILL NOT BE DEFINED, AS SUCH givenUniqueRecipe.owner CAUSES ERROR
     // Review -> Potential unique error message catch based on defined?

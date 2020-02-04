@@ -15,7 +15,7 @@ import ConfirmDelete from "./components/ConfirmDelete";
 import RecipeDetails from "./components/RecipeDetails";
 import AuthService from "./components/auth/auth-services";
 import APIAccess from "./components/api/api-access";
-// import EditRecipe from './components/EditRecipe'
+import EditRecipe from './components/EditRecipe'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 //Test
 //Test 2
@@ -294,6 +294,9 @@ class App extends Component {
                   />
                 )}
               />
+
+              <Route exact path='/recipe/:recipeID/edit' render={props => (<EditRecipe allData={this.state} {...props}/>)}/>
+
               <Route
                 exact
                 path="/recipe/:recipeID/delete"
@@ -311,7 +314,6 @@ class App extends Component {
                   <ConfirmDelete loggedInUser={this.state.loggedInUser} {...props} />
                 )}
               />
-              {/* <Route exact path='/recipe/:id/edit' component={EditRecipe}/> */}
             </Switch>
           </>
         )}
