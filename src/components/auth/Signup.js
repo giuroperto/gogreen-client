@@ -71,43 +71,51 @@ class Signup extends Component {
   render() {
     return(
       <div className="form-background">
-      <div className="form-container">
-      <form onSubmit={this.handleSignupFormSubmit}>
-      <h2>Create an account</h2>
-        <div className="form-group">
-          <label for="email">Email address</label>
-          <input name='email' value={this.state.email} type="email" className="form-control" id="email" aria-describedby="emailHelp" onChange={this.handleSignupChange} required />
+      <div className="form-container align-items-start justify-content-center d-flex my-5">
+      <form className='signup-form d-flex flex-column align-items-center' onSubmit={this.handleSignupFormSubmit}>
+      <h2>Become a Go Green family member!</h2>
+      <div className='login-logo'>
+            <img src="/images/logo.png" alt="logo"/>
+          </div>
+        <div className="form-group input-container">
+          <input name='email' value={this.state.email} placeholder='Email' type="email" className="form-control" id="email" aria-describedby="emailHelp" onChange={this.handleSignupChange} required />
+          <div className="div-bar-form"></div>
+          
           <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
-        <div class="form-row">
-          <label for="name">Your name</label>
-          <div class="col">
+        <div class="form-group input-container">
             <input name="firstName" value={this.state.firstName} type="text" class="form-control" placeholder="First name" onChange={this.handleSignupChange} required />
-          </div>
-          <div class="col">
+            <div className="div-bar-form"></div>
+      
+            </div>
+
+            <div class="form-group input-container">
+
             <input name="lastName" value={this.state.lastName} type="text" class="form-control" placeholder="Last name" onChange={this.handleSignupChange} required />
-          </div>
+            <div className="div-bar-form"></div>
+
         </div>
-        <div className="form-group">
-          <label for="username">Username</label>
-          <input name='username' value={this.state.username} type="text" className="form-control" id="username" aria-describedby="emailHelp" onChange={this.handleSignupChange} required />
+        <div className="form-group input-container">
+          <input name='username' value={this.state.username} type="text" className="form-control"   id="username" aria-describedby="emailHelp" placeholder="Username" onChange={this.handleSignupChange} required />
+          <div className="div-bar-form"></div>
+
         </div>
-        <div className="form-group">
-          <label for="exampleInputPassword1">Password</label>
-          <input name='password' value={this.state.password} type="password" className="form-control" id="password" onChange={this.handleSignupChange} required />
+        <div className="form-group input-container">
+          <input name='password' value={this.state.password} type="password" className="form-control" id="password" onChange={this.handleSignupChange} placeholder="Password" required />
+          <div className="div-bar-form"></div>
+          
           <small id="passHelp" className="form-text text-muted">Password has to be at least 8 characters.</small>
         </div>
-        <div className="form-group">
-          <label for="profilePic">Add a profile picture</label>
-          <div class="input-group mb-3">
+        <div className="form-group input-container-picture mt-3">
+          <label forHtml="profilePic">Add a profile picture</label>
+          <div class="input-group mb-3 d-flex flex-column">
             <div class="custom-file">
-              <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="profilePic" onChange={this.handleUpload}/>
-              <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+              <input type="file" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="profilePic" onChange={this.handleUpload}/>
+              <label className="custom-file-label" forHtml="inputGroupFile01"></label>
             </div>
+        <button type="submit" className="btn btn-primary mt-3 create-btn">Create Account</button>
           </div>
         </div>
-
-        <button type="submit" className="btn btn-primary">Submit</button>
       </form>
       </div>
     </div>

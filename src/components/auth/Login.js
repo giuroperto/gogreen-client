@@ -68,7 +68,6 @@ class Login extends Component {
                 required
               />
               <div className="div-bar-form"></div>
-              <div className="div-bar-form"></div>
             </div>
             <div className="form-group">
               <input
