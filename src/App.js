@@ -11,6 +11,7 @@ import AllRecipes from "./components/AllRecipes";
 import AddRecipe from "./components/AddRecipe";
 import Profile from "./components/Profile";
 import EditProfile from "./components/EditProfile";
+import ConfirmDelete from "./components/ConfirmDelete";
 import RecipeDetails from "./components/RecipeDetails";
 import AuthService from "./components/auth/auth-services";
 import APIAccess from "./components/api/api-access";
@@ -286,11 +287,28 @@ class App extends Component {
               <Route
                 exact
                 path="/recipe/:recipeID"
-                render={props => (
+                render={(props) => (
                   <RecipeDetails
                     allRecipes={this.state.allRecipes}
                     {...props}
                   />
+                )}
+              />
+              <Route
+                exact
+                path="/recipe/:recipeID/delete"
+                render={(props) => (
+                  <ConfirmDelete
+                    loggedInUser={this.state.loggedInUser}
+                    {...props}
+                  />
+                )}
+              />
+              <Route
+                exact
+                path="/user/:username/delete"
+                render={(props) => (
+                  <ConfirmDelete loggedInUser={this.state.loggedInUser} {...props} />
                 )}
               />
               {/* <Route exact path='/recipe/:id/edit' component={EditRecipe}/> */}

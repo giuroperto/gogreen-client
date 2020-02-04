@@ -84,6 +84,9 @@ class Profile extends Component {
             (this.props.match.params.username === this.props.loggedInUser.username) && <Link to={`/user/${this.props.loggedInUser.username}/edit`}>Edit Profile</Link>
           }
           </div>
+          <div className="delete-button">
+            <Link to={`/user/${this.props.loggedInUser.username}/delete`} > Delete Profile </Link>
+          </div>
         </div>
         <div className="user-recipes">
           <div className="links btn-group btn-group-toggle" data-toggle="buttons">
