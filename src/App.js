@@ -19,6 +19,7 @@ import APIAccess from "./components/api/api-access";
 // import EditRecipe from './components/EditRecipe'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 //Test
+//Test 2
 class App extends Component {
   constructor(props) {
     super(props);
