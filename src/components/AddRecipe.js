@@ -8,7 +8,7 @@ class AddRecipe extends Component {
 
   render() {
     return(
-      <div className="background">
+      <div className="background d-flex justify-content-center">
         <MasterForm allData={this.props.allData} {...this.props} />
       </div>
     )

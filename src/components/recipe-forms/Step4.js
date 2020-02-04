@@ -113,18 +113,18 @@ class Step4 extends Component {
         <label htmlFor="instructions">Detail your recipe <strong>instructions</strong> here.</label>
         {this.state.inputs.map(input => (
           <div key={input.key} className="form-row">
-            <div className="col-md-9 mb-3">
-              <label>Step</label>
+            <div className="col-md-9 mb-3 text-left">
+              <label >Step {input.key + 1}</label>
               <input key={input.key} data-key={input.key} className="form-control" type="text" name={input.textName} value={this.state.instructions.values[input.key].text} onChange={this.handleChange}/>
             </div>
-            <div className="col-md-3 mb-3">
+            <div className="col-md-3 mb-3 text-left">
               <label htmlFor="time">Time (minutes)</label>
               <input key={input.key} data-key={input.key} className="form-control" type="number" name={input.timeName} value={this.state.instructions.values[input.key].timeMinutes} onChange={this.handleChange}/>
             </div>
           </div>
         ))}
         <button 
-          className="btn btn-secondary"
+          className="btn btn-secondary float-right"
           type="button" onClick={this.addInput}>+</button>
       </div>
       <div className="form-group">
