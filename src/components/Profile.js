@@ -63,10 +63,9 @@ class Profile extends Component {
       }
         <div className="user-info d-flex">
           <div className="profile-picture">
-          {/* //TODO add Usermodel picture */}
-          {/* {
-            this.state.userAccount.picture && <img src={this.state.userAccount.picture} alt="Profile picture"/>
-          } */}
+          {
+            this.state.userAccount && this.state.userAccount.picture && <img src={this.state.userAccount.picture} alt="Profile picture"/>
+          }
           </div>
           <div className="infos">
             <h2>{this.state.userAccount && this.state.userAccount.username}</h2>
