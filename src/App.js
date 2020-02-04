@@ -12,6 +12,8 @@ import AddRecipe from "./components/AddRecipe";
 import Profile from "./components/Profile";
 import EditProfile from "./components/EditProfile";
 import RecipeDetails from "./components/RecipeDetails";
+// import Success from "./components/RecipeDetails";
+// import Failure from "./components/RecipeDetails";
 import AuthService from "./components/auth/auth-services";
 import APIAccess from "./components/api/api-access";
 // import EditRecipe from './components/EditRecipe'
@@ -169,6 +171,8 @@ class App extends Component {
             />
             <Switch>
               <Route exact path="/" component={Home} />
+              {/* <Route exact path="/success" component={Success} />
+              <Route exact path="/failure" component={Failure} /> */}
               <Route
                 exact
                 path="/login"
@@ -213,7 +217,7 @@ class App extends Component {
                 exact
                 path="/user/:username/edit"
                 render={props => (
-                  <EditProfile getMessage={this.getMessage} {...props} />
+                  <EditProfile message={this.state.message} getMessage={this.getMessage} {...props} />
                 )}
               />
               <Route

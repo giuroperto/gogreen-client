@@ -40,12 +40,6 @@ class Navbar extends Component {
   }
   componentDidUpdate(prevProps) {
     if (this.props.allData.loggedInUser !== prevProps.allData.loggedInUser) {
-      console.log('fernando vacilao');
-      console.log('fernando vacilao');
-      console.log('fernando vacilao');
-      console.log('fernando vacilao');
-      console.log('fernando vacilao');
-      console.log('fernando vacilao');
       this.props.allData.loggedInUser ? this.setState({ loggedInUser: this.props.allData.loggedInUser, showLoginAndSignupButtons: false, showLogoutAndOtherButtons: true, }) : this.setState({ loggedInUser: this.props.allData.loggedInUser, showLoginAndSignupButtons: true, showLogoutAndOtherButtons: false,  })
     }
   }
