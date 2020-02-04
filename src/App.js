@@ -90,6 +90,7 @@ class App extends Component {
   }
   componentDidMount() {
     this.getRecipes();
+    console.log(this.state.allRecipes)
   }
   getFilters(filter, option) {
     switch (filter) {
@@ -104,7 +105,6 @@ class App extends Component {
     }
   }
   getSearchWord(word) {
-    console.log("Sou Alex the word is:");
     console.log(word);
     this.setState({
       searchWord: word
@@ -148,11 +148,42 @@ class App extends Component {
       loggedInUser: user
     });
   }
+
+  filterNavBar(){
+    let givenDisplayedRecipes = this.state.allRecipes
+    
+    if (this.state.searchWord !== '') {
+      givenDisplayedRecipes = givenDisplayedRecipes.filter(e => {
+        let givenSearchWord = this.state.searchWord.toUpperCase();
+        return (e.ingredients.toUpperCase().includes(givenSearchWord) || e.name.toUpperCase().includes(givenSearchWord) || e.description.toUpperCase().includes(givenSearchWord))
+      })
+    }
+
+    if (this.state.searchDishType !== '') {
+      givenDisplayedRecipes = givenDisplayedRecipes.filter(e => {
+        return (e.dishTypes.includes(this.state.searchDishType))
+      })
+    }
+
+    if (this.state.searchCuisine !== '') {
+      givenDisplayedRecipes = givenDisplayedRecipes.filter(e => {
+        return (e.cuisines.includes(this.state.searchCuisine))
+      })
+    }
+
+    this.setState({
+      displayedRecipes: givenDisplayedRecipes
+    });
+  }
+
+
   render() {
     console.log(this.state.loggedInUser);
     console.log(this.state.allRecipes);
-    console.log(this.state.searchWord);
     this.fetchUser();
+
+    
+
     return (
       <div className="App">
         {this.state.loader ? (
