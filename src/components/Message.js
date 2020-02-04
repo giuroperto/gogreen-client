@@ -9,7 +9,7 @@ class Message extends Component {
     return (
       <div className="message">
       {
-        this.props.success ? <p className="success-message">{this.props.message}</p> : <p className="failure-message">{this.props.message}</p>
+        this.props.successMessage ? <p className="success-message">{this.props.message}</p> : <p className="failure-message">{this.props.message}</p>
       }
       </div>
     )

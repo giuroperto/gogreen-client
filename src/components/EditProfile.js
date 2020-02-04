@@ -44,6 +44,12 @@ class EditProfile extends Component {
     });
   }
 
+  redirectPage(success, username) {
+    if (success) {
+      this.props.history.push(`/user/${username}`);
+    }
+  }
+
   handleSubmit(event) {
     event.preventDefault();
     console.log('submit');
@@ -52,8 +58,8 @@ class EditProfile extends Component {
 
     this.apiEndpoints.editUser(username, firstName, lastName, email, usernameForm, oldPassword, newPassword)
       .then(response => {
-        console.log(response.status);
-        this.props.getMessage(response.message);
+        this.props.getMessage(response.status, response.data.message);
+        this.redirectPage(this.props.successMessage, usernameForm);
         //TODO redirect to the right page -> get username properly
         // this.props.history.push(`/user/${this.props.username}`);
       })
@@ -66,7 +72,7 @@ class EditProfile extends Component {
     return(
       <div className="container-fluid profile-edit-form" style={{width: '85%'}}>
       {
-        this.props.message && <Message message={this.props.message}/>
+        this.props.message && <Message successMessage={this.props.successMessage} message={this.props.message}/>
       }
         <form onSubmit={this.handleSubmit}>
           <h3>Edit profile</h3>
