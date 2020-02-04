@@ -3,6 +3,8 @@ import { Link, NavLink } from "react-router-dom";
 import SearchButtons from "./SearchButtons";
 import FilterRender from "./FilterRender";
 import AuthService from "./auth/auth-services";
+
+
 class Navbar extends Component {
   constructor(props) {
     super(props);
@@ -47,9 +49,9 @@ class Navbar extends Component {
     console.log(this.state)
     return (
       <div className="nav-container">
-        <nav className="navbar navbar-expand-lg navbar-light">
+        <nav className="navbar navbar-expand-lg navbar-light nav-main">
           <NavLink className="navbar-brand" to="/">
-            GoGreen
+          <img className='nav-logo ml-1' src="/images/logo.png" alt="logo"/>
           </NavLink>
           <button
             className="navbar-toggler"
