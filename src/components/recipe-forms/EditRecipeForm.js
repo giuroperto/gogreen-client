@@ -58,6 +58,7 @@ class EditRecipeForm extends Component {
   }
 
   componentDidMount() {
+    console.log('hieee', this.props)
     if (this.props.recipe !== null && this.props.recipe !== undefined) {
       let {name, description, dishTypes, cuisines, servings, ingredients, instructions, vegan} = this.props.recipe;
 
@@ -69,7 +70,7 @@ class EditRecipeForm extends Component {
       // }
 
       let givenIngredients = [];
-      if (ingredients[0] === undefined){
+      if (ingredients === undefined){
       } else if (ingredients.length === 1) {
         givenIngredients = ingredients[0].split("\n");
         let removed = givenIngredients.splice(givenIngredients.length -1 ,1);
@@ -98,9 +99,19 @@ class EditRecipeForm extends Component {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
-    this.setState({
-      [name]: value
-    });
+
+    if (name.includes('ingredient')) {
+      const myKey = event.target.dataset.key;
+      let ingredientsCopy = [...this.state.ingredients];
+      ingredientsCopy[myKey] = value;
+      this.setState({
+        ingredients: ingredientsCopy
+      })
+    } else {
+      this.setState({
+        [name]: value
+      });
+    }
   }
 
   
