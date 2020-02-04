@@ -11,14 +11,13 @@ class AllRecipes extends Component {
   }
 
 render(){
-  console.log('Alex look at this!')
     return(
       <>
-      {(this.props.allData.allRecipes) ? (
+      {(this.props.allData.displayedRecipes) ? (
 
       <div className='all-recipes-full-list'>
           <div className='all-recipes-each-listed'>
-            {this.props.allData.allRecipes && this.props.allData.allRecipes.map(element => {
+            {this.props.allData.displayedRecipes && this.props.allData.displayedRecipes.map(element => {
               
                 let determinedOwner = '';
                 if (element.owner === undefined){

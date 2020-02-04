@@ -89,7 +89,45 @@ class App extends Component {
     this.getRecipes = this.getRecipes.bind(this);
     this.getSearchWord = this.getSearchWord.bind(this);
     this.getMessage = this.getMessage.bind(this);
+    this.filterNavBar = this.filterNavBar.bind(this);
+    this.resetNavBar = this.resetNavBar.bind(this);
   }
+
+  resetNavBar(){
+    let givenDisplayedRecipes = this.state.allRecipes
+    this.setState({
+      displayedRecipes: givenDisplayedRecipes
+    });
+  }
+
+  filterNavBar(){
+      let givenDisplayedRecipes = this.state.allRecipes
+      if (this.state.searchWord !== '') {
+        givenDisplayedRecipes = givenDisplayedRecipes.filter(e => {
+          let givenSearchWord = this.state.searchWord.toUpperCase();
+          return (
+            ((e.ingredients.length > 0) ? e.ingredients[0].toUpperCase().includes(givenSearchWord) : false)
+            || ((e.name.length > 0) ? e.name.toUpperCase().includes(givenSearchWord) : false)
+            || ((e.description.length > 0) ? e.description.toUpperCase().includes(givenSearchWord) : false)
+              )
+        })
+      }
+      // e.name.toUpperCase().includes(givenSearchWord)
+    if (this.state.searchDishType !== '') {
+      givenDisplayedRecipes = givenDisplayedRecipes.filter(e => {
+        return (e.dishTypes.includes(this.state.searchDishType))
+      })
+    }
+    if (this.state.searchCuisine !== '') {
+      givenDisplayedRecipes = givenDisplayedRecipes.filter(e => {
+        return (e.cuisines.includes(this.state.searchCuisine))
+      })
+    }
+    this.setState({
+      displayedRecipes: givenDisplayedRecipes
+    });
+}
+
   componentDidMount() {
     this.getRecipes();
     console.log(this.state.allRecipes)
@@ -111,6 +149,8 @@ class App extends Component {
     this.setState({
       searchWord: word
     });
+    this.getRecipes();
+    this.filterNavBar();
   }
   getMessage(apiMessage) {
     console.log(apiMessage);
@@ -126,6 +166,7 @@ class App extends Component {
           allRecipes: response,
           loader: false,
         });
+        this.filterNavBar()
       })
       .catch(err => console.log(err));
   }
@@ -150,34 +191,6 @@ class App extends Component {
       loggedInUser: user
     });
   }
-
-  filterNavBar(){
-    let givenDisplayedRecipes = this.state.allRecipes
-    
-    if (this.state.searchWord !== '') {
-      givenDisplayedRecipes = givenDisplayedRecipes.filter(e => {
-        let givenSearchWord = this.state.searchWord.toUpperCase();
-        return (e.ingredients.toUpperCase().includes(givenSearchWord) || e.name.toUpperCase().includes(givenSearchWord) || e.description.toUpperCase().includes(givenSearchWord))
-      })
-    }
-
-    if (this.state.searchDishType !== '') {
-      givenDisplayedRecipes = givenDisplayedRecipes.filter(e => {
-        return (e.dishTypes.includes(this.state.searchDishType))
-      })
-    }
-
-    if (this.state.searchCuisine !== '') {
-      givenDisplayedRecipes = givenDisplayedRecipes.filter(e => {
-        return (e.cuisines.includes(this.state.searchCuisine))
-      })
-    }
-
-    this.setState({
-      displayedRecipes: givenDisplayedRecipes
-    });
-  }
-
 
   render() {
     console.log(this.state.loggedInUser);
