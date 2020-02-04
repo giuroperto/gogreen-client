@@ -12,6 +12,8 @@ import AddRecipe from "./components/AddRecipe";
 import Profile from "./components/Profile";
 import EditProfile from "./components/EditProfile";
 import RecipeDetails from "./components/RecipeDetails";
+// import Success from "./components/RecipeDetails";
+// import Failure from "./components/RecipeDetails";
 import AuthService from "./components/auth/auth-services";
 import APIAccess from "./components/api/api-access";
 // import EditRecipe from './components/EditRecipe'
@@ -78,6 +80,8 @@ class App extends Component {
       displayedRecipes: [],
       // messages from API
       message: "",
+      successMessage: false,
+  
       loader: true,
     };
     this.service = new AuthService();
@@ -87,9 +91,11 @@ class App extends Component {
     this.getRecipes = this.getRecipes.bind(this);
     this.getSearchWord = this.getSearchWord.bind(this);
     this.getMessage = this.getMessage.bind(this);
+    this.clearMessage = this.clearMessage.bind(this);
   }
   componentDidMount() {
     this.getRecipes();
+    console.log(this.state.allRecipes)
   }
   getFilters(filter, option) {
     switch (filter) {
@@ -104,18 +110,33 @@ class App extends Component {
     }
   }
   getSearchWord(word) {
-    console.log("Sou Alex the word is:");
     console.log(word);
     this.setState({
       searchWord: word
     });
   }
+
   getMessage(apiMessage) {
     console.log(apiMessage);
+
+    //TODO ajustar para quando for sucesso our nao
+    let typeOfMessage = 'TBD'
+
     this.setState({
-      message: apiMessage
+      message: apiMessage,
+      successMessage: typeOfMessage,
+    });
+
+    setTimeout(this.clearMessage, 5000);
+  }
+
+  clearMessage(){
+    this.setState({
+      message: '',
+      successMessage: false,
     });
   }
+
   getRecipes() {
     this.apiEndpoints
       .getAllRecipes()
@@ -148,11 +169,42 @@ class App extends Component {
       loggedInUser: user
     });
   }
+
+  filterNavBar(){
+    let givenDisplayedRecipes = this.state.allRecipes
+    
+    if (this.state.searchWord !== '') {
+      givenDisplayedRecipes = givenDisplayedRecipes.filter(e => {
+        let givenSearchWord = this.state.searchWord.toUpperCase();
+        return (e.ingredients.toUpperCase().includes(givenSearchWord) || e.name.toUpperCase().includes(givenSearchWord) || e.description.toUpperCase().includes(givenSearchWord))
+      })
+    }
+
+    if (this.state.searchDishType !== '') {
+      givenDisplayedRecipes = givenDisplayedRecipes.filter(e => {
+        return (e.dishTypes.includes(this.state.searchDishType))
+      })
+    }
+
+    if (this.state.searchCuisine !== '') {
+      givenDisplayedRecipes = givenDisplayedRecipes.filter(e => {
+        return (e.cuisines.includes(this.state.searchCuisine))
+      })
+    }
+
+    this.setState({
+      displayedRecipes: givenDisplayedRecipes
+    });
+  }
+
+
   render() {
     console.log(this.state.loggedInUser);
     console.log(this.state.allRecipes);
-    console.log(this.state.searchWord);
     this.fetchUser();
+
+    
+
     return (
       <div className="App">
         {this.state.loader ? (
@@ -169,6 +221,8 @@ class App extends Component {
             />
             <Switch>
               <Route exact path="/" component={Home} />
+              {/* <Route exact path="/success" component={Success} />
+              <Route exact path="/failure" component={Failure} /> */}
               <Route
                 exact
                 path="/login"
@@ -213,7 +267,7 @@ class App extends Component {
                 exact
                 path="/user/:username/edit"
                 render={props => (
-                  <EditProfile getMessage={this.getMessage} {...props} />
+                  <EditProfile message={this.state.message} getMessage={this.getMessage} {...props} />
                 )}
               />
               <Route

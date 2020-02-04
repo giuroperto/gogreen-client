@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AuthService from './auth-services';
 
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -46,21 +47,24 @@ class Login extends Component {
   render() {
     return(
       <div className="form-background">
-        <div className="form-container">
-        <h2>Welcome back</h2>
-        <form onSubmit={this.handleLoginFormSubmit}>
-          <div className="form-group">
-            <label htmlFor="username">Username</label>
-            <input name='username' value={this.state.username} type="text" className="form-control" id="username" aria-describedby="emailHelp" onChange={this.handleLoginChange} required />
+        <div className="form-container d-flex flex-column justify-content-center align-items-center login-container">
+        <h2>Sign In</h2>
+        <form className='login-form d-flex flex-column align-items-center' onSubmit={this.handleLoginFormSubmit}>
+          <div className="form-group mt-5">
+            <input name='username' value={this.state.username} type="text" className="form-control input-fields" placeholder="Username" id="username" aria-describedby="emailHelp" onChange={this.handleLoginChange} required />
+            <div className='div-bar-form'></div>
+
           </div>
           <div className="form-group">
-            <label htmlFor="exampleInputPassword1">Password</label>
-            <input name='password' value={this.state.password} type="password" className="form-control" id="password" onChange={this.handleLoginChange} required/>
+            <input name='password' value={this.state.password} type="password" className="form-control input-fields" placeholder="Password" id="password" onChange={this.handleLoginChange} required/>
+            <div className='div-bar-form'></div>
           </div>
-          <button type="submit" className="btn btn-primary">Login</button>
+          <button type="submit" className="btn btn-primary my-5">Login</button>
+          <p>Don't have an account yet? Click <a href="/signup">here</a></p>
         </form>
         </div>
       </div>
+
     )
   }
 }

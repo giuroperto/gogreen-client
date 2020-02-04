@@ -52,8 +52,8 @@ class EditProfile extends Component {
 
     this.apiEndpoints.editUser(username, firstName, lastName, email, usernameForm, oldPassword, newPassword)
       .then(response => {
-        console.log(response);
-        this.props.getMessage(response);
+        console.log(response.status);
+        this.props.getMessage(response.message);
         //TODO redirect to the right page -> get username properly
         // this.props.history.push(`/user/${this.props.username}`);
       })
@@ -65,7 +65,9 @@ class EditProfile extends Component {
     console.log(this.props.message);
     return(
       <div className="container-fluid profile-edit-form" style={{width: '85%'}}>
-      <Message />
+      {
+        this.props.message && <Message message={this.props.message}/>
+      }
         <form onSubmit={this.handleSubmit}>
           <h3>Edit profile</h3>
           <div className="form-row">
@@ -104,3 +106,4 @@ class EditProfile extends Component {
 export default EditProfile;
 
 //TODO add password to check when saving and new field to edit password
+// adjust to when the message is error to show the same page, when success, show profile
