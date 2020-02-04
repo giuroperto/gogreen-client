@@ -7,74 +7,18 @@ const recipesCleanTestAlex = require('./AlexInput.js');
 
 class AllRecipes extends Component {
   constructor(props) {
-    super(props);
-    this.state = {
-      fullRecipeDatabase: [],
-      displayedRecipeDatabase: []
-    };
-    this.getRecipes = this.props.getRecipes.bind(this);
+    super(props)
   }
-
-  componentDidMount(){
-    console.log('Look for me Alex!')
-    console.log(this.props)
-    this.getRecipes();
-    console.log(this.allRecipes)
-    // this.setState({
-    //   fullRecipeDatabase: this.props.allData.allRecipes,
-    //   displayedRecipeDatabase: this.state.fullRecipeDatabase
-    // });
-    
-  }
-
-  componentDidUpdate() {
-    let displayedRecipeDatabase = this.state.fullRecipeDatabase
-    if (this.props.allData.searchWord != '') {
-      displayedRecipeDatabase = displayedRecipeDatabase.filter(e => {
-        let givenSearchWord = this.props.allData.searchWord.toUpperCase();
-        return (e.ingredients.toUpperCase().includes(givenSearchWord) || e.name.toUpperCase().includes(givenSearchWord) || e.description.toUpperCase().includes(givenSearchWord))
-      })
-    }
-
-    if (this.props.allData.searchDishType != '') {
-      displayedRecipeDatabase = displayedRecipeDatabase.filter(e => {
-        return (e.dishTypes.includes(this.props.allData.searchDishType))
-      })
-    }
-
-    if (this.props.allData.searchCuisine != '') {
-      displayedRecipeDatabase = displayedRecipeDatabase.filter(e => {
-        return (e.cuisines.includes(this.props.allData.searchCuisine))
-      })
-    }
-
-    // Difficulty TBD
-    // if (this.props.allData.searchCookingLevel != '') {
-    //   displayedRecipeDatabase = displayedRecipeDatabase.filter(e => {
-    //     return (e.dishTypes.includes(this.props.allData.searchCookingLevel))
-    //   })
-    // }
-
-  }
-
-
-
-
-  // PREVIOUS
-  //       <input type="text" name="searchWord" id="searchWord" value={this.state.searchWord} placeholder="Search recipe..." onChange={this.handleChange} />
-  //       {
-  //         this.props.allData.recipes.filter(recipe => recipe.name.toLowerCase().includes(this.state.searchWord.toLowerCase())).map(recipe => <Link to="/main" className="recipes-link">{recipe.name} </Link>)
-
-  // this.props.allData.allRecipes
 
 render(){
+  console.log('Alex look at this!')
     return(
       <>
-      {this.state.displayedRecipeDatabase ? (
+      {(this.props.allData.allRecipes) ? (
 
       <div className='all-recipes-full-list'>
           <div className='all-recipes-each-listed'>
-            {this.state.displayedRecipeDatabase && this.state.displayedRecipeDatabase.map(element => {
+            {this.props.allData.allRecipes && this.props.allData.allRecipes.map(element => {
               
                 let determinedOwner = '';
                 if (element.owner === undefined){
