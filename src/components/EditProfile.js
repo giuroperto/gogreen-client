@@ -106,3 +106,4 @@ class EditProfile extends Component {
 export default EditProfile;
 
 //TODO add password to check when saving and new field to edit password
+// adjust to when the message is error to show the same page, when success, show profile
