@@ -68,5 +68,3 @@ class FilterRender extends Component {
 }
 
 export default FilterRender;
-
-//TODO handle changes, so when we select an option from the list it will be saved in the state and we can render the AllRecipes page using this filter -> APP.js
