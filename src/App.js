@@ -11,9 +11,8 @@ import AllRecipes from "./components/AllRecipes";
 import AddRecipe from "./components/AddRecipe";
 import Profile from "./components/Profile";
 import EditProfile from "./components/EditProfile";
+import ConfirmDelete from "./components/ConfirmDelete";
 import RecipeDetails from "./components/RecipeDetails";
-// import Success from "./components/RecipeDetails";
-// import Failure from "./components/RecipeDetails";
 import AuthService from "./components/auth/auth-services";
 import APIAccess from "./components/api/api-access";
 import EditRecipe from './components/EditRecipe'
@@ -158,8 +157,6 @@ class App extends Component {
   }
 
   getMessage(type, apiMessage) {
-    //TODO ajustar para quando for sucesso our nao
-
     let typeOfMessage = false;
 
     if (type === 200) {
@@ -240,8 +237,6 @@ class App extends Component {
             />
             <Switch>
               <Route exact path="/" component={Home} />
-              {/* <Route exact path="/success" component={Success} />
-              <Route exact path="/failure" component={Failure} /> */}
               <Route
                 exact
                 path="/login"
@@ -279,7 +274,7 @@ class App extends Component {
                 exact
                 path="/user/:username"
                 render={props => (
-                  <Profile message={this.state.message} successMessage={this.state.successMessage} allRecipes={this.state.allRecipes} {...props} />
+                  <Profile message={this.state.message} loggedInUser={this.state.loggedInUser} successMessage={this.state.successMessage} allRecipes={this.state.allRecipes} {...props} />
                 )}
               />
               <Route
@@ -292,14 +287,33 @@ class App extends Component {
               <Route
                 exact
                 path="/recipe/:recipeID"
-                render={props => (
+                render={(props) => (
                   <RecipeDetails
                     allRecipes={this.state.allRecipes}
                     {...props}
                   />
                 )}
               />
+
               <Route exact path='/recipe/:recipeID/edit' render={props => (<EditRecipe allData={this.state} {...props}/>)}/>
+
+              <Route
+                exact
+                path="/recipe/:recipeID/delete"
+                render={(props) => (
+                  <ConfirmDelete
+                    loggedInUser={this.state.loggedInUser}
+                    {...props}
+                  />
+                )}
+              />
+              <Route
+                exact
+                path="/user/:username/delete"
+                render={(props) => (
+                  <ConfirmDelete loggedInUser={this.state.loggedInUser} {...props} />
+                )}
+              />
             </Switch>
           </>
         )}

@@ -19,5 +19,3 @@ class Message extends Component {
 }
 
 export default Message;
-
-//pass success or failure in order to render it with correct styling
