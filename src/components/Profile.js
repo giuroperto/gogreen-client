@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import RecipeCard from '../components/RecipeCard';
 import Message from '../components/Message';
 import APIAccess from './api/api-access';
@@ -25,7 +26,7 @@ class Profile extends Component {
     this.apiEndpoints.getOneUser(username)
       .then(response => {
         this.setState({
-          userAccount: response,
+          userAccount: response.data,
         })
       })
       .catch(err => console.log(err));
@@ -56,6 +57,9 @@ class Profile extends Component {
 
   render() {
     console.log(this.state);
+    console.log('username params', this.props.match.params);
+    console.log('username loggedin', this.props.loggedInUser.username);
+    console.log((this.props.match.params === this.props.loggedInUser.username))
     return(
       <div className="profile-page">
       {
@@ -74,6 +78,11 @@ class Profile extends Component {
             {
               this.state.userRecipes.length > 0 ? <p>Has contributed { this.state.userRecipes.length } recipes</p> : <p> Has not started contributing just yet! </p>
             }
+          </div>
+          <div className="edit-button">
+          {
+            (this.props.match.params.username === this.props.loggedInUser.username) && <Link to={`/user/${this.props.loggedInUser.username}/edit`}>Edit Profile</Link>
+          }
           </div>
         </div>
         <div className="user-recipes">
