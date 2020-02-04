@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Hanuman&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Jomolhari&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
 
 
 * {
@@ -9,8 +8,7 @@
 
 body {
   font-size: 10px;
-  /* font-family: 'Hanuman', serif; */
-  font-family: 'Jomolhari', serif;
+  font-family: 'Lato', sans-serif;
 
 }
 
@@ -20,20 +18,23 @@ img {
 
 .App {
   text-align: center;
+  font-family: 'Lato', sans-serif;
+
 }
 
 
 /* NAVBARS */
 
 .nav-container{
-  box-shadow: 0 4px 2px -2px rgba(0,0,0,.2);
+  box-shadow: 0 4px 2px -2px rgba(0,0,0,.4);
   width: 100vw;
-  background-color: rgba(240, 245, 230, 0.1);
+  background-color: rgba(196,180,164);
+
   
 }
 
 .nav-buttons a {
-  color: rgba(72, 151, 75, 0.9);
+  color: rgba(255, 255, 255, 1);
   font-weight: 600;
 }
 
@@ -55,12 +56,12 @@ img {
   display: flex;
   align-items: center;
   margin-right: 1vw;
-  color: rgba(72, 151, 75, 0.9);
+  color: rgba(255, 255, 255, 1);
 }
 
 .nav-icon-container img {
   width: 2.5vw;
-  margin-bottom: 1vh;
+
 }
 
 .nav-icon-container p {
@@ -73,7 +74,7 @@ img {
 
 .navbar-list a.chosen,
 .navbar-list a:hover {
-  border-bottom: 1px solid lightgreen;
+  border-bottom: 0.5  px solid lightgreen;
 }
 
 .logged-in-welcome {
@@ -92,7 +93,7 @@ img {
   align-items: center;
   border: 1px solid #dfe1e5;
   box-shadow: none;
-  height: 6vh;
+  height: 5vh;
   width: 38vw;
   border-radius: 24px;
   z-index: 3;
@@ -102,6 +103,9 @@ img {
 margin: 0.6rem;
 width: 100%;
 border: transparent;
+outline:0px !important;
+-webkit-appearance:none;
+box-shadow: none !important;
 }
 
 .search-bar-container button {
@@ -121,10 +125,14 @@ border: transparent;
 /* HOME PAGE */
 
 .section1-container {
-  background-image: url('/images/home-images/home.jpeg');
+  background-image: url('/images/home-plate.jpg');
   background-size: cover;
-  height: 80vh;
+  height: 90vh;
   font-weight: 700;
+}
+
+.section1-div {
+  margin: 20vh 0 0 10vw;
 }
 
 .section1-div h2 {
@@ -141,7 +149,7 @@ border: transparent;
 .section1-div button {
   font-size: 1.7rem;
   color: white;
-  background-color: rgba(111, 224, 88, 0.904);
+  background-color: rgba(121,192,85, 0.904);
   border: solid rgb(240, 245, 230, 0.3);;
 }
 

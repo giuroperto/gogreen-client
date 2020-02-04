@@ -11,7 +11,7 @@ class Home extends Component {
     return (
       <div className="home-container">
 
-        <section className="d-flex justify-content-center align-items-center section1-container">
+        <section className="d-flex justify-content-start align-items-start section1-container">
           <div className="section1-div">
             <h2>GoGreen</h2>
             <h4>Find and share V recipes</h4>
