@@ -73,17 +73,34 @@ class Step3 extends Component {
       <>
       <div className="form-group">
         <label htmlFor="ingredients">What <strong>ingredients</strong> will be used?</label>
-        {this.renderInputs().map(input => (<input
-          key={input.key}
-          data-key={input.key}
-          className="form-control"
-          type="text"
-          name={input.inputName}
-          value={this.state.ingredients.values[input.key]}
-          onChange={this.handleChange}/>))}
-        <button 
-          className="btn btn-secondary"
-          type="button" onClick={this.addInput}>+</button>
+        {this.renderInputs().map(input => {
+          if (input.key === this.state.inputNumber -1) {
+            return (
+            <div class="input-group mb-3">
+              <input
+            key={input.key}
+            data-key={input.key}
+            className="form-control"
+            type="text"
+            name={input.inputName}
+            value={this.state.ingredients.values[input.key]}
+            onChange={this.handleChange}/>
+              <div class="input-group-append">
+              <button 
+                className="btn btn-secondary"
+                type="button" onClick={this.addInput}>+</button>
+              </div>
+            </div>)
+          }
+          return (<input
+            key={input.key}
+            data-key={input.key}
+            className="form-control mb-3"
+            type="text"
+            name={input.inputName}
+            value={this.state.ingredients.values[input.key]}
+            onChange={this.handleChange}/>)
+        })}
       </div>
       <div className="form-group form-check">
         <input

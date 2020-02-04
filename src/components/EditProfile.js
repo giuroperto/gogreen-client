@@ -19,6 +19,7 @@ class EditProfile extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleUpload = this.handleUpload.bind(this);
   }
 
   componentDidMount() {
@@ -59,6 +60,19 @@ class EditProfile extends Component {
       })
       .catch(err => console.log(err));
   }
+  
+  handleUpload (event) {
+    const uploadData = new FormData();
+    uploadData.append("imageUrl", event.target.files[0]);
+    console.log('hi!', event.target.files)
+    this.apiEndpoints.handleUpload(uploadData)
+    .then(response => {
+        this.setState({ picture: response.secure_url });
+      })
+      .catch(err => {
+        console.log("Error while uploading the file: ", err);
+      });
+  }
 
   render() {
     console.log(this.state);
@@ -95,6 +109,12 @@ class EditProfile extends Component {
           <div className="form-group">
             <label for="newPassword">New Password</label>
             <input type="password" className="form-control" id="newPassword" name="newPassword" onChange={this.handleChange} value={this.state.newPassword}/>
+          </div>
+          <div class="input-group mb-3">
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="profilePic" onChange={this.handleUpload}/>
+              <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+            </div>
           </div>
           <button type="submit">Save changes</button>
         </form>

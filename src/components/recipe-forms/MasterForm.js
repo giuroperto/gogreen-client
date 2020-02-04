@@ -124,7 +124,7 @@ class MasterForm extends Component {
     if(currentStep !== 1){
       return (
         <button 
-          className="btn btn-secondary" 
+          className="btn btn-secondary float-left" 
           type="button" onClick={this._prev}>
         Previous
         </button>
@@ -138,7 +138,7 @@ class MasterForm extends Component {
     if(currentStep < 4){
       return (
         <button 
-          className="btn btn-primary float-right" 
+          className="btn btn-secondary float-right" 
           type="button" onClick={this._next}>
         Next
         </button>        
@@ -149,8 +149,9 @@ class MasterForm extends Component {
 
   render() {
     return(
-      <div className="w-50">
-        <form onSubmit={this.handleSubmit}>
+      <div className="w-50 py-5">
+      <h2 className="mb-4">Add Recipe</h2>
+        <form className="my-5" onSubmit={this.handleSubmit}>
           <Step1 
             currentStep={this.state.currentStep} 
             handleChange={this.handleChange}
@@ -182,7 +183,7 @@ class MasterForm extends Component {
           />
           {this.previousButton}
           {this.nextButton}
-          {this.state.currentStep === 4 && <button type="submit" className="btn btn-primary">Submit Recipe</button>}
+          {this.state.currentStep === 4 && <button type="submit" className="btn btn-primary float-right">Submit Recipe</button>}
         </form>
       </div>
     )
