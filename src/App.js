@@ -73,6 +73,7 @@ class App extends Component {
       searchDishType: "",
       searchCuisine: "",
       searchCookingLevel: "",
+      searchVeganOnly: "",
       //auth info
       loggedInUser: null,
       // info from API

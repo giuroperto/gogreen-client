@@ -14,15 +14,23 @@ class Navbar extends Component {
       showLoginAndSignupButtons: true,
       showLogoutAndOtherButtons: false,
       loader: true,
+      veganToggle: false,
     };
     this.service = new AuthService();
     this.filterRender = this.filterRender.bind(this);
     this.logoutUser = this.logoutUser.bind(this);
+    this.veganToggle = this.veganToggle.bind(this);
   }
   filterRender() {
     this.setState({
       showFilterRender: !this.state.showFilterRender
     });
+  }
+  veganToggle() {
+    this.setState({
+      veganToggle: !this.state.veganToggle
+    });
+    console.log('vegan toggle switched!')
   }
   logoutUser() {
     console.log('logging out')
@@ -47,6 +55,15 @@ class Navbar extends Component {
   }
   render() {
     console.log(this.state)
+    let vegetarianString = '';
+    let veganString = '';
+    if (this.state.veganToggle){
+      vegetarianString = "images/vegetarian-off.png"; 
+      veganString = "images/vegan-on.png"
+    } else {
+        vegetarianString = "images/vegetarian-on.png"; 
+        veganString = "images/vegan-off.png"
+      };
     return (
       <div className="nav-container">
         <nav className="navbar navbar-expand-lg navbar-light nav-main">
@@ -143,20 +160,18 @@ class Navbar extends Component {
               <img src="images/book2.png" alt="book-icon" />
               <p>All Recipes</p>
             </NavLink>
-            <NavLink
-              className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
-              to="/"
-            >
-              <img src="images/vegetable.png" alt="vegetables-icon" />
-              <p>Vegan</p>
-            </NavLink>
-            <NavLink
-              className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
-              to="/"
-            >
-              <img src="images/diet.png" alt="vegetarian-icon" />
+            
+            
+            <NavLink className="nav-navbar nav-link d-flex align-items-center nav-icon-container" to="/" onClick={this.veganToggle}>
+              <img src={vegetarianString} alt="vegetarian-icon" />
               <p>Vegetarian</p>
             </NavLink>
+
+            <NavLink className="nav-navbar nav-link d-flex align-items-center nav-icon-container" to="/" onClick={this.veganToggle}>
+              <img src={veganString} alt="vegetables-icon" />
+              <p>Vegan</p>
+            </NavLink>
+
           </div>
           <div className="mr-3">
             <SearchButtons
