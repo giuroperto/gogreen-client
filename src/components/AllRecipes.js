@@ -18,7 +18,6 @@ render(){
       <div className='all-recipes-full-list'>
           <div className='all-recipes-each-listed'>
             {this.props.allData.displayedRecipes && this.props.allData.displayedRecipes.map(element => {
-                
                 let determinedOwner = '';
                 if (element.ownerAPI !== undefined){
                   determinedOwner = element.ownerAPI
