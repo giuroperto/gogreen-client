@@ -29,13 +29,13 @@ class Home extends Component {
 
         <section className='section2'>
           <div className="container-fluid">
-            <div className="mt-5 d-flex flex-column align-items-center">
+            <div className="mt-5 mb-3 d-flex flex-column align-items-center">
               <h3 className="">How it works?</h3>
               <div className="div-bar"></div>
             </div>
 
-            <div className="d-flex row">
-              <div className="col-sm mt-5 section2-container">
+            <div className="d-flex row justify-content-sm-around">
+              <div className="col-sm section2-container">
                 <img src="./images/chef-hat.png" alt="fork" />
                 <h4 className="hello">Be the chef</h4>
                 <p className="text-muted">
@@ -43,7 +43,7 @@ class Home extends Component {
                 </p>
               </div>
 
-              <div className="col-sm mt-5 section2-container">
+              <div className="col-sm section2-container">
                 <img src="./images/cook.png" alt="fork" />
                 <h4 className="hello">Find the ideal recipe</h4>
                 <p className="text-muted">
@@ -52,7 +52,7 @@ class Home extends Component {
                 </p>
               </div>
 
-              <div className="col-sm mt-5 section2-container">
+              <div className="col-sm section2-container">
                 <img src="./images/powder.png" alt="fork" />
                 <h4 className="hello">Fork and improve their recipes</h4>
                 <p className="text-muted">
@@ -68,8 +68,8 @@ class Home extends Component {
           className="container-fluid featured-recipes mt-5"
           style={{ width: "85%" }}
         >
-          <div className="my-5 d-flex flex-column align-items-center">
-            <h3 className="">How skilled are you today?</h3>
+          <div className="mt-5 mb-2 d-flex flex-column align-items-center">
+            <h3 className="">How skilled do you feel today?</h3>
             <div className="div-bar"></div>
           </div>
 
@@ -149,7 +149,7 @@ class Home extends Component {
                     <img src="" alt="" />
                   </div>
                   <h4 className="difficulty-text">Feeling adventurous?</h4>
-                  <p>
+                  <p className="difficulty-link">
                     See more <strong>Hard</strong> recipes
                   </p>
                 </a>
@@ -158,7 +158,7 @@ class Home extends Component {
           </div>
         </div>
         
-<footer className="page-footer font-small unique-color-dark" style={{ 'background-color': '#e0e0e0 ' }}>
+<footer className="mt-5 page-footer font-small unique-color-dark" style={{ 'background-color': '#e0e0e0 ' }}>
 
   <div style={{ 'background-color': '#616161 ' }}>
     <div className="container">

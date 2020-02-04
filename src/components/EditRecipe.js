@@ -7,7 +7,6 @@ class EditRecipe extends Component {
     super(props);
     this.state = {
       uniqueRecipe: null,
-      flag: true
     }
     this.apiEndpoints = new APIAccess();
   }
@@ -21,9 +20,8 @@ class EditRecipe extends Component {
     this.apiEndpoints.getOneRecipe(recipeID)
     .then(response => {
       self.setState({
-        flag: false,
-        uniqueRecipe: response
-    }, () => console.log(response, self.state))})
+        uniqueRecipe: response.data
+    })})
     .catch(err => console.log(err));
   }
 

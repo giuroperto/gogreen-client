@@ -163,16 +163,26 @@ border: transparent;
 
 .recipe-name {
   color: white;
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.feat-recipe {
+  border-radius: 20px;
 }
 
 .text-box {
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(20,50,20,0.75);
   width: 100%;
-  padding: 3% 0;
+  padding: 2% 0;
+  border-radius: 0 0 20px 20px;
 }
 
 .difficulty-text {
   margin: 0;
+  text-decoration: none;
+  color: green;
 }
 
 
