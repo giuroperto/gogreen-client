@@ -28,10 +28,10 @@ class EditProfile extends Component {
     this.apiEndpoints.getOneUser(username)
       .then(response => {
         this.setState({
-          firstName: response.firstName,
-          lastName: response.lastName,
-          email: response.email,
-          usernameForm: response.username,
+          firstName: response.data.firstName,
+          lastName: response.data.lastName,
+          email: response.data.email,
+          usernameForm: response.data.username,
         })
       })
       .catch(err => console.log(err));
@@ -61,8 +61,6 @@ class EditProfile extends Component {
       .then(response => {
         this.props.getMessage(response.status, response.data.message);
         this.redirectPage(this.props.successMessage, usernameForm);
-        //TODO redirect to the right page -> get username properly
-        // this.props.history.push(`/user/${this.props.username}`);
       })
       .catch(err => console.log(err));
   }
@@ -132,4 +130,3 @@ class EditProfile extends Component {
 export default EditProfile;
 
 //TODO add password to check when saving and new field to edit password
-// adjust to when the message is error to show the same page, when success, show profile
