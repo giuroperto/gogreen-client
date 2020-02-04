@@ -53,11 +53,15 @@ class Login extends Component {
           <div className="form-group mt-5">
             <input name='username' value={this.state.username} type="text" className="form-control input-fields" placeholder="Username" id="username" aria-describedby="emailHelp" onChange={this.handleLoginChange} required />
             <div className='div-bar-form'></div>
+            <div className='div-bar-form'></div>
+
 
           </div>
           <div className="form-group">
             <input name='password' value={this.state.password} type="password" className="form-control input-fields" placeholder="Password" id="password" onChange={this.handleLoginChange} required/>
             <div className='div-bar-form'></div>
+            <div className='div-bar-form'></div>
+
           </div>
           <button type="submit" className="btn btn-primary my-5">Login</button>
           <p>Don't have an account yet? Click <a href="/signup">here</a></p>

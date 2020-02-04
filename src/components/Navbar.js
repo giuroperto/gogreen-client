@@ -86,14 +86,14 @@ class Navbar extends Component {
                     className="nav-navbar nav-link d-flex align-items-center mr-3 nav-icon-container"
                     to="/signup"
                   >
-                    <img src="images/recipe.png" alt="recipe-icon" />
+                    <img src="images/mobile-phone.png" alt="recipe-icon" />
                     <p>Sign Up</p>
                   </NavLink>
                   <NavLink
                     className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
                     to="/login"
                   >
-                    <img src="images/chef.png" alt="chef-icon" />
+                    <img src="images/recipe2.png" alt="chef-icon" />
                     <p>Login</p>
                   </NavLink>
                 </>
@@ -106,14 +106,14 @@ class Navbar extends Component {
                 className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
                 to="/addrecipe"
               >
-                <img className="mr-1" src="images/add.png" alt="add-icon" />
+                <img className="mr-1" src="images/add2.png" alt="add-icon" />
                 <p>Add Recipe</p>
               </NavLink>
               <NavLink
                 className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
                 to={`/user/${this.state.loggedInUser.username}`}
               >
-                <img src="images/kitchen.png" alt="profile-icon" />
+                <img src="images/kitchen-pack.png" alt="profile-icon" />
                 <p>My Profile</p>
               </NavLink>
               <NavLink
@@ -121,7 +121,7 @@ class Navbar extends Component {
                 onClick={this.logoutUser}
                 to="/"
               >
-                <img src="images/logout.png" alt="chef-icon" />
+                <img src="images/logout2.png" alt="chef-icon" />
                 <p>Logout</p>
               </NavLink>
                 </>
@@ -132,27 +132,27 @@ class Navbar extends Component {
         <div className="split-container d-flex justify-content-center">
           <div className="split-bar"></div>
         </div>
-        <nav className="navbar navbar-light second-navbar d-flex align-items-center mt-1 navbar-list">
+        <nav className="navbar navbar-light second-navbar d-flex align-items-center navbar-list">
           <div className="second-nav-icon-div d-flex align-items-center ml-2">
             <NavLink
               className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
               to="/allrecipes"
             >
-              <img src="images/cook-book.png" alt="book-icon" />
+              <img src="images/book2.png" alt="book-icon" />
               <p>All Recipes</p>
             </NavLink>
             <NavLink
               className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
               to="/"
             >
-              <img src="images/vegetables-icon.png" alt="vegetables-icon" />
+              <img src="images/vegetable.png" alt="vegetables-icon" />
               <p>Vegan</p>
             </NavLink>
             <NavLink
               className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
               to="/"
             >
-              <img src="images/vegetarian-icon.png" alt="vegetarian-icon" />
+              <img src="images/diet.png" alt="vegetarian-icon" />
               <p>Vegetarian</p>
             </NavLink>
           </div>
