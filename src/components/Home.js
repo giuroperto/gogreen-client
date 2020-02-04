@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Message from './Message';
 
 //TODO deixar featured recipes responsivo; mostrar uma de cada vez? wrap
 
@@ -10,6 +11,10 @@ class Home extends Component {
   render() {
     return (
       <div className="home-container">
+      
+      {
+        this.props.message && <Message successMessage={this.props.successMessage} message={this.props.message}/>
+      }
 
         <section className="d-flex justify-content-start align-items-start section1-container">
           <div className="section1-div">
@@ -362,3 +367,7 @@ class Home extends Component {
 }
 
 export default Home;
+
+
+// trazer getmessage e success message -> para rendererizar condicional
+// passar o message

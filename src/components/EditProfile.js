@@ -54,7 +54,6 @@ class EditProfile extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log('submit');
     let { firstName, lastName, email, usernameForm, oldPassword, newPassword, picture } = this.state;
     const { username } = this.props.match.params;
 
