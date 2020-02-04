@@ -18,14 +18,14 @@ render(){
       <div className='all-recipes-full-list'>
           <div className='all-recipes-each-listed'>
             {this.props.allData.displayedRecipes && this.props.allData.displayedRecipes.map(element => {
-
+                
                 let determinedOwner = '';
-                if (element.owner === undefined){
+                if (element.ownerAPI !== undefined){
                   determinedOwner = element.ownerAPI
                 } else {
-                  determinedOwner = element.owner.replace(element.owner)
+                  determinedOwner = element.owner.username
                 }
-
+                console.log(element.owner);
                 let cleanDishType = '';
                 if (element.dishTypes[0] === undefined) {
                   cleanDishType = "N/A"

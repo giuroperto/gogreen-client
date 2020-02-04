@@ -9,26 +9,26 @@ class Step4 extends Component {
     this.state = {
       inputNumber: 3,
       inputs: [
-        { key: 0, textName: 'instruction0', timeName:'timeMinutes0' },
-        { key: 1, textName: 'instruction1', timeName:'timeMinutes1' },
-        { key: 2, textName: 'instruction2', timeName:'timeMinutes2' },],
+        { key: 0, textName: 'instruction0', timeName:'stepTimeMinutes0' },
+        { key: 1, textName: 'instruction1', timeName:'stepTimeMinutes1' },
+        { key: 2, textName: 'instruction2', timeName:'stepTimeMinutes2' },],
       instructions: {
         name: "instructions",
         values: [
           {
             step: 1,
             text: '',
-            timeMinutes: 0,
+            stepTimeMinutes: 0,
           },
           {
             step: 2,
             text: '',
-            timeMinutes: 0,
+            stepTimeMinutes: 0,
           },
           {
             step: 3,
             text: '',
-            timeMinutes: 0,
+            stepTimeMinutes: 0,
           }]
       }
     }
@@ -42,12 +42,12 @@ class Step4 extends Component {
   addInput() {
     let index = this.state.inputNumber;
     let inputsCopy = [...this.state.inputs];
-    inputsCopy.push({ key: index, textName: 'instruction' + index, timeName: 'timeMinutes' + index })
+    inputsCopy.push({ key: index, textName: 'instruction' + index, timeName: 'stepTimeMinutes' + index })
     let instructionsValuesCopy = [...this.state.instructions.values];
     instructionsValuesCopy[index] = {
       step: index,
       text: '',
-      timeMinutes: 0,
+      stepTimeMinutes: 0,
     };
     console.log(inputsCopy);
     console.log(instructionsValuesCopy);
@@ -65,7 +65,7 @@ class Step4 extends Component {
   //   let inputs = [];
   //   for (let i = 0; i < this.state.inputNumber; i += 1) {
   //     let textName = 'instruction' + i;
-  //     let timeName = 'timeMinutes' + i;
+  //     let timeName = 'stepTimeMinutes' + i;
   //     inputs.push({ key: i, textName, timeName })
   //   }
   //   this.setState({
@@ -88,7 +88,7 @@ class Step4 extends Component {
         }
       }, this.handleInstructions);
     } else if (name.includes('time')) {
-      instructionsValuesCopy[myKey].timeMinutes = value;
+      instructionsValuesCopy[myKey].stepTimeMinutes = value;
       this.setState({
         instructions: {
           name: 'instructions',
@@ -119,7 +119,7 @@ class Step4 extends Component {
             </div>
             <div className="col-md-3 mb-3 text-left">
               <label htmlFor="time">Time (minutes)</label>
-              <input key={input.key} data-key={input.key} className="form-control" type="number" name={input.timeName} value={this.state.instructions.values[input.key].timeMinutes} onChange={this.handleChange}/>
+              <input key={input.key} data-key={input.key} className="form-control" type="number" name={input.timeName} value={this.state.instructions.values[input.key].stepTimeMinutes} onChange={this.handleChange}/>
             </div>
           </div>
         ))}

@@ -13,6 +13,7 @@ class EditProfile extends Component {
       usernameForm: '',
       oldPassword: '',
       newPassword: '',
+      picture: '',
     }
 
     this.apiEndpoints = new APIAccess();
@@ -28,10 +29,10 @@ class EditProfile extends Component {
     this.apiEndpoints.getOneUser(username)
       .then(response => {
         this.setState({
-          firstName: response.firstName,
-          lastName: response.lastName,
-          email: response.email,
-          usernameForm: response.username,
+          firstName: response.data.firstName,
+          lastName: response.data.lastName,
+          email: response.data.email,
+          usernameForm: response.data.username,
         })
       })
       .catch(err => console.log(err));
@@ -54,15 +55,17 @@ class EditProfile extends Component {
   handleSubmit(event) {
     event.preventDefault();
     console.log('submit');
-    let { firstName, lastName, email, usernameForm, oldPassword, newPassword } = this.state;
+    let { firstName, lastName, email, usernameForm, oldPassword, newPassword, picture } = this.state;
     const { username } = this.props.match.params;
 
-    this.apiEndpoints.editUser(username, firstName, lastName, email, usernameForm, oldPassword, newPassword)
+    if (picture === '') {
+      picture = 'https://res.cloudinary.com/dxatyucj2/image/upload/v1580833315/go-green/vegetalwhite.jpg.jpg'
+    }
+
+    this.apiEndpoints.editUser(username, firstName, lastName, email, usernameForm, oldPassword, newPassword, picture)
       .then(response => {
         this.props.getMessage(response.status, response.data.message);
         this.redirectPage(this.props.successMessage, usernameForm);
-        //TODO redirect to the right page -> get username properly
-        // this.props.history.push(`/user/${this.props.username}`);
       })
       .catch(err => console.log(err));
   }
@@ -132,4 +135,3 @@ class EditProfile extends Component {
 export default EditProfile;
 
 //TODO add password to check when saving and new field to edit password
-// adjust to when the message is error to show the same page, when success, show profile

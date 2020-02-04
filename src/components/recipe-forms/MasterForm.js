@@ -77,7 +77,7 @@ class MasterForm extends Component {
   handleSubmit (event) {
     event.preventDefault();
     const { name, description, dishTypes, cuisines, servings, ingredients, instructions, vegan, picture } = this.state;
-    let totalTimeMinutes = ingredients.reduce((acc, item) => acc + item.timeMinutes, 0);
+    let totalTimeMinutes = instructions.reduce((acc, item) => acc + parseInt(item.stepTimeMinutes), 0);
     let owner = this.props.allData.loggedInUser._id;
 
     this.apiEndpoints.addNewRecipe(owner, name, description, ingredients, dishTypes, vegan, cuisines, totalTimeMinutes, servings, instructions, picture)
