@@ -12,8 +12,8 @@ class APIAccess {
     return this.APIAccess.get(`/user/${username}`).then(response => response.data);
   }
 
-  editUser(username, firstName, lastName, email, usernameForm, oldPassword, newPassword) {
-    return this.APIAccess.put(`/user/${username}`, { firstName, lastName, email, usernameForm, oldPassword, newPassword });
+  editUser(username, firstName, lastName, email, usernameForm, oldPassword, newPassword, picture) {
+    return this.APIAccess.put(`/user/${username}`, { firstName, lastName, email, usernameForm, oldPassword, newPassword, picture });
   }
 
   deleteUser(username) {
