@@ -72,8 +72,8 @@ class Signup extends Component {
     return(
       <div className="form-background">
       <div className="form-container">
-      <h2>Create an account</h2>
       <form onSubmit={this.handleSignupFormSubmit}>
+      <h2>Create an account</h2>
         <div className="form-group">
           <label for="email">Email address</label>
           <input name='email' value={this.state.email} type="email" className="form-control" id="email" aria-describedby="emailHelp" onChange={this.handleSignupChange} required />
