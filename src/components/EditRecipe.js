@@ -14,7 +14,7 @@ class EditRecipe extends Component {
 
   componentDidMount() {
     const { recipeID } = this.props.match.params;
-    console.log(recipeID);
+    console.log(this.props);
     let self = this;
 
 

@@ -22,17 +22,17 @@ class EditRecipeForm extends Component {
         {
           step: 1,
           text: '',
-          timeMinutes: 0,
+          stepTimeMinutes: 0,
         },
         {
           step: 2,
           text: '',
-          timeMinutes: 0,
+          stepTimeMinutes: 0,
         },
         {
           step: 3,
           text: '',
-          timeMinutes: 0,
+          stepTimeMinutes: 0,
         }],
       vegan: false,
       // picture: '',
@@ -61,12 +61,22 @@ class EditRecipeForm extends Component {
     if (this.props.recipe !== null && this.props.recipe !== undefined) {
       let {name, description, dishTypes, cuisines, servings, ingredients, instructions, vegan} = this.props.recipe;
 
+      // let givenIngredients = [];
+      // if (ingredients[0] === undefined){
+      // } else {
+      //   givenIngredients = ingredients[0].split("\n");
+      //   let removed = givenIngredients.splice(givenIngredients.length -1 ,1);
+      // }
+
       let givenIngredients = [];
       if (ingredients[0] === undefined){
-      } else {
+      } else if (ingredients.length === 1) {
         givenIngredients = ingredients[0].split("\n");
         let removed = givenIngredients.splice(givenIngredients.length -1 ,1);
+      } else {
+        givenIngredients = ingredients
       }
+
 
       let ingredientsInputs = givenIngredients.length;
       let instructionsInputs = instructions.length;
@@ -97,14 +107,13 @@ class EditRecipeForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const { name, description, dishTypes, cuisines, servings, ingredients, instructions, vegan } = this.state;
-    let totalTimeMinutes = ingredients.reduce((acc, item) => acc + item.timeMinutes, 0);
+    let totalstepTimeMinutes = instructions.reduce((acc, item) => acc + parseInt(item.stepTimeMinutes), 0);
     let owner = this.props.allData.loggedInUser._id;
-
+    
     let recipeID = this.props.recipe._id;
     //TODO add picture
-    this.apiEndpoints.editRecipe(recipeID, name, description, ingredients, dishTypes, vegan, cuisines, totalTimeMinutes, servings, instructions)
+    this.apiEndpoints.editRecipe(recipeID, name, description, ingredients, dishTypes, vegan, cuisines, totalstepTimeMinutes, servings, instructions)
     .then(() => {
-      console.log(this.props)
       this.props.history.push(`/recipe/${recipeID}`)
     })
     .catch(err => console.log(err));
@@ -122,9 +131,8 @@ class EditRecipeForm extends Component {
   renderInstructionsInputs() {
     let inputs = [];
     for (let i = 0; i < this.state.instructionsInputs; i += 1) {
-      inputs.push({ key: i, textName: 'instruction' + i, timeName: 'timeMinutes' + i })
+      inputs.push({ key: i, textName: 'instruction' + i, timeName: 'stepTimeMinutes' + i })
     }
-    console.log('inputs', inputs)
     return inputs;
   }
 
@@ -141,13 +149,13 @@ class EditRecipeForm extends Component {
       instructionsCopy[index] = {
         step: index,
         text: '',
-        timeMinutes: 0,
+        stepTimeMinutes: 0,
       };
 
       this.setState({
         instructions: instructionsCopy,
         instructionsInputs: newNumber,
-      }, () => console.log(this.state.instructionsInputs))
+      })
     } 
   }
 
@@ -163,7 +171,7 @@ class EditRecipeForm extends Component {
         instructions: instructionsValuesCopy
       });
     } else if (name.includes('time')) {
-      instructionsValuesCopy[myKey].timeMinutes = value;
+      instructionsValuesCopy[myKey].stepTimeMinutes = value;
       this.setState({
         instructions: instructionsValuesCopy
       });
@@ -220,7 +228,7 @@ class EditRecipeForm extends Component {
         <div className="form-group">
           <label htmlFor="ingredients">Ingredients</label>
           {this.renderIngredientsInputs().map(input => {
-          if (input.key === this.state.inputNumber -1) {
+          if (input.key === this.state.ingredients.length -1) {
             return (
             <div class="input-group mb-3">
               <input
@@ -229,7 +237,7 @@ class EditRecipeForm extends Component {
             className="form-control"
             type="text"
             name={input.inputName}
-            value={this.state.ingredients.values[input.key]}
+            value={this.state.ingredients[input.key]}
             onChange={this.handleChange}/>
               <div class="input-group-append">
               <button 
@@ -244,7 +252,7 @@ class EditRecipeForm extends Component {
             className="form-control mb-3"
             type="text"
             name={input.inputName}
-            value={this.state.ingredients.values[input.key]}
+            value={this.state.ingredients[input.key]}
             onChange={this.handleChange}/>)
         })}
         </div>
@@ -265,11 +273,11 @@ class EditRecipeForm extends Component {
             <div key={input.key} className="form-row">
               <div className="col-md-9 mb-3">
                 <label>Step {input.key + 1}</label>
-                <input key={input.key} data-key={input.key} className="form-control" type="text" name={input.textName} value={this.state.instructions[input.key].text} onChange={this.handleChange}/>
+                <input key={input.key} data-key={input.key} className="form-control" type="text" name={input.textName} value={this.state.instructions[input.key].text} onChange={this.handleInstructionsChange}/>
               </div>
               <div className="col-md-3 mb-3">
                 <label htmlFor="time">Time (minutes)</label>
-                <input key={input.key} data-key={input.key} className="form-control" type="number" name={input.timeName} value={this.state.instructions[input.key].timeMinutes} onChange={this.handleChange}/>
+                <input key={input.key} data-key={input.key} className="form-control" type="number" name={input.timeName} value={this.state.instructions[input.key].stepTimeMinutes} onChange={this.handleInstructionsChange}/>
               </div>
             </div>
           ))}

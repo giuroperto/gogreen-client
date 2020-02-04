@@ -16,7 +16,7 @@ import RecipeDetails from "./components/RecipeDetails";
 // import Failure from "./components/RecipeDetails";
 import AuthService from "./components/auth/auth-services";
 import APIAccess from "./components/api/api-access";
-// import EditRecipe from './components/EditRecipe'
+import EditRecipe from './components/EditRecipe'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 //Test
 //Test 2
@@ -299,7 +299,7 @@ class App extends Component {
                   />
                 )}
               />
-              {/* <Route exact path='/recipe/:id/edit' component={EditRecipe}/> */}
+              <Route exact path='/recipe/:recipeID/edit' render={props => (<EditRecipe allData={this.state} {...props}/>)}/>
             </Switch>
           </>
         )}
