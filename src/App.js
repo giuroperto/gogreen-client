@@ -80,6 +80,8 @@ class App extends Component {
       displayedRecipes: [],
       // messages from API
       message: "",
+      successMessage: false,
+  
       loader: true,
     };
     this.service = new AuthService();
@@ -89,6 +91,7 @@ class App extends Component {
     this.getRecipes = this.getRecipes.bind(this);
     this.getSearchWord = this.getSearchWord.bind(this);
     this.getMessage = this.getMessage.bind(this);
+    this.clearMessage = this.clearMessage.bind(this);
   }
   componentDidMount() {
     this.getRecipes();
@@ -112,12 +115,28 @@ class App extends Component {
       searchWord: word
     });
   }
+
   getMessage(apiMessage) {
     console.log(apiMessage);
+
+    //TODO ajustar para quando for sucesso our nao
+    let typeOfMessage = 'TBD'
+
     this.setState({
-      message: apiMessage
+      message: apiMessage,
+      successMessage: typeOfMessage,
+    });
+
+    setTimeout(this.clearMessage, 5000);
+  }
+
+  clearMessage(){
+    this.setState({
+      message: '',
+      successMessage: false,
     });
   }
+
   getRecipes() {
     this.apiEndpoints
       .getAllRecipes()

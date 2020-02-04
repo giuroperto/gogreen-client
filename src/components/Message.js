@@ -8,7 +8,9 @@ class Message extends Component {
   render() {
     return (
       <div className="message">
-        <p>{this.props.message}</p>
+      {
+        this.props.success ? <p className="success-message">{this.props.message}</p> : <p className="failure-message">{this.props.message}</p>
+      }
       </div>
     )
   }
@@ -17,3 +19,5 @@ class Message extends Component {
 }
 
 export default Message;
+
+//pass success or failure in order to render it with correct styling
