@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 
 //TODO deixar featured recipes responsivo; mostrar uma de cada vez? wrap
 
@@ -69,178 +70,88 @@ class Home extends Component {
 
           <div className="row">
             <div className="col-sm">
-              <a href="" className="recipe-link">
+              <Link to="/recipe/5e384386b742f83ceec52f23" className="recipe-link">
                 <article
                   className="feat-recipe d-flex justify-content-center align-items-end"
                   style={{
-                    backgroundImage: 'url("./images/pudim.jpg")',
+                    backgroundImage: 'url("./images/home-images/pasta.jpg")',
                     backgroundSize: "cover",
                     height: "45vh"
                   }}
                 >
                   <div className="text-box">
-                    <h2 className="recipe-name">Pudim de coco</h2>
+                    <h2 className="recipe-name">Creamy Avocado Pasta</h2>
                   </div>
                 </article>
-              </a>
+              </Link>
               <div className="difficulty-link">
-                <a href="">
+                <Link to="/allrecipes">
                   <div className="difficulty icon">
                     <img src="" alt="" />
                   </div>
-                  <p className="difficulty-text">Get a meal ready in minutes</p>
-                  <h4>
+                  <h4 className="difficulty-text">Just starting out?</h4>
+                  <p>
                     See more <strong>Easy</strong> recipes
-                  </h4>
-                </a>
+                  </p>
+                </Link>
               </div>
             </div>
             <div className="col-sm">
-              <a href="" className="recipe-link">
+              <Link to="/recipe/5e384386b742f83ceec52f43" className="recipe-link">
                 <article
                   className="feat-recipe d-flex justify-content-center align-items-end"
                   style={{
-                    backgroundImage: 'url("./images/pudim.jpg")',
+                    backgroundImage: 'url("./images/home-images/burger.jpeg")',
                     backgroundSize: "cover",
                     height: "45vh"
                   }}
                 >
                   <div className="text-box">
-                    <h2 className="recipe-name">Pudim de coco</h2>
+                    <h2 className="recipe-name">Bean Burgers with Spicy Guacamole</h2>
                   </div>
                 </article>
-              </a>
+              </Link>
               <div className="difficulty-link">
-                <a href="">
+                <Link to="/allrecipes">
                   <div className="difficulty icon">
                     <img src="" alt="" />
                   </div>
-                  <p className="difficulty-text"></p>
-                  <h4>
+                  <h4 className="difficulty-text">Get a meal ready in minutes</h4>
+                  <p>
                     See more <strong>Medium</strong> recipes
-                  </h4>
-                </a>
+                  </p>
+                </Link>
               </div>
             </div>
             <div className="col-sm">
-              <a href="" className="recipe-link">
+              <Link to="/recipe/5e384386b742f83ceec530d8" className="recipe-link">
                 <article
                   className="feat-recipe d-flex justify-content-center align-items-end"
                   style={{
-                    backgroundImage: 'url("./images/pudim.jpg")',
+                    backgroundImage: 'url("./images/home-images/lentil.jpg")',
                     backgroundSize: "cover",
                     height: "45vh"
                   }}
                 >
                   <div className="text-box">
-                    <h2 className="recipe-name">Pudim de coco</h2>
+                    <h2 className="recipe-name">Red Lentils and Spinach in Masala Sauce</h2>
                   </div>
                 </article>
-              </a>
+              </Link>
               <div className="difficulty-link">
                 <a href="">
                   <div className="difficulty-icon">
                     <img src="" alt="" />
                   </div>
-                  <p className="difficulty-text">Feeling adventurous?</p>
-                  <h4>
+                  <h4 className="difficulty-text">Feeling adventurous?</h4>
+                  <p>
                     See more <strong>Hard</strong> recipes
-                  </h4>
+                  </p>
                 </a>
               </div>
             </div>
           </div>
         </div>
-
-        <div
-          className="container-fluid category-links"
-          style={{ width: "85%" }}
-        >
-          <div className="dish-types-links">
-            <h4>Dish Types</h4>
-            <div className="row">
-              <div className="cuisine-figure col-xs-6 col-sm-3">
-                <a href="">
-                  <img
-                    src="./images/home-images/maincourse.jpg"
-                    alt="Main Course"
-                  />
-                  <h5>Main Course</h5>
-                </a>
-              </div>
-              <div className="cuisine-figure col-xs-6 col-sm-3">
-                <a href="">
-                  <img
-                    src="./images/home-images/maincourse.jpg"
-                    alt="Main Course"
-                  />
-                  <h5>Main Course</h5>
-                </a>
-              </div>
-              <div className="cuisine-figure col-xs-6 col-sm-3">
-                <a href="">
-                  <img
-                    src="./images/home-images/maincourse.jpg"
-                    alt="Main Course"
-                  />
-                  <h5>Main Course</h5>
-                </a>
-              </div>
-              <div className="cuisine-figure col-xs-6 col-sm-3">
-                <a href="">
-                  <img
-                    src="./images/home-images/maincourse.jpg"
-                    alt="Main Course"
-                  />
-                  <h5>Main Course</h5>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div className="container-fluid cuisines-links">
-            <h4>Cuisines</h4>
-            <div className="row">
-              <div className="cuisine-figure col-xs-6 col-sm-3">
-                <a href="">
-                  <img
-                    src="./images/home-images/maincourse.jpg"
-                    alt="Main Course"
-                  />
-                  <h5>Main Course</h5>
-                </a>
-              </div>
-              <div className="cuisine-figure col-xs-6 col-sm-3">
-                <a href="">
-                  <img
-                    src="./images/home-images/maincourse.jpg"
-                    alt="Main Course"
-                  />
-                  <h5>Main Course</h5>
-                </a>
-              </div>
-              <div className="cuisine-figure col-xs-6 col-sm-3">
-                <a href="">
-                  <img
-                    src="./images/home-images/maincourse.jpg"
-                    alt="Main Course"
-                  />
-                  <h5>Main Course</h5>
-                </a>
-              </div>
-              <div className="cuisine-figure col-xs-6 col-sm-3">
-                <a href="">
-                  <img
-                    src="./images/home-images/maincourse.jpg"
-                    alt="Main Course"
-                  />
-                  <h5>Main Course</h5>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
         
 <footer className="page-footer font-small unique-color-dark" style={{ 'background-color': '#e0e0e0 ' }}>
 
