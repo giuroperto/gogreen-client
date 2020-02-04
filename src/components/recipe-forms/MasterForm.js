@@ -3,6 +3,7 @@ import Step1 from './Step1';
 import Step2 from './Step2';
 import Step3 from './Step3';
 import Step4 from './Step4';
+import Message from '../Message';
 import APIAccess from '../api/api-access'
 
 //TODO add picture
@@ -73,6 +74,12 @@ class MasterForm extends Component {
       [name]: values
     })
   }
+
+  redirectPage(success, recipeID) {
+    if (success) {
+      this.props.history.push(`/recipe/${recipeID}`);
+    }
+  }
   
   handleSubmit (event) {
     event.preventDefault();
@@ -82,8 +89,10 @@ class MasterForm extends Component {
 
     this.apiEndpoints.addNewRecipe(owner, name, description, ingredients, dishTypes, vegan, cuisines, totalTimeMinutes, servings, instructions, picture)
     .then(response => {
-      console.log(response);
-      this.props.history.push(`/recipe/${response.newRecipe._id}`)
+      console.log(response)
+      const recipeID = response.data.newRecipe._id;
+      this.props.getMessage(response.status, response.data.message);
+      this.redirectPage(this.props.successMessage, recipeID);
     })
     .catch(err => console.log(err));
 
@@ -150,6 +159,9 @@ class MasterForm extends Component {
   render() {
     return(
       <div className="w-50 py-5">
+      {
+        this.props.message && <Message successMessage={this.props.successMessage} message={this.props.message}/>
+      }
       <h2 className="mb-4">Add Recipe</h2>
         <form className="my-5" onSubmit={this.handleSubmit}>
           <Step1 
