@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Message from './Message';
 
 class RecipeDetails extends Component {
   constructor(props) {
@@ -69,6 +70,9 @@ class RecipeDetails extends Component {
       {this.state.uniqueRecipe.ingredients ? (
 
         <div id="detailed-recipe" className="container-fluid" style={{width: '85%'}}>
+          {
+          this.props.message && <Message successMessage={this.props.successMessage} message={this.props.message}/>
+          }
           <div className="row d-flex justify-content-center mb-4 mt-4">
              <div><h3><b>{this.state.uniqueRecipe.name}</b></h3></div>
              <div><h5>{this.state.uniqueRecipe.description}</h5></div>         

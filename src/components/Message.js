@@ -6,7 +6,6 @@ class Message extends Component {
   }
 
   render() {
-    console.log('oi de dentro da mensagem')
     return (
       <div className="message">
       {

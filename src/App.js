@@ -248,7 +248,7 @@ class App extends Component {
             />
             <Switch>
               <Route exact path="/" render={(props) => (
-                <Home getMessage={this.getMessage} message={this.state.message} successMessage={this.state.successMessage} {...props} />
+                <Home message={this.state.message} successMessage={this.state.successMessage} {...props} />
               )} />
               <Route
                 exact
@@ -281,7 +281,7 @@ class App extends Component {
               <Route
                 exact
                 path="/addrecipe"
-                render={props => <AddRecipe allData={this.state} {...props} />}
+                render={props => <AddRecipe allData={this.state} message={this.state.message} successMessage={this.state.successMessage} getMessage={this.getMessage} {...props} />}
               />
               <Route
                 exact
@@ -302,7 +302,7 @@ class App extends Component {
                 path="/recipe/:recipeID"
                 render={(props) => (
                   <RecipeDetails
-                    allRecipes={this.state.allRecipes}
+                    allRecipes={this.state.allRecipes} message={this.state.message} successMessage={this.state.successMessage} 
                     {...props}
                   />
                 )}
