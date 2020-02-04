@@ -198,7 +198,7 @@ class App extends Component {
       .getAllRecipes()
       .then(response => {
         this.setState({
-          allRecipes: response,
+          allRecipes: response.data,
           loader: false,
         });
         this.filterNavBar()
