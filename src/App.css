@@ -30,7 +30,14 @@ img {
   width: 100vw;
   background-color: rgba(196,180,164);
 
-  
+}
+
+.nav-main{
+  height: 8vh;
+}
+
+.nav-logo {
+  width: 6vw;
 }
 
 .nav-buttons a {
@@ -46,6 +53,7 @@ img {
 
 .second-navbar {
   background-color: rgba(255, 255, 255, 0.1);
+  padding: 0 !important;
 }
 
 .second-nav-icon-div {
@@ -201,16 +209,26 @@ border: transparent;
 
 /* LOGIN FORM*/
 
+.login-logo {
+  width: 8vw;
+}
+
 .login-container {
   margin: 6vh 0;
+  
 }
 
 .login-form{
   border: solid 0.1rem grey;
   border-radius: 0.8rem;
-  width: 30vw;
-  height: 60vh;
+  width: 25vw;
   outline: 0;
+  box-shadow: 0px 0px 4px 2px rgba(164,148,132, 0.6);
+}
+
+.login-form h2 {
+  margin-top: 2vh;
+  color: rgb(141, 124, 108);
 }
 
 .login-form input{
@@ -225,8 +243,34 @@ border: transparent;
 .div-bar-form {
   height: 0.1vh;
   width: 20vw;
-  background: greenyellow;
+  background: rgba(33, 83, 21, 0.6);
 }
+
+.no-account {
+  margin-top: 6vh;
+}
+
+.create-btn {
+  background: #ff8f00 !important;
+  color: #ffffff;
+  border: solid #ff8f00 !important;
+}
+
+.create-btn:hover {
+  background: #e65100 !important;
+  border: solid #e65100 !important;
+}
+
+.create-btn a {
+  color: #ffffff;
+}
+
+.create-btn a:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+
 
 
 
