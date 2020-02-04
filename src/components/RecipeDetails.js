@@ -24,7 +24,7 @@ class RecipeDetails extends Component {
       if (givenUniqueRecipe.owner === undefined){
         givenDeterminedOwner = givenUniqueRecipe.ownerAPI
       } else {
-        givenDeterminedOwner = givenUniqueRecipe.owner.replace(givenUniqueRecipe.owner)
+        givenDeterminedOwner = givenUniqueRecipe.owner.username
       }
     let givenCleanDishType = (givenUniqueRecipe.dishTypes[0]).slice(0,1).toUpperCase()+(givenUniqueRecipe.dishTypes[0]).slice(1,(givenUniqueRecipe.dishTypes[0]).length);
 
@@ -37,9 +37,11 @@ class RecipeDetails extends Component {
 
     let givenIngredients = [];
       if (givenUniqueRecipe.ingredients[0] === undefined){
-      } else {
+      } else if (givenUniqueRecipe.ingredients.length === 1) {
         givenIngredients = givenUniqueRecipe.ingredients[0].split("\n");
         let removed = givenIngredients.splice(givenIngredients.length -1 ,1);
+      } else {
+        givenIngredients = givenUniqueRecipe.ingredients
       }
     
     this.setState({
@@ -51,6 +53,10 @@ class RecipeDetails extends Component {
     })
 
   }
+
+  //TODO add fork button for logged users
+  //TODO add edit button if logged user is recipe owner
+
 
   render(){
     console.log(this.state.uniqueRecipe.ingredients)
