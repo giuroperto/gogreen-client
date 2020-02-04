@@ -316,13 +316,15 @@ class App extends Component {
                   />
                 )}
               />
+
               <Route
                 exact
                 path="/user/:username/delete"
                 render={(props) => (
-                  <ConfirmDelete loggedInUser={this.state.loggedInUser} {...props} />
+                  <ConfirmDelete loggedInUser={this.state.loggedInUser} getMessage={this.getMessage} successMessage={this.successMessage} getUser={this.getUser} {...props} />
                 )}
               />
+
             </Switch>
           </>
         )}

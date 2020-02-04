@@ -1,38 +1,45 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import APIAccess from './api/api-access';
+import AuthService from "./auth/auth-services";
 
 class ConfirmDelete extends Component {
   constructor(props) {
     super(props);
 
     this.apiEndpoints = new APIAccess();
+    this.service = new AuthService();
     this.deleteUser = this.deleteUser.bind(this);
     this.redirectPage = this.redirectPage.bind(this);
 
   }
 
-  deleteUser() {
-    const { username } = this.props.loggedInUser;
-    this.apiEndpoints.delete(username)
-      .then(response => {
-        this.props.getMessage(response.status, response.data.message);
-        this.redirectPage(this.props.successMessage, username)
-        // redirecionar e mostrar mensagem
-      })
-      .catch(err => console.log(err));
+  componentDidMount() {
+
   }
 
-  redirectPage(success, username) {
+  deleteUser() {
+    const { username } = this.props.loggedInUser;
+
+    this.apiEndpoints.deleteUser(username)
+      .then(response => {
+        this.props.getMessage(response.status, response.data.message);
+        this.redirectPage(this.props.successMessage);
+        this.props.getUser(null);
+        })
+        .catch(err => console.log(err));
+  }
+
+  redirectPage(success) {
     if (success) {
-      // redirecionar para a pagina
-      // this.props.history.push(`/user/${username}`);
+      this.props.history.push('/');
     }
   }
 
   render() {
     return (
       <div className="confirm-delete">
+        <h3> Are you sure you want to delete your account? </h3>
         <Link to='/' onClick={this.deleteUser}>DELETE </Link>
         <Link to={`/user/${this.props.loggedInUser.username}`}> CANCEL </Link>
       </div>
@@ -42,8 +49,3 @@ class ConfirmDelete extends Component {
 }
 
 export default ConfirmDelete;
-
-// passar get message, successmessage, username, loggedinuser
-
-// passar username por props
-// when deleting, first logout and then delete user and redirect home
