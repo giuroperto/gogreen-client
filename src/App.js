@@ -91,6 +91,7 @@ class App extends Component {
     this.fetchUser = this.fetchUser.bind(this);
     this.getRecipes = this.getRecipes.bind(this);
     this.getSearchWord = this.getSearchWord.bind(this);
+    this.getFilters = this.getFilters.bind(this);
     this.getMessage = this.getMessage.bind(this);
     this.filterNavBar = this.filterNavBar.bind(this);
     this.resetNavBar = this.resetNavBar.bind(this);
@@ -136,17 +137,29 @@ class App extends Component {
     this.getRecipes();
     console.log(this.state.allRecipes)
   }
-  getFilters(filter, option) {
+  getFilters(filter, selection) {
     switch (filter) {
-      case "dishType":
+      case "searchDishType":
+        this.setState({
+          searchDishType: selection
+        });
         break;
-      case "cuisine":
+      case "searchCuisine":
+        this.setState({
+          searchCuisine: selection
+        });
         break;
-      case "level":
+      case "searchCookingLevel":
+        this.setState({
+          searchCookingLevel: selection
+        });
         break;
       default:
         break;
     }
+    this.getRecipes();
+    this.filterNavBar();
+    console.log(this.state)
   }
   getSearchWord(word) {
     console.log(word);
@@ -219,11 +232,7 @@ class App extends Component {
 
   render() {
     console.log(this.state.loggedInUser);
-    console.log(this.state.allRecipes);
     this.fetchUser();
-
-    
-
     return (
       <div className="App">
         {this.state.loader ? (
