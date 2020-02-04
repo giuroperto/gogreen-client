@@ -57,13 +57,14 @@ class Profile extends Component {
 
   render() {
     console.log(this.state);
-    console.log('username params', this.props.match.params);
-    console.log('username loggedin', this.props.loggedInUser.username);
-    console.log((this.props.match.params === this.props.loggedInUser.username))
+    console.log(this.props);
+    // console.log('username params', this.props.match.params);
+    // console.log('username loggedin', this.props.loggedInUser.username);
+    // console.log((this.props.match.params === this.props.loggedInUser.username))
     return(
       <div className="profile-page">
       {
-        this.props.message && <Message message={this.props.message}/>
+        this.props.message && <Message successMessage={this.props.successMessage} message={this.props.message}/>
       }
         <div className="user-info d-flex">
           <div className="profile-picture">
