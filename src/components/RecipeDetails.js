@@ -147,20 +147,20 @@ class RecipeDetails extends Component {
               <div className="edit-button mr-3">
                 {this.props.loggedInUser && this.state.uniqueRecipe.owner && this.state.uniqueRecipe.owner.username ===
                   this.props.loggedInUser.username && (
-                  <button type="button" class="btn btn-secondary">
-                    <Link to={`/recipe/${this.props.match.params.recipeID}/edit`}>
+                  <Link to={`/recipe/${this.props.match.params.recipeID}/edit`}>
+                    <button type="button" class="btn btn-secondary">
                       Edit Recipe
-                    </Link>
-                  </button>
+                    </button>
+                  </Link>
                 )}
               </div>
               <div className="edit-button ml-3">
                 {this.props.loggedInUser && (
-                  <button type="button" class="btn btn-secondary">
-                    <Link to={``}>
+                  <Link to={``}>
+                    <button type="button" class="btn btn-secondary">
                       Fork this Recipe
-                    </Link>
-                  </button>
+                    </button>
+                  </Link>
                 )}
               </div>
             </div>
