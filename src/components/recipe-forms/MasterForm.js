@@ -42,23 +42,6 @@ class MasterForm extends Component {
     return arr.join(" ");
   }
 
-  // componentDidMount() {
-  //   if (this.props.recipe !== null && this.props.recipe !== undefined) {
-  //     let {name, description, dishTypes, cuisines, servings, ingredients, instructions, vegan} = this.props.recipe;
-      
-  //     // normalize dishTypes and cuisines string to uppercase initials
-  //     if (typeof (dishTypes) === 'object' && dishTypes.length !== 0) {
-  //       let firstDishType = dishTypes[0];
-  //       dishTypes = this.capitalizeData(firstDishType);
-  //     }
-  //     if (typeof (cuisines) === 'object' && cuisines.length !== 0) {
-  //       let firstCuisine = cuisines[0];
-  //       cuisines = this.capitalizeData(firstCuisine);
-  //     }
-  //     this.setState({currentStep: 1, name, description, dishTypes, cuisines, servings, ingredients, instructions, vegan}, () => console.log('meu log', this.state));
-  //   }
-  // }
-
   handleChange(event) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Message from './Message';
 import {Link} from 'react-router-dom';
+import APIAccess from "./api/api-access";
 
 class RecipeDetails extends Component {
   constructor(props) {
@@ -13,51 +14,46 @@ class RecipeDetails extends Component {
       cleanDishType: '',
       ingredients: '',
     };
+    this.apiEndpoints = new APIAccess();
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
 
-    // ao adicionar receita, redirecionamos pra cá
-    // o que dá um erro
-    //TODO resolver esse problema
-
-    let recipesDB = this.props.allRecipes;
-    // NOTE: IF DATABASE CUTS givenUniqueRecipe WILL NOT BE DEFINED, AS SUCH givenUniqueRecipe.owner CAUSES ERROR
-    // Review -> Potential unique error message catch based on defined?
-    const givenUniqueRecipe = recipesDB.find(x => x._id === this.props.match.params.recipeID)
-    let givenDeterminedOwner = '';
+    this.apiEndpoints.getOneRecipe(this.props.match.params.recipeID)
+    .then(response => {
+      let givenUniqueRecipe = response.data;
+      let givenDeterminedOwner = '';
       if (givenUniqueRecipe.owner === undefined){
         givenDeterminedOwner = givenUniqueRecipe.ownerAPI
       } else {
         givenDeterminedOwner = givenUniqueRecipe.owner.username
       }
-    let givenCleanDishType = (givenUniqueRecipe.dishTypes[0]).slice(0,1).toUpperCase()+(givenUniqueRecipe.dishTypes[0]).slice(1,(givenUniqueRecipe.dishTypes[0]).length);
-
-    let givenCuisine = '';
-      if (givenUniqueRecipe.cuisines[0] === undefined){
-        givenCuisine = "Not specified"
-      } else {
-        givenCuisine = givenUniqueRecipe.cuisines[0]
-      }
-
-    let givenIngredients = [];
-      if (givenUniqueRecipe.ingredients[0] === undefined){
-      } else if (givenUniqueRecipe.ingredients.length === 1) {
-        givenIngredients = givenUniqueRecipe.ingredients[0].split("\n");
-        let removed = givenIngredients.splice(givenIngredients.length -1 ,1);
-      } else {
-        givenIngredients = givenUniqueRecipe.ingredients
-      }
-    
-    this.setState({
-      uniqueRecipe: givenUniqueRecipe,
-      determinedOwner: givenDeterminedOwner,
-      cleanDishType: givenCleanDishType,
-      cuisine: givenCuisine,
-      ingredients: givenIngredients
+      let givenCleanDishType = (givenUniqueRecipe.dishTypes[0]).slice(0,1).toUpperCase()+(givenUniqueRecipe.dishTypes[0]).slice(1,(givenUniqueRecipe.dishTypes[0]).length);
+      let givenCuisine = '';
+        if (givenUniqueRecipe.cuisines[0] === undefined){
+          givenCuisine = "Not specified"
+        } else {
+          givenCuisine = givenUniqueRecipe.cuisines[0]
+        }
+      let givenIngredients = [];
+        if (givenUniqueRecipe.ingredients[0] === undefined){
+        } else if (givenUniqueRecipe.ingredients.length === 1) {
+          givenIngredients = givenUniqueRecipe.ingredients[0].split("\n");
+          let removed = givenIngredients.splice(givenIngredients.length -1 ,1);
+        } else {
+          givenIngredients = givenUniqueRecipe.ingredients
+        }
+      
+      this.setState({
+        uniqueRecipe: givenUniqueRecipe,
+        determinedOwner: givenDeterminedOwner,
+        cleanDishType: givenCleanDishType,
+        cuisine: givenCuisine,
+        ingredients: givenIngredients
+      })
     })
-
+    .catch(err => console.log(err))
   }
 
 
@@ -136,7 +132,7 @@ class RecipeDetails extends Component {
             
             <div className='d-flex justify-content-center'>
               <div className="edit-button mr-3">
-                {this.props.loggedInUser && this.state.uniqueRecipe.owner.username ===
+                {this.props.loggedInUser && this.state.uniqueRecipe.owner && this.state.uniqueRecipe.owner.username ===
                   this.props.loggedInUser.username && (
                   <button type="button" class="btn btn-secondary">
                     <Link to={`/recipe/${this.props.match.params.recipeID}/edit`}>
