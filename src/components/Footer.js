@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <MDBFooter className="font-small pt-2 footer mt-5">
+    <MDBFooter className="font-small pt-2 footer">
       <MDBContainer>
         <MDBRow className="pt-3 mb-3 text-center d-flex justify-content-center footer-links">
           <MDBCol md="2" className="b-3">
