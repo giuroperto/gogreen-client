@@ -18,6 +18,7 @@ import AuthService from "./components/auth/auth-services";
 import APIAccess from "./components/api/api-access";
 import EditRecipe from './components/EditRecipe'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Footer from "./components/Footer";
 //Test
 //Test 2
 class App extends Component {
@@ -366,6 +367,7 @@ class App extends Component {
               />
 
             </Switch>
+            <Footer />
           </>
         )}
       </div>
