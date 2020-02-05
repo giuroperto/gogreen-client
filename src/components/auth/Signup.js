@@ -47,7 +47,9 @@ class Signup extends Component {
       this.props.getMessage(response.status, response.data.message);
       this.redirectPage(this.props.successMessage);
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      this.props.getMessage(err.response.status, err.response.data.message);
+    })
   }
 
   redirectPage(success) {
@@ -113,6 +115,11 @@ class Signup extends Component {
           <div className="div-bar-form"></div>
           
           <small id="passHelp" className="form-text text-muted">Password has to be at least 8 characters.</small>
+          <div>
+          {
+            this.props.message && <Message successMessage={this.props.successMessage} message={this.props.message}/>
+          }
+          </div>
         </div>
         <div className="form-group input-container-picture mt-3">
           <label forHtml="profilePic">Add a profile picture</label>
@@ -120,11 +127,6 @@ class Signup extends Component {
             <div class="custom-file">
               <input type="file" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="profilePic" onChange={this.handleUpload}/>
               <label className="custom-file-label" forHtml="inputGroupFile01"></label>
-            </div>
-            <div>
-            {
-              this.props.message && <Message successMessage={this.props.successMessage} message={this.props.message}/>
-            }
             </div>
             <button type="submit" className="btn btn-primary mt-3 create-btn">Create Account</button>
           </div>
