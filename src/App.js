@@ -311,13 +311,23 @@ class App extends Component {
                 path="/recipe/:recipeID"
                 render={(props) => (
                   <RecipeDetails
-                    allRecipes={this.state.allRecipes} message={this.state.message} successMessage={this.state.successMessage} 
+                    allRecipes={this.state.allRecipes} message={this.state.message} successMessage={this.state.successMessage} loggedInUser={this.state.loggedInUser}
                     {...props}
                   />
                 )}
               />
 
-              <Route exact path='/recipe/:recipeID/edit' render={props => (<EditRecipe allData={this.state} {...props}/>)}/>
+              <Route
+                exact
+                path='/recipe/:recipeID/edit'
+                render={props => (
+                  <EditRecipe
+                    allData={this.state}
+                    loggedInUser={this.state.loggedInUser}
+                    {...props}
+                  />
+                )}
+              />
 
               <Route
                 exact

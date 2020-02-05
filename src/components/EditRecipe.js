@@ -27,7 +27,7 @@ class EditRecipe extends Component {
 
   render() {
     return(
-      <div className="container d-flex justify-content-center">
+      <div className="container d-flex justify-content-center my-5">
         {this.state.uniqueRecipe !== null && <EditRecipeForm {...this.props} recipe={this.state.uniqueRecipe} allData={this.props.allData}/>}
       </div>
     )

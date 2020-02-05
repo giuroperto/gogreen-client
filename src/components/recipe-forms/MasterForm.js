@@ -63,6 +63,7 @@ class MasterForm extends Component {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
+    console.log(value)
     this.setState({
       [name]: value
     });
@@ -85,9 +86,12 @@ class MasterForm extends Component {
     event.preventDefault();
     const { name, description, dishTypes, cuisines, servings, ingredients, instructions, vegan, picture } = this.state;
     let totalTimeMinutes = instructions.reduce((acc, item) => acc + parseInt(item.stepTimeMinutes), 0);
+    instructions.map(item => item.stepTimeMinutes = parseInt(item.stepTimeMinutes))
     let owner = this.props.allData.loggedInUser._id;
-
-    this.apiEndpoints.addNewRecipe(owner, name, description, ingredients, dishTypes, vegan, cuisines, totalTimeMinutes, servings, instructions, picture)
+    let dishTypesArr = [dishTypes];
+    let cuisinesArr = [cuisines];
+    console.log(picture);
+    this.apiEndpoints.addNewRecipe(owner, name, description, ingredients, dishTypesArr, vegan, cuisinesArr, totalTimeMinutes, servings, instructions, picture)
     .then(response => {
       console.log(response.data)
       const recipeID = response.data.newRecipe._id;
@@ -104,7 +108,7 @@ class MasterForm extends Component {
     console.log('hi!', event.target.files)
     this.apiEndpoints.handleUpload(uploadData)
     .then(response => {
-        this.setState({ picture: response.secure_url });
+        this.setState({ picture: response.data.secure_url });
       })
       .catch(err => {
         console.log("Error while uploading the file: ", err);
@@ -162,13 +166,15 @@ class MasterForm extends Component {
       {
         this.props.message && <Message successMessage={this.props.successMessage} message={this.props.message}/>
       }
-      <h2 className="mb-4">Add Recipe</h2>
+        <h2 className="mb-4">Add Recipe</h2>
         <form className="my-5" onSubmit={this.handleSubmit}>
           <Step1 
             currentStep={this.state.currentStep} 
             handleChange={this.handleChange}
             name={this.state.name}
             description={this.state.description}
+            handleFileUpload={this.handleFileUpload}
+            picture={this.state.picture}
           />
           <Step2 
             currentStep={this.state.currentStep} 
@@ -190,8 +196,6 @@ class MasterForm extends Component {
             handleChange={this.handleChange}
             passInstructions={this.receiveArray}
             instructions={this.state.instructions}
-            picture={this.state.picture}
-            handleFileUpload={this.handleFileUpload}
           />
           {this.previousButton}
           {this.nextButton}

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import Message from './Message';
+import {Link} from 'react-router-dom';
 
 class RecipeDetails extends Component {
   constructor(props) {
     super(props);
 
-  this.state = {
+    this.state = {
       searchWord: '',
       uniqueRecipe: {},
       determinedOwner: '',
@@ -59,12 +60,11 @@ class RecipeDetails extends Component {
 
   }
 
+
   //TODO add fork button for logged users
-  //TODO add edit button if logged user is recipe owner
 
 
-  render(){
-    console.log(this.state.uniqueRecipe.ingredients)
+  render() {
     return(
       <>
       {this.state.uniqueRecipe.ingredients ? (
@@ -73,16 +73,16 @@ class RecipeDetails extends Component {
           {
           this.props.message && <Message successMessage={this.props.successMessage} message={this.props.message}/>
           }
-          <div className="row d-flex justify-content-center mb-4 mt-4">
+          <div className="row d-flex flex-column justify-content-center mb-4 mt-4">
              <div><h3><b>{this.state.uniqueRecipe.name}</b></h3></div>
-             <div><h5>{this.state.uniqueRecipe.description}</h5></div>         
+             <div><span className="recipe-description">{this.state.uniqueRecipe.description}</span></div>         
           </div>
 
-            <div className="row">
+            <div className="row ">
                 <div id="individual-left" className="col-sm">
-                    <img src={this.state.uniqueRecipe.picture} alt="Recipe-Text"></img>
+                    <img src={this.state.uniqueRecipe.picture} alt="Recipe-Text" style={{maxWidth: '30vw', height: '100%'}}></img>
                 </div>
-                <div id="individual-right" className="col-sm d-flex flex-column justify-content-around">
+                <div id="individual-right" className="col-sm d-flex flex-column justify-content-center align-items-start">
                     <div>
                         <p><b>Created by: </b>{this.state.determinedOwner}</p> 
                     </div>
@@ -104,8 +104,8 @@ class RecipeDetails extends Component {
               <div className="row d-flex justify-content-center mr-1 ml-1">
                 <div className="row text-left">
                   <ul>
-                  {this.state.ingredients.map(i => {
-                      return <li>{i}</li>;
+                  {this.state.ingredients.map((i, idx) => {
+                      return <li key={idx}>{i}</li>;
                   })}
                   </ul>
                 </div>
@@ -133,9 +133,31 @@ class RecipeDetails extends Component {
               })}
             </div>
 
+            
+            <div className='d-flex justify-content-center'>
+              <div className="edit-button mr-3">
+                {this.props.loggedInUser && this.state.uniqueRecipe.owner.username ===
+                  this.props.loggedInUser.username && (
+                  <button type="button" class="btn btn-secondary">
+                    <Link to={`/recipe/${this.props.match.params.recipeID}/edit`}>
+                      Edit Recipe
+                    </Link>
+                  </button>
+                )}
+              </div>
+              <div className="edit-button ml-3">
+                {this.props.loggedInUser && (
+                  <button type="button" class="btn btn-secondary">
+                    <Link to={``}>
+                      Fork this Recipe
+                    </Link>
+                  </button>
+                )}
+              </div>
+            </div>
 
           <a href="/allrecipes">
-            <button>Return to all recipes</button>
+            <button type="button" class="btn btn-secondary">Return to all recipes</button>
           </a>
         </div>
       ) : (

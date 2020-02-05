@@ -13,6 +13,7 @@ class Step1 extends Component {
     }
 
     return(
+      <>
       <div className="form-group">
         <label htmlFor="name">What's the <strong>name</strong> of your recipe?</label>
         <input
@@ -33,6 +34,11 @@ class Step1 extends Component {
           onChange={this.props.handleChange}
         />
       </div>
+      <div className="form-group">
+        <label htmlFor="file">Add a <strong>picture</strong> of your dish</label>
+        <input type="file" class="form-control-file" id="file" onChange={this.props.handleFileUpload}/>
+      </div>
+      </>
     )
   }
 }
