@@ -115,7 +115,7 @@ class EditRecipeForm extends Component {
     let recipeID = this.props.recipe._id;
     let dishTypesArr = [dishTypes];
     let cuisinesArr = [cuisines];
-    
+
     this.apiEndpoints.editRecipe(recipeID, name, description, ingredients, dishTypesArr, vegan, cuisinesArr, totalstepTimeMinutes, servings, instructions, picture)
     .then(() => {
       this.props.history.push(`/recipe/${recipeID}`)
@@ -209,6 +209,7 @@ class EditRecipeForm extends Component {
             type="text"
             value={this.state.name}
             onChange={this.handleChange}
+            required
           />
           <label htmlFor="description">Description</label>
           <input
@@ -218,6 +219,7 @@ class EditRecipeForm extends Component {
             type="text"
             value={this.state.description}
             onChange={this.handleChange}
+            required
           />
         </div>
 
@@ -244,7 +246,7 @@ class EditRecipeForm extends Component {
 
         <div className="form-group">
           <label htmlFor="servings">Servings</label>
-          <input className="form-control" type="number" name="servings" value={this.state.servings} min="1" onChange={this.handleChange}/>
+          <input className="form-control" type="number" name="servings" required value={this.state.servings} min="1" onChange={this.handleChange}/>
         </div>
         
         <div className="form-group">
@@ -295,7 +297,7 @@ class EditRecipeForm extends Component {
             <div key={input.key} className="form-row">
               <div className="col-md-9 mb-3">
                 <label>Step {input.key + 1}</label>
-                <input key={input.key} data-key={input.key} className="form-control" type="text" name={input.textName} value={this.state.instructions[input.key].text} onChange={this.handleInstructionsChange}/>
+                <input key={input.key} data-key={input.key} required className="form-control" type="text" name={input.textName} value={this.state.instructions[input.key].text} onChange={this.handleInstructionsChange}/>
               </div>
               <div className="col-md-3 mb-3">
                 <label htmlFor="time">Time (minutes)</label>
