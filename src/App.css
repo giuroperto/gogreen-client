@@ -358,8 +358,10 @@ border: transparent;
 
 .profile-page {
   border-radius: 5px;
+  padding-bottom: 5vh;
   background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
 }
+
 
 .profile-container {
   /* border: solid green; */
@@ -368,13 +370,18 @@ border: transparent;
 
 .profile-container img{
   border-radius: 50%;
-  box-shadow: 1px 5px 5px black;
+  /* box-shadow: 1px 5px 5px black; */
   width: 15vw;
 }
 
 .recipes-favourites-container {
   margin-top: -10vh;
-  /* margin-bottom: 10vh; */
+}
+
+.recipes-cards-container {
+  overflow: scroll;
+  height: 80vh;
+
 }
 
 .user-recipes {
@@ -382,7 +389,16 @@ border: transparent;
   border-radius: 2vw;
   width: 70%;
   margin: 0 auto;
-  
+}
+
+.delete-button a, .edit-button a {
+  color: rgba(255, 255, 255, 1);
+  text-decoration: none;
+}
+
+.delete-button a:hover, .edit-button a:hover {
+  color: rgba(255, 255, 255, 1);
+  text-decoration: none;
 }
 
 /* RECIPE DETAILS */
@@ -518,6 +534,15 @@ border: transparent;
 /* S, M and G MOBILES */
 
 @media (max-device-width: 425px)  { 
+
+  .profile-container img {
+    width: 55vw;
+  }
+
+  .profile-infos h3 {
+    font-size: 1.5rem;
+  }
+
   .login-form {
     width: 80vw;
   }
@@ -540,5 +565,9 @@ border: transparent;
 
   .feat-recipe {
     height: 30vh;
+  }
+
+  .user-recipes {
+    width: 90vw;
   }
 }
