@@ -32,6 +32,12 @@ class Signup extends Component {
     // default profile picture
     if (picture === '') {picture = 'https://res.cloudinary.com/dxatyucj2/image/upload/v1580833315/go-green/vegetalwhite.jpg.jpg'}
 
+    // existe um problema de asincronicidade entre o upload de imagem
+    // e o submit. caso o usuário envie os dados logo após selecionar
+    // uma imagem, são grandes as chances de que o upload não tenha
+    // terminado.
+    // FIXME fazer submit esperar upload de imagem
+
     this.service
     .signup(email, firstName, lastName, username, password, picture)
     .then(response => {
@@ -71,7 +77,7 @@ class Signup extends Component {
     console.log('hi!', event.target.files)
     this.apiEndpoints.handleUpload(uploadData)
     .then(response => {
-        this.setState({ picture: response.secure_url });
+        this.setState({ picture: response.data.secure_url });
       })
       .catch(err => {
         console.log("Error while uploading the file: ", err);
@@ -121,16 +127,16 @@ class Signup extends Component {
           }
           </div>
         </div>
-        <div className="form-group input-container-picture mt-3">
+        <div className="form-group input-container-picture mt-1">
           <label forHtml="profilePic">Add a profile picture</label>
-          <div class="input-group mb-3 d-flex flex-column">
+          <div class="input-group d-flex flex-column">
             <div class="custom-file">
               <input type="file" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="profilePic" onChange={this.handleUpload}/>
               <label className="custom-file-label" forHtml="inputGroupFile01"></label>
             </div>
-            <button type="submit" className="btn btn-primary mt-3 create-btn">Create Account</button>
           </div>
         </div>
+        <button type="submit" className="btn btn-primary mt-3 mb-4 create-btn">Create Account</button>
       </form>
       </div>
     </div>
