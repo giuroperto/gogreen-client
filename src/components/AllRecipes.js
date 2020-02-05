@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import AOS from "aos";
 import { Link } from 'react-router-dom';
+import "aos/dist/aos.css";
 import RecipeCard from './RecipeCard.js'
 import axios from 'axios';
 const recipesCleanTestAlex = require('./AlexInput.js');
 
+AOS.init({ offset: 80 });
 
 class AllRecipes extends Component {
   constructor(props) {
@@ -34,7 +37,7 @@ render(){
                
                 let cleanLink = "/recipe/"+ element._id
 
-                return (<RecipeCard name={element.name} image={element.picture} description={element.description} owner={determinedOwner} link={cleanLink} time={element.totalTimeMinutes} vegan={element.vegan} cuisines={element.cuisines} dishTypes={cleanDishType} allRecipes = {this.props.allData.allRecipes}/>);
+                return (<div  data-aos="fade-right"><RecipeCard name={element.name} image={element.picture} description={element.description} owner={determinedOwner} link={cleanLink} time={element.totalTimeMinutes} vegan={element.vegan} cuisines={element.cuisines} dishTypes={cleanDishType} allRecipes = {this.props.allData.allRecipes}/></div>);
 
             })}  
           </div>
