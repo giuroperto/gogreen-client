@@ -327,5 +327,30 @@ border: transparent;
 }
 
 
+/* PROFILE */
+
+.profile-page {
+  border: solid red;
+}
+
+.profile-container {
+  border: solid green;
+  width: 70vw;
+}
+
+.profile-container img{
+  width: 4vw;
+}
+
+.profile-sub-container {
+  border: solid blue;
+  width: 6vw;
+}
+
+.recipes-favourites-container {
+  border: solid;
+  width: 60vw;
+}
+
 
 
