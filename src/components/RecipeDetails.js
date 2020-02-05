@@ -165,9 +165,9 @@ class RecipeDetails extends Component {
               </div>
             </div>
 
-          <a href="/allrecipes">
+          <Link to="/allrecipes">
             <button type="button" className="btn btn-success">Return to all recipes</button>
-          </a>
+          </Link>
         </div>
       ) : (
       <h1>Loading!!!</h1>)
