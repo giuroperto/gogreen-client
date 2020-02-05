@@ -34,6 +34,7 @@ class EditProfile extends Component {
           lastName: response.data.lastName,
           email: response.data.email,
           usernameForm: response.data.username,
+          picture: response.data.picture
         })
       })
       .catch(err => console.log(err));
@@ -58,7 +59,8 @@ class EditProfile extends Component {
     let { firstName, lastName, email, usernameForm, oldPassword, newPassword, picture } = this.state;
     const { username } = this.props.match.params;
 
-    if (picture === '') {
+    if (picture === '' || picture === null) {
+      console.log('no pic!')
       picture = 'https://res.cloudinary.com/dxatyucj2/image/upload/v1580833315/go-green/vegetalwhite.jpg.jpg'
     }
 
@@ -76,7 +78,8 @@ class EditProfile extends Component {
     console.log('hi!', event.target.files)
     this.apiEndpoints.handleUpload(uploadData)
     .then(response => {
-        this.setState({ picture: response.secure_url });
+      console.log('upload response:', response)
+        this.setState({ picture: response.data.secure_url });
       })
       .catch(err => {
         console.log("Error while uploading the file: ", err);
@@ -95,36 +98,38 @@ class EditProfile extends Component {
           <h3>Edit profile</h3>
           <div className="form-row">
             <div className="form-group col-md-6">
-              <label for="firstName">First name</label>
+              <label htmlFor="firstName">First name</label>
               <input type="text" className="form-control" id="firstName" name="firstName" onChange={this.handleChange} value={this.state.firstName}/>
             </div>
             <div className="form-group col-md-6">
-            <label for="lastName">Last name</label>
+            <label htmlFor="lastName">Last name</label>
             <input type="text" className="form-control" id="lastName" name="lastName" onChange={this.handleChange} value={this.state.lastName}/>
             </div>
           </div>
+          <div class="input-group mb-3 d-flex flex-column">
+            <label htmlFor="file">Replace picture</label>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="profilePic" onChange={this.handleUpload}/>
+              <label class="custom-file-label" htmlFor="inputGroupFile01">Choose file</label>
+            </div>
+          </div>
           <div className="form-group">
-            <label for="email">Email</label>
+            <label htmlFor="email">Email</label>
             <input type="email" className="form-control" id="email" name="email" onChange={this.handleChange} value={this.state.email}/>
           </div>
           <div className="form-group">
-            <label for="usernameForm">Username</label>
+            <label htmlFor="usernameForm">Username</label>
             <input type="text" className="form-control" id="usernameForm" name="usernameForm" onChange={this.handleChange} value={this.state.usernameForm}/>
           </div>
           <div className="form-group">
-            <label for="oldPassword">Current Password</label>
+            <label htmlFor="oldPassword">Current Password</label>
             <input type="password" className="form-control" id="oldPassword" name="oldPassword" onChange={this.handleChange} value={this.state.oldPassword} required/>
           </div>
           <div className="form-group">
-            <label for="newPassword">New Password</label>
+            <label htmlFor="newPassword">New Password</label>
             <input type="password" className="form-control" id="newPassword" name="newPassword" onChange={this.handleChange} value={this.state.newPassword}/>
           </div>
-          <div class="input-group mb-3">
-            <div class="custom-file">
-              <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="profilePic" onChange={this.handleUpload}/>
-              <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-            </div>
-          </div>
+          
           <button type="submit">Save changes</button>
           <Link to={`/user/${this.props.match.params.username}`}> Cancel </Link>
         </form>
