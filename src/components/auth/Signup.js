@@ -74,7 +74,7 @@ class Signup extends Component {
   handleUpload (event) {
     const uploadData = new FormData();
     uploadData.append("imageUrl", event.target.files[0]);
-    console.log('hi!', event.target.files)
+    console.log('Upload handled', event.target.files)
     this.apiEndpoints.handleUpload(uploadData)
     .then(response => {
         this.setState({ picture: response.data.secure_url });

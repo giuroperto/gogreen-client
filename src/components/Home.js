@@ -84,7 +84,7 @@ class Home extends Component {
                   }}
                 >
                   <div className="text-box">
-                    <h2 className="recipe-name">Creamy Avocado Pasta</h2>
+                    <h2 className="recipe-name pl-2 pr-2">Fun and Easy Creamy Avocado Pasta</h2>
                   </div>
                 </article>
               </Link>
@@ -109,7 +109,7 @@ class Home extends Component {
                   }}
                 >
                   <div className="text-box">
-                    <h2 className="recipe-name">Bean Burgers with Spicy Guacamole</h2>
+                    <h2 className="recipe-name pl-2 pr-2">Bean Burgers with Spicy Guacamole</h2>
                   </div>
                 </article>
               </Link>
@@ -134,7 +134,7 @@ class Home extends Component {
                   }}
                 >
                   <div className="text-box">
-                    <h2 className="recipe-name">Red Lentils and Spinach in Masala Sauce</h2>
+                    <h2 className="recipe-name pl-2 pr-2">Red Lentils and Spinach in Masala Sauce</h2>
                   </div>
                 </article>
               </Link>

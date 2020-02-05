@@ -20,7 +20,6 @@ class ConfirmDelete extends Component {
 
     this.apiEndpoints.deleteUser(username)
       .then(response => {
-        console.log('dentro do delete user api')
         this.props.getMessage(response.status, response.data.message);
         this.redirectPage(this.props.successMessage);
         this.props.getUser(null);

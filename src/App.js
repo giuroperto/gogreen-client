@@ -142,7 +142,6 @@ class App extends Component {
 
   componentDidMount() {
     this.getRecipes();
-    console.log(this.state.allRecipes)
   }
   getFilters(filter, selection) {
     switch (filter) {
@@ -166,10 +165,8 @@ class App extends Component {
     }
     this.getRecipes();
     this.filterNavBar();
-    console.log(this.state)
   }
   getSearchWord(word) {
-    console.log(word);
     this.setState({
       searchWord: word
     });
@@ -177,7 +174,6 @@ class App extends Component {
     this.filterNavBar();
   }
   getVeganState(boolean) {
-    console.log(boolean);
     this.setState({
       searchVeganOnly: boolean
     });
@@ -243,10 +239,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.loggedInUser);
-    console.log(this.state.message);
-    console.log(this.state);
-    // console.log(this.state.successMessage);
     this.fetchUser();
     return (
       <div className="App">
