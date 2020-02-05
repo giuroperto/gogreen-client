@@ -89,7 +89,7 @@ class MasterForm extends Component {
 
     this.apiEndpoints.addNewRecipe(owner, name, description, ingredients, dishTypes, vegan, cuisines, totalTimeMinutes, servings, instructions, picture)
     .then(response => {
-      console.log(response)
+      console.log(response.data)
       const recipeID = response.data.newRecipe._id;
       this.props.getMessage(response.status, response.data.message);
       this.redirectPage(this.props.successMessage, recipeID);

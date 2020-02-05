@@ -4,7 +4,6 @@ import SearchButtons from "./SearchButtons";
 import FilterRender from "./FilterRender";
 import AuthService from "./auth/auth-services";
 
-
 class Navbar extends Component {
   constructor(props) {
     super(props);
@@ -32,6 +31,7 @@ class Navbar extends Component {
     });
     console.log('vegan toggle switched!')
   }
+
   logoutUser() {
     console.log('logging out')
     this.setState({
@@ -39,15 +39,17 @@ class Navbar extends Component {
     })
     this.service
       .logout()
-      .then(() => {
+      .then(response => {
         this.setState({
           loggedInUser: null,
           loader: false,
         });
         this.props.getUser(null);
+        this.props.getMessage(response.status, response.data.message);
       })
       .catch(err => console.log(err));
   }
+  
   componentDidUpdate(prevProps) {
     if (this.props.allData.loggedInUser !== prevProps.allData.loggedInUser) {
       this.props.allData.loggedInUser ? this.setState({ loggedInUser: this.props.allData.loggedInUser, showLoginAndSignupButtons: false, showLogoutAndOtherButtons: true, }) : this.setState({ loggedInUser: this.props.allData.loggedInUser, showLoginAndSignupButtons: true, showLogoutAndOtherButtons: false,  })
@@ -58,17 +60,17 @@ class Navbar extends Component {
     let vegetarianString = '';
     let veganString = '';
     if (this.state.veganToggle){
-      vegetarianString = "images/vegetarian-off.png"; 
-      veganString = "images/vegan-on.png"
+      vegetarianString = "https://res.cloudinary.com/dxatyucj2/image/upload/v1580900040/go-green/vegetarian-off_liw02r.png"; 
+      veganString = "https://res.cloudinary.com/dxatyucj2/image/upload/v1580900039/go-green/vegan-on_nn6xrl.png"
     } else {
-        vegetarianString = "images/vegetarian-on.png"; 
-        veganString = "images/vegan-off.png"
+        vegetarianString = "https://res.cloudinary.com/dxatyucj2/image/upload/v1580900040/go-green/vegetarian-on_dfi1b5.png"; 
+        veganString = "https://res.cloudinary.com/dxatyucj2/image/upload/v1580900039/go-green/vegan-off_yrfdh4.png"
       };
     return (
       <div className="nav-container">
         <nav className="navbar navbar-expand-lg navbar-light nav-main">
           <NavLink className="navbar-brand" to="/">
-          <img className='nav-logo ml-1' src="/images/logo.png" alt="logo"/>
+          <img className='nav-logo ml-1' src="https://res.cloudinary.com/dxatyucj2/image/upload/v1580900039/go-green/logo_sbjwg4.png" alt="logo"/>
           </NavLink>
           <button
             className="navbar-toggler"
@@ -105,14 +107,14 @@ class Navbar extends Component {
                     className="nav-navbar nav-link d-flex align-items-center mr-3 nav-icon-container"
                     to="/signup"
                   >
-                    <img src="images/mobile-phone.png" alt="recipe-icon" />
+                    <img src="https://res.cloudinary.com/dxatyucj2/image/upload/v1580900039/go-green/mobile-phone_qkzglz.png" alt="recipe-icon" />
                     <p>Sign Up</p>
                   </NavLink>
                   <NavLink
                     className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
                     to="/login"
                   >
-                    <img src="images/recipe2.png" alt="chef-icon" />
+                    <img src="https://res.cloudinary.com/dxatyucj2/image/upload/v1580900039/go-green/recipe2_owkbb1.png" alt="chef-icon" />
                     <p>Login</p>
                   </NavLink>
                 </>
@@ -125,14 +127,14 @@ class Navbar extends Component {
                 className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
                 to="/addrecipe"
               >
-                <img className="mr-1" src="images/add2.png" alt="add-icon" />
+                <img className="mr-1" src="https://res.cloudinary.com/dxatyucj2/image/upload/v1580900036/go-green/add2_dvvobd.png" alt="add-icon" />
                 <p>Add Recipe</p>
               </NavLink>
               <NavLink
                 className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
                 to={`/user/${this.state.loggedInUser.username}`}
               >
-                <img src="images/kitchen-pack.png" alt="profile-icon" />
+                <img src="https://res.cloudinary.com/dxatyucj2/image/upload/v1580900039/go-green/kitchen-pack_zlb5av.png" alt="profile-icon" />
                 <p>My Profile</p>
               </NavLink>
               <NavLink
@@ -140,7 +142,7 @@ class Navbar extends Component {
                 onClick={this.logoutUser}
                 to="/"
               >
-                <img src="images/logout2.png" alt="chef-icon" />
+                <img src="https://res.cloudinary.com/dxatyucj2/image/upload/v1580900039/go-green/logout2_t3jix7.png" alt="chef-icon" />
                 <p>Logout</p>
               </NavLink>
                 </>
@@ -157,7 +159,7 @@ class Navbar extends Component {
               className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
               to="/allrecipes"
             >
-              <img src="images/book2.png" alt="book-icon" />
+              <img src="https://res.cloudinary.com/dxatyucj2/image/upload/v1580900036/go-green/book2_t5vazt.png" alt="book-icon" />
               <p>All Recipes</p>
             </NavLink>
             
