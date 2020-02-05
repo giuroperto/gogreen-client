@@ -61,6 +61,11 @@ class Profile extends Component {
   render() {
     console.log(this.state);
     console.log(this.props);
+    if (this.state.userAccount) {
+      console.log(this.state.userAccount.created_at);
+      console.log(new Date(this.state.userAccount.created_at).getMonth())
+      console.log(this.state.userAccount.created_at);
+    }
     // console.log('username params', this.props.match.params);
     // console.log('username loggedin', this.props.loggedInUser.username);
     // console.log((this.props.match.params === this.props.loggedInUser.username))
@@ -98,7 +103,7 @@ class Profile extends Component {
               <div className="infos">
                 <p>
                   User since{" "}
-                  {this.state.userAccount && this.state.userAccount.created_at}
+                  {this.state.userAccount && (`${new Date(this.state.userAccount.created_at).getDate()} / ${new Date(this.state.userAccount.created_at).getMonth() + 1} / ${new Date(this.state.userAccount.created_at).getFullYear()}`)}
                 </p>
                 {this.state.userRecipes.length > 0 ? (
                   <p>Has contributed {this.state.userRecipes.length} recipes</p>
