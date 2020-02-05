@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import RecipeCard from "../components/RecipeCard";
+import ProfileRecipeCard from "../components/ProfileRecipeCard";
 import Message from "../components/Message";
 import APIAccess from "./api/api-access";
 
@@ -81,14 +81,13 @@ class Profile extends Component {
 
         <div className="container">
           <div className="row profile-container align-items-center justify-content-center">
-            <div className="col-sm profile-img-container">
+            <div className="col-sm profile-img-container mt-4">
               {this.state.userAccount && this.state.userAccount.picture && (
                 <img
                   src={this.state.userAccount.picture}
                   alt="profile-picture"
                 />
               )}
-              <img src="/images/diet.png" alt="profile-picture" />
             </div>
 
             <div className="col-sm profile-infos mt-5">
@@ -170,13 +169,13 @@ class Profile extends Component {
                     Favourites
                   </label>
                 </div>
-                <div className="recipes-cards-container" style={{minHeight: '30vh'}}>
+                <div className="recipes-cards-container py-5" style={{minHeight: '30vh'}}>
                   {this.state.showFavourites
                     ? this.state.userAccount.favourites.map(recipe => (
-                        <RecipeCard {...recipe} owner={recipe.owner.username} image={recipe.picture} time={recipe.totalTimeMinutes} dishTypes={recipe.dishTypes[0]} link={`/recipe/${recipe._id}`}/>
+                        <ProfileRecipeCard {...recipe}/>
                       ))
                     : this.state.userRecipes.map(recipe => (
-                        <RecipeCard {...recipe} owner={recipe.owner.username} image={recipe.picture} time={recipe.totalTimeMinutes} dishTypes={recipe.dishTypes[0]} link={`/recipe/${recipe._id}`}/>
+                        <ProfileRecipeCard {...recipe}/>
                       ))}
                   {/* //TODO add text to when there are no favs and recipes */}
                 </div>
