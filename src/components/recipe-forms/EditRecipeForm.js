@@ -4,6 +4,7 @@ import Step2 from './Step2';
 import Step3 from './Step3';
 import Step4 from './Step4';
 import APIAccess from '../api/api-access'
+import {Link} from 'react-router-dom';
 
 class EditRecipeForm extends Component {
   constructor(props) {
@@ -198,7 +199,7 @@ class EditRecipeForm extends Component {
 
   render() {
     return(
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className="mb-5">
         
         <div className="form-group">
           <label htmlFor="name">Name</label>
@@ -291,7 +292,7 @@ class EditRecipeForm extends Component {
           <label className="form-check-label" htmlFor="vegan">This is a vegan recipe</label>
         </div>
        
-        <div className="form-group">
+        <div className="form-group d-flex flex-column">
           <label htmlFor="instructions">Instructions</label>
           {this.renderInstructionsInputs().map(input => (
             <div key={input.key} className="form-row">
@@ -305,12 +306,25 @@ class EditRecipeForm extends Component {
               </div>
             </div>
           ))}
-          <button 
-            className="btn btn-secondary float-right"
-            type="button" onClick={() => this.addInput('inst')}>+</button>
+          <div className="align-self-end">
+            <button 
+              className="btn btn-secondary"
+              type="button" onClick={this.addInput}>+</button>
+          </div>
         </div>
 
-        <button type="submit">Save Changes</button>
+        <div className='d-flex justify-content-between mt-5'>
+          <div className="delete-button">
+              <Link to={`/recipe/${this.props.match.params.recipeID}/delete`}>
+                <button type="button" class="btn btn-warning">
+                    Delete Recipe
+                </button>
+              </Link>
+          </div>
+          <div className="submit-button">
+            <button type="submit" className="btn btn-primary">Save Changes</button>
+          </div>
+        </div>
       </form>
     )
   }

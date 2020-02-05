@@ -169,10 +169,10 @@ class Profile extends Component {
                 <div className="recipes-cards-container" style={{minHeight: '30vh'}}>
                   {this.state.showFavourites
                     ? this.state.userAccount.favourites.map(recipe => (
-                        <RecipeCard {...recipe} owner={recipe.owner.username} image={recipe.picture} time={recipe.totalTimeMinutes} dishTypes={recipe.dishTypes[0]}/>
+                        <RecipeCard {...recipe} owner={recipe.owner.username} image={recipe.picture} time={recipe.totalTimeMinutes} dishTypes={recipe.dishTypes[0]} link={`/recipe/${recipe._id}`}/>
                       ))
                     : this.state.userRecipes.map(recipe => (
-                        <RecipeCard {...recipe} owner={recipe.owner.username} image={recipe.picture} time={recipe.totalTimeMinutes} dishTypes={recipe.dishTypes[0]}/>
+                        <RecipeCard {...recipe} owner={recipe.owner.username} image={recipe.picture} time={recipe.totalTimeMinutes} dishTypes={recipe.dishTypes[0]} link={`/recipe/${recipe._id}`}/>
                       ))}
                   {/* //TODO add text to when there are no favs and recipes */}
                 </div>

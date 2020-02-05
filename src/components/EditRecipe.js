@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import EditRecipeForm from './recipe-forms/EditRecipeForm';
 import APIAccess from './api/api-access';
+import {Link} from 'react-router-dom';
 
 class EditRecipe extends Component {
   constructor(props) {
@@ -27,7 +28,7 @@ class EditRecipe extends Component {
 
   render() {
     return(
-      <div className="container d-flex justify-content-center my-5">
+      <div className="container d-flex flex-column justify-content-center my-5">
         {this.state.uniqueRecipe !== null && <EditRecipeForm {...this.props} recipe={this.state.uniqueRecipe} allData={this.props.allData}/>}
       </div>
     )
