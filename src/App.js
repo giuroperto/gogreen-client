@@ -90,6 +90,7 @@ class App extends Component {
     this.getUser = this.getUser.bind(this);
     this.fetchUser = this.fetchUser.bind(this);
     this.getRecipes = this.getRecipes.bind(this);
+    this.getVeganState = this.getVeganState.bind(this);
     this.getSearchWord = this.getSearchWord.bind(this);
     this.getFilters = this.getFilters.bind(this);
     this.getMessage = this.getMessage.bind(this);
@@ -117,7 +118,6 @@ class App extends Component {
               )
         })
       }
-      // e.name.toUpperCase().includes(givenSearchWord)
     if (this.state.searchDishType !== '') {
       givenDisplayedRecipes = givenDisplayedRecipes.filter(e => {
         return (e.dishTypes.includes(this.state.searchDishType))
@@ -126,6 +126,11 @@ class App extends Component {
     if (this.state.searchCuisine !== '') {
       givenDisplayedRecipes = givenDisplayedRecipes.filter(e => {
         return (e.cuisines.includes(this.state.searchCuisine))
+      })
+    }
+    if (this.state.searchVeganOnly === true) {
+      givenDisplayedRecipes = givenDisplayedRecipes.filter(e => {
+        return (e.vegan === true)
       })
     }
     this.setState({
@@ -169,6 +174,14 @@ class App extends Component {
     this.getRecipes();
     this.filterNavBar();
   }
+  getVeganState(boolean) {
+    console.log(boolean);
+    this.setState({
+      searchVeganOnly: boolean
+    });
+    this.getRecipes();
+    this.filterNavBar();
+  }
 
   getMessage(type, apiMessage) {
     let typeOfMessage = false;
@@ -193,7 +206,6 @@ class App extends Component {
       successMessage: false,
     });
   }
-
   getRecipes() {
     this.apiEndpoints
       .getAllRecipes()
@@ -246,6 +258,7 @@ class App extends Component {
               allData={this.state}
               getUser={this.getUser}
               getSearchWord={this.getSearchWord}
+              getVeganState={this.getVeganState}
               getFilters={this.getFilters}
               getMessage={this.getMessage}
             />
