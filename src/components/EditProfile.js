@@ -15,6 +15,7 @@ class EditProfile extends Component {
       oldPassword: '',
       newPassword: '',
       picture: '',
+      pictureName: '',
     }
 
     this.apiEndpoints = new APIAccess();
@@ -75,11 +76,10 @@ class EditProfile extends Component {
   handleUpload (event) {
     const uploadData = new FormData();
     uploadData.append("imageUrl", event.target.files[0]);
-    console.log('hi!', event.target.files)
+    const { name } = event.target.files[0];
     this.apiEndpoints.handleUpload(uploadData)
     .then(response => {
-      console.log('upload response:', response)
-        this.setState({ picture: response.data.secure_url });
+        this.setState({ picture: response.data.secure_url, pictureName: name });
       })
       .catch(err => {
         console.log("Error while uploading the file: ", err);
@@ -106,11 +106,11 @@ class EditProfile extends Component {
             <input type="text" className="form-control" id="lastName" name="lastName" onChange={this.handleChange} value={this.state.lastName}/>
             </div>
           </div>
-          <div class="input-group mb-3 d-flex flex-column">
+          <div className="input-group mb-3 d-flex flex-column">
             <label htmlFor="file">Replace picture</label>
-            <div class="custom-file">
-              <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="profilePic" onChange={this.handleUpload}/>
-              <label class="custom-file-label" htmlFor="inputGroupFile01">Choose file</label>
+            <div className="custom-file">
+              <input type="file" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="profilePic" onChange={this.handleUpload}/>
+              <label className="custom-file-label" htmlFor="inputGroupFile01">{this.state.pictureName ? this.state.pictureName : 'Choose file...'}</label>
             </div>
           </div>
           <div className="form-group">
