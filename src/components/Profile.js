@@ -71,7 +71,7 @@ class Profile extends Component {
     // console.log('username loggedin', this.props.loggedInUser.username);
     // console.log((this.props.match.params === this.props.loggedInUser.username))
     return (
-      <div className="profile-page mt-5">
+      <div className="profile-page">
         {this.props.message && (
           <Message
             successMessage={this.props.successMessage}
@@ -91,7 +91,7 @@ class Profile extends Component {
               <img src="/images/diet.png" alt="profile-picture" />
             </div>
 
-            <div className="col-sm profile-infos">
+            <div className="col-sm profile-infos mt-5">
               <h3 className="name">
                 Hello,{" "}
                 {this.state.userAccount && this.state.userAccount.firstName}{" "}
@@ -140,7 +140,6 @@ class Profile extends Component {
               </div>
             </div>
           </div>
-
           <div className="recipes-favourites-container">
             <div className="toggle-buttons">
               <div className="user-recipes">
@@ -149,7 +148,7 @@ class Profile extends Component {
                   data-toggle="buttons"
                 >
                   {/* adjust styling when clicked the other should be unselected */}
-                  <label className="btn btn-secondary active">
+                  <label className="btn btn-success active">
                     <input
                       type="radio"
                       name="recipes"
@@ -160,7 +159,7 @@ class Profile extends Component {
                     />{" "}
                     Recipes
                   </label>
-                  <label className="btn btn-secondary">
+                  <label className="btn btn-info">
                     <input
                       type="radio"
                       name="favourites"
@@ -184,6 +183,7 @@ class Profile extends Component {
               </div>
             </div>
           </div>
+
         </div>
       </div>
     );

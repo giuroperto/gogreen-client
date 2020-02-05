@@ -357,24 +357,31 @@ border: transparent;
 /* PROFILE */
 
 .profile-page {
-  border: solid red;
+  box-shadow: 0px 0px 5px 6px rgba(165, 170, 166, 0.9);
+  border-radius: 5px;
+  background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
 }
 
 .profile-container {
-  border: solid green;
+  /* border: solid green; */
+  padding-bottom: 15vh;
 }
 
 .profile-container img{
-  width: 20vw;
+  border-radius: 50%;
+  box-shadow: 1px 5px 5px black;
+  width: 15vw;
 }
 
-.profile-sub-container {
-  border: solid blue;
-  width: 6vw;
-}
 
 .recipes-favourites-container {
-  border: solid;
+  margin-top: -10vh;
+}
+
+.user-recipes {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 2vw;
+  
 }
 
 /* RECIPE DETAILS */
