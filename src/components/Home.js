@@ -20,17 +20,19 @@ class Home extends Component {
         <section className="d-flex justify-content-start align-items-start section1-container">
           <div className="section1-div">
             <h2>GoGreen</h2>
-            <h4>Find and share V recipes</h4>
-            <button type="button" className="btn btn-success">
-              Let's begin
-            </button>
+            <h4>Find and share vegetarian and vegan recipes</h4>
+            <Link to="/allrecipes">
+              <button type="button" className="btn btn-success">
+                Let's begin
+              </button>
+            </Link>
           </div>
         </section>
 
         <section className='section2'>
           <div className="container-fluid">
             <div className="mt-5 mb-3 d-flex flex-column align-items-center">
-              <h3 className="">How it works?</h3>
+              <h3 className="">How does it work?</h3>
               <div className="div-bar"></div>
             </div>
 
@@ -39,7 +41,7 @@ class Home extends Component {
                 <img src="./images/chef-hat.png" alt="fork" />
                 <h4 className="hello">Be the chef</h4>
                 <p className="text-muted">
-                  Share your way of cook in a step-by-step recipe
+                  Share your way of cooking in a step-by-step recipe
                 </p>
               </div>
 
@@ -47,7 +49,7 @@ class Home extends Component {
                 <img src="./images/cook.png" alt="fork" />
                 <h4 className="hello">Find the ideal recipe</h4>
                 <p className="text-muted">
-                  Over 1,000 vegan, vegetarian and wolrdwide recipes for all
+                  Over 1,000 vegan, vegetarian and worldwide recipes for all
                   levels
                 </p>
               </div>
@@ -56,8 +58,8 @@ class Home extends Component {
                 <img src="./images/powder.png" alt="fork" />
                 <h4 className="hello">Fork and improve their recipes</h4>
                 <p className="text-muted">
-                  As an open-source recipes base, GoGreen allow users suggesting
-                  improvements to other chefs' recipe
+                  As an open-source recipes base, GoGreen allows users to suggest
+                  improvements to other chefs' recipes
                 </p>
               </div>
             </div>
@@ -65,8 +67,7 @@ class Home extends Component {
         </section>
 
         <div
-          className="container-fluid featured-recipes mt-5"
-          style={{ width: "85%" }}
+          className="container-fluid featured-recipes my-5"
         >
           <div className="mt-5 mb-2 d-flex flex-column align-items-center">
             <h3 className="">How skilled do you feel today?</h3>
@@ -79,9 +80,7 @@ class Home extends Component {
                 <article
                   className="feat-recipe d-flex justify-content-center align-items-end"
                   style={{
-                    backgroundImage: 'url("./images/home-images/pasta.jpg")',
-                    backgroundSize: "cover",
-                    height: "45vh"
+                    backgroundImage: 'url("./images/home-images/pasta.jpg")'
                   }}
                 >
                   <div className="text-box">
@@ -89,13 +88,13 @@ class Home extends Component {
                   </div>
                 </article>
               </Link>
-              <div className="difficulty-link">
+              <div className="difficulty-div">
                 <Link to="/allrecipes">
-                  <div className="difficulty icon">
-                    <img src="" alt="" />
+                  <div className="difficulty-icon-div">
+                    <img className="difficulty-icon" src="./images/home-images/easy.png" alt="Easy" />
                   </div>
                   <h4 className="difficulty-text">Just starting out?</h4>
-                  <p>
+                  <p className="difficulty-link">
                     See more <strong>Easy</strong> recipes
                   </p>
                 </Link>
@@ -106,9 +105,7 @@ class Home extends Component {
                 <article
                   className="feat-recipe d-flex justify-content-center align-items-end"
                   style={{
-                    backgroundImage: 'url("./images/home-images/burger.jpeg")',
-                    backgroundSize: "cover",
-                    height: "45vh"
+                    backgroundImage: 'url("./images/home-images/burger.jpeg")'
                   }}
                 >
                   <div className="text-box">
@@ -116,13 +113,13 @@ class Home extends Component {
                   </div>
                 </article>
               </Link>
-              <div className="difficulty-link">
+              <div className="difficulty-div">
                 <Link to="/allrecipes">
-                  <div className="difficulty icon">
-                    <img src="" alt="" />
+                  <div className="difficulty-icon-div">
+                    <img className="difficulty-icon" src="./images/home-images/medium.png" alt="Medium" />
                   </div>
                   <h4 className="difficulty-text">Get a meal ready in minutes</h4>
-                  <p>
+                  <p className="difficulty-link">
                     See more <strong>Medium</strong> recipes
                   </p>
                 </Link>
@@ -133,9 +130,7 @@ class Home extends Component {
                 <article
                   className="feat-recipe d-flex justify-content-center align-items-end"
                   style={{
-                    backgroundImage: 'url("./images/home-images/lentil.jpg")',
-                    backgroundSize: "cover",
-                    height: "45vh"
+                    backgroundImage: 'url("./images/home-images/lentil.jpg")'
                   }}
                 >
                   <div className="text-box">
@@ -143,10 +138,10 @@ class Home extends Component {
                   </div>
                 </article>
               </Link>
-              <div className="difficulty-link">
+              <div className="difficulty-div">
                 <a href="">
-                  <div className="difficulty-icon">
-                    <img src="" alt="" />
+                  <div className="difficulty-icon-div">
+                    <img className="difficulty-icon" src="./images/home-images/hard.png" alt="Hard" />
                   </div>
                   <h4 className="difficulty-text">Feeling adventurous?</h4>
                   <p className="difficulty-link">

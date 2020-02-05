@@ -135,7 +135,8 @@ border: transparent;
 .section1-container {
   background-image: url('/images/home-plate.jpg');
   background-size: cover;
-  height: 90vh;
+  background-position: center;
+  height: 70vh;
   font-weight: 700;
 }
 
@@ -146,11 +147,13 @@ border: transparent;
 .section1-div h2 {
   color: rgb(52, 122, 69);
   font-size: 4rem;
+  font-weight: 600;
 }
 
 .section1-div h4 {
   font-size: 2rem;
   color: rgb(54, 121, 70);
+  margin-bottom: 2rem;
 
 }
 
@@ -177,12 +180,6 @@ border: transparent;
   width: 100%;
   padding: 2% 0;
   border-radius: 0 0 20px 20px;
-}
-
-.difficulty-text {
-  margin: 0;
-  text-decoration: none;
-  color: green;
 }
 
 
@@ -215,6 +212,37 @@ border: transparent;
   width: 5vw;
   background: orangered;
   margin-bottom: 2vh;
+}
+
+/* FEATURED RECIPES */
+
+.featured-recipes {
+  width: 85%;
+}
+
+.feat-recipe {
+  background-size: cover;
+  height: 45vh;
+}
+
+.difficulty-text {
+  margin: 0;
+  text-decoration: none;
+  color: rgb(52, 122, 69);
+}
+
+.difficulty-link {
+  color: rgb(42, 99, 56);
+}
+
+.difficulty-icon {
+  margin: 2vh 0 1vh 0;
+  /* max-width: 20vw; */
+  max-height: 7vh;
+  /* min-width: 10vw; */
+  min-height: 3vh;
+  width: auto;
+  height: auto;
 }
 
 /* LOGIN FORM*/
@@ -414,7 +442,67 @@ border: transparent;
   text-decoration: none;
 }
 
+/* ABOUT US */
+.about-background {
+  width: 100%;
+  height: 100%;
+}
 
+.about-page {
+  width: 100%;
+  height: 100%;
+}
+
+.our-mission {
+  background-color: rgb(222, 245, 227);
+  height: 30vh;
+}
+
+.who-we-are {
+  background-color: rgb(180, 216, 187);
+  height: 30vh;
+}
+
+.get-in-touch {
+  background-color: rgb(142, 184, 150);
+  height: 35vh;
+  padding: 4vh 0;
+}
+
+.get-in-touch-row {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.about-us-header {
+  font-weight: 700;
+  color: rgb(28, 63, 36)
+}
+
+.about-page>section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.who-we-are-description {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-us-text {
+  width: 50%;
+}
+
+
+
+.about-us-form {
+  width: 100%;
+  /* padding-top: 3vh; */
+}
 
 /* MEDIA QUERIES */
 
@@ -440,5 +528,9 @@ border: transparent;
   
   .login-form input::placeholder, .signup-form input::placeholder {
     text-align: center;
+  }
+
+  .feat-recipe {
+    height: 30vh;
   }
 }
