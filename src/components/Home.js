@@ -18,14 +18,16 @@ class Home extends Component {
       }
 
         <section className="d-flex justify-content-start align-items-start section1-container">
-          <div className="section1-div">
-            <h2>GoGreen</h2>
-            <h4>Find and share vegetarian and vegan recipes</h4>
-            <Link to="/allrecipes">
-              <button type="button" className="btn btn-success">
-                Let's begin
-              </button>
-            </Link>
+          <div className="section1-div row w-100 ml-4">
+          <div className="section1-div-left d-flex flex-column align-items-center col-6">
+              <h2>GoGreen</h2>
+              <h4>Find and share vegetarian and vegan recipes</h4>
+              <Link to="/allrecipes">
+                <button type="button" className="btn btn-success">
+                  Let's begin
+                </button>
+              </Link>
+            </div>
           </div>
         </section>
 
@@ -118,7 +120,7 @@ class Home extends Component {
                   <div className="difficulty-icon-div">
                     <img className="difficulty-icon" src="./images/home-images/medium.png" alt="Medium" />
                   </div>
-                  <h4 className="difficulty-text">Get a meal ready in minutes</h4>
+                  <h4 className="difficulty-text">Try something new?</h4>
                   <p className="difficulty-link">
                     See more <strong>Medium</strong> recipes
                   </p>
