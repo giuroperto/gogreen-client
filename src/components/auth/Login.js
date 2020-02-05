@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import AuthService from "./auth-services";
 import { Link } from "react-router-dom";
+import Message from '../Message';
 
 class Login extends Component {
   constructor(props) {
@@ -17,11 +18,8 @@ class Login extends Component {
   }
 
   handleLoginFormSubmit(event) {
-    console.log(this.state);
     event.preventDefault();
-    //TODO refactor
-    const username = this.state.username;
-    const password = this.state.password;
+    const { username, password } = this.state;
 
     this.service
       .login(username, password)
@@ -30,10 +28,22 @@ class Login extends Component {
           username: "",
           password: ""
         });
-        this.props.getUser(response);
-        this.props.history.push(`/user/${this.props.loggedInUser.username}`);
+        console.log(response)
+        this.props.getUser(response.data);
+        this.props.getMessage(response.status, response.data.message);
+        this.redirectPage(this.props.successMessage);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        this.props.getMessage(500, 'Login failed! Try again.');
+        this.redirectPage(this.props.successMessage);
+        console.log(err)
+      });
+  }
+
+  redirectPage(success) {
+    if (success) {
+      this.props.history.push(`/user/${this.props.loggedInUser.username}`);
+    }
   }
 
   handleLoginChange(event) {
@@ -81,6 +91,11 @@ class Login extends Component {
                 required
               />
               <div className="div-bar-form"></div>
+            </div>
+            <div>
+            {
+              this.props.message && <Message successMessage={this.props.successMessage} message={this.props.message}/>
+            }
             </div>
             <button type="submit" className="btn btn-success my-3 pr-5 pl-5 py-2">
               Login

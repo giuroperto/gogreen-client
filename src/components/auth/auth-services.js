@@ -9,19 +9,19 @@ class AuthService {
   }
 
   signup(email, firstName, lastName, username, password, picture) {
-    return this.service.post('/signup', { email, firstName, lastName, username, password, picture }).then(response => response.data);
+    return this.service.post('/signup', { email, firstName, lastName, username, password, picture }).then(response => response);
   }
 
   login(username, password) {
-    return this.service.post('/login', { username, password }).then(response => response.data);
+    return this.service.post('/login', { username, password }).then(response => response);
   }
 
   loggedin() {
-    return this.service.get('/loggedin').then(response => response.data);
+    return this.service.get('/loggedin').then(response => response);
   }
 
   logout() {
-    return this.service.get('/logout').then(response => response.data);
+    return this.service.get('/logout').then(response => response);
   }
 
 }

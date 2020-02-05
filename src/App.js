@@ -212,7 +212,7 @@ class App extends Component {
         .loggedin()
         .then(response => {
           this.setState({
-            loggedInUser: response
+            loggedInUser: response.data
           });
         })
         .catch(err => {
@@ -247,6 +247,7 @@ class App extends Component {
               getUser={this.getUser}
               getSearchWord={this.getSearchWord}
               getFilters={this.getFilters}
+              getMessage={this.getMessage}
             />
             <Switch>
               <Route exact path="/" render={(props) => (
@@ -259,6 +260,9 @@ class App extends Component {
                   <Login
                     loggedInUser={this.state.loggedInUser}
                     getUser={this.getUser}
+                    message={this.state.message}
+                    successMessage={this.state.successMessage}
+                    getMessage={this.getMessage} 
                     {...props}
                   />
                 )}
