@@ -119,7 +119,7 @@ class Step4 extends Component {
             </div>
             <div className="col-md-3 mb-3 text-left">
               <label htmlFor="time">Time (minutes)</label>
-              <input key={input.key} data-key={input.key} className="form-control" type="number" name={input.timeName} value={this.state.instructions.values[input.key].stepTimeMinutes} onChange={this.handleChange}/>
+              <input key={input.key} data-key={input.key} className="form-control" type="number" min="0" name={input.timeName} value={this.state.instructions.values[input.key].stepTimeMinutes} onChange={this.handleChange}/>
             </div>
           </div>
         ))}
