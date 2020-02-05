@@ -26,7 +26,7 @@ class Step2 extends Component {
 
       <div className="form-group">
         <label htmlFor="cuisines">Your recipe belongs to which <strong>cuisine</strong>?</label>
-        <select value={this.props.cuisine} name="cuisines" onChange={this.props.handleChange} multiple={false} className="custom-select">
+        <select value={this.props.cuisines} name="cuisines" onChange={this.props.handleChange} multiple={false} className="custom-select">
           <option value=''>Choose a cuisine</option>
           {this.props.allData.cuisinesArr.map((cuisine, idx) => <option key={idx} value={cuisine}>{cuisine}</option>)}
         </select>

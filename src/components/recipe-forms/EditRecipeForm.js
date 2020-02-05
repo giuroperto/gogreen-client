@@ -119,11 +119,14 @@ class EditRecipeForm extends Component {
     event.preventDefault();
     const { name, description, dishTypes, cuisines, servings, ingredients, instructions, vegan } = this.state;
     let totalstepTimeMinutes = instructions.reduce((acc, item) => acc + parseInt(item.stepTimeMinutes), 0);
+    instructions.map(item => item.stepTimeMinutes = parseInt(item.stepTimeMinutes))
     let owner = this.props.allData.loggedInUser._id;
-    
+    console.log('im submitting:', name, dishTypes, cuisines, ingredients, instructions)
     let recipeID = this.props.recipe._id;
+    let dishTypesArr = [dishTypes];
+    let cuisinesArr = [cuisines];
     //TODO add picture
-    this.apiEndpoints.editRecipe(recipeID, name, description, ingredients, dishTypes, vegan, cuisines, totalstepTimeMinutes, servings, instructions)
+    this.apiEndpoints.editRecipe(recipeID, name, description, ingredients, dishTypesArr, vegan, cuisinesArr, totalstepTimeMinutes, servings, instructions)
     .then(() => {
       this.props.history.push(`/recipe/${recipeID}`)
     })
@@ -181,8 +184,9 @@ class EditRecipeForm extends Component {
       this.setState({
         instructions: instructionsValuesCopy
       });
-    } else if (name.includes('time')) {
+    } else if (name.includes('step')) {
       instructionsValuesCopy[myKey].stepTimeMinutes = value;
+      console.log('name:', name, 'value:', value, 'copied array:', instructionsValuesCopy)
       this.setState({
         instructions: instructionsValuesCopy
       });
@@ -225,7 +229,7 @@ class EditRecipeForm extends Component {
 
         <div className="form-group">
           <label htmlFor="cuisines">Cuisine</label>
-          <select value={this.state.cuisine} name="cuisines" onChange={this.handleChange} multiple={false} className="custom-select">
+          <select value={this.state.cuisines} name="cuisines" onChange={this.handleChange} multiple={false} className="custom-select">
             <option value=''>Choose a cuisine</option>
             {this.props.allData.cuisinesArr.map((cuisine, idx) => <option key={idx} value={cuisine}>{cuisine}</option>)}
           </select>

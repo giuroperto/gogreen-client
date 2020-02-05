@@ -352,5 +352,8 @@ border: transparent;
   width: 60vw;
 }
 
+/* RECIPE DETAILS */
 
-
+.recipe-description {
+  font-style: italic;
+}
