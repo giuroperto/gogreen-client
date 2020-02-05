@@ -198,7 +198,7 @@ class App extends Component {
       successMessage: typeOfMessage,
     });
 
-    setTimeout(this.clearMessage, 5000);
+    setTimeout(this.clearMessage, 4000);
   }
 
   clearMessage(){
