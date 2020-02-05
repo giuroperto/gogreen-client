@@ -160,7 +160,7 @@ class Home extends Component {
         
 <footer className="mt-5 page-footer font-small unique-color-dark" style={{ 'background-color': '#e0e0e0 ' }}>
 
-  <div style={{ 'background-color': '#616161 ' }}>
+  <div style={{ 'backgroundColor': '#616161 ' }}>
     <div className="container">
       <div className="row py-4 d-flex align-items-center">
         <div className="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
