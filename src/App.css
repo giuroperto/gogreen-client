@@ -335,11 +335,10 @@ border: transparent;
 
 .profile-container {
   border: solid green;
-  width: 70vw;
 }
 
 .profile-container img{
-  width: 4vw;
+  width: 20vw;
 }
 
 .profile-sub-container {
@@ -349,7 +348,6 @@ border: transparent;
 
 .recipes-favourites-container {
   border: solid;
-  width: 60vw;
 }
 
 /* RECIPE DETAILS */
