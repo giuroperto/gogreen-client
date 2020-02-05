@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AuthService from './auth-services';
 import APIAccess from '../api/api-access';
+import Message from '../Message';
 
 class Signup extends Component {
   constructor(props) {
@@ -42,10 +43,17 @@ class Signup extends Component {
         password: '',
         picture: '',
       })
-      this.props.getUser(response)
-      this.props.history.push(`/user/${this.props.loggedInUser.username}`)
+      this.props.getUser(response.data);
+      this.props.getMessage(response.status, response.data.message);
+      this.redirectPage(this.props.successMessage);
     })
     .catch(err => console.log(err))
+  }
+
+  redirectPage(success) {
+    if (success) {
+      this.props.history.push(`/user/${this.props.loggedInUser.username}`);
+    }
   }
 
   handleSignupChange(event){
@@ -113,7 +121,12 @@ class Signup extends Component {
               <input type="file" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="profilePic" onChange={this.handleUpload}/>
               <label className="custom-file-label" forHtml="inputGroupFile01"></label>
             </div>
-        <button type="submit" className="btn btn-primary mt-3 create-btn">Create Account</button>
+            <div>
+            {
+              this.props.message && <Message successMessage={this.props.successMessage} message={this.props.message}/>
+            }
+            </div>
+            <button type="submit" className="btn btn-primary mt-3 create-btn">Create Account</button>
           </div>
         </div>
       </form>
