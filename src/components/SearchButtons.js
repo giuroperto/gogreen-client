@@ -9,7 +9,6 @@ class SearchButtons extends Component {
       searchWord: '',
     }
 
-    this.clickOnSearchButton = this.clickOnSearchButton.bind(this);
     this.clickOnFilter = this.clickOnFilter.bind(this);
     this.handleChange = this.handleChange.bind(this);
 
