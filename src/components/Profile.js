@@ -28,7 +28,7 @@ class Profile extends Component {
       .then(response => {
         this.setState({
           userAccount: response.data
-        });
+        }, this.getUserRecipes);
       })
       .catch(err => console.log(err));
 
@@ -39,8 +39,9 @@ class Profile extends Component {
   getUserRecipes() {
     const { username } = this.props.match.params;
     let filteredRecipes = this.props.allRecipes.filter(
-      recipe => recipe.owner.username === username
+      recipe => recipe.owner && recipe.owner.username === username
     );
+    console.log('my filtered recipes:', filteredRecipes)
     this.setState({
       userRecipes: filteredRecipes
     });
@@ -165,13 +166,13 @@ class Profile extends Component {
                     Favourites
                   </label>
                 </div>
-                <div className="recipes-cards-container">
+                <div className="recipes-cards-container" style={{minHeight: '30vh'}}>
                   {this.state.showFavourites
                     ? this.state.userAccount.favourites.map(recipe => (
-                        <RecipeCard {...recipe} />
+                        <RecipeCard {...recipe} owner={recipe.owner.username} image={recipe.picture} time={recipe.totalTimeMinutes} dishTypes={recipe.dishTypes[0]}/>
                       ))
                     : this.state.userRecipes.map(recipe => (
-                        <RecipeCard {...recipe} />
+                        <RecipeCard {...recipe} owner={recipe.owner.username} image={recipe.picture} time={recipe.totalTimeMinutes} dishTypes={recipe.dishTypes[0]}/>
                       ))}
                   {/* //TODO add text to when there are no favs and recipes */}
                 </div>

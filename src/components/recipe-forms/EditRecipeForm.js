@@ -5,8 +5,6 @@ import Step3 from './Step3';
 import Step4 from './Step4';
 import APIAccess from '../api/api-access'
 
-//TODO add picture
-
 class EditRecipeForm extends Component {
   constructor(props) {
     super(props);
@@ -59,16 +57,8 @@ class EditRecipeForm extends Component {
   }
 
   componentDidMount() {
-    console.log('hieee', this.props)
     if (this.props.recipe !== null && this.props.recipe !== undefined) {
       let {name, description, dishTypes, cuisines, servings, ingredients, instructions, vegan, picture} = this.props.recipe;
-
-      // let givenIngredients = [];
-      // if (ingredients[0] === undefined){
-      // } else {
-      //   givenIngredients = ingredients[0].split("\n");
-      //   let removed = givenIngredients.splice(givenIngredients.length -1 ,1);
-      // }
 
       let givenIngredients = [];
       if (ingredients === undefined){
@@ -122,11 +112,10 @@ class EditRecipeForm extends Component {
     let totalstepTimeMinutes = instructions.reduce((acc, item) => acc + parseInt(item.stepTimeMinutes), 0);
     instructions.map(item => item.stepTimeMinutes = parseInt(item.stepTimeMinutes))
     let owner = this.props.allData.loggedInUser._id;
-    console.log('im submitting:', name, dishTypes, cuisines, ingredients, instructions)
     let recipeID = this.props.recipe._id;
     let dishTypesArr = [dishTypes];
     let cuisinesArr = [cuisines];
-    //TODO add picture
+    
     this.apiEndpoints.editRecipe(recipeID, name, description, ingredients, dishTypesArr, vegan, cuisinesArr, totalstepTimeMinutes, servings, instructions, picture)
     .then(() => {
       this.props.history.push(`/recipe/${recipeID}`)
