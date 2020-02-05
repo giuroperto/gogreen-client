@@ -31,7 +31,7 @@ class FilterRender extends Component {
             <div className="container-fluid row d-flex flex-row align-content-center m-0 p-0">
               <div className="col-xs-4 col-sm-4 d-flex flex-column justify-content-center">
                 <div className="d-flex justify-content-center align-items-center nav-icon-container mb-2">
-                  <img className="mr-2" src="https://res.cloudinary.com/dxatyucj2/image/upload/v1580900036/go-green/book2_t5vazt.png" alt="book-icon" />
+                  <img className="mr-2" src="https://res.cloudinary.com/dxatyucj2/image/upload/v1580927909/go-green/dishtype-icon_xrc837.png" alt="book-icon" />
                   <p className="text-nowrap">By Dish Type</p>
                 </div>
                 <div>
@@ -45,7 +45,7 @@ class FilterRender extends Component {
               </div>
               <div className="col-xs-4 col-sm-4 d-flex flex-column justify-content-center">
                 <div className="d-flex justify-content-center align-items-center nav-icon-container mb-2">
-                  <img className="mr-2" src="https://res.cloudinary.com/dxatyucj2/image/upload/v1580900036/go-green/book2_t5vazt.png" alt="book-icon" />
+                  <img className="mr-2" src="https://res.cloudinary.com/dxatyucj2/image/upload/v1580927914/go-green/cuisine-icon_nmv2sk.png" alt="book-icon" />
                   <p className="text-nowrap">By Cuisine</p>
                 </div>
                 <div>
@@ -59,7 +59,7 @@ class FilterRender extends Component {
               </div>
               <div className="col-xs-4 col-sm-4 d-flex flex-column justify-content-center">
                 <div className="d-flex justify-content-center align-items-center nav-icon-container mb-2">
-                  <img className="mr-2" src="https://res.cloudinary.com/dxatyucj2/image/upload/v1580900036/go-green/book2_t5vazt.png" alt="book-icon" />
+                  <img className="mr-2" src="https://res.cloudinary.com/dxatyucj2/image/upload/v1580927903/go-green/difficulty-icon_jpbod7.png" alt="book-icon" />
                   <p className="text-nowrap">By Difficulty</p>
                 </div>
                 <div>
