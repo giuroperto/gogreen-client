@@ -41,9 +41,9 @@ render(){
 
             })}  
           </div>
-          <a href="/">
+          <Link to="/">
             <button type="button" className="btn btn-success">Return home</button>
-          </a>
+          </Link>
       </div>
       ) : (
         <h1>Loading!!!</h1>
