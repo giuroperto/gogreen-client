@@ -69,7 +69,7 @@ class RecipeDetails extends Component {
       <>
       {this.state.uniqueRecipe.ingredients ? (
 
-        <div id="detailed-recipe" className="container-fluid" style={{width: '85%'}}>
+        <div id="detailed-recipe" className="container-fluid mb-3" style={{width: '85%'}}>
           {
           this.props.message && <Message successMessage={this.props.successMessage} message={this.props.message}/>
           }
@@ -114,7 +114,9 @@ class RecipeDetails extends Component {
 
             <div className="row d-flex justify-content-center">
               <h4 className="mb-4 mt-4">Instructions</h4>
-              {this.state.uniqueRecipe.instructions.map(i => {
+
+              {(this.state.uniqueRecipe.instructions.length > 0) ?
+              this.state.uniqueRecipe.instructions.map(i => {
                 let timeRendered = "";
                 i.stepTimeMinutes ? (timeRendered = `${i.stepTimeMinutes} minutes`) : (timeRendered = "");
                 return (
@@ -130,7 +132,18 @@ class RecipeDetails extends Component {
                   </div>
 
                 )
-              })}
+              })
+              : 
+              <div className="container-fluid">
+                <div className="d-flex flex-column justify-content-center">
+                  <p className="mb-0">Instructions not provided.</p>
+                  <hr /> 
+                </div>
+              </div>
+              }
+
+
+
             </div>
 
             
@@ -157,7 +170,7 @@ class RecipeDetails extends Component {
             </div>
 
           <a href="/allrecipes">
-            <button type="button" class="btn btn-secondary">Return to all recipes</button>
+            <button type="button" className="btn btn-success">Return to all recipes</button>
           </a>
         </div>
       ) : (

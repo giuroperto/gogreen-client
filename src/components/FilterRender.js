@@ -25,44 +25,55 @@ class FilterRender extends Component {
   render() {
 
     return (
-      <div className="filter-render">
-        <div>
-          <h2>Advanced Filters</h2>
-          <div class="container">
-            <div class="row">
-              <div class="col-sm">
-                <h3>By Dish Type</h3>
-                <select name="searchDishType" className='form-control' onChange={this.handleChange}>
-                  <option selected="selected"></option>
-                  {this.props.allData.dishTypesArr.sort().map(dishType => {
-                    return <option value={dishType}> {dishType} </option>;
-                  })}
-                </select>
+      <div className="filter-render text-white">
+        <div className="mt-2 mb-2">
+          <p><b>Advanced Filters</b></p>
+            <div className="container-fluid row d-flex flex-row align-content-center m-0 p-0">
+              <div className="col-xs-4 col-sm-4 d-flex flex-column justify-content-center">
+                <div className="d-flex justify-content-center align-items-center nav-icon-container mb-2">
+                  <img className="mr-2" src="https://res.cloudinary.com/dxatyucj2/image/upload/v1580900036/go-green/book2_t5vazt.png" alt="book-icon" />
+                  <p className="text-nowrap">By Dish Type</p>
+                </div>
+                <div>
+                  <select name="searchDishType" className='form-control' onChange={this.handleChange}>
+                    <option selected="selected"></option>
+                    {this.props.allData.dishTypesArr.sort().map(dishType => {
+                      return <option value={dishType}> {dishType} </option>;
+                    })}
+                  </select>
+                </div>
               </div>
-
-              <div class="col-sm">
-                <h3>By Cousine</h3>
-                <select name="searchCuisine" className='form-control' onChange={this.handleChange}>
-                  <option selected="selected"></option>
-                  {this.props.allData.cuisinesArr.sort().map(cuisinesType => {
-                    return <option value={cuisinesType}> {cuisinesType} </option>;
-                  })}
-                </select>
+              <div className="col-xs-4 col-sm-4 d-flex flex-column justify-content-center">
+                <div className="d-flex justify-content-center align-items-center nav-icon-container mb-2">
+                  <img className="mr-2" src="https://res.cloudinary.com/dxatyucj2/image/upload/v1580900036/go-green/book2_t5vazt.png" alt="book-icon" />
+                  <p className="text-nowrap">By Cuisine</p>
+                </div>
+                <div>
+                  <select name="searchCuisine" className='form-control' onChange={this.handleChange}>
+                    <option selected="selected"></option>
+                    {this.props.allData.cuisinesArr.sort().map(cuisinesType => {
+                      return <option value={cuisinesType}> {cuisinesType} </option>;
+                    })}
+                  </select>
+                </div>
               </div>
-
-              <div class="col-sm">
-                <h3>Cooking Level</h3>
-                <select name="searchCookingLevel" className='form-control' onChange={this.handleChange}>
-                  <option selected="selected"></option>
-                  {this.props.allData.difficultLevelArr.map(level => {
-                    return <option value={level}> {level} </option>;
-                  })}
-                </select>
+              <div className="col-xs-4 col-sm-4 d-flex flex-column justify-content-center">
+                <div className="d-flex justify-content-center align-items-center nav-icon-container mb-2">
+                  <img className="mr-2" src="https://res.cloudinary.com/dxatyucj2/image/upload/v1580900036/go-green/book2_t5vazt.png" alt="book-icon" />
+                  <p className="text-nowrap">By Difficulty</p>
+                </div>
+                <div>
+                  <select name="searchCookingLevel" className='form-control' onChange={this.handleChange}>
+                    <option selected="selected"></option>
+                    {this.props.allData.difficultLevelArr.map(level => {
+                      return <option value={level}> {level} </option>;
+                    })}
+                  </select>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
     );
   }
 }
