@@ -34,7 +34,7 @@ class Step2 extends Component {
 
       <div className="form-group">
         <label htmlFor="servings">How many <strong>servings</strong> is your recipe?</label>
-        <input className="form-control" type="number" name="servings" min="1" value={this.props.servings} onChange={this.props.handleChange}/>
+        <input className="form-control" type="number" name="servings" min="1" required value={this.props.servings} onChange={this.props.handleChange}/>
       </div>
       </>
     )
