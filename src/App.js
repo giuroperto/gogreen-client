@@ -230,6 +230,7 @@ class App extends Component {
   render() {
     console.log(this.state.loggedInUser);
     console.log(this.state.message);
+    console.log(this.state);
     // console.log(this.state.successMessage);
     this.fetchUser();
     return (
