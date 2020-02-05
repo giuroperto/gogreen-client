@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import APIAccess from './api/api-access';
 import AuthService from "./auth/auth-services";
+import Message from '../components/Message';
 
 class ConfirmDelete extends Component {
   constructor(props) {
@@ -23,8 +24,10 @@ class ConfirmDelete extends Component {
         this.props.getMessage(response.status, response.data.message);
         this.redirectPage(this.props.successMessage);
         this.props.getUser(null);
-        })
-        .catch(err => console.log(err));
+      })
+      .catch(err => {
+        this.props.getMessage(err.response.status, err.response.data.message);
+      });
   }
 
   redirectPage(success) {
@@ -36,6 +39,11 @@ class ConfirmDelete extends Component {
   render() {
     return (
       <div className="confirm-delete">
+        <div>
+          {
+            this.props.message && <Message successMessage={this.props.successMessage} message={this.props.message}/>
+          }
+        </div>
         <h3> Are you sure you want to delete your account? </h3>
         <Link to='/' onClick={this.deleteUser}>DELETE </Link>
         <Link to={`/user/${this.props.loggedInUser.username}`}> CANCEL </Link>

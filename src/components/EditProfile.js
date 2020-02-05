@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import APIAccess from './api/api-access';
 import Message from './Message';
+import { Link } from 'react-router-dom';
 
 class EditProfile extends Component {
   constructor(props) {
@@ -125,6 +126,7 @@ class EditProfile extends Component {
             </div>
           </div>
           <button type="submit">Save changes</button>
+          <Link to={`/user/${this.props.match.params.username}`}> Cancel </Link>
         </form>
       </div>
     )

@@ -348,6 +348,9 @@ class App extends Component {
                 render={(props) => (
                   <ConfirmDelete
                     loggedInUser={this.state.loggedInUser}
+                    message={this.state.message}
+                    successMessage={this.state.successMessage}
+                    getMessage={this.getMessage}
                     {...props}
                   />
                 )}
