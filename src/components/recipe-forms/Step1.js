@@ -36,10 +36,17 @@ class Step1 extends Component {
           required
         />
       </div>
-      <div className="form-group">
+      <div className="form-group custom-file">
         <label htmlFor="file">Add a <strong>picture</strong> of your dish</label>
-        <input type="file" class="form-control-file" id="file" required onChange={this.props.handleFileUpload}/>
+        <input type="file" className="form-control-file custom-file-input" id="file" required onChange={this.props.handleFileUpload}/>
+        <label className="custom-file-label img-name" forHtml="inputGroupFile01"> {this.props.pictureName ? this.props.pictureName : 'Choose file...'} </label>
       </div>
+
+      {/* <div class="custom-file">
+              <input type="file" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="profilePic" onChange={this.handleUpload}/>
+            </div> */}
+
+
       </>
     )
   }
