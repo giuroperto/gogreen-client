@@ -2,25 +2,25 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import APIAccess from './api/api-access';
 import AuthService from "./auth/auth-services";
-import Message from '../components/Message';
+import Message from './Message';
 
-class ConfirmDelete extends Component {
+class ConfirmDeleteRecipe extends Component {
   constructor(props) {
     super(props);
 
     this.apiEndpoints = new APIAccess();
     this.service = new AuthService();
-    this.deleteUser = this.deleteUser.bind(this);
+    this.deleteRecipe = this.deleteRecipe.bind(this);
     this.redirectPage = this.redirectPage.bind(this);
 
   }
 
-  deleteUser() {
-    const { username } = this.props.loggedInUser;
+  deleteRecipe() {
+    const { recipeID } = this.props.match.params;
 
-    this.apiEndpoints.deleteUser(username)
+    this.apiEndpoints.deleteRecipe(recipeID)
       .then(response => {
-        console.log('dentro do delete user api')
+        console.log('dentro do recipe user api')
         this.props.getMessage(response.status, response.data.message);
         this.redirectPage(this.props.successMessage);
         this.props.getUser(null);
@@ -44,13 +44,13 @@ class ConfirmDelete extends Component {
             this.props.message && <Message successMessage={this.props.successMessage} message={this.props.message}/>
           }
         </div>
-        <h3> Are you sure you want to delete your account? </h3>
-        <Link to='/' onClick={this.deleteUser}>DELETE </Link>
-        <Link to={`/user/${this.props.loggedInUser.username}`}> CANCEL </Link>
+        <h3> Are you sure you want to delete this recipe? </h3>
+        <Link to='/' onClick={this.deleteRecipe}>DELETE </Link>
+        <Link to={`/recipe/${this.props.match.params.recipeID}`}> CANCEL </Link>
       </div>
     )
   }
 
 }
 
-export default ConfirmDelete;
+export default ConfirmDeleteRecipe;

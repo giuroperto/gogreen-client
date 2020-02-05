@@ -1,88 +1,84 @@
 import React, { Component } from 'react';
 import Message from './Message';
+import {Link} from 'react-router-dom';
+import APIAccess from "./api/api-access";
 
 class RecipeDetails extends Component {
   constructor(props) {
     super(props);
 
-  this.state = {
+    this.state = {
       searchWord: '',
       uniqueRecipe: {},
       determinedOwner: '',
       cleanDishType: '',
       ingredients: '',
     };
+    this.apiEndpoints = new APIAccess();
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
 
-    // ao adicionar receita, redirecionamos pra cá
-    // o que dá um erro
-    //TODO resolver esse problema
-
-    let recipesDB = this.props.allRecipes;
-    // NOTE: IF DATABASE CUTS givenUniqueRecipe WILL NOT BE DEFINED, AS SUCH givenUniqueRecipe.owner CAUSES ERROR
-    // Review -> Potential unique error message catch based on defined?
-    const givenUniqueRecipe = recipesDB.find(x => x._id === this.props.match.params.recipeID)
-    let givenDeterminedOwner = '';
+    this.apiEndpoints.getOneRecipe(this.props.match.params.recipeID)
+    .then(response => {
+      let givenUniqueRecipe = response.data;
+      let givenDeterminedOwner = '';
       if (givenUniqueRecipe.owner === undefined){
         givenDeterminedOwner = givenUniqueRecipe.ownerAPI
       } else {
         givenDeterminedOwner = givenUniqueRecipe.owner.username
       }
-    let givenCleanDishType = (givenUniqueRecipe.dishTypes[0]).slice(0,1).toUpperCase()+(givenUniqueRecipe.dishTypes[0]).slice(1,(givenUniqueRecipe.dishTypes[0]).length);
-
-    let givenCuisine = '';
-      if (givenUniqueRecipe.cuisines[0] === undefined){
-        givenCuisine = "Not specified"
-      } else {
-        givenCuisine = givenUniqueRecipe.cuisines[0]
-      }
-
-    let givenIngredients = [];
-      if (givenUniqueRecipe.ingredients[0] === undefined){
-      } else if (givenUniqueRecipe.ingredients.length === 1) {
-        givenIngredients = givenUniqueRecipe.ingredients[0].split("\n");
-        let removed = givenIngredients.splice(givenIngredients.length -1 ,1);
-      } else {
-        givenIngredients = givenUniqueRecipe.ingredients
-      }
-    
-    this.setState({
-      uniqueRecipe: givenUniqueRecipe,
-      determinedOwner: givenDeterminedOwner,
-      cleanDishType: givenCleanDishType,
-      cuisine: givenCuisine,
-      ingredients: givenIngredients
+      let givenCleanDishType = (givenUniqueRecipe.dishTypes[0]).slice(0,1).toUpperCase()+(givenUniqueRecipe.dishTypes[0]).slice(1,(givenUniqueRecipe.dishTypes[0]).length);
+      let givenCuisine = '';
+        if (givenUniqueRecipe.cuisines[0] === undefined){
+          givenCuisine = "Not specified"
+        } else {
+          givenCuisine = givenUniqueRecipe.cuisines[0]
+        }
+      let givenIngredients = [];
+        if (givenUniqueRecipe.ingredients[0] === undefined){
+        } else if (givenUniqueRecipe.ingredients.length === 1) {
+          givenIngredients = givenUniqueRecipe.ingredients[0].split("\n");
+          let removed = givenIngredients.splice(givenIngredients.length -1 ,1);
+        } else {
+          givenIngredients = givenUniqueRecipe.ingredients
+        }
+      
+      this.setState({
+        uniqueRecipe: givenUniqueRecipe,
+        determinedOwner: givenDeterminedOwner,
+        cleanDishType: givenCleanDishType,
+        cuisine: givenCuisine,
+        ingredients: givenIngredients
+      })
     })
-
+    .catch(err => console.log(err))
   }
 
+
   //TODO add fork button for logged users
-  //TODO add edit button if logged user is recipe owner
 
 
-  render(){
-    console.log(this.state.uniqueRecipe.ingredients)
+  render() {
     return(
       <>
       {this.state.uniqueRecipe.ingredients ? (
 
-        <div id="detailed-recipe" className="container-fluid" style={{width: '85%'}}>
+        <div id="detailed-recipe" className="container-fluid mb-3" style={{width: '85%'}}>
           {
           this.props.message && <Message successMessage={this.props.successMessage} message={this.props.message}/>
           }
-          <div className="row d-flex justify-content-center mb-4 mt-4">
+          <div className="row d-flex flex-column justify-content-center mb-4 mt-4">
              <div><h3><b>{this.state.uniqueRecipe.name}</b></h3></div>
-             <div><h5>{this.state.uniqueRecipe.description}</h5></div>         
+             <div><span className="recipe-description">{this.state.uniqueRecipe.description}</span></div>         
           </div>
 
-            <div className="row">
+            <div className="row ">
                 <div id="individual-left" className="col-sm">
-                    <img src={this.state.uniqueRecipe.picture} alt="Recipe-Text"></img>
+                    <img src={this.state.uniqueRecipe.picture} alt="Recipe-Text" style={{maxWidth: '30vw', height: '100%'}}></img>
                 </div>
-                <div id="individual-right" className="col-sm d-flex flex-column justify-content-around">
+                <div id="individual-right" className="col-sm d-flex flex-column justify-content-center align-items-start">
                     <div>
                         <p><b>Created by: </b>{this.state.determinedOwner}</p> 
                     </div>
@@ -104,8 +100,8 @@ class RecipeDetails extends Component {
               <div className="row d-flex justify-content-center mr-1 ml-1">
                 <div className="row text-left">
                   <ul>
-                  {this.state.ingredients.map(i => {
-                      return <li>{i}</li>;
+                  {this.state.ingredients.map((i, idx) => {
+                      return <li key={idx}>{i}</li>;
                   })}
                   </ul>
                 </div>
@@ -114,7 +110,9 @@ class RecipeDetails extends Component {
 
             <div className="row d-flex justify-content-center">
               <h4 className="mb-4 mt-4">Instructions</h4>
-              {this.state.uniqueRecipe.instructions.map(i => {
+
+              {(this.state.uniqueRecipe.instructions.length > 0) ?
+              this.state.uniqueRecipe.instructions.map(i => {
                 let timeRendered = "";
                 i.stepTimeMinutes ? (timeRendered = `${i.stepTimeMinutes} minutes`) : (timeRendered = "");
                 return (
@@ -130,12 +128,45 @@ class RecipeDetails extends Component {
                   </div>
 
                 )
-              })}
+              })
+              : 
+              <div className="container-fluid">
+                <div className="d-flex flex-column justify-content-center">
+                  <p className="mb-0">Instructions not provided.</p>
+                  <hr /> 
+                </div>
+              </div>
+              }
+
+
+
             </div>
 
+            
+            <div className='d-flex justify-content-center'>
+              <div className="edit-button mr-3">
+                {this.props.loggedInUser && this.state.uniqueRecipe.owner && this.state.uniqueRecipe.owner.username ===
+                  this.props.loggedInUser.username && (
+                  <button type="button" class="btn btn-secondary">
+                    <Link to={`/recipe/${this.props.match.params.recipeID}/edit`}>
+                      Edit Recipe
+                    </Link>
+                  </button>
+                )}
+              </div>
+              <div className="edit-button ml-3">
+                {this.props.loggedInUser && (
+                  <button type="button" class="btn btn-secondary">
+                    <Link to={``}>
+                      Fork this Recipe
+                    </Link>
+                  </button>
+                )}
+              </div>
+            </div>
 
           <a href="/allrecipes">
-            <button>Return to all recipes</button>
+            <button type="button" className="btn btn-success">Return to all recipes</button>
           </a>
         </div>
       ) : (

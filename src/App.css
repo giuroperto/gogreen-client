@@ -28,7 +28,7 @@ img {
 .nav-container{
   box-shadow: 0 4px 2px -2px rgba(0,0,0,.4);
   width: 100vw;
-  background-color: rgba(196,180,164);
+  background-color: rgb(182, 165, 148);
 
 }
 
@@ -254,7 +254,6 @@ border: transparent;
 
 }
 
-
 .div-bar-form {
   border: solid 0.5px rgba(33, 83, 21, 0.6);
   width: 20vw;
@@ -335,11 +334,10 @@ border: transparent;
 
 .profile-container {
   border: solid green;
-  width: 70vw;
 }
 
 .profile-container img{
-  width: 4vw;
+  width: 20vw;
 }
 
 .profile-sub-container {
@@ -349,8 +347,98 @@ border: transparent;
 
 .recipes-favourites-container {
   border: solid;
-  width: 60vw;
+}
+
+/* RECIPE DETAILS */
+
+.recipe-description {
+  font-style: italic;
+}
+
+
+/* FOOTER */
+
+.footer{
+  background-color: rgba(211, 189, 162, 0.6);
+  box-shadow: 0px -5px 7px 0px rgba(0,0,0,0.4);
+}
+
+.footer-links a {
+  color: rgba(88, 73, 55, 0.8);
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: rgba(53, 37, 17, 0.8);
+  text-decoration: none;
+}
+
+
+.fa-facebook-f {
+  color: rgba(59, 89, 152, 0.8);
+}
+
+.fa-twitter {
+  color: rgba(29, 161, 242, 0.8);
+}
+
+.fa-instagram {
+  color: rgba(195, 42, 163, 0.8);
+
+}
+
+.fa-google-plus {
+  color: rgba(52, 168, 83, 0.8);
+}
+
+.fa-linkedin-in {
+  color: rgba(0, 119, 181, 0.8);
+}
+
+.fa-pinterest {
+  color: rgba(189, 8, 28, 0.8);
+}
+
+.footer-copyrights a {
+  color: rgba(71, 54, 31, 0.8);
+
+}
+
+.footer-copyrights p {
+  color: rgba(88, 73, 55, 0.8);
+
+}
+
+.footer-copyrights a:hover {
+  color: rgba(53, 37, 17, 0.8);
+  text-decoration: none;
 }
 
 
 
+/* MEDIA QUERIES */
+
+
+/* S, M and G MOBILES */
+
+@media (max-device-width: 425px)  { 
+  .login-form {
+    width: 80vw;
+  }
+
+  .signup-form {
+    width: 90vw;
+  }
+
+  .login-form input, .div-bar-form {
+    width: 60vw;
+  }
+
+  .signup-form input {
+    width: 70vw;
+  }
+  
+  .login-form input::placeholder, .signup-form input::placeholder {
+    text-align: center;
+  }
+}

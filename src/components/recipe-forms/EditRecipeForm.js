@@ -4,8 +4,7 @@ import Step2 from './Step2';
 import Step3 from './Step3';
 import Step4 from './Step4';
 import APIAccess from '../api/api-access'
-
-//TODO add picture
+import {Link} from 'react-router-dom';
 
 class EditRecipeForm extends Component {
   constructor(props) {
@@ -35,13 +34,14 @@ class EditRecipeForm extends Component {
           stepTimeMinutes: 0,
         }],
       vegan: false,
-      // picture: '',
+      picture: '',
       ingredientsInputs: 3,
       instructionsInputs: 3
     }
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleFileUpload = this.handleFileUpload.bind(this)
     this.apiEndpoints = new APIAccess();
     this.renderIngredientsInputs = this.renderIngredientsInputs.bind(this);
     this.renderInstructionsInputs = this.renderInstructionsInputs.bind(this);
@@ -58,16 +58,8 @@ class EditRecipeForm extends Component {
   }
 
   componentDidMount() {
-    console.log('hieee', this.props)
     if (this.props.recipe !== null && this.props.recipe !== undefined) {
-      let {name, description, dishTypes, cuisines, servings, ingredients, instructions, vegan} = this.props.recipe;
-
-      // let givenIngredients = [];
-      // if (ingredients[0] === undefined){
-      // } else {
-      //   givenIngredients = ingredients[0].split("\n");
-      //   let removed = givenIngredients.splice(givenIngredients.length -1 ,1);
-      // }
+      let {name, description, dishTypes, cuisines, servings, ingredients, instructions, vegan, picture} = this.props.recipe;
 
       let givenIngredients = [];
       if (ingredients === undefined){
@@ -91,7 +83,7 @@ class EditRecipeForm extends Component {
         let firstCuisine = cuisines[0];
         cuisines = this.capitalizeData(firstCuisine);
       }
-      this.setState({name, description, dishTypes, cuisines, servings, ingredients: givenIngredients, instructions, vegan, ingredientsInputs, instructionsInputs}, () => console.log('meu log', this.state));
+      this.setState({name, description, dishTypes, cuisines, servings, ingredients: givenIngredients, instructions, vegan, ingredientsInputs, instructionsInputs, picture}, () => console.log('meu log', this.state));
     }
   }
 
@@ -117,13 +109,15 @@ class EditRecipeForm extends Component {
   
   handleSubmit = (event) => {
     event.preventDefault();
-    const { name, description, dishTypes, cuisines, servings, ingredients, instructions, vegan } = this.state;
+    const { name, description, dishTypes, cuisines, servings, ingredients, instructions, vegan, picture } = this.state;
     let totalstepTimeMinutes = instructions.reduce((acc, item) => acc + parseInt(item.stepTimeMinutes), 0);
+    instructions.map(item => item.stepTimeMinutes = parseInt(item.stepTimeMinutes))
     let owner = this.props.allData.loggedInUser._id;
-    
     let recipeID = this.props.recipe._id;
-    //TODO add picture
-    this.apiEndpoints.editRecipe(recipeID, name, description, ingredients, dishTypes, vegan, cuisines, totalstepTimeMinutes, servings, instructions)
+    let dishTypesArr = [dishTypes];
+    let cuisinesArr = [cuisines];
+
+    this.apiEndpoints.editRecipe(recipeID, name, description, ingredients, dishTypesArr, vegan, cuisinesArr, totalstepTimeMinutes, servings, instructions, picture)
     .then(() => {
       this.props.history.push(`/recipe/${recipeID}`)
     })
@@ -181,18 +175,31 @@ class EditRecipeForm extends Component {
       this.setState({
         instructions: instructionsValuesCopy
       });
-    } else if (name.includes('time')) {
+    } else if (name.includes('step')) {
       instructionsValuesCopy[myKey].stepTimeMinutes = value;
+      console.log('name:', name, 'value:', value, 'copied array:', instructionsValuesCopy)
       this.setState({
         instructions: instructionsValuesCopy
       });
     }
   }
 
+  handleFileUpload (event) {
+    const uploadData = new FormData();
+    uploadData.append("imageUrl", event.target.files[0]);
+    this.apiEndpoints.handleUpload(uploadData)
+    .then(response => {
+        this.setState({ picture: response.data.secure_url });
+      })
+      .catch(err => {
+        console.log("Error while uploading the file: ", err);
+      });
+  }
+
 
   render() {
     return(
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className="mb-5">
         
         <div className="form-group">
           <label htmlFor="name">Name</label>
@@ -203,6 +210,7 @@ class EditRecipeForm extends Component {
             type="text"
             value={this.state.name}
             onChange={this.handleChange}
+            required
           />
           <label htmlFor="description">Description</label>
           <input
@@ -212,7 +220,13 @@ class EditRecipeForm extends Component {
             type="text"
             value={this.state.description}
             onChange={this.handleChange}
+            required
           />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="file">Replace picture</label>
+          <input type="file" class="form-control-file" id="file" onChange={this.handleFileUpload}/>
         </div>
 
         <div className="form-group">
@@ -225,7 +239,7 @@ class EditRecipeForm extends Component {
 
         <div className="form-group">
           <label htmlFor="cuisines">Cuisine</label>
-          <select value={this.state.cuisine} name="cuisines" onChange={this.handleChange} multiple={false} className="custom-select">
+          <select value={this.state.cuisines} name="cuisines" onChange={this.handleChange} multiple={false} className="custom-select">
             <option value=''>Choose a cuisine</option>
             {this.props.allData.cuisinesArr.map((cuisine, idx) => <option key={idx} value={cuisine}>{cuisine}</option>)}
           </select>
@@ -233,7 +247,7 @@ class EditRecipeForm extends Component {
 
         <div className="form-group">
           <label htmlFor="servings">Servings</label>
-          <input className="form-control" type="number" name="servings" value={this.state.servings} onChange={this.handleChange}/>
+          <input className="form-control" type="number" name="servings" required value={this.state.servings} min="1" onChange={this.handleChange}/>
         </div>
         
         <div className="form-group">
@@ -278,26 +292,39 @@ class EditRecipeForm extends Component {
           <label className="form-check-label" htmlFor="vegan">This is a vegan recipe</label>
         </div>
        
-        <div className="form-group">
+        <div className="form-group d-flex flex-column">
           <label htmlFor="instructions">Instructions</label>
           {this.renderInstructionsInputs().map(input => (
             <div key={input.key} className="form-row">
               <div className="col-md-9 mb-3">
                 <label>Step {input.key + 1}</label>
-                <input key={input.key} data-key={input.key} className="form-control" type="text" name={input.textName} value={this.state.instructions[input.key].text} onChange={this.handleInstructionsChange}/>
+                <input key={input.key} data-key={input.key} required className="form-control" type="text" name={input.textName} value={this.state.instructions[input.key].text} onChange={this.handleInstructionsChange}/>
               </div>
               <div className="col-md-3 mb-3">
                 <label htmlFor="time">Time (minutes)</label>
-                <input key={input.key} data-key={input.key} className="form-control" type="number" name={input.timeName} value={this.state.instructions[input.key].stepTimeMinutes} onChange={this.handleInstructionsChange}/>
+                <input key={input.key} data-key={input.key} className="form-control" type="number" min="0" name={input.timeName} value={this.state.instructions[input.key].stepTimeMinutes} onChange={this.handleInstructionsChange}/>
               </div>
             </div>
           ))}
-          <button 
-            className="btn btn-secondary float-right"
-            type="button" onClick={() => this.addInput('inst')}>+</button>
+          <div className="align-self-end">
+            <button 
+              className="btn btn-secondary"
+              type="button" onClick={this.addInput}>+</button>
+          </div>
         </div>
 
-        <button type="submit">Save Changes</button>
+        <div className='d-flex justify-content-between mt-5'>
+          <div className="delete-button">
+              <Link to={`/recipe/${this.props.match.params.recipeID}/delete`}>
+                <button type="button" class="btn btn-warning">
+                    Delete Recipe
+                </button>
+              </Link>
+          </div>
+          <div className="submit-button">
+            <button type="submit" className="btn btn-primary">Save Changes</button>
+          </div>
+        </div>
       </form>
     )
   }

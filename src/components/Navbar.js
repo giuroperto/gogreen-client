@@ -18,18 +18,27 @@ class Navbar extends Component {
     this.service = new AuthService();
     this.filterRender = this.filterRender.bind(this);
     this.logoutUser = this.logoutUser.bind(this);
-    this.veganToggle = this.veganToggle.bind(this);
+    this.veganTrue = this.veganTrue.bind(this);
+    this.veganFalse = this.veganFalse.bind(this);
   }
   filterRender() {
     this.setState({
       showFilterRender: !this.state.showFilterRender
     });
   }
-  veganToggle() {
+  veganTrue() {
     this.setState({
-      veganToggle: !this.state.veganToggle
+      veganToggle: true
     });
-    console.log('vegan toggle switched!')
+    this.props.getVeganState(true);
+    console.log('vegan true!')
+  }
+  veganFalse() {
+    this.setState({
+      veganToggle: false
+    });
+    this.props.getVeganState(false);
+    console.log('vegan false!')
   }
 
   logoutUser() {
@@ -108,14 +117,14 @@ class Navbar extends Component {
                     to="/signup"
                   >
                     <img src="https://res.cloudinary.com/dxatyucj2/image/upload/v1580900039/go-green/mobile-phone_qkzglz.png" alt="recipe-icon" />
-                    <p>Sign Up</p>
+                    <p className="text-nowrap">Sign Up</p>
                   </NavLink>
                   <NavLink
                     className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
                     to="/login"
                   >
                     <img src="https://res.cloudinary.com/dxatyucj2/image/upload/v1580900039/go-green/recipe2_owkbb1.png" alt="chef-icon" />
-                    <p>Login</p>
+                    <p className="text-nowrap">Login</p>
                   </NavLink>
                 </>
               )}
@@ -157,21 +166,21 @@ class Navbar extends Component {
           <div className="second-nav-icon-div d-flex align-items-center ml-2">
             <NavLink
               className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
-              to="/allrecipes"
+              to="/allrecipes" onClick={this.veganFalse}
             >
-              <img src="https://res.cloudinary.com/dxatyucj2/image/upload/v1580900036/go-green/book2_t5vazt.png" alt="book-icon" />
-              <p>All Recipes</p>
+              <img className="mr-2" src="https://res.cloudinary.com/dxatyucj2/image/upload/v1580900036/go-green/book2_t5vazt.png" alt="book-icon" />
+              <p className="text-nowrap">All Recipes</p>
             </NavLink>
             
             
-            <NavLink className="nav-navbar nav-link d-flex align-items-center nav-icon-container" to="/" onClick={this.veganToggle}>
-              <img src={vegetarianString} alt="vegetarian-icon" />
-              <p>Vegetarian</p>
+            <NavLink className="nav-navbar nav-link d-flex align-items-center nav-icon-container" to="/allrecipes" onClick={this.veganFalse}>
+              <img className="mr-2" src={vegetarianString} alt="vegetarian-icon" />
+              <p className="text-nowrap">Vegetarian</p>
             </NavLink>
 
-            <NavLink className="nav-navbar nav-link d-flex align-items-center nav-icon-container" to="/" onClick={this.veganToggle}>
+            <NavLink className="nav-navbar nav-link d-flex align-items-center nav-icon-container" to="/allrecipes" onClick={this.veganTrue}>
               <img src={veganString} alt="vegetables-icon" />
-              <p>Vegan</p>
+              <p className="text-nowrap">Vegan</p>
             </NavLink>
 
           </div>

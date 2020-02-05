@@ -15,7 +15,7 @@ render(){
       <>
       {(this.props.allData.displayedRecipes) ? (
 
-      <div className='all-recipes-full-list'>
+      <div className='all-recipes-full-list mb-3'>
           <div className='all-recipes-each-listed'>
             {this.props.allData.displayedRecipes && this.props.allData.displayedRecipes.map(element => {
                 let determinedOwner = '';
@@ -39,7 +39,7 @@ render(){
             })}  
           </div>
           <a href="/">
-            <button>Return home</button>
+            <button type="button" className="btn btn-success">Return home</button>
           </a>
       </div>
       ) : (

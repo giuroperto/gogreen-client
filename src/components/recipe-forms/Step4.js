@@ -7,11 +7,9 @@ class Step4 extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputNumber: 3,
+      inputNumber: 1,
       inputs: [
-        { key: 0, textName: 'instruction0', timeName:'stepTimeMinutes0' },
-        { key: 1, textName: 'instruction1', timeName:'stepTimeMinutes1' },
-        { key: 2, textName: 'instruction2', timeName:'stepTimeMinutes2' },],
+        { key: 0, textName: 'instruction0', timeName:'stepTimeMinutes0' },],
       instructions: {
         name: "instructions",
         values: [
@@ -19,17 +17,7 @@ class Step4 extends Component {
             step: 1,
             text: '',
             stepTimeMinutes: 0,
-          },
-          {
-            step: 2,
-            text: '',
-            stepTimeMinutes: 0,
-          },
-          {
-            step: 3,
-            text: '',
-            stepTimeMinutes: 0,
-          }]
+          },]
       }
     }
     this.addInput = this.addInput.bind(this);
@@ -87,7 +75,7 @@ class Step4 extends Component {
           values: instructionsValuesCopy
         }
       }, this.handleInstructions);
-    } else if (name.includes('time')) {
+    } else if (name.includes('step')) {
       instructionsValuesCopy[myKey].stepTimeMinutes = value;
       this.setState({
         instructions: {
@@ -109,27 +97,25 @@ class Step4 extends Component {
     
     return(
       <>
-      <div className="form-group">
+      <div className="form-group d-flex flex-column">
         <label htmlFor="instructions">Detail your recipe <strong>instructions</strong> here.</label>
         {this.state.inputs.map(input => (
           <div key={input.key} className="form-row">
             <div className="col-md-9 mb-3 text-left">
               <label >Step {input.key + 1}</label>
-              <input key={input.key} data-key={input.key} className="form-control" type="text" name={input.textName} value={this.state.instructions.values[input.key].text} onChange={this.handleChange}/>
+              <input key={input.key} data-key={input.key} className="form-control" type="text" name={input.textName} value={this.state.instructions.values[input.key].text} onChange={this.handleChange} required/>
             </div>
             <div className="col-md-3 mb-3 text-left">
               <label htmlFor="time">Time (minutes)</label>
-              <input key={input.key} data-key={input.key} className="form-control" type="number" name={input.timeName} value={this.state.instructions.values[input.key].stepTimeMinutes} onChange={this.handleChange}/>
+              <input key={input.key} data-key={input.key} className="form-control" type="number" min="0" name={input.timeName} value={this.state.instructions.values[input.key].stepTimeMinutes} onChange={this.handleChange}/>
             </div>
           </div>
         ))}
-        <button 
-          className="btn btn-secondary float-right"
-          type="button" onClick={this.addInput}>+</button>
-      </div>
-      <div className="form-group">
-        <label htmlFor="file">Finally, add a <strong>picture</strong></label>
-        <input type="file" class="form-control-file" id="file" onChange={this.props.handleFileUpload}/>
+        <div className="align-self-end">
+          <button 
+            className="btn btn-secondary"
+            type="button" onClick={this.addInput}>+</button>
+        </div>
       </div>
       </>
     )

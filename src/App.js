@@ -12,11 +12,13 @@ import AddRecipe from "./components/AddRecipe";
 import Profile from "./components/Profile";
 import EditProfile from "./components/EditProfile";
 import ConfirmDelete from "./components/ConfirmDelete";
+import ConfirmDeleteRecipe from "./components/ConfirmDeleteRecipe";
 import RecipeDetails from "./components/RecipeDetails";
 import AuthService from "./components/auth/auth-services";
 import APIAccess from "./components/api/api-access";
 import EditRecipe from './components/EditRecipe'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Footer from "./components/Footer";
 //Test
 //Test 2
 class App extends Component {
@@ -90,6 +92,7 @@ class App extends Component {
     this.getUser = this.getUser.bind(this);
     this.fetchUser = this.fetchUser.bind(this);
     this.getRecipes = this.getRecipes.bind(this);
+    this.getVeganState = this.getVeganState.bind(this);
     this.getSearchWord = this.getSearchWord.bind(this);
     this.getFilters = this.getFilters.bind(this);
     this.getMessage = this.getMessage.bind(this);
@@ -117,7 +120,6 @@ class App extends Component {
               )
         })
       }
-      // e.name.toUpperCase().includes(givenSearchWord)
     if (this.state.searchDishType !== '') {
       givenDisplayedRecipes = givenDisplayedRecipes.filter(e => {
         return (e.dishTypes.includes(this.state.searchDishType))
@@ -126,6 +128,11 @@ class App extends Component {
     if (this.state.searchCuisine !== '') {
       givenDisplayedRecipes = givenDisplayedRecipes.filter(e => {
         return (e.cuisines.includes(this.state.searchCuisine))
+      })
+    }
+    if (this.state.searchVeganOnly === true) {
+      givenDisplayedRecipes = givenDisplayedRecipes.filter(e => {
+        return (e.vegan === true)
       })
     }
     this.setState({
@@ -169,6 +176,14 @@ class App extends Component {
     this.getRecipes();
     this.filterNavBar();
   }
+  getVeganState(boolean) {
+    console.log(boolean);
+    this.setState({
+      searchVeganOnly: boolean
+    });
+    this.getRecipes();
+    this.filterNavBar();
+  }
 
   getMessage(type, apiMessage) {
     let typeOfMessage = false;
@@ -184,7 +199,7 @@ class App extends Component {
       successMessage: typeOfMessage,
     });
 
-    setTimeout(this.clearMessage, 5000);
+    setTimeout(this.clearMessage, 4000);
   }
 
   clearMessage(){
@@ -193,7 +208,6 @@ class App extends Component {
       successMessage: false,
     });
   }
-
   getRecipes() {
     this.apiEndpoints
       .getAllRecipes()
@@ -246,6 +260,7 @@ class App extends Component {
               allData={this.state}
               getUser={this.getUser}
               getSearchWord={this.getSearchWord}
+              getVeganState={this.getVeganState}
               getFilters={this.getFilters}
               getMessage={this.getMessage}
             />
@@ -311,20 +326,33 @@ class App extends Component {
                 path="/recipe/:recipeID"
                 render={(props) => (
                   <RecipeDetails
-                    allRecipes={this.state.allRecipes} message={this.state.message} successMessage={this.state.successMessage} 
+                    allRecipes={this.state.allRecipes} message={this.state.message} successMessage={this.state.successMessage} loggedInUser={this.state.loggedInUser}
                     {...props}
                   />
                 )}
               />
 
-              <Route exact path='/recipe/:recipeID/edit' render={props => (<EditRecipe allData={this.state} {...props}/>)}/>
+              <Route
+                exact
+                path='/recipe/:recipeID/edit'
+                render={props => (
+                  <EditRecipe
+                    allData={this.state}
+                    loggedInUser={this.state.loggedInUser}
+                    {...props}
+                  />
+                )}
+              />
 
               <Route
                 exact
                 path="/recipe/:recipeID/delete"
                 render={(props) => (
-                  <ConfirmDelete
+                  <ConfirmDeleteRecipe
                     loggedInUser={this.state.loggedInUser}
+                    message={this.state.message}
+                    successMessage={this.state.successMessage}
+                    getMessage={this.getMessage}
                     {...props}
                   />
                 )}
@@ -339,6 +367,7 @@ class App extends Component {
               />
 
             </Switch>
+            <Footer />
           </>
         )}
       </div>

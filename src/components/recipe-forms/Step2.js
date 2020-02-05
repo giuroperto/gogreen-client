@@ -26,7 +26,7 @@ class Step2 extends Component {
 
       <div className="form-group">
         <label htmlFor="cuisines">Your recipe belongs to which <strong>cuisine</strong>?</label>
-        <select value={this.props.cuisine} name="cuisines" onChange={this.props.handleChange} multiple={false} className="custom-select">
+        <select value={this.props.cuisines} name="cuisines" onChange={this.props.handleChange} multiple={false} className="custom-select">
           <option value=''>Choose a cuisine</option>
           {this.props.allData.cuisinesArr.map((cuisine, idx) => <option key={idx} value={cuisine}>{cuisine}</option>)}
         </select>
@@ -34,7 +34,7 @@ class Step2 extends Component {
 
       <div className="form-group">
         <label htmlFor="servings">How many <strong>servings</strong> is your recipe?</label>
-        <input className="form-control" type="number" name="servings" value={this.props.servings.value} onChange={this.props.handleChange}/>
+        <input className="form-control" type="number" name="servings" min="1" required value={this.props.servings} onChange={this.props.handleChange}/>
       </div>
       </>
     )
