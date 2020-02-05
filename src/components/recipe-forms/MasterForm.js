@@ -18,7 +18,7 @@ class MasterForm extends Component {
       description: '',
       dishTypes: '',
       cuisines: '',
-      servings: 0,
+      servings: 1,
       ingredients: [],
       instructions: [],
       vegan: false,
