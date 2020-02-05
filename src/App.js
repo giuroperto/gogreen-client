@@ -274,6 +274,9 @@ class App extends Component {
                   <Signup
                     loggedInUser={this.state.loggedInUser}
                     getUser={this.getUser}
+                    message={this.state.message}
+                    successMessage={this.state.successMessage}
+                    getMessage={this.getMessage} 
                     {...props}
                   />
                 )}

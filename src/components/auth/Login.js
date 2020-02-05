@@ -28,15 +28,14 @@ class Login extends Component {
           username: "",
           password: ""
         });
-        console.log(response)
+        console.log('response aqui:', response)
         this.props.getUser(response.data);
         this.props.getMessage(response.status, response.data.message);
         this.redirectPage(this.props.successMessage);
       })
       .catch(err => {
-        this.props.getMessage(500, 'Login failed! Try again.');
-        this.redirectPage(this.props.successMessage);
-        console.log(err)
+        console.log(err.response.data.message);
+        this.props.getMessage(err.response.data.status, err.response.data.message);
       });
   }
 
