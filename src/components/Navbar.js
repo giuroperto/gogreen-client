@@ -31,18 +31,16 @@ class Navbar extends Component {
       veganToggle: true
     });
     this.props.getVeganState(true);
-    console.log('vegan true!')
   }
   veganFalse() {
     this.setState({
       veganToggle: false
     });
     this.props.getVeganState(false);
-    console.log('vegan false!')
   }
 
   logoutUser() {
-    console.log('logging out')
+    console.log('Log out')
     this.setState({
       loader: true,
     })

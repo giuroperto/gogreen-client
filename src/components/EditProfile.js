@@ -61,7 +61,6 @@ class EditProfile extends Component {
     const { username } = this.props.match.params;
 
     if (picture === '' || picture === null) {
-      console.log('no pic!')
       picture = 'https://res.cloudinary.com/dxatyucj2/image/upload/v1580833315/go-green/vegetalwhite.jpg.jpg'
     }
 
@@ -87,8 +86,6 @@ class EditProfile extends Component {
   }
 
   render() {
-    console.log(this.state);
-    console.log(this.props.message);
     return(
       <div className="container-fluid profile-edit-form" style={{width: '85%'}}>
       {

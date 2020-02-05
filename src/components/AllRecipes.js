@@ -27,7 +27,6 @@ render(){
                 } else {
                   determinedOwner = element.owner.username
                 }
-                console.log(element.owner);
                 let cleanDishType = '';
                 if (element.dishTypes[0] === undefined) {
                   cleanDishType = "N/A"

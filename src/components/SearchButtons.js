@@ -17,7 +17,7 @@ class SearchButtons extends Component {
   //Click on Filter button to open filters
   clickOnFilter(event){
     event.preventDefault();
-    console.log('Filter Clicked')
+    console.log('Filter clicked')
     this.props.showFilter();
   }
 

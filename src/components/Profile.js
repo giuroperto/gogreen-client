@@ -60,16 +60,6 @@ class Profile extends Component {
   }
 
   render() {
-    console.log(this.state);
-    console.log(this.props);
-    if (this.state.userAccount) {
-      console.log(this.state.userAccount.created_at);
-      console.log(new Date(this.state.userAccount.created_at).getMonth())
-      console.log(this.state.userAccount.created_at);
-    }
-    // console.log('username params', this.props.match.params);
-    // console.log('username loggedin', this.props.loggedInUser.username);
-    // console.log((this.props.match.params === this.props.loggedInUser.username))
     return (
       <div className="profile-page">
         {this.props.message && (

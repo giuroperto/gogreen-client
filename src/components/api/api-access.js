@@ -43,7 +43,6 @@ class APIAccess {
   }
 
   handleUpload (theFile) {
-    // console.log('file in service: ', theFile)
     return this.APIAccess.post('/upload', theFile).then(res => res);
   }
 

@@ -46,7 +46,6 @@ class MasterForm extends Component {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
-    console.log(value)
     this.setState({
       [name]: value
     });
@@ -73,10 +72,8 @@ class MasterForm extends Component {
     let owner = this.props.allData.loggedInUser._id;
     let dishTypesArr = [dishTypes];
     let cuisinesArr = [cuisines];
-    console.log(picture);
     this.apiEndpoints.addNewRecipe(owner, name, description, ingredients, dishTypesArr, vegan, cuisinesArr, totalTimeMinutes, servings, instructions, picture)
     .then(response => {
-      console.log(response.data)
       const recipeID = response.data.newRecipe._id;
       this.props.getMessage(response.status, response.data.message);
       this.redirectPage(this.props.successMessage, recipeID);
@@ -88,7 +85,6 @@ class MasterForm extends Component {
   handleFileUpload (event) {
     const uploadData = new FormData();
     uploadData.append("imageUrl", event.target.files[0]);
-    console.log('hi!', event.target.files)
     this.apiEndpoints.handleUpload(uploadData)
     .then(response => {
         this.setState({ picture: response.data.secure_url });

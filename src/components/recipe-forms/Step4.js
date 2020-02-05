@@ -37,8 +37,6 @@ class Step4 extends Component {
       text: '',
       stepTimeMinutes: 0,
     };
-    console.log(inputsCopy);
-    console.log(instructionsValuesCopy);
     this.setState({
       inputNumber: this.state.inputNumber + 1,
       inputs: inputsCopy,

@@ -83,7 +83,7 @@ class EditRecipeForm extends Component {
         let firstCuisine = cuisines[0];
         cuisines = this.capitalizeData(firstCuisine);
       }
-      this.setState({name, description, dishTypes, cuisines, servings, ingredients: givenIngredients, instructions, vegan, ingredientsInputs, instructionsInputs, picture}, () => console.log('meu log', this.state));
+      this.setState({name, description, dishTypes, cuisines, servings, ingredients: givenIngredients, instructions, vegan, ingredientsInputs, instructionsInputs, picture}, () => console.log('Inputs Set'));
     }
   }
 
@@ -177,7 +177,6 @@ class EditRecipeForm extends Component {
       });
     } else if (name.includes('step')) {
       instructionsValuesCopy[myKey].stepTimeMinutes = value;
-      console.log('name:', name, 'value:', value, 'copied array:', instructionsValuesCopy)
       this.setState({
         instructions: instructionsValuesCopy
       });
