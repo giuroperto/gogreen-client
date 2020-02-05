@@ -12,6 +12,7 @@ import AddRecipe from "./components/AddRecipe";
 import Profile from "./components/Profile";
 import EditProfile from "./components/EditProfile";
 import ConfirmDelete from "./components/ConfirmDelete";
+import ConfirmDeleteRecipe from "./components/ConfirmDeleteRecipe";
 import RecipeDetails from "./components/RecipeDetails";
 import AuthService from "./components/auth/auth-services";
 import APIAccess from "./components/api/api-access";
@@ -346,7 +347,7 @@ class App extends Component {
                 exact
                 path="/recipe/:recipeID/delete"
                 render={(props) => (
-                  <ConfirmDelete
+                  <ConfirmDeleteRecipe
                     loggedInUser={this.state.loggedInUser}
                     message={this.state.message}
                     successMessage={this.state.successMessage}
