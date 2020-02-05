@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import MasterForm from './recipe-forms/MasterForm'
 
-class Navbar extends Component {
+class AddRecipe extends Component {
   constructor(props) {
     super(props);
   }
 
   render() {
     return(
-      <div className="background">
-        <MasterForm />
+      <div className="background d-flex justify-content-center">
+        <MasterForm allData={this.props.allData} {...this.props} />
       </div>
     )
   }
 }
 
-export default Navbar;
+export default AddRecipe;

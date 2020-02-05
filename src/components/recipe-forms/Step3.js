@@ -16,6 +16,20 @@ class Step3 extends Component {
     // this.removeInput = this.removeInput.bind(this);
     this.renderInputs = this.renderInputs.bind(this);
     this.handleIngredients = this.handleIngredients.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  componentDidMount() {
+    console.log('ingredients', this.props);
+    if (this.props.ingredients.length !== 0) {
+      this.setState({
+        inputNumber: 3,
+        ingredients: {
+          name: "ingredients",
+          values: this.props.ingredients
+      }
+      })
+    }
   }
 
   addInput() {
@@ -26,7 +40,7 @@ class Step3 extends Component {
 
   renderInputs() {
     let inputs = [];
-    for (let i = 0; i <= this.state.inputNumber; i += 1) {
+    for (let i = 0; i < this.state.inputNumber; i += 1) {
       let inputName = 'ingredient' + i;
       inputs.push({ key: i, name: inputName })
     }
@@ -40,6 +54,7 @@ class Step3 extends Component {
     ingredientsCopy[myKey] = value;
     this.setState({
       ingredients: {
+        name: 'ingredients',
         values: ingredientsCopy
       }
     }, this.handleIngredients)
@@ -58,26 +73,44 @@ class Step3 extends Component {
       <>
       <div className="form-group">
         <label htmlFor="ingredients">What <strong>ingredients</strong> will be used?</label>
-        {this.renderInputs().map(input => (<input
-          key={input.key}
-          data-key={input.key}
-          className="form-control"
-          type="text"
-          name={input.inputName}
-          value={this.state.ingredients.values[input.key]}
-          onChange={this.handleChange}/>))}
-        <button 
-          className="btn btn-secondary"
-          type="button" onClick={this.addInput}>+</button>
+        {this.renderInputs().map(input => {
+          if (input.key === this.state.inputNumber -1) {
+            return (
+            <div class="input-group mb-3">
+              <input
+            key={input.key}
+            data-key={input.key}
+            className="form-control"
+            type="text"
+            name={input.inputName}
+            value={this.state.ingredients.values[input.key]}
+            onChange={this.handleChange}/>
+              <div class="input-group-append">
+              <button 
+                className="btn btn-secondary"
+                type="button" onClick={this.addInput}>+</button>
+              </div>
+            </div>)
+          }
+          return (<input
+            key={input.key}
+            data-key={input.key}
+            className="form-control mb-3"
+            type="text"
+            name={input.inputName}
+            value={this.state.ingredients.values[input.key]}
+            onChange={this.handleChange}/>)
+        })}
       </div>
-      <div class="form-group form-check">
+      <div className="form-group form-check">
         <input
           type="checkbox"
           className="form-check-input"
-          id="isVegan"
-          checked={this.props.isVegan}
+          id="vegan"
+          checked={this.props.vegan}
+          name="vegan"
           onChange={this.props.handleChange}/>
-        <label className="form-check-label" for="isVegan">This is a <strong>vegan</strong> recipe</label>
+        <label className="form-check-label" htmlFor="vegan">This is a <strong>vegan</strong> recipe</label>
       </div>
       </>
     )

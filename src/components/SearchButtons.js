@@ -5,8 +5,13 @@ class SearchButtons extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      searchWord: '',
+    }
+
     this.clickOnSearchButton = this.clickOnSearchButton.bind(this);
     this.clickOnFilter = this.clickOnFilter.bind(this);
+    this.handleChange = this.handleChange.bind(this);
 
   }
 
@@ -23,31 +28,43 @@ class SearchButtons extends Component {
     this.props.showFilter();
   }
 
+  handleChange(event) {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value,
+    });
+    this.props.getSearchWord(value);
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+  }
+
   render() {
+    console.log(this.state)
+    console.log(this.props)
     return (
-      <div className="search-button">
-        <form className="form-inline my-2 my-lg-0">
-          <input
-            class="form-control mr-sm-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button
-            className="btn btn-outline-success my-2 my-sm-0"
-            type="submit"
-            onClick={this.clickOnFilter}
-          >
-            +
-          </button>
-          <button
-            className="btn btn-outline-success my-2 my-sm-0"
-            type="submit"
-            onClick={this.clickOnSearchButton}
-          >
-            Search
-          </button>
-        </form>
+      <div>
+
+        <div className="search-bar-container">
+        {/* created form to deal with submit */}
+          <form className="search-bar-container" onSubmit={this.handleSubmit}>
+            <input 
+              type="search"
+              name="searchWord"
+              placeholder='Search by recipe or ingredient'
+              value={this.state.searchWord}
+              onChange={this.handleChange}
+            />
+            <button onClick={this.clickOnFilter}>
+              <i className="fas fa-filter"></i>
+            </button>
+            <button type="submit" onClick={this.clickOnSearchButton}>
+              <i className="fas fa-search"></i>
+            </button>
+          </form>
+        </div>
+
       </div>
     );
   }
