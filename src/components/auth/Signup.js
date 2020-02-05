@@ -13,7 +13,8 @@ class Signup extends Component {
       email: '',
       username: '',
       password: '',
-      picture: ''
+      picture: '',
+      pictureName: '',
     }
 
     this.service = new AuthService();
@@ -73,11 +74,12 @@ class Signup extends Component {
 
   handleUpload (event) {
     const uploadData = new FormData();
+    let { name } = event.target.files[0];
     uploadData.append("imageUrl", event.target.files[0]);
     console.log('Upload handled', event.target.files)
     this.apiEndpoints.handleUpload(uploadData)
     .then(response => {
-        this.setState({ picture: response.data.secure_url });
+        this.setState({ picture: response.data.secure_url, pictureName: name });
       })
       .catch(err => {
         console.log("Error while uploading the file: ", err);
@@ -132,7 +134,7 @@ class Signup extends Component {
           <div class="input-group d-flex flex-column">
             <div class="custom-file">
               <input type="file" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="profilePic" onChange={this.handleUpload}/>
-              <label className="custom-file-label" forHtml="inputGroupFile01"></label>
+              <label className="custom-file-label img-name" forHtml="inputGroupFile01"> {this.state.pictureName ? this.state.pictureName : 'Choose file...'} </label>
             </div>
           </div>
         </div>
