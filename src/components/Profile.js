@@ -65,44 +65,43 @@ class Profile extends Component {
     // console.log('username loggedin', this.props.loggedInUser.username);
     // console.log((this.props.match.params === this.props.loggedInUser.username))
     return (
-      <div className="profile-page d-flex flex-column justify-content-center align-items-center mt-5">
-
-{this.props.message && (
+      <div className="container profile-page d-flex flex-column justify-content-center align-items-center mt-5">
+        {this.props.message && (
           <Message
             successMessage={this.props.successMessage}
             message={this.props.message}
           />
         )}
 
-        <div className="profile-container d-flex align-items-center justify-content-center">
-          <div className="profile-img-container mr-5">
-          {this.state.userAccount && this.state.userAccount.picture && (
+        <div className="row profile-container d-flex align-items-center justify-content-center">
+          <div className="col-sm profile-img-container">
+            {this.state.userAccount && this.state.userAccount.picture && (
               <img src={this.state.userAccount.picture} alt="profile-picture" />
             )}
             <img src="/images/diet.png" alt="profile-picture" />
           </div>
 
-          <div className="profile-infos ml-5">
-
+          <div className="col-sm profile-infos">
             <h3 className="name">
-              Hello, {this.state.userAccount && this.state.userAccount.firstName}{" "}
+              Hello,{" "}
+              {this.state.userAccount && this.state.userAccount.firstName}{" "}
               {this.state.userAccount && this.state.userAccount.lastName}
             </h3>
             <p>@{this.state.userAccount && this.state.userAccount.username}</p>
 
             <div className="infos">
-            <p>
-              User since{" "}
-              {this.state.userAccount && this.state.userAccount.created_at}
-            </p>
-            {this.state.userRecipes.length > 0 ? (
-              <p>Has contributed {this.state.userRecipes.length} recipes</p>
-            ) : (
-              <p> Has not started contributing just yet! </p>
-            )}
-        </div>
+              <p>
+                User since{" "}
+                {this.state.userAccount && this.state.userAccount.created_at}
+              </p>
+              {this.state.userRecipes.length > 0 ? (
+                <p>Has contributed {this.state.userRecipes.length} recipes</p>
+              ) : (
+                <p> Has not started contributing just yet! </p>
+              )}
+            </div>
 
-            <div className='d-flex'>
+            <div className="col-sm d-flex">
               <div className="edit-button mr-3">
                 {this.props.match.params.username ===
                   this.props.loggedInUser.username && (
