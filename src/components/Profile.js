@@ -80,6 +80,9 @@ class Profile extends Component {
               )}
             </div>
 
+            <div className='bar vl'>
+            </div>
+
             <div className="col-sm-4 profile-infos mt-5">
               <h3 className="name">
                 Hello,{" "}
@@ -87,23 +90,25 @@ class Profile extends Component {
                 {this.state.userAccount && this.state.userAccount.lastName}
               </h3>
               <p>
+              <i class="fas fa-user"></i>
                 @{this.state.userAccount && this.state.userAccount.username}
               </p>
 
               <div className="infos">
                 <p>
+                <i class="fas fa-calendar-alt"></i>
                   User since{" "}
                   {this.state.userAccount && (`${new Date(this.state.userAccount.created_at).getDate()} / ${new Date(this.state.userAccount.created_at).getMonth() + 1} / ${new Date(this.state.userAccount.created_at).getFullYear()}`)}
                 </p>
                 {this.state.userRecipes.length > 0 ? (
-                  <p>Has contributed {this.state.userRecipes.length} recipes</p>
+                  <p><i class="fas fa-list-alt"></i>Has contributed {this.state.userRecipes.length} recipes</p>
                 ) : (
-                  <p> Has not started contributing just yet! </p>
+                  <p> <i class="fas fa-minus-circle"></i>Has not started contributing just yet! </p>
                 )}
               </div>
               
               
-              <div className="d-flex justify-content-center mb-5">
+              <div className="d-flex justify-content-start mb-5">
                 <div className="edit-button mr-3">
                   {this.props.match.params.username ===
                     this.props.loggedInUser.username && (

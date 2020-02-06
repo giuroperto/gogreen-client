@@ -373,6 +373,16 @@ border: transparent;
   color: rgba(123,72,32, 0.9);
 }
 
+.recipe-link:hover {
+  text-decoration: none;
+}
+
+.difficulty-div a:hover {
+  color: green;
+}
+
+
+
 .feat-recipe {
   background-size: cover;
   height: 45vh;
@@ -539,8 +549,10 @@ border: transparent;
 .profile-page {
   border-radius: 5px;
   padding-bottom: 5vh;
-  background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
+  /* background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%); */
+  background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
 }
+
 
 
 .profile-container {
@@ -550,8 +562,9 @@ border: transparent;
 
 .profile-container img{
   border-radius: 50%;
-  /* box-shadow: 1px 5px 5px black; */
   width: 15vw;
+  border: solid rgba(126, 119, 115, 0.9) 0.2rem;
+  height: fit-content;
 }
 
 .recipes-favourites-container {
@@ -561,12 +574,38 @@ border: transparent;
 .recipes-cards-container {
   overflow: scroll;
   height: 80vh;
+}
 
+.vl {
+  border-left: 0.1rem solid rgba(202, 192, 179, 0.6);
+  height: 30vh;
+  width: 5%
+}
+
+.profile-infos{
+  text-align: start;
+}
+
+.profile-infos i {
+  font-size: 1.2rem;
+  margin-right: 1.5vw;
+}
+
+.profile-infos h3 {
+  color: rgba(123,72,32, 0.9);
+  font-weight: 600;
+  letter-spacing: 0.1vw;
+  margin-bottom: 4vh;
+}
+
+.profile-infos p {
+  color: rgba(124, 79, 44, 0.9);
+  letter-spacing: 0.1vw;
 }
 
 .profile-btn {
   border-radius: 5px !important;
-  height: 4.2vh;
+  height: 6vh;
 }
 
 .user-recipes {
@@ -754,6 +793,16 @@ border: transparent;
 
 @media (max-device-width: 425px)  { 
 
+  .vl {
+    border-left: 0rem solid rgba(202, 192, 179, 0.6);
+    height: 0;
+    width: 0;
+  }
+
+  .profile-infos {
+    text-align: center;
+  }
+
   .profile-container img {
     width: 55vw;
   }
@@ -852,7 +901,7 @@ border: transparent;
   }
 
   .nav-link {
-    padding: 0.5rem 0;
+    padding: 0.5rem 0 !important;
   }
 
   .navbar-collapse img {
