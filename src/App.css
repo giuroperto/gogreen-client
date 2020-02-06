@@ -362,6 +362,21 @@ border: transparent;
   overflow: hidden;
 }
 
+/* MESSAGE */
+
+.success-message {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: rgb(129, 168, 129);
+  color: white;
+}
+
+.failure-message {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: rgb(196, 98, 81);
+  color: white;
+}
 
 /* PROFILE */
 
