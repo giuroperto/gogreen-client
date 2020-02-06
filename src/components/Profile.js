@@ -71,7 +71,7 @@ class Profile extends Component {
 
         <div className="container">
           <div className="row profile-container align-items-center justify-content-center">
-            <div className="col-sm profile-img-container mt-4">
+            <div className="col-sm-4 profile-img-container mt-4">
               {this.state.userAccount && this.state.userAccount.picture && (
                 <img
                   src={this.state.userAccount.picture}
@@ -80,7 +80,7 @@ class Profile extends Component {
               )}
             </div>
 
-            <div className="col-sm profile-infos mt-5">
+            <div className="col-sm-4 profile-infos mt-5">
               <h3 className="name">
                 Hello,{" "}
                 {this.state.userAccount && this.state.userAccount.firstName}{" "}
@@ -146,7 +146,7 @@ class Profile extends Component {
                       checked
                       onClick={this.showRecipes}
                     />{" "}
-                    Recipes
+                    <i class="fas fa-list-alt"></i> Recipes
                   </label>
                   <label className="btn btn-info">
                     <input
@@ -156,7 +156,7 @@ class Profile extends Component {
                       autocomplete="off"
                       onClick={this.showFavourites}
                     />{" "}
-                    Favourites
+                    <i class="fas fa-star"></i> Favourites
                   </label>
                 </div>
                 <div className="recipes-cards-container py-5" style={{minHeight: '30vh'}}>
