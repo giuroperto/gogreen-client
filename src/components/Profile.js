@@ -11,7 +11,8 @@ class Profile extends Component {
     this.state = {
       userAccount: null,
       showFavourites: false,
-      userRecipes: []
+      userRecipes: [],
+      dateMonth: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
     };
 
     this.apiEndpoints = new APIAccess();
@@ -93,7 +94,7 @@ class Profile extends Component {
               <div className="infos">
                 <p>
                   User since{" "}
-                  {this.state.userAccount && (`${new Date(this.state.userAccount.created_at).getDate()} / ${new Date(this.state.userAccount.created_at).getMonth() + 1} / ${new Date(this.state.userAccount.created_at).getFullYear()}`)}
+                  {this.state.userAccount && (`${new Date(this.state.userAccount.created_at).getDate()} ${this.state.dateMonth[new Date(this.state.userAccount.created_at).getMonth()]} ${new Date(this.state.userAccount.created_at).getFullYear()}`)}
                 </p>
                 {this.state.userRecipes.length > 0 ? (
                   <p>Has contributed {this.state.userRecipes.length} recipes</p>
