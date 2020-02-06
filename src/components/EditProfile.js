@@ -15,6 +15,7 @@ class EditProfile extends Component {
       oldPassword: '',
       newPassword: '',
       picture: '',
+      pictureName: '',
     }
 
     this.apiEndpoints = new APIAccess();
@@ -60,7 +61,6 @@ class EditProfile extends Component {
     const { username } = this.props.match.params;
 
     if (picture === '' || picture === null) {
-      console.log('no pic!')
       picture = 'https://res.cloudinary.com/dxatyucj2/image/upload/v1580833315/go-green/vegetalwhite.jpg.jpg'
     }
 
@@ -75,11 +75,10 @@ class EditProfile extends Component {
   handleUpload (event) {
     const uploadData = new FormData();
     uploadData.append("imageUrl", event.target.files[0]);
-    console.log('hi!', event.target.files)
+    const { name } = event.target.files[0];
     this.apiEndpoints.handleUpload(uploadData)
     .then(response => {
-      console.log('upload response:', response)
-        this.setState({ picture: response.data.secure_url });
+        this.setState({ picture: response.data.secure_url, pictureName: name });
       })
       .catch(err => {
         console.log("Error while uploading the file: ", err);
@@ -87,15 +86,13 @@ class EditProfile extends Component {
   }
 
   render() {
-    console.log(this.state);
-    console.log(this.props.message);
     return(
       <div className="container-fluid profile-edit-form" style={{width: '85%'}}>
       {
         this.props.message && <Message successMessage={this.props.successMessage} message={this.props.message}/>
       }
         <form onSubmit={this.handleSubmit}>
-          <h3>Edit profile</h3>
+          <h3 className="pb-2 title-edit-profile">Edit profile</h3>
           <div className="form-row">
             <div className="form-group col-md-6">
               <label htmlFor="firstName">First name</label>
@@ -106,11 +103,11 @@ class EditProfile extends Component {
             <input type="text" className="form-control" id="lastName" name="lastName" onChange={this.handleChange} value={this.state.lastName}/>
             </div>
           </div>
-          <div class="input-group mb-3 d-flex flex-column">
+          <div className="input-group mb-3 d-flex flex-column">
             <label htmlFor="file">Replace picture</label>
-            <div class="custom-file">
-              <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="profilePic" onChange={this.handleUpload}/>
-              <label class="custom-file-label" htmlFor="inputGroupFile01">Choose file</label>
+            <div className="custom-file">
+              <input type="file" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="profilePic" onChange={this.handleUpload}/>
+              <label className="custom-file-label img-name" htmlFor="inputGroupFile01">{this.state.pictureName ? this.state.pictureName : 'Choose file...'}</label>
             </div>
           </div>
           <div className="form-group">
@@ -130,9 +127,11 @@ class EditProfile extends Component {
             <input type="password" className="form-control" id="newPassword" name="newPassword" onChange={this.handleChange} value={this.state.newPassword}/>
           </div>
           
-          <button type="submit">Save changes</button>
-          <Link to={`/user/${this.props.match.params.username}`}> Cancel </Link>
-        </form>
+          <div className="d-flex justify-content-between">
+            <button type="submit" className="btn btn-primary">Save changes</button>
+            <Link to={`/user/${this.props.match.params.username}`}> Return </Link>
+          </div>
+        </form> 
       </div>
     )
   }

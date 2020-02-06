@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { Link} from 'react-router-dom';
 
 class SearchButtons extends Component {
   constructor(props) {
@@ -9,22 +9,15 @@ class SearchButtons extends Component {
       searchWord: '',
     }
 
-    this.clickOnSearchButton = this.clickOnSearchButton.bind(this);
     this.clickOnFilter = this.clickOnFilter.bind(this);
     this.handleChange = this.handleChange.bind(this);
 
   }
 
-  //Click on Search button to Search
-  clickOnSearchButton(event) {
-    event.preventDefault();
-    console.log("Search Clicked");
-  }
-
   //Click on Filter button to open filters
   clickOnFilter(event){
     event.preventDefault();
-    console.log('Filter Clicked')
+    console.log('Filter clicked')
     this.props.showFilter();
   }
 
@@ -41,11 +34,8 @@ class SearchButtons extends Component {
   }
 
   render() {
-    console.log(this.state)
-    console.log(this.props)
     return (
       <div>
-
         <div className="search-bar-container">
         {/* created form to deal with submit */}
           <form className="search-bar-container" onSubmit={this.handleSubmit}>
@@ -59,12 +49,13 @@ class SearchButtons extends Component {
             <button onClick={this.clickOnFilter}>
               <i className="fas fa-filter"></i>
             </button>
-            <button type="submit" onClick={this.clickOnSearchButton}>
+            <Link to="/allrecipes">
+            <button type="submit">
               <i className="fas fa-search"></i>
             </button>
+            </Link>
           </form>
         </div>
-
       </div>
     );
   }

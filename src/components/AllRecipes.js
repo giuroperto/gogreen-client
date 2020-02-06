@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import AOS from "aos";
 import { Link } from 'react-router-dom';
+import "aos/dist/aos.css";
 import RecipeCard from './RecipeCard.js'
 import axios from 'axios';
 const recipesCleanTestAlex = require('./AlexInput.js');
 
+AOS.init({ offset: 80 });
 
 class AllRecipes extends Component {
   constructor(props) {
@@ -16,6 +19,13 @@ render(){
       {(this.props.allData.displayedRecipes) ? (
 
       <div className='all-recipes-full-list mb-3'>
+      <div className="all-recipes-header d-flex justify-content-center">
+        <h2>Find the Perfect Recipe for Your Next Meal</h2>
+      </div>
+      <div className='sub-header d-flex justify-content-center'>
+      <p>Narrow your filter by <span>cuisine</span>, <span>dish type</span> or <span>cooking level</span></p>
+      </div>
+
           <div className='all-recipes-each-listed'>
             {this.props.allData.displayedRecipes && this.props.allData.displayedRecipes.map(element => {
                 let determinedOwner = '';
@@ -24,7 +34,6 @@ render(){
                 } else {
                   determinedOwner = element.owner.username
                 }
-                console.log(element.owner);
                 let cleanDishType = '';
                 if (element.dishTypes[0] === undefined) {
                   cleanDishType = "N/A"
@@ -34,13 +43,13 @@ render(){
                
                 let cleanLink = "/recipe/"+ element._id
 
-                return (<RecipeCard name={element.name} image={element.picture} description={element.description} owner={determinedOwner} link={cleanLink} time={element.totalTimeMinutes} vegan={element.vegan} cuisines={element.cuisines} dishTypes={cleanDishType} allRecipes = {this.props.allData.allRecipes}/>);
+                return (<div  data-aos="fade-right"><RecipeCard name={element.name} image={element.picture} description={element.description} owner={determinedOwner} link={cleanLink} time={element.totalTimeMinutes} vegan={element.vegan} cuisines={element.cuisines} dishTypes={cleanDishType} allRecipes = {this.props.allData.allRecipes}/></div>);
 
             })}  
           </div>
-          <a href="/">
+          <Link to="/">
             <button type="button" className="btn btn-success">Return home</button>
-          </a>
+          </Link>
       </div>
       ) : (
         <h1>Loading!!!</h1>

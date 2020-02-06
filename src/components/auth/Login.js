@@ -62,7 +62,7 @@ class Login extends Component {
           >
           <h2>Sign In</h2>
           <div className='login-logo'>
-            <img src="/images/logo.png" alt="logo"/>
+            <img src="https://res.cloudinary.com/dxatyucj2/image/upload/v1580900039/go-green/logo_sbjwg4.png" alt="logo"/>
           </div>
             <div className="form-group mt-3">
               <input

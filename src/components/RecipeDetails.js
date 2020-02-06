@@ -13,6 +13,7 @@ class RecipeDetails extends Component {
       determinedOwner: '',
       cleanDishType: '',
       ingredients: '',
+      count: 0
     };
     this.apiEndpoints = new APIAccess();
   }
@@ -22,6 +23,7 @@ class RecipeDetails extends Component {
 
     this.apiEndpoints.getOneRecipe(this.props.match.params.recipeID)
     .then(response => {
+      console.log('im in')
       let givenUniqueRecipe = response.data;
       let givenDeterminedOwner = '';
       if (givenUniqueRecipe.owner === undefined){
@@ -61,6 +63,7 @@ class RecipeDetails extends Component {
 
 
   render() {
+    let stepCount = 0;
     return(
       <>
       {this.state.uniqueRecipe.ingredients ? (
@@ -69,36 +72,46 @@ class RecipeDetails extends Component {
           {
           this.props.message && <Message successMessage={this.props.successMessage} message={this.props.message}/>
           }
-          <div className="row d-flex flex-column justify-content-center mb-4 mt-4">
-             <div><h3><b>{this.state.uniqueRecipe.name}</b></h3></div>
-             <div><span className="recipe-description">{this.state.uniqueRecipe.description}</span></div>         
+          <div className="row d-flex flex-column justify-content-center align-items-center mb-2 mt-4">
+            <div className="recipe-details-picture">
+                <img src={this.state.uniqueRecipe.picture} alt={this.state.uniqueRecipe.name}></img>
+            </div>
+            <div className="recipe-details-name">
+               <h3>{this.state.uniqueRecipe.name}</h3>
+            </div>
+            <div>
+              <span className="recipe-description">{this.state.uniqueRecipe.description}</span>
+            </div>         
           </div>
+            <div className="row recipe-details-general-info">
+              <div className="col-sm d-flex recipe-details-general-info-col">
+                <div className="individual-detail">
+                  <img className='recipe-details-icon' src="../images/hat-icon.png" alt="Contributed by" />
+                  <p>{this.state.determinedOwner}</p> 
+                </div>
+                <div className="individual-detail">
+                  <img className='recipe-details-icon' src="../images/clock.png" alt="Prep time" />
+                  <p>{this.state.uniqueRecipe.totalTimeMinutes} minutes</p> 
+                </div>
+              </div>
+              <div className="col-sm d-flex recipe-details-general-info-col">
+                <div className="individual-detail">
+                  <img className='recipe-details-icon' src="../images/food2.png" alt="Dish type" />
+                  <p>{this.state.cleanDishType}</p> 
+                </div>       
+                <div className="individual-detail">
+                  <img className='recipe-details-icon' src="../images/cuisine-icon.png" alt="Cuisine" />
+                  <p>{this.state.cuisine}</p> 
+                </div>          
+              </div>
 
-            <div className="row ">
-                <div id="individual-left" className="col-sm">
-                    <img src={this.state.uniqueRecipe.picture} alt="Recipe-Text" style={{maxWidth: '30vw', height: '100%'}}></img>
-                </div>
-                <div id="individual-right" className="col-sm d-flex flex-column justify-content-center align-items-start">
-                    <div>
-                        <p><b>Created by: </b>{this.state.determinedOwner}</p> 
-                    </div>
-                    <div>
-                        <p><b>Prep time: </b>{this.state.uniqueRecipe.totalTimeMinutes} minutes</p> 
-                    </div>
-                    <div>
-                        <p><b>Dish type: </b>{this.state.cleanDishType}</p> 
-                    </div>       
-                    <div>
-                        <p><b>Cuisine: </b>{this.state.cuisine}</p> 
-                    </div>          
-                </div>
             </div>
             <div className="align-center">
-              <div className="row d-flex justify-content-center">
+              <div className="row d-flex justify-content-center text-container">
                 <h4 className="mb-4 mt-4">Ingredients</h4>
               </div>
               <div className="row d-flex justify-content-center mr-1 ml-1">
-                <div className="row text-left">
+                <div className="text-left">
                   <ul>
                   {this.state.ingredients.map((i, idx) => {
                       return <li key={idx}>{i}</li>;
@@ -108,18 +121,23 @@ class RecipeDetails extends Component {
               </div>
             </div>
 
-            <div className="row d-flex justify-content-center">
-              <h4 className="mb-4 mt-4">Instructions</h4>
+                <div className='d-flex justify-content-center text-container2'>
+                <h4 className="mb-4 mt-4">Instructions</h4>
+                </div>
+            <div className="row d-flex justify-content-center instructions-div">
+                
+
 
               {(this.state.uniqueRecipe.instructions.length > 0) ?
               this.state.uniqueRecipe.instructions.map(i => {
+                stepCount += 1;
                 let timeRendered = "";
                 i.stepTimeMinutes ? (timeRendered = `${i.stepTimeMinutes} minutes`) : (timeRendered = "");
                 return (
                   <div className="container-fluid">
                     <div className="row">
                       <div className="col-xs-6 col-sm-3 d-flex flex-column justify-content-center">
-                        <div><p className="step mb-0"><b>Step {i.step}</b></p></div>
+                        <div><p className="step mb-0"><b>Step {stepCount}</b></p></div>
                         <div><p className="step mb-0"><i>{timeRendered}</i></p></div>
                       </div>
                       <div className="col-xs-6 col-xs-mt-2 col-sm-9 text-left">{i.text}</div>
@@ -144,30 +162,30 @@ class RecipeDetails extends Component {
 
             
             <div className='d-flex justify-content-center'>
-              <div className="edit-button mr-3">
+              <div className="edit-button mb-3">
                 {this.props.loggedInUser && this.state.uniqueRecipe.owner && this.state.uniqueRecipe.owner.username ===
                   this.props.loggedInUser.username && (
-                  <button type="button" class="btn btn-secondary">
-                    <Link to={`/recipe/${this.props.match.params.recipeID}/edit`}>
+                  <Link to={`/recipe/${this.props.match.params.recipeID}/edit`}>
+                    <button type="button" class="btn btn-secondary">
                       Edit Recipe
-                    </Link>
-                  </button>
+                    </button>
+                  </Link>
                 )}
               </div>
-              <div className="edit-button ml-3">
+              {/* <div className="edit-button ml-3">
                 {this.props.loggedInUser && (
-                  <button type="button" class="btn btn-secondary">
-                    <Link to={``}>
+                  <Link to={``}>
+                    <button type="button" class="btn btn-secondary">
                       Fork this Recipe
-                    </Link>
-                  </button>
+                    </button>
+                  </Link>
                 )}
-              </div>
+              </div> */}
             </div>
 
-          <a href="/allrecipes">
+          <Link to="/allrecipes">
             <button type="button" className="btn btn-success">Return to all recipes</button>
-          </a>
+          </Link>
         </div>
       ) : (
       <h1>Loading!!!</h1>)

@@ -20,7 +20,6 @@ class Step3 extends Component {
   }
 
   componentDidMount() {
-    console.log('ingredients', this.props);
     if (this.props.ingredients.length !== 0) {
       this.setState({
         inputNumber: 3,

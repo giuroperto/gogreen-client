@@ -35,7 +35,8 @@ class EditRecipeForm extends Component {
         }],
       vegan: false,
       picture: '',
-      ingredientsInputs: 3,
+      pictureName: '',
+      ingredientsInputs: 1,
       instructionsInputs: 3
     }
 
@@ -83,7 +84,7 @@ class EditRecipeForm extends Component {
         let firstCuisine = cuisines[0];
         cuisines = this.capitalizeData(firstCuisine);
       }
-      this.setState({name, description, dishTypes, cuisines, servings, ingredients: givenIngredients, instructions, vegan, ingredientsInputs, instructionsInputs, picture}, () => console.log('meu log', this.state));
+      this.setState({name, description, dishTypes, cuisines, servings, ingredients: givenIngredients, instructions, vegan, ingredientsInputs, instructionsInputs, picture}, () => console.log('Inputs Set'));
     }
   }
 
@@ -177,7 +178,6 @@ class EditRecipeForm extends Component {
       });
     } else if (name.includes('step')) {
       instructionsValuesCopy[myKey].stepTimeMinutes = value;
-      console.log('name:', name, 'value:', value, 'copied array:', instructionsValuesCopy)
       this.setState({
         instructions: instructionsValuesCopy
       });
@@ -186,10 +186,11 @@ class EditRecipeForm extends Component {
 
   handleFileUpload (event) {
     const uploadData = new FormData();
+    let { name } = event.target.files[0];
     uploadData.append("imageUrl", event.target.files[0]);
     this.apiEndpoints.handleUpload(uploadData)
     .then(response => {
-        this.setState({ picture: response.data.secure_url });
+        this.setState({ picture: response.data.secure_url, pictureName: name });
       })
       .catch(err => {
         console.log("Error while uploading the file: ", err);
@@ -199,7 +200,7 @@ class EditRecipeForm extends Component {
 
   render() {
     return(
-      <form onSubmit={this.handleSubmit} className="mb-5">
+      <form onSubmit={this.handleSubmit} className="edit-recipe-form mb-5">
         
         <div className="form-group">
           <label htmlFor="name">Name</label>
@@ -212,6 +213,8 @@ class EditRecipeForm extends Component {
             onChange={this.handleChange}
             required
           />
+        </div>
+        <div className="form-group">
           <label htmlFor="description">Description</label>
           <input
             className="form-control"
@@ -226,7 +229,12 @@ class EditRecipeForm extends Component {
 
         <div className="form-group">
           <label htmlFor="file">Replace picture</label>
-          <input type="file" class="form-control-file" id="file" onChange={this.handleFileUpload}/>
+          <div className="input-group d-flex flex-column">
+            <div className="custom-file">
+              <input type="file" className="form-control-file custom-file-input" id="file" name="file" onChange={this.handleFileUpload}/>
+              <label className="custom-file-label img-name" forHtml="file"> {this.state.pictureName ? this.state.pictureName : 'Choose file...'} </label>
+            </div>
+          </div>
         </div>
 
         <div className="form-group">
@@ -253,7 +261,7 @@ class EditRecipeForm extends Component {
         <div className="form-group">
           <label htmlFor="ingredients">Ingredients</label>
           {this.renderIngredientsInputs().map(input => {
-          if (input.key === this.state.ingredients.length -1) {
+          if (input.key === this.state.ingredientsInputs -1) {
             return (
             <div class="input-group mb-3">
               <input
@@ -309,20 +317,27 @@ class EditRecipeForm extends Component {
           <div className="align-self-end">
             <button 
               className="btn btn-secondary"
-              type="button" onClick={this.addInput}>+</button>
+              type="button" onClick={() => this.addInput('inst')}>+</button>
           </div>
         </div>
 
         <div className='d-flex justify-content-between mt-5'>
           <div className="delete-button">
               <Link to={`/recipe/${this.props.match.params.recipeID}/delete`}>
-                <button type="button" class="btn btn-warning">
+                <button type="button" class="btn btn-danger">
                     Delete Recipe
                 </button>
               </Link>
           </div>
           <div className="submit-button">
             <button type="submit" className="btn btn-primary">Save Changes</button>
+          </div>
+          <div className="cancel-button">
+              <Link to={`/recipe/${this.props.match.params.recipeID}`}>
+                <button type="button" class="btn btn-warning">
+                    Cancel
+                </button>
+              </Link>
           </div>
         </div>
       </form>

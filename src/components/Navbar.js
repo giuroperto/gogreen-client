@@ -31,18 +31,16 @@ class Navbar extends Component {
       veganToggle: true
     });
     this.props.getVeganState(true);
-    console.log('vegan true!')
   }
   veganFalse() {
     this.setState({
       veganToggle: false
     });
     this.props.getVeganState(false);
-    console.log('vegan false!')
   }
 
   logoutUser() {
-    console.log('logging out')
+    console.log('Log out')
     this.setState({
       loader: true,
     })
@@ -61,11 +59,18 @@ class Navbar extends Component {
   
   componentDidUpdate(prevProps) {
     if (this.props.allData.loggedInUser !== prevProps.allData.loggedInUser) {
-      this.props.allData.loggedInUser ? this.setState({ loggedInUser: this.props.allData.loggedInUser, showLoginAndSignupButtons: false, showLogoutAndOtherButtons: true, }) : this.setState({ loggedInUser: this.props.allData.loggedInUser, showLoginAndSignupButtons: true, showLogoutAndOtherButtons: false,  })
+      this.props.allData.loggedInUser ? this.setState({ loggedInUser: this.props.allData.loggedInUser, showLoginAndSignupButtons: false, showLogoutAndOtherButtons: true, }) : this.setState({ loggedInUser: this.props.allData.loggedInUser, showLoginAndSignupButtons: true, showLogoutAndOtherButtons: false, })
     }
   }
+
+  // componentDidMount() {
+  //   this.props.getUser(this.state.loggedInUser);
+  // }
+
+  // ajustar o getUser para ficar na Navbar
+
   render() {
-    console.log(this.state)
+    console.log('state do navbar', this.state);
     let vegetarianString = '';
     let veganString = '';
     if (this.state.veganToggle){
@@ -93,11 +98,11 @@ class Navbar extends Component {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div
-            className="collapse navbar-collapse d-flex justify-content-between"
+            className="collapse navbar-collapse justify-content-between"
             id="navbarSupportedContent"
           >
             <div className="d-md-flex flex-direction-start nav-buttons navbar-list">
-              <NavLink className="nav-navbar nav-link" to="/aboutus">
+              <NavLink className="nav-navbar nav-link px-0" to="/aboutus">
                 Why GoGreen?
               </NavLink>
             </div>
@@ -113,14 +118,14 @@ class Navbar extends Component {
               {this.state.showLoginAndSignupButtons && (
                 <>
                   <NavLink
-                    className="nav-navbar nav-link d-flex align-items-center mr-3 nav-icon-container"
+                    className="nav-navbar nav-link d-flex align-items-center nav-icon-container px-0"
                     to="/signup"
                   >
                     <img src="https://res.cloudinary.com/dxatyucj2/image/upload/v1580900039/go-green/mobile-phone_qkzglz.png" alt="recipe-icon" />
                     <p className="text-nowrap">Sign Up</p>
                   </NavLink>
                   <NavLink
-                    className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
+                    className="nav-navbar nav-link d-flex align-items-center nav-icon-container px-0"
                     to="/login"
                   >
                     <img src="https://res.cloudinary.com/dxatyucj2/image/upload/v1580900039/go-green/recipe2_owkbb1.png" alt="chef-icon" />
@@ -136,7 +141,7 @@ class Navbar extends Component {
                 className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
                 to="/addrecipe"
               >
-                <img className="mr-1" src="https://res.cloudinary.com/dxatyucj2/image/upload/v1580900036/go-green/add2_dvvobd.png" alt="add-icon" />
+                <img className="mr-1" src="images/plus.png" alt="add-icon" />
                 <p>Add Recipe</p>
               </NavLink>
               <NavLink
@@ -163,7 +168,7 @@ class Navbar extends Component {
           <div className="split-bar"></div>
         </div>
         <nav className="navbar navbar-light second-navbar d-flex align-items-center navbar-list">
-          <div className="second-nav-icon-div d-flex align-items-center ml-2">
+          <div className="second-nav-icon-div d-flex align-items-center">
             <NavLink
               className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
               to="/allrecipes" onClick={this.veganFalse}
@@ -179,12 +184,12 @@ class Navbar extends Component {
             </NavLink>
 
             <NavLink className="nav-navbar nav-link d-flex align-items-center nav-icon-container" to="/allrecipes" onClick={this.veganTrue}>
-              <img src={veganString} alt="vegetables-icon" />
+              <img src={veganString} className="mr-2" alt="vegetables-icon" />
               <p className="text-nowrap">Vegan</p>
             </NavLink>
 
           </div>
-          <div className="mr-3">
+          <div className="second-navbar-search">
             <SearchButtons
               showFilter={this.filterRender}
               getSearchWord={this.props.getSearchWord}

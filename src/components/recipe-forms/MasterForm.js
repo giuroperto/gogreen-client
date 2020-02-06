@@ -23,6 +23,7 @@ class MasterForm extends Component {
       instructions: [],
       vegan: false,
       picture: '',
+      pictureName: '',
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -46,7 +47,6 @@ class MasterForm extends Component {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
-    console.log(value)
     this.setState({
       [name]: value
     });
@@ -73,10 +73,8 @@ class MasterForm extends Component {
     let owner = this.props.allData.loggedInUser._id;
     let dishTypesArr = [dishTypes];
     let cuisinesArr = [cuisines];
-    console.log(picture);
     this.apiEndpoints.addNewRecipe(owner, name, description, ingredients, dishTypesArr, vegan, cuisinesArr, totalTimeMinutes, servings, instructions, picture)
     .then(response => {
-      console.log(response.data)
       const recipeID = response.data.newRecipe._id;
       this.props.getMessage(response.status, response.data.message);
       this.redirectPage(this.props.successMessage, recipeID);
@@ -87,11 +85,11 @@ class MasterForm extends Component {
 
   handleFileUpload (event) {
     const uploadData = new FormData();
+    let { name } = event.target.files[0];
     uploadData.append("imageUrl", event.target.files[0]);
-    console.log('hi!', event.target.files)
     this.apiEndpoints.handleUpload(uploadData)
     .then(response => {
-        this.setState({ picture: response.data.secure_url });
+        this.setState({ picture: response.data.secure_url, pictureName: name });
       })
       .catch(err => {
         console.log("Error while uploading the file: ", err);
@@ -145,7 +143,7 @@ class MasterForm extends Component {
 
   render() {
     return(
-      <div className="w-50 py-5">
+      <div className="master-form py-5">
       {
         this.props.message && <Message successMessage={this.props.successMessage} message={this.props.message}/>
       }
@@ -158,6 +156,7 @@ class MasterForm extends Component {
             description={this.state.description}
             handleFileUpload={this.handleFileUpload}
             picture={this.state.picture}
+            pictureName={this.state.pictureName}
           />
           <Step2 
             currentStep={this.state.currentStep} 

@@ -38,7 +38,12 @@ class Step1 extends Component {
       </div>
       <div className="form-group">
         <label htmlFor="file">Add a <strong>picture</strong> of your dish</label>
-        <input type="file" class="form-control-file" id="file" required onChange={this.props.handleFileUpload}/>
+        <div className="input-group d-flex flex-column">
+          <div className="custom-file">
+          <input type="file" className="form-control-file custom-file-input" id="file" name="file" required onChange={this.props.handleFileUpload}/>
+          <label className="custom-file-label img-name" forHtml="file"> {this.props.pictureName ? this.props.pictureName : 'Choose file...'} </label>
+          </div>
+        </div>
       </div>
       </>
     )

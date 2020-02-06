@@ -19,8 +19,9 @@ import APIAccess from "./components/api/api-access";
 import EditRecipe from './components/EditRecipe'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Footer from "./components/Footer";
-//Test
-//Test 2
+import ProtectedRoute from './components/auth/protected-route';
+
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -84,7 +85,7 @@ class App extends Component {
       // messages from API
       message: "",
       successMessage: false,
-  
+      count: 0,
       loader: true,
     };
     this.service = new AuthService();
@@ -142,8 +143,8 @@ class App extends Component {
 
   componentDidMount() {
     this.getRecipes();
-    console.log(this.state.allRecipes)
   }
+
   getFilters(filter, selection) {
     switch (filter) {
       case "searchDishType":
@@ -166,10 +167,8 @@ class App extends Component {
     }
     this.getRecipes();
     this.filterNavBar();
-    console.log(this.state)
   }
   getSearchWord(word) {
-    console.log(word);
     this.setState({
       searchWord: word
     });
@@ -177,7 +176,6 @@ class App extends Component {
     this.filterNavBar();
   }
   getVeganState(boolean) {
-    console.log(boolean);
     this.setState({
       searchVeganOnly: boolean
     });
@@ -199,7 +197,7 @@ class App extends Component {
       successMessage: typeOfMessage,
     });
 
-    setTimeout(this.clearMessage, 4000);
+    setTimeout(this.clearMessage, 5000);
   }
 
   clearMessage(){
@@ -220,6 +218,7 @@ class App extends Component {
       })
       .catch(err => console.log(err));
   }
+
   fetchUser() {
     if (this.state.loggedInUser === null) {
       this.service
@@ -236,6 +235,7 @@ class App extends Component {
         });
     }
   }
+
   getUser(user) {
     this.setState({
       loggedInUser: user
@@ -243,10 +243,7 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.loggedInUser);
-    console.log(this.state.message);
-    console.log(this.state);
-    // console.log(this.state.successMessage);
+    console.log('state do app', this.state);
     this.fetchUser();
     return (
       <div className="App">
@@ -302,10 +299,15 @@ class App extends Component {
                 path="/allrecipes"
                 render={props => <AllRecipes allData={this.state} {...props} />}
               />
-              <Route
+              <ProtectedRoute
                 exact
+                user={this.state.loggedInUser}
+                message={this.state.message}
+                successMessage={this.state.successMessage}
+                getMessage={this.getMessage}
+                allData={this.state}
                 path="/addrecipe"
-                render={props => <AddRecipe allData={this.state} message={this.state.message} successMessage={this.state.successMessage} getMessage={this.getMessage} {...props} />}
+                component={AddRecipe}
               />
               <Route
                 exact
@@ -314,12 +316,14 @@ class App extends Component {
                   <Profile message={this.state.message} loggedInUser={this.state.loggedInUser} successMessage={this.state.successMessage} allRecipes={this.state.allRecipes} {...props} />
                 )}
               />
-              <Route
+              <ProtectedRoute
                 exact
+                user={this.state.loggedInUser}
+                successMessage={this.state.successMessage}
+                getMessage={this.getMessage}
+                message={this.state.message}
                 path="/user/:username/edit"
-                render={props => (
-                  <EditProfile message={this.state.message} successMessage={this.state.successMessage} getMessage={this.getMessage} {...props} />
-                )}
+                component={EditProfile}
               />
               <Route
                 exact
@@ -332,38 +336,37 @@ class App extends Component {
                 )}
               />
 
-              <Route
+              <ProtectedRoute
                 exact
+                user={this.state.loggedInUser}
+                loggedInUser={this.state.loggedInUser}
+                allData={this.state}
                 path='/recipe/:recipeID/edit'
-                render={props => (
-                  <EditRecipe
-                    allData={this.state}
-                    loggedInUser={this.state.loggedInUser}
-                    {...props}
+                component={EditRecipe}
                   />
                 )}
               />
 
-              <Route
+              <ProtectedRoute
                 exact
+                user={this.state.loggedInUser}
+                loggedInUser={this.state.loggedInUser}
+                message={this.state.message}
+                successMessage={this.state.successMessage}
+                getMessage={this.getMessage}
                 path="/recipe/:recipeID/delete"
-                render={(props) => (
-                  <ConfirmDeleteRecipe
-                    loggedInUser={this.state.loggedInUser}
-                    message={this.state.message}
-                    successMessage={this.state.successMessage}
-                    getMessage={this.getMessage}
-                    {...props}
-                  />
-                )}
+                component={ConfirmDeleteRecipe}
               />
 
-              <Route
+              <ProtectedRoute
                 exact
+                user={this.state.loggedInUser}
+                loggedInUser={this.state.loggedInUser}
+                getUser={this.getUser}
+                successMessage={this.successMessage}
+                getMessage={this.getMessage}
                 path="/user/:username/delete"
-                render={(props) => (
-                  <ConfirmDelete loggedInUser={this.state.loggedInUser} getMessage={this.getMessage} successMessage={this.successMessage} getUser={this.getUser} {...props} />
-                )}
+                component={ConfirmDelete}
               />
 
             </Switch>

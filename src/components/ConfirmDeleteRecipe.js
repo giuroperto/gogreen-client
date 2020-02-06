@@ -20,7 +20,6 @@ class ConfirmDeleteRecipe extends Component {
 
     this.apiEndpoints.deleteRecipe(recipeID)
       .then(response => {
-        console.log('dentro do recipe user api')
         this.props.getMessage(response.status, response.data.message);
         this.redirectPage(this.props.successMessage);
         this.props.getUser(null);
