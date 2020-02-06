@@ -73,7 +73,7 @@ const Footer = () => {
       </MDBContainer>
       <div className="footer-copyright text-center pt-3 pb-1 footer-copyrights">
         <MDBContainer fluid>
-          <p>@2020 Copyrigths: <Link to='/'> GoGreen.com</Link></p>
+          <p>@2020 Copyrights: <Link to='/'> GoGreen.com</Link></p>
         </MDBContainer>
       </div>
     </MDBFooter>
