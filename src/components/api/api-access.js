@@ -3,7 +3,7 @@ import axios from 'axios';
 class APIAccess {
   constructor() {
     this.APIAccess = axios.create({
-      baseURL: 'http://localhost:5000/api',
+      baseURL: 'http://go-green-recipes.herokuapp.com/api',
       withCredentials: true,
     });
   }
