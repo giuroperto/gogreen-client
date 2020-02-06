@@ -9,7 +9,7 @@ const ProfileRecipeCard = props => {
                         style={{height: '24vh', width: '95%', backgroundImage: `url(${props.picture})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
                         <Link to={`/recipe/${props._id}`} style={{width: '100%', height: '100%', display: 'block'}}></Link>
                     </div>
-                <div className="col-sm-4 d-flex flex-column ml-3 justify-content-start align-items-start individual-right">
+                {/* <div className="col-sm-4 d-flex flex-column ml-3 justify-content-start align-items-start individual-right">
                     <div className="mt-1 mb-4">
                         <Link to={`/recipe/${props._id}`}>
                             <h3 className="mb-0">{props.name}</h3>
@@ -21,6 +21,40 @@ const ProfileRecipeCard = props => {
                         <p><b>Prep time: </b>{props.totalTimeMinutes} minutes</p> 
                         <p><b>Dish type: </b>{props.dishTypes[0]}</p> 
                     </div>
+                </div> */}
+                <div
+                  id="individual-right"
+                  className="profile-recipe-card-infos col-md-6 d-flex flex-column align-items-start"
+                >
+                  <div className="mt-3">
+                    <Link to={`/recipe/${props._id}`}>
+                      <h3>{props.name}</h3>
+                    </Link>
+                  </div>
+                  <div>
+                    <h4>{props.description}</h4>
+                  </div>
+                  <div>
+                    <p>
+                      <img className='profile-recipe-card-img' src="../images/hat-icon.png" alt="chef" />
+                      <b>Created by:  </b>
+                      {props.owner.username}
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <img className='profile-recipe-card-img' src="../images/clock.png" alt="clock" />
+                      <b>Prep time: </b>
+                      {props.totalTimeMinutes} minutes
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <img className='profile-recipe-card-img' src="../images/food2.png" alt="plate" />
+                      <b>Dish type: </b>
+                      {props.dishTypes[0]}
+                    </p>
+                  </div>
                 </div>
             </div>
             <hr />    
