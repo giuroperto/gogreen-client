@@ -107,7 +107,7 @@ class EditProfile extends Component {
             <label htmlFor="file">Replace picture</label>
             <div className="custom-file">
               <input type="file" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="profilePic" onChange={this.handleUpload}/>
-              <label className="custom-file-label" htmlFor="inputGroupFile01">{this.state.pictureName ? this.state.pictureName : 'Choose file...'}</label>
+              <label className="custom-file-label img-name" htmlFor="inputGroupFile01">{this.state.pictureName ? this.state.pictureName : 'Choose file...'}</label>
             </div>
           </div>
           <div className="form-group">

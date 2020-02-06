@@ -23,6 +23,7 @@ class MasterForm extends Component {
       instructions: [],
       vegan: false,
       picture: '',
+      pictureName: '',
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -84,10 +85,11 @@ class MasterForm extends Component {
 
   handleFileUpload (event) {
     const uploadData = new FormData();
+    let { name } = event.target.files[0];
     uploadData.append("imageUrl", event.target.files[0]);
     this.apiEndpoints.handleUpload(uploadData)
     .then(response => {
-        this.setState({ picture: response.data.secure_url });
+        this.setState({ picture: response.data.secure_url, pictureName: name });
       })
       .catch(err => {
         console.log("Error while uploading the file: ", err);
@@ -154,6 +156,7 @@ class MasterForm extends Component {
             description={this.state.description}
             handleFileUpload={this.handleFileUpload}
             picture={this.state.picture}
+            pictureName={this.state.pictureName}
           />
           <Step2 
             currentStep={this.state.currentStep} 
