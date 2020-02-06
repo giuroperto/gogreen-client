@@ -141,7 +141,7 @@ class Navbar extends Component {
                 className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
                 to="/addrecipe"
               >
-                <img className="mr-1" src="https://res.cloudinary.com/dxatyucj2/image/upload/v1580900036/go-green/add2_dvvobd.png" alt="add-icon" />
+                <img className="mr-1" src="images/plus.png" alt="add-icon" />
                 <p>Add Recipe</p>
               </NavLink>
               <NavLink

@@ -72,36 +72,46 @@ class RecipeDetails extends Component {
           {
           this.props.message && <Message successMessage={this.props.successMessage} message={this.props.message}/>
           }
-          <div className="row d-flex flex-column justify-content-center mb-4 mt-4">
-             <div><h3><b>{this.state.uniqueRecipe.name}</b></h3></div>
-             <div><span className="recipe-description">{this.state.uniqueRecipe.description}</span></div>         
+          <div className="row d-flex flex-column justify-content-center align-items-center mb-2 mt-4">
+            <div className="recipe-details-picture">
+                <img src={this.state.uniqueRecipe.picture} alt={this.state.uniqueRecipe.name}></img>
+            </div>
+            <div className="recipe-details-name">
+               <h3>{this.state.uniqueRecipe.name}</h3>
+            </div>
+            <div>
+              <span className="recipe-description">{this.state.uniqueRecipe.description}</span>
+            </div>         
           </div>
+            <div className="row recipe-details-general-info">
+              <div className="col-sm d-flex recipe-details-general-info-col">
+                <div className="individual-detail">
+                  <img className='recipe-details-icon' src="../images/hat-icon.png" alt="Contributed by" />
+                  <p>{this.state.determinedOwner}</p> 
+                </div>
+                <div className="individual-detail">
+                  <img className='recipe-details-icon' src="../images/clock.png" alt="Prep time" />
+                  <p>{this.state.uniqueRecipe.totalTimeMinutes} minutes</p> 
+                </div>
+              </div>
+              <div className="col-sm d-flex recipe-details-general-info-col">
+                <div className="individual-detail">
+                  <img className='recipe-details-icon' src="../images/food2.png" alt="Dish type" />
+                  <p>{this.state.cleanDishType}</p> 
+                </div>       
+                <div className="individual-detail">
+                  <img className='recipe-details-icon' src="../images/cuisine-icon.png" alt="Cuisine" />
+                  <p>{this.state.cuisine}</p> 
+                </div>          
+              </div>
 
-            <div className="row ">
-                <div id="individual-left" className="col-sm">
-                    <img src={this.state.uniqueRecipe.picture} alt="Recipe-Text" style={{maxWidth: '30vw', height: '100%'}}></img>
-                </div>
-                <div id="individual-right" className="col-sm d-flex flex-column justify-content-center align-items-start">
-                    <div>
-                        <p><b>Created by: </b>{this.state.determinedOwner}</p> 
-                    </div>
-                    <div>
-                        <p><b>Prep time: </b>{this.state.uniqueRecipe.totalTimeMinutes} minutes</p> 
-                    </div>
-                    <div>
-                        <p><b>Dish type: </b>{this.state.cleanDishType}</p> 
-                    </div>       
-                    <div>
-                        <p><b>Cuisine: </b>{this.state.cuisine}</p> 
-                    </div>          
-                </div>
             </div>
             <div className="align-center">
-              <div className="row d-flex justify-content-center">
+              <div className="row d-flex justify-content-center text-container">
                 <h4 className="mb-4 mt-4">Ingredients</h4>
               </div>
               <div className="row d-flex justify-content-center mr-1 ml-1">
-                <div className="row text-left">
+                <div className="text-left">
                   <ul>
                   {this.state.ingredients.map((i, idx) => {
                       return <li key={idx}>{i}</li>;
@@ -111,8 +121,12 @@ class RecipeDetails extends Component {
               </div>
             </div>
 
-            <div className="row d-flex justify-content-center">
-              <h4 className="mb-4 mt-4">Instructions</h4>
+                <div className='d-flex justify-content-center text-container2'>
+                <h4 className="mb-4 mt-4">Instructions</h4>
+                </div>
+            <div className="row d-flex justify-content-center instructions-div">
+                
+
 
               {(this.state.uniqueRecipe.instructions.length > 0) ?
               this.state.uniqueRecipe.instructions.map(i => {
@@ -158,7 +172,7 @@ class RecipeDetails extends Component {
                   </Link>
                 )}
               </div>
-              <div className="edit-button ml-3">
+              {/* <div className="edit-button ml-3">
                 {this.props.loggedInUser && (
                   <Link to={``}>
                     <button type="button" class="btn btn-secondary">
@@ -166,7 +180,7 @@ class RecipeDetails extends Component {
                     </button>
                   </Link>
                 )}
-              </div>
+              </div> */}
             </div>
 
           <Link to="/allrecipes">

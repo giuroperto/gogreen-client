@@ -322,7 +322,7 @@ class EditRecipeForm extends Component {
         <div className='d-flex justify-content-between mt-5'>
           <div className="delete-button">
               <Link to={`/recipe/${this.props.match.params.recipeID}/delete`}>
-                <button type="button" class="btn btn-warning">
+                <button type="button" class="btn btn-danger">
                     Delete Recipe
                 </button>
               </Link>
