@@ -59,15 +59,18 @@ class Navbar extends Component {
   
   componentDidUpdate(prevProps) {
     if (this.props.allData.loggedInUser !== prevProps.allData.loggedInUser) {
-      this.props.allData.loggedInUser ? this.setState({ loggedInUser: this.props.allData.loggedInUser, showLoginAndSignupButtons: false, showLogoutAndOtherButtons: true, }) : this.setState({ loggedInUser: this.props.allData.loggedInUser, showLoginAndSignupButtons: true, showLogoutAndOtherButtons: false,  })
+      this.props.allData.loggedInUser ? this.setState({ loggedInUser: this.props.allData.loggedInUser, showLoginAndSignupButtons: false, showLogoutAndOtherButtons: true, }) : this.setState({ loggedInUser: this.props.allData.loggedInUser, showLoginAndSignupButtons: true, showLogoutAndOtherButtons: false, })
     }
   }
 
+  // componentDidMount() {
+  //   this.props.getUser(this.state.loggedInUser);
+  // }
+
   // ajustar o getUser para ficar na Navbar
-  // ajustar meses com objeto/array
 
   render() {
-    console.log(this.state)
+    console.log('state do navbar', this.state);
     let vegetarianString = '';
     let veganString = '';
     if (this.state.veganToggle){

@@ -144,6 +144,7 @@ class App extends Component {
   componentDidMount() {
     this.getRecipes();
   }
+
   getFilters(filter, selection) {
     switch (filter) {
       case "searchDishType":
@@ -196,7 +197,7 @@ class App extends Component {
       successMessage: typeOfMessage,
     });
 
-    setTimeout(this.clearMessage, 4000);
+    setTimeout(this.clearMessage, 5000);
   }
 
   clearMessage(){
@@ -217,6 +218,7 @@ class App extends Component {
       })
       .catch(err => console.log(err));
   }
+
   fetchUser() {
     if (this.state.loggedInUser === null) {
       this.service
@@ -233,6 +235,7 @@ class App extends Component {
         });
     }
   }
+
   getUser(user) {
     this.setState({
       loggedInUser: user
@@ -240,6 +243,7 @@ class App extends Component {
   }
 
   render() {
+    console.log('state do app', this.state);
     this.fetchUser();
     return (
       <div className="App">

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import 'mdbreact';
+// import 'mdbreact';
 // import "mdbreact/dist/css/mdb.css";
 
 class Message extends Component {
