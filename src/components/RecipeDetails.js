@@ -107,7 +107,7 @@ class RecipeDetails extends Component {
 
             </div>
             <div className="align-center">
-              <div className="row d-flex justify-content-center">
+              <div className="row d-flex justify-content-center text-container">
                 <h4 className="mb-4 mt-4">Ingredients</h4>
               </div>
               <div className="row d-flex justify-content-center mr-1 ml-1">
@@ -121,8 +121,12 @@ class RecipeDetails extends Component {
               </div>
             </div>
 
+                <div className='d-flex justify-content-center text-container2'>
+                <h4 className="mb-4 mt-4">Instructions</h4>
+                </div>
             <div className="row d-flex justify-content-center instructions-div">
-              <h4 className="mb-4 mt-4">Instructions</h4>
+                
+
 
               {(this.state.uniqueRecipe.instructions.length > 0) ?
               this.state.uniqueRecipe.instructions.map(i => {
