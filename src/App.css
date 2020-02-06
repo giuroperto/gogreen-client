@@ -420,18 +420,24 @@ border: transparent;
 /* MESSAGE */
 
 .success-message {
-  margin-top: 10px;
-  padding: 5px 10px;
   background-color: rgb(129, 168, 129);
-  color: white;
 }
 
 .failure-message {
+  background-color: rgb(196, 98, 81);
+}
+
+.message {
   margin-top: 10px;
   padding: 5px 10px;
-  background-color: rgb(196, 98, 81);
   color: white;
+  /* transition: all ease-in-out .3s;
+  opacity: 1; */
 }
+
+/* .fade-out {
+  opacity: 0;
+} */
 
 /* PROFILE */
 

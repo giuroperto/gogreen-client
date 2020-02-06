@@ -62,6 +62,10 @@ class Navbar extends Component {
       this.props.allData.loggedInUser ? this.setState({ loggedInUser: this.props.allData.loggedInUser, showLoginAndSignupButtons: false, showLogoutAndOtherButtons: true, }) : this.setState({ loggedInUser: this.props.allData.loggedInUser, showLoginAndSignupButtons: true, showLogoutAndOtherButtons: false,  })
     }
   }
+
+  // ajustar o getUser para ficar na Navbar
+  // ajustar meses com objeto/array
+
   render() {
     console.log(this.state)
     let vegetarianString = '';
