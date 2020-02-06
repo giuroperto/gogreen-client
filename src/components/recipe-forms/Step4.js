@@ -20,6 +20,7 @@ class Step4 extends Component {
           },]
       }
     }
+    
     this.addInput = this.addInput.bind(this);
     // this.removeInput = this.removeInput.bind(this);
     // this.renderInputs = this.renderInputs.bind(this);

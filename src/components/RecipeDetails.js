@@ -13,6 +13,7 @@ class RecipeDetails extends Component {
       determinedOwner: '',
       cleanDishType: '',
       ingredients: '',
+      count: 0
     };
     this.apiEndpoints = new APIAccess();
   }
