@@ -19,6 +19,13 @@ render(){
       {(this.props.allData.displayedRecipes) ? (
 
       <div className='all-recipes-full-list mb-3'>
+      <div className="all-recipes-header d-flex justify-content-center">
+        <h2>Find the Perfect Recipe for your Next Meal</h2>
+      </div>
+      <div className='sub-header d-flex justify-content-center'>
+      <p>Narrow your filter by cuisine, dish type or cooking level</p>
+      </div>
+
           <div className='all-recipes-each-listed'>
             {this.props.allData.displayedRecipes && this.props.allData.displayedRecipes.map(element => {
                 let determinedOwner = '';

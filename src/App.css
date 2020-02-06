@@ -25,12 +25,10 @@ img {
 
 }
 
-
 /* NAVBARS */
 
 .nav-container{
   box-shadow: 0 4px 2px -2px rgba(0,0,0,.4);
-  width: 100vw;
   background-color: rgb(182, 165, 148);
 
 }
@@ -56,7 +54,6 @@ img {
 
 .second-navbar {
   background-color: rgba(255, 255, 255, 0.1);
-  padding: 0 !important;
 }
 
 .second-nav-icon-div {
@@ -144,7 +141,7 @@ border: transparent;
 }
 
 .section1-div {
-  margin: 8vh 0 0 15vw;
+  /* margin: 8vh 0 0 15vw; */
 }
 
 .section1-div h2 {
@@ -185,12 +182,70 @@ border: transparent;
   border-radius: 0 0 20px 20px;
 }
 
+/* ALL RECEPIES */
 
-/* SECTION 2 */
+.all-recipes-header {
+  position: relative;
+  text-align: center;
+  margin: 10vh 10vw 0 10vw;
+}
 
-/* .section2 {
-  
-} */
+.all-recipes-header::before {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 1px;
+    z-index: -1;
+    background-color: #d8d8d8;
+    content: "";
+}
+
+.all-recipes-header h2 {
+  line-height: 1.2;
+  letter-spacing: 0.2vw;
+  width: 55vw;
+  background-color: #fff;
+  font-weight: bold;
+  color: rgba(123,72,32, 0.9)
+}
+
+.sub-header {
+  margin-bottom: 10vh;
+}
+
+.sub-header p {
+  line-height: 1.5;
+  letter-spacing: 0.2vw;
+  font-style: italic;
+  color: rgba(123,72,32, 0.7)
+}
+
+/* RECIPE CARD */
+
+.recipe-img {
+  border-radius: 1px;
+  width: 35vw;
+}
+
+.recipe-card-infos p {
+  letter-spacing: 0.1rem;
+
+}
+
+.recipe-card-infos h3 {
+  margin-bottom: 6vh;
+  color: rgba(121,192,85, 0.904);
+  letter-spacing: 0.1rem;
+}
+
+.recipe-card-img {
+  width: 2vw;
+  margin-right: 2vw;
+
+}
+
+
 
 .section2-container {
   display: flex;
@@ -362,6 +417,21 @@ border: transparent;
   overflow: hidden;
 }
 
+/* MESSAGE */
+
+.success-message {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: rgb(129, 168, 129);
+  color: white;
+}
+
+.failure-message {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: rgb(196, 98, 81);
+  color: white;
+}
 
 /* PROFILE */
 
@@ -579,4 +649,133 @@ border: transparent;
   .user-recipes {
     width: 90vw;
   }
+
+
+  .all-recipes-header {
+    margin-top: 5vh;
+  }
+
+  .all-recipes-header h2 {
+    font-size: 1rem;
+  }
+
+  .sub-header {
+    margin-bottom: 5vh;
+  }
+  
+  .sub-header p {
+    font-size: 0.8rem;
+    width: 50vw;
+  }
+  
+  .section1-container {
+    background-position: 80% 0%;
+    background-size: 400%;
+    background-repeat: no-repeat;
+  }
+
+  .section1-div {
+    margin-bottom: 18vh;
+  }
+
+  .section1-div h2 {
+    color: rgb(52, 122, 69);
+    font-size: 3.1rem;
+    font-weight: 600;
+  }
+
+  .section1-div h4 {
+    font-size: 1.7rem;
+    color: rgb(54, 121, 70);
+    margin-bottom: 2rem;
+  }
+
+  .navbar-collapse {
+    position: relative;
+    z-index: 10;
+    background-color: rgba(230,230,230,1);
+    flex-direction: column !important;
+    align-items: flex-end !important;
+    border-radius: 3px;
+  }
+
+  .navbar-collapse > div a {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end;
+    color: green;
+  }
+
+  .nav-logo {
+    width: 12vw;
+  }
+
+  .nav-link {
+    padding: 0.5rem 0;
+  }
+
+  .navbar-collapse img {
+    display: none !important;
+  }
+
+  .navbar-collapse .navbar-list {
+    /* background-color: green; */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end;
+    padding: 0 5%;
+  }
+
+  .second-navbar {
+    flex-direction: column-reverse;
+  }
+
+  .second-nav-icon-div {
+    width: 100%;
+    justify-content: space-around;
+    margin-left: 0 !important;
+  }
+
+  .second-navbar-search {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .search-bar-container {
+    width: 80%;
+    margin: 1vh auto;
+  }
+
+  form.search-bar-container {
+    width: 100%;
+  }
+
+  .second-nav-icon-div img {
+    /* display: none; */
+    width: 6vw;
+  }
+
+  .nav-icon-container p {
+    font-size: 1rem;
+    width: 100%;
+  }
+
+  .our-mission {
+    background-color: rgb(222, 245, 227);
+    height: 100%;
+    padding: 4vh 0;
+  }
+  
+  .who-we-are {
+    background-color: rgb(180, 216, 187);
+    height: 100%;
+    padding: 4vh 0;
+  }
+  
+  .get-in-touch {
+    background-color: rgb(142, 184, 150);
+    height: 100%;
+    padding: 4vh 0;
+  }
+
 }

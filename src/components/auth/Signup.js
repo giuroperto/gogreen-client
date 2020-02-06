@@ -15,6 +15,7 @@ class Signup extends Component {
       password: '',
       picture: '',
       pictureName: '',
+      // loader: true,
     }
 
     this.service = new AuthService();

@@ -17,17 +17,25 @@ class Home extends Component {
         this.props.message && <Message successMessage={this.props.successMessage} message={this.props.message}/>
       }
 
-        <section className="d-flex justify-content-start align-items-start section1-container">
-          <div className="section1-div row w-100 ml-4">
-          <div className="section1-div-left d-flex flex-column align-items-center col-6">
-              <h2>GoGreen</h2>
-              <h4>Find and share vegetarian and vegan recipes</h4>
-              <Link to="/allrecipes">
-                <button type="button" className="btn btn-success">
-                  Let's begin
-                </button>
-              </Link>
+        <section className="d-flex justify-content-center align-items-center section1-container">
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-sm-8">
+                <div className="section1-div d-flex flex-column align-items-center">
+                  <h2>GoGreen</h2>
+                  <h4>Find and share vegetarian and vegan recipes</h4>
+                  <Link to="/allrecipes">
+                    <button type="button" className="btn btn-success">
+                      Let's begin
+                    </button>
+                  </Link>
+                </div>
+              </div>
+              <div className="col-sm-4">
+
+              </div>
             </div>
+
           </div>
         </section>
 
@@ -69,7 +77,7 @@ class Home extends Component {
         </section>
 
         <div
-          className="container-fluid featured-recipes my-5"
+          className="container-fluid featured-recipes mt-5"
         >
           <div className="mt-5 mb-2 d-flex flex-column align-items-center">
             <h3 className="">How skilled do you feel today?</h3>
@@ -77,7 +85,7 @@ class Home extends Component {
           </div>
 
           <div className="row">
-            <div className="col-sm">
+            <div className="col-sm mb-4">
               <Link to="/recipe/5e384386b742f83ceec52f23" className="recipe-link">
                 <article
                   className="feat-recipe d-flex justify-content-center align-items-end"
@@ -102,7 +110,7 @@ class Home extends Component {
                 </Link>
               </div>
             </div>
-            <div className="col-sm">
+            <div className="col-sm mb-4">
               <Link to="/recipe/5e384386b742f83ceec52f43" className="recipe-link">
                 <article
                   className="feat-recipe d-flex justify-content-center align-items-end"
@@ -127,7 +135,7 @@ class Home extends Component {
                 </Link>
               </div>
             </div>
-            <div className="col-sm">
+            <div className="col-sm mb-4">
               <Link to="/recipe/5e384386b742f83ceec530d8" className="recipe-link">
                 <article
                   className="feat-recipe d-flex justify-content-center align-items-end"
