@@ -92,7 +92,7 @@ class EditProfile extends Component {
         this.props.message && <Message successMessage={this.props.successMessage} message={this.props.message}/>
       }
         <form onSubmit={this.handleSubmit}>
-          <h3>Edit profile</h3>
+          <h3 className="pb-2 title-edit-profile">Edit profile</h3>
           <div className="form-row">
             <div className="form-group col-md-6">
               <label htmlFor="firstName">First name</label>
@@ -127,9 +127,11 @@ class EditProfile extends Component {
             <input type="password" className="form-control" id="newPassword" name="newPassword" onChange={this.handleChange} value={this.state.newPassword}/>
           </div>
           
-          <button type="submit">Save changes</button>
-          <Link to={`/user/${this.props.match.params.username}`}> Cancel </Link>
-        </form>
+          <div className="d-flex justify-content-between">
+            <button type="submit" className="btn btn-primary">Save changes</button>
+            <Link to={`/user/${this.props.match.params.username}`}> Return </Link>
+          </div>
+        </form> 
       </div>
     )
   }

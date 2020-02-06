@@ -693,6 +693,19 @@ color: rgba(100, 96, 92, 0.9);
   text-decoration: none;
 }
 
+/* EDIT PROFILE */
+
+.profile-edit-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0px;
+}
+
+.title-edit-profile {
+  color: rgba(123,72,32, 0.9);
+}
+
 /* RECIPE DETAILS */
 
 .recipe-description {
