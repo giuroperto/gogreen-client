@@ -161,7 +161,7 @@ class Navbar extends Component {
           <div className="split-bar"></div>
         </div>
         <nav className="navbar navbar-light second-navbar d-flex align-items-center navbar-list">
-          <div className="second-nav-icon-div d-flex align-items-center ml-2">
+          <div className="second-nav-icon-div d-flex align-items-center">
             <NavLink
               className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
               to="/allrecipes" onClick={this.veganFalse}
