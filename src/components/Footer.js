@@ -7,6 +7,11 @@ const Footer = () => {
     <MDBFooter className="font-small pt-2 footer">
       <MDBContainer>
         <MDBRow className="pt-3 mb-3 text-center d-flex justify-content-center footer-links">
+        <MDBCol md="2" className="b-3">
+            <h6 className="title font-weight-bold">
+            <Link to='/'>Home</Link>
+            </h6>
+          </MDBCol>
           <MDBCol md="2" className="b-3">
             <h6 className="title font-weight-bold">
               <Link to='/aboutus'>About Us</Link>
