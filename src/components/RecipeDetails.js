@@ -61,6 +61,7 @@ class RecipeDetails extends Component {
 
 
   render() {
+    let stepCount = 0;
     return(
       <>
       {this.state.uniqueRecipe.ingredients ? (
@@ -113,13 +114,14 @@ class RecipeDetails extends Component {
 
               {(this.state.uniqueRecipe.instructions.length > 0) ?
               this.state.uniqueRecipe.instructions.map(i => {
+                stepCount += 1;
                 let timeRendered = "";
                 i.stepTimeMinutes ? (timeRendered = `${i.stepTimeMinutes} minutes`) : (timeRendered = "");
                 return (
                   <div className="container-fluid">
                     <div className="row">
                       <div className="col-xs-6 col-sm-3 d-flex flex-column justify-content-center">
-                        <div><p className="step mb-0"><b>Step {i.step}</b></p></div>
+                        <div><p className="step mb-0"><b>Step {stepCount}</b></p></div>
                         <div><p className="step mb-0"><i>{timeRendered}</i></p></div>
                       </div>
                       <div className="col-xs-6 col-xs-mt-2 col-sm-9 text-left">{i.text}</div>

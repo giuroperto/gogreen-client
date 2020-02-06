@@ -298,8 +298,12 @@ class App extends Component {
               <ProtectedRoute
                 exact
                 user={this.state.loggedInUser}
+                message={this.state.message}
+                successMessage={this.state.successMessage}
+                getMessage={this.getMessage}
+                allData={this.state}
                 path="/addrecipe"
-                render={props => <AddRecipe allData={this.state} message={this.state.message} successMessage={this.state.successMessage} getMessage={this.getMessage} {...props} />}
+                component={AddRecipe}
               />
               <Route
                 exact
@@ -311,10 +315,11 @@ class App extends Component {
               <ProtectedRoute
                 exact
                 user={this.state.loggedInUser}
+                successMessage={this.state.successMessage}
+                getMessage={this.getMessage}
+                message={this.state.message}
                 path="/user/:username/edit"
-                render={props => (
-                  <EditProfile message={this.state.message} successMessage={this.state.successMessage} getMessage={this.getMessage} {...props} />
-                )}
+                component={EditProfile}
               />
               <Route
                 exact
@@ -330,12 +335,10 @@ class App extends Component {
               <ProtectedRoute
                 exact
                 user={this.state.loggedInUser}
+                loggedInUser={this.state.loggedInUser}
+                allData={this.state}
                 path='/recipe/:recipeID/edit'
-                render={props => (
-                  <EditRecipe
-                    allData={this.state}
-                    loggedInUser={this.state.loggedInUser}
-                    {...props}
+                component={EditRecipe}
                   />
                 )}
               />
@@ -343,25 +346,23 @@ class App extends Component {
               <ProtectedRoute
                 exact
                 user={this.state.loggedInUser}
+                loggedInUser={this.state.loggedInUser}
+                message={this.state.message}
+                successMessage={this.state.successMessage}
+                getMessage={this.getMessage}
                 path="/recipe/:recipeID/delete"
-                render={(props) => (
-                  <ConfirmDeleteRecipe
-                    loggedInUser={this.state.loggedInUser}
-                    message={this.state.message}
-                    successMessage={this.state.successMessage}
-                    getMessage={this.getMessage}
-                    {...props}
-                  />
-                )}
+                component={ConfirmDeleteRecipe}
               />
 
               <ProtectedRoute
                 exact
                 user={this.state.loggedInUser}
+                loggedInUser={this.state.loggedInUser}
+                getUser={this.getUser}
+                successMessage={this.successMessage}
+                getMessage={this.getMessage}
                 path="/user/:username/delete"
-                render={(props) => (
-                  <ConfirmDelete loggedInUser={this.state.loggedInUser} getMessage={this.getMessage} successMessage={this.successMessage} getUser={this.getUser} {...props} />
-                )}
+                component={ConfirmDelete}
               />
 
             </Switch>
