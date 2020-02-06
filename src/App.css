@@ -25,7 +25,6 @@ img {
 
 }
 
-
 /* NAVBARS */
 
 .nav-container{
@@ -55,7 +54,6 @@ img {
 
 .second-navbar {
   background-color: rgba(255, 255, 255, 0.1);
-  padding: 0 !important;
 }
 
 .second-nav-icon-div {
@@ -695,6 +693,10 @@ border: transparent;
 
   .nav-logo {
     width: 12vw;
+  }
+
+  .nav-link {
+    padding: 0.5rem 0;
   }
 
   .navbar-collapse img {
