@@ -25,7 +25,6 @@ img {
 
 }
 
-
 /* NAVBARS */
 
 .nav-container{
@@ -55,7 +54,6 @@ img {
 
 .second-navbar {
   background-color: rgba(255, 255, 255, 0.1);
-  padding: 0 !important;
 }
 
 .second-nav-icon-div {
@@ -313,8 +311,34 @@ border: transparent;
 
 }
 
+.profile-recipe-card-infos p {
+  letter-spacing: 0.1rem;
+
+}
+
+.profile-recipe-card-infos h3 {
+  margin-bottom: 0.5vh;
+  color: rgba(121,192,85, 0.904);
+  letter-spacing: 0.1rem;
+}
+
+.profile-recipe-card-infos h4 {
+  margin-bottom: 2vh;
+  font-style: italic;
+  text-align: start;
+  font-size: 1rem;
+  letter-spacing: 0.1rem;
+}
+
+.profile-recipe-card-img {
+  width: 1.5vw;
+  margin-right: 1vw;
+
 
 /* FEATURED RECIPES */
+
+}
+
 
 .featured-recipes-child {
   position: relative;
@@ -483,6 +507,21 @@ border: transparent;
   overflow: hidden;
 }
 
+/* MESSAGE */
+
+.success-message {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: rgb(129, 168, 129);
+  color: white;
+}
+
+.failure-message {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: rgb(196, 98, 81);
+  color: white;
+}
 
 /* PROFILE */
 
@@ -512,6 +551,11 @@ border: transparent;
   overflow: scroll;
   height: 80vh;
 
+}
+
+.profile-btn {
+  border-radius: 5px !important;
+  height: 4.2vh;
 }
 
 .user-recipes {
@@ -760,6 +804,10 @@ border: transparent;
 
   .nav-logo {
     width: 12vw;
+  }
+
+  .nav-link {
+    padding: 0.5rem 0;
   }
 
   .navbar-collapse img {

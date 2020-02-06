@@ -85,7 +85,7 @@ class App extends Component {
       // messages from API
       message: "",
       successMessage: false,
-  
+      count: 0,
       loader: true,
     };
     this.service = new AuthService();
