@@ -91,11 +91,11 @@ class Navbar extends Component {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div
-            className="collapse navbar-collapse d-flex justify-content-between"
+            className="collapse navbar-collapse justify-content-between"
             id="navbarSupportedContent"
           >
             <div className="d-md-flex flex-direction-start nav-buttons navbar-list">
-              <NavLink className="nav-navbar nav-link" to="/aboutus">
+              <NavLink className="nav-navbar nav-link px-0" to="/aboutus">
                 Why GoGreen?
               </NavLink>
             </div>
@@ -111,14 +111,14 @@ class Navbar extends Component {
               {this.state.showLoginAndSignupButtons && (
                 <>
                   <NavLink
-                    className="nav-navbar nav-link d-flex align-items-center mr-3 nav-icon-container"
+                    className="nav-navbar nav-link d-flex align-items-center nav-icon-container px-0"
                     to="/signup"
                   >
                     <img src="https://res.cloudinary.com/dxatyucj2/image/upload/v1580900039/go-green/mobile-phone_qkzglz.png" alt="recipe-icon" />
                     <p className="text-nowrap">Sign Up</p>
                   </NavLink>
                   <NavLink
-                    className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
+                    className="nav-navbar nav-link d-flex align-items-center nav-icon-container px-0"
                     to="/login"
                   >
                     <img src="https://res.cloudinary.com/dxatyucj2/image/upload/v1580900039/go-green/recipe2_owkbb1.png" alt="chef-icon" />
@@ -177,12 +177,12 @@ class Navbar extends Component {
             </NavLink>
 
             <NavLink className="nav-navbar nav-link d-flex align-items-center nav-icon-container" to="/allrecipes" onClick={this.veganTrue}>
-              <img src={veganString} alt="vegetables-icon" />
+              <img src={veganString} className="mr-2" alt="vegetables-icon" />
               <p className="text-nowrap">Vegan</p>
             </NavLink>
 
           </div>
-          <div className="mr-3">
+          <div className="second-navbar-search">
             <SearchButtons
               showFilter={this.filterRender}
               getSearchWord={this.props.getSearchWord}

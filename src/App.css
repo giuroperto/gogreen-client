@@ -30,7 +30,6 @@ img {
 
 .nav-container{
   box-shadow: 0 4px 2px -2px rgba(0,0,0,.4);
-  width: 100vw;
   background-color: rgb(182, 165, 148);
 
 }
@@ -144,7 +143,7 @@ border: transparent;
 }
 
 .section1-div {
-  margin: 8vh 0 0 15vw;
+  /* margin: 8vh 0 0 15vw; */
 }
 
 .section1-div h2 {
@@ -579,4 +578,113 @@ border: transparent;
   .user-recipes {
     width: 90vw;
   }
+
+  .section1-container {
+    background-position: 80% 0%;
+    background-size: 400%;
+    background-repeat: no-repeat;
+  }
+
+  .section1-div {
+    margin-bottom: 18vh;
+  }
+
+  .section1-div h2 {
+    color: rgb(52, 122, 69);
+    font-size: 3.1rem;
+    font-weight: 600;
+  }
+
+  .section1-div h4 {
+    font-size: 1.7rem;
+    color: rgb(54, 121, 70);
+    margin-bottom: 2rem;
+  }
+
+  .navbar-collapse {
+    position: relative;
+    z-index: 10;
+    background-color: rgba(230,230,230,1);
+    flex-direction: column !important;
+    align-items: flex-end !important;
+    border-radius: 3px;
+  }
+
+  .navbar-collapse > div a {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end;
+    color: green;
+    padding: 
+  }
+
+  .navbar-collapse a {
+    /* padding: 0; */
+  }
+
+  .navbar-collapse img {
+    display: none !important;
+  }
+
+  .navbar-collapse .navbar-list {
+    /* background-color: green; */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end;
+    padding: 0 5%;
+  }
+
+  .second-navbar {
+    flex-direction: column-reverse;
+  }
+
+  .second-nav-icon-div {
+    width: 100%;
+    justify-content: space-around;
+    margin-left: 0 !important;
+    margin-right: 4vw !important;
+  }
+
+  .second-navbar-search {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .search-bar-container {
+    width: 80%;
+    margin: 1vh auto;
+  }
+
+  form.search-bar-container {
+    width: 100%;
+  }
+
+  .second-nav-icon-div img {
+    /* display: none; */
+    width: 6vw;
+  }
+
+  .nav-icon-container p {
+    font-size: 1rem;
+    width: 100%;
+  }
+
+  .our-mission {
+    background-color: rgb(222, 245, 227);
+    height: 100%;
+    padding: 4vh 0;
+  }
+  
+  .who-we-are {
+    background-color: rgb(180, 216, 187);
+    height: 100%;
+    padding: 4vh 0;
+  }
+  
+  .get-in-touch {
+    background-color: rgb(142, 184, 150);
+    height: 100%;
+    padding: 4vh 0;
+  }
+
 }
