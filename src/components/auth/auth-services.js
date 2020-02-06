@@ -3,7 +3,7 @@ import axios from 'axios';
 class AuthService {
   constructor() {
     this.service = axios.create({
-      baseURL: 'http://go-green-recipes.herokuapp.com/api',
+      baseURL: 'https://go-green-recipes.herokuapp.com/api',
       withCredentials: true,
     });
   }
