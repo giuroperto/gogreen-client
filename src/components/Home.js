@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import Message from './Message';
 
 //TODO deixar featured recipes responsivo; mostrar uma de cada vez? wrap
@@ -22,7 +23,7 @@ class Home extends Component {
             <div className="row">
               <div className="col-sm-8">
                 <div className="section1-div d-flex flex-column align-items-center">
-                  <h2>GoGreen</h2>
+                  <h2>Go Green</h2>
                   <h4>Find and share vegetarian and vegan recipes</h4>
                   <Link to="/allrecipes">
                     <button type="button" className="btn btn-success">
@@ -32,18 +33,19 @@ class Home extends Component {
                 </div>
               </div>
               <div className="col-sm-4">
-
               </div>
             </div>
-
           </div>
+            <div className='hash-link'>
+            <HashLink to="#section-2"><i class="fas fa-chevron-down hash-link-icon"></i></HashLink>
+            </div>
         </section>
 
-        <section className='section2'>
+        <section className='section2' id='section-2'>
           <div className="container-fluid">
             <div className="mt-5 mb-3 d-flex flex-column align-items-center">
-              <h3 className="">How does it work?</h3>
-              <div className="div-bar"></div>
+              <h3>How does it work?</h3>
+              <div className="div-bar mb-5"></div>
             </div>
 
             <div className="d-flex row justify-content-sm-around">
@@ -79,9 +81,8 @@ class Home extends Component {
         <div
           className="container-fluid featured-recipes mt-5"
         >
-          <div className="mt-5 mb-2 d-flex flex-column align-items-center">
+          <div className="mt-5 d-flex flex-column align-items-center featured-recipes-child">
             <h3 className="">How skilled do you feel today?</h3>
-            <div className="div-bar"></div>
           </div>
 
           <div className="row">
