@@ -36,7 +36,7 @@ class EditRecipeForm extends Component {
       vegan: false,
       picture: '',
       pictureName: '',
-      ingredientsInputs: 3,
+      ingredientsInputs: 1,
       instructionsInputs: 3
     }
 
@@ -200,7 +200,7 @@ class EditRecipeForm extends Component {
 
   render() {
     return(
-      <form onSubmit={this.handleSubmit} className="mb-5">
+      <form onSubmit={this.handleSubmit} className="edit-recipe-form mb-5">
         
         <div className="form-group">
           <label htmlFor="name">Name</label>
@@ -213,6 +213,8 @@ class EditRecipeForm extends Component {
             onChange={this.handleChange}
             required
           />
+        </div>
+        <div className="form-group">
           <label htmlFor="description">Description</label>
           <input
             className="form-control"
@@ -259,7 +261,7 @@ class EditRecipeForm extends Component {
         <div className="form-group">
           <label htmlFor="ingredients">Ingredients</label>
           {this.renderIngredientsInputs().map(input => {
-          if (input.key === this.state.ingredients.length -1) {
+          if (input.key === this.state.ingredientsInputs -1) {
             return (
             <div class="input-group mb-3">
               <input
@@ -315,7 +317,7 @@ class EditRecipeForm extends Component {
           <div className="align-self-end">
             <button 
               className="btn btn-secondary"
-              type="button" onClick={this.addInput}>+</button>
+              type="button" onClick={() => this.addInput('inst')}>+</button>
           </div>
         </div>
 

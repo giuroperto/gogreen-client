@@ -162,7 +162,7 @@ class RecipeDetails extends Component {
 
             
             <div className='d-flex justify-content-center'>
-              <div className="edit-button mr-3">
+              <div className="edit-button mb-3">
                 {this.props.loggedInUser && this.state.uniqueRecipe.owner && this.state.uniqueRecipe.owner.username ===
                   this.props.loggedInUser.username && (
                   <Link to={`/recipe/${this.props.match.params.recipeID}/edit`}>

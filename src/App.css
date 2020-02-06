@@ -83,6 +83,11 @@ img {
 .navbar-list a.chosen,
 .navbar-list a:hover {
   border-bottom: 0.5px solid lightgreen;
+  color: whitesmoke;
+}
+
+.navbar-list a {
+  letter-spacing: 0.1rem;
 }
 
 .logged-in-welcome {
@@ -729,6 +734,17 @@ color: rgba(100, 96, 92, 0.9);
   margin: 0 auto !important;
 }
 
+/* EDIT RECIPE FORM */
+
+.edit-recipe-form {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.master-form {
+  width: 50%;
+}
+
 /* FOOTER */
 
 .footer{
@@ -1077,6 +1093,18 @@ color: rgba(100, 96, 92, 0.9);
   .instructions-div {
     width: 100%;
     margin: 0 auto !important;
+  }
+
+  .edit-recipe-form {
+    width: 90%;
+  }
+
+  .master-form {
+    width: 80%;
+  }
+
+  .navbar-list a {
+    letter-spacing: 0.05rem;
   }
 
 }
