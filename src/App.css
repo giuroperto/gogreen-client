@@ -144,7 +144,7 @@ border: transparent;
 }
 
 .section1-div {
-  margin: 20vh 0 0 10vw;
+  margin: 8vh 0 0 15vw;
 }
 
 .section1-div h2 {
@@ -354,6 +354,12 @@ border: transparent;
   justify-content: start;
   align-items: start;
   color: rgb(141, 124, 108);
+}
+
+.img-name {
+  font-size: 14px;
+  text-align: left;
+  overflow: hidden;
 }
 
 
