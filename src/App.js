@@ -19,8 +19,9 @@ import APIAccess from "./components/api/api-access";
 import EditRecipe from './components/EditRecipe'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Footer from "./components/Footer";
-//Test
-//Test 2
+import ProtectedRoute from './components/auth/protected-route';
+
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -294,8 +295,9 @@ class App extends Component {
                 path="/allrecipes"
                 render={props => <AllRecipes allData={this.state} {...props} />}
               />
-              <Route
+              <ProtectedRoute
                 exact
+                user={this.state.loggedInUser}
                 path="/addrecipe"
                 render={props => <AddRecipe allData={this.state} message={this.state.message} successMessage={this.state.successMessage} getMessage={this.getMessage} {...props} />}
               />
@@ -306,8 +308,9 @@ class App extends Component {
                   <Profile message={this.state.message} loggedInUser={this.state.loggedInUser} successMessage={this.state.successMessage} allRecipes={this.state.allRecipes} {...props} />
                 )}
               />
-              <Route
+              <ProtectedRoute
                 exact
+                user={this.state.loggedInUser}
                 path="/user/:username/edit"
                 render={props => (
                   <EditProfile message={this.state.message} successMessage={this.state.successMessage} getMessage={this.getMessage} {...props} />
@@ -324,8 +327,9 @@ class App extends Component {
                 )}
               />
 
-              <Route
+              <ProtectedRoute
                 exact
+                user={this.state.loggedInUser}
                 path='/recipe/:recipeID/edit'
                 render={props => (
                   <EditRecipe
@@ -336,8 +340,9 @@ class App extends Component {
                 )}
               />
 
-              <Route
+              <ProtectedRoute
                 exact
+                user={this.state.loggedInUser}
                 path="/recipe/:recipeID/delete"
                 render={(props) => (
                   <ConfirmDeleteRecipe
@@ -350,8 +355,9 @@ class App extends Component {
                 )}
               />
 
-              <Route
+              <ProtectedRoute
                 exact
+                user={this.state.loggedInUser}
                 path="/user/:username/delete"
                 render={(props) => (
                   <ConfirmDelete loggedInUser={this.state.loggedInUser} getMessage={this.getMessage} successMessage={this.successMessage} getUser={this.getUser} {...props} />
