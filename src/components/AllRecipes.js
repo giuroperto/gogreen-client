@@ -23,7 +23,7 @@ render(){
         <h2>Find the Perfect Recipe for Your Next Meal</h2>
       </div>
       <div className='sub-header d-flex justify-content-center'>
-      <p>Narrow your filter by cuisine, dish type or cooking level</p>
+      <p>Narrow your filter by <span>cuisine</span>, <span>dish type</span> or <span>cooking level</span></p>
       </div>
 
           <div className='all-recipes-each-listed'>

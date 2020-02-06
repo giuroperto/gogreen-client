@@ -62,6 +62,10 @@ class Navbar extends Component {
       this.props.allData.loggedInUser ? this.setState({ loggedInUser: this.props.allData.loggedInUser, showLoginAndSignupButtons: false, showLogoutAndOtherButtons: true, }) : this.setState({ loggedInUser: this.props.allData.loggedInUser, showLoginAndSignupButtons: true, showLogoutAndOtherButtons: false,  })
     }
   }
+
+  // ajustar o getUser para ficar na Navbar
+  // ajustar meses com objeto/array
+
   render() {
     console.log(this.state)
     let vegetarianString = '';
@@ -134,7 +138,7 @@ class Navbar extends Component {
                 className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
                 to="/addrecipe"
               >
-                <img className="mr-1" src="https://res.cloudinary.com/dxatyucj2/image/upload/v1580900036/go-green/add2_dvvobd.png" alt="add-icon" />
+                <img className="mr-1" src="images/plus.png" alt="add-icon" />
                 <p>Add Recipe</p>
               </NavLink>
               <NavLink

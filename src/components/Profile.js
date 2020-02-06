@@ -80,6 +80,9 @@ class Profile extends Component {
               )}
             </div>
 
+            <div className='bar vl'>
+            </div>
+
             <div className="col-sm-4 profile-infos mt-5">
               <h3 className="name">
                 Hello,{" "}
@@ -87,23 +90,25 @@ class Profile extends Component {
                 {this.state.userAccount && this.state.userAccount.lastName}
               </h3>
               <p>
+              <i class="fas fa-user"></i>
                 @{this.state.userAccount && this.state.userAccount.username}
               </p>
 
               <div className="infos">
                 <p>
+                <i class="fas fa-calendar-alt"></i>
                   User since{" "}
                   {this.state.userAccount && (`${new Date(this.state.userAccount.created_at).getDate()} / ${new Date(this.state.userAccount.created_at).getMonth() + 1} / ${new Date(this.state.userAccount.created_at).getFullYear()}`)}
                 </p>
                 {this.state.userRecipes.length > 0 ? (
-                  <p>Has contributed {this.state.userRecipes.length} recipes</p>
+                  <p><i class="fas fa-list-alt"></i>Has contributed {this.state.userRecipes.length} recipes</p>
                 ) : (
-                  <p> Has not started contributing just yet! </p>
+                  <p> <i class="fas fa-minus-circle"></i>Has not started contributing just yet! </p>
                 )}
               </div>
               
               
-              <div className="d-flex justify-content-center mb-5">
+              <div className="d-flex justify-content-start mb-5">
                 <div className="edit-button mr-3">
                   {this.props.match.params.username ===
                     this.props.loggedInUser.username && (
@@ -111,7 +116,7 @@ class Profile extends Component {
                       <Link
                         to={`/user/${this.props.loggedInUser.username}/edit`}
                       >
-                        Edit Profile
+                        <i class="fas fa-edit mr-2"></i>Edit Profile
                       </Link>
                     </button>
                   )}
@@ -121,8 +126,9 @@ class Profile extends Component {
                     <Link
                       to={`/user/${this.props.loggedInUser.username}/delete`}
                     >
+                      
                       {" "}
-                      Delete Profile{" "}
+                      <i class="fas fa-trash mr-2"></i>Delete Profile{" "}
                     </Link>
                   </button>
                 </div>
@@ -133,11 +139,13 @@ class Profile extends Component {
             <div className="toggle-buttons">
               <div className="user-recipes">
                 <div
-                  className="links btn-group btn-group-toggle"
+                  className="container d-flex justify-content-between links btn-group btn-group-toggle py-4"
                   data-toggle="buttons"
                 >
                   {/* adjust styling when clicked the other should be unselected */}
-                  <label className="btn btn-success active">
+                  <div style={{width: '2%'}}></div>
+                  <label className="profile-btn btn btn-success active">
+                  <span className="d-flex justify-content-center align-items-center">
                     <input
                       type="radio"
                       name="recipes"
@@ -146,18 +154,23 @@ class Profile extends Component {
                       checked
                       onClick={this.showRecipes}
                     />{" "}
-                    <i class="fas fa-list-alt"></i> Recipes
+                      <i class="fas fa-list-alt"></i> <span className="ml-2">Recipes</span> 
+                    </span>
                   </label>
-                  <label className="btn btn-info">
-                    <input
-                      type="radio"
-                      name="favourites"
-                      id="favourites"
-                      autocomplete="off"
-                      onClick={this.showFavourites}
-                    />{" "}
-                    <i class="fas fa-star"></i> Favourites
+                  <div style={{width: '5%'}}></div>
+                  <label className="profile-btn btn btn-info">
+                    <span className="d-flex justify-content-center align-items-center">
+                      <input
+                        type="radio"
+                        name="favourites"
+                        id="favourites"
+                        autocomplete="off"
+                        onClick={this.showFavourites}
+                      />{" "}
+                      <i class="fas fa-star"></i> <span className="ml-2">Favourites</span>
+                    </span>
                   </label>
+                  <div style={{width: '2%'}}></div>
                 </div>
                 <div className="recipes-cards-container py-5" style={{minHeight: '30vh'}}>
                   {this.state.showFavourites
