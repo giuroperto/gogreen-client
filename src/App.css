@@ -691,11 +691,10 @@ border: transparent;
     flex-direction: column !important;
     align-items: flex-end;
     color: green;
-    padding: 
   }
 
-  .navbar-collapse a {
-    /* padding: 0; */
+  .nav-logo {
+    width: 12vw;
   }
 
   .navbar-collapse img {

@@ -22,6 +22,7 @@ class RecipeDetails extends Component {
 
     this.apiEndpoints.getOneRecipe(this.props.match.params.recipeID)
     .then(response => {
+      console.log('im in')
       let givenUniqueRecipe = response.data;
       let givenDeterminedOwner = '';
       if (givenUniqueRecipe.owner === undefined){
