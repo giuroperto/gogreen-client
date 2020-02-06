@@ -143,7 +143,7 @@ class MasterForm extends Component {
 
   render() {
     return(
-      <div className="w-50 py-5">
+      <div className="master-form py-5">
       {
         this.props.message && <Message successMessage={this.props.successMessage} message={this.props.message}/>
       }
