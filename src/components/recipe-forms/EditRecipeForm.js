@@ -35,6 +35,7 @@ class EditRecipeForm extends Component {
         }],
       vegan: false,
       picture: '',
+      pictureName: '',
       ingredientsInputs: 3,
       instructionsInputs: 3
     }
@@ -185,10 +186,11 @@ class EditRecipeForm extends Component {
 
   handleFileUpload (event) {
     const uploadData = new FormData();
+    let { name } = event.target.files[0];
     uploadData.append("imageUrl", event.target.files[0]);
     this.apiEndpoints.handleUpload(uploadData)
     .then(response => {
-        this.setState({ picture: response.data.secure_url });
+        this.setState({ picture: response.data.secure_url, pictureName: name });
       })
       .catch(err => {
         console.log("Error while uploading the file: ", err);
@@ -225,7 +227,12 @@ class EditRecipeForm extends Component {
 
         <div className="form-group">
           <label htmlFor="file">Replace picture</label>
-          <input type="file" class="form-control-file" id="file" onChange={this.handleFileUpload}/>
+          <div className="input-group d-flex flex-column">
+            <div className="custom-file">
+              <input type="file" className="form-control-file custom-file-input" id="file" name="file" onChange={this.handleFileUpload}/>
+              <label className="custom-file-label img-name" forHtml="file"> {this.state.pictureName ? this.state.pictureName : 'Choose file...'} </label>
+            </div>
+          </div>
         </div>
 
         <div className="form-group">
@@ -322,6 +329,13 @@ class EditRecipeForm extends Component {
           </div>
           <div className="submit-button">
             <button type="submit" className="btn btn-primary">Save Changes</button>
+          </div>
+          <div className="cancel-button">
+              <Link to={`/recipe/${this.props.match.params.recipeID}`}>
+                <button type="button" class="btn btn-warning">
+                    Cancel
+                </button>
+              </Link>
           </div>
         </div>
       </form>
