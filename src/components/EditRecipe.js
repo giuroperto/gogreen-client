@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import EditRecipeForm from './recipe-forms/EditRecipeForm';
 import APIAccess from './api/api-access';
 import Loader from "react-loader-spinner";
-import {Link} from 'react-router-dom';
 
 class EditRecipe extends Component {
   constructor(props) {

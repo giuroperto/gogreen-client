@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import SearchButtons from "./SearchButtons";
 import FilterRender from "./FilterRender";
 import AuthService from "./auth/auth-services";
@@ -74,7 +74,6 @@ class Navbar extends Component {
   // ajustar o getUser para ficar na Navbar
 
   render() {
-    console.log('state do navbar', this.state);
     let vegetarianString = '';
     let veganString = '';
     if (this.state.veganToggle){
