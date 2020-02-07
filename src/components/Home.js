@@ -87,7 +87,7 @@ class Home extends Component {
 
           <div className="row">
             <div className="col-sm mb-4">
-              <Link to="/allrecipes" className="recipe-link">
+              <Link to="/recipe/5e3c4c12af5c58a3880cf666" className="recipe-link">
                 <article
                   className="feat-recipe d-flex justify-content-center align-items-end"
                   style={{
@@ -112,7 +112,7 @@ class Home extends Component {
               </div>
             </div>
             <div className="col-sm mb-4">
-              <Link to="/allrecipes" className="recipe-link">
+              <Link to="/recipe/5e3c4c12af5c58a3880cf686" className="recipe-link">
                 <article
                   className="feat-recipe d-flex justify-content-center align-items-end"
                   style={{
@@ -137,7 +137,7 @@ class Home extends Component {
               </div>
             </div>
             <div className="col-sm mb-4">
-              <Link to="/allrecipes" className="recipe-link">
+              <Link to="/recipe/5e3c4c12af5c58a3880cf81b" className="recipe-link">
                 <article
                   className="feat-recipe d-flex justify-content-center align-items-end"
                   style={{
