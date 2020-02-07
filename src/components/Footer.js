@@ -37,41 +37,29 @@ const Footer = () => {
         <MDBRow>
           <MDBCol md="12" className="mt-2">
             <div className="mb-1 flex-center footer-icons">
-              <a className="fb-ic">
               <Link to="#facebook">
                 <i className="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x">
                 </i>
               </Link>
-              </a>
-              <a className="tw-ic">
               <Link to="#twitter">
                 <i className="fab fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x">
                 </i>
               </Link>
-              </a>
-              <a className="gplus-ic">
               <Link to="#googleplus">
                 <i className="fab fa-google-plus fa-lg white-text mr-md-5 mr-3 fa-2x">
                 </i>
               </Link>
-              </a>
-              <a className="li-ic">
               <Link to="#linkedin">
                 <i className="fab fa-linkedin-in fa-lg white-text mr-md-5 mr-3 fa-2x">
                 </i>
               </Link>
-              </a>
-              <a className="ins-ic">
               <Link to="#instagram">
                 <i className="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x">
                 </i>
               </Link>
-              </a>
-              <a className="pin-ic">
               <Link to="#pintrest">
                 <i className="fab fa-pinterest fa-lg white-text fa-2x"> </i>
               </Link>
-              </a>
             </div>
           </MDBCol>
         </MDBRow>

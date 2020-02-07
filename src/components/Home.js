@@ -37,7 +37,7 @@ class Home extends Component {
             </div>
           </div>
             <div className='hash-link'>
-            <HashLink to="#section-2"><i class="fas fa-chevron-down hash-link-icon"></i></HashLink>
+            <HashLink to="#section-2"><i className="fas fa-chevron-down hash-link-icon"></i></HashLink>
             </div>
         </section>
 
