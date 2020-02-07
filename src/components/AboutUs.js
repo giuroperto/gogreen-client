@@ -15,8 +15,7 @@ class AboutUs extends Component {
             <h2 className='about-us-header'>Our Mission</h2>
             <div className="div-bar"></div>
             <p className="about-us-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, alias tenetur omnis ipsam impedit veritatis nemo porro obcaecati! Blanditiis et eligendi expedita inventore at suscipit perferendis dolor obcaecati vero adipisci.
-             {/* Buscamos auxiliar pessoas que tenham interesse em adotar uma dieta vegetariana ou vegana, de forma a simplificar o acesso à diversas receitas dos mais variados níveis de dificuldade. */}
+            We seek to help people who are interested in adopting a vegetarian or vegan diet, in order to simplify access to diverse and delicious recipes.
              </p>
           </section>
           <section className='who-we-are'>
@@ -24,16 +23,20 @@ class AboutUs extends Component {
             <div className="div-bar"></div>
             <div className="who-we-are-description">
               <p className="about-us-text"> 
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim aliquid deleniti dolor et corrupti harum id praesentium exercitationem assumenda, a culpa laudantium obcaecati possimus iure ut quibusdam facilis modi incidunt.
-              
-              {/* A Go Green foi fundada em 2020 por quatro amigos durante o curso de Web Development na Ironhack São Paulo. A empresa surgiu do interesse dos integrantes em reduzir o consumo de carne e do entendimento que essa transição de hábito alimentar é um processo consideravelmente difícil, seja pela necessidade de repor a proteína com base em outra fonte seja pela dificuldade em encontrar receitas saborosas e nutritivas. Oferecemos uma ferramenta onde as pessoas podem compartilhar suas receitas e também contribuir com receitas de terceiros, por meio de avaliações ou mesmo propondo alterações. Esperamos assim incentivar mais pessoas a optarem por uma alimentação sem carne e reduzir os impactos no meio-ambiente e no bem estar dos animais.  */}
+              Go Green was founded in 2020 by four friends during the Web Development course at Ironhack São Paulo. 
+
+              The company was born from our interest in reducing meat consumption and making the transition as easy as possible for our users - chefs, cooks, and the curious!
+
+              We offer a tool where people can share their recipes and also contribute to third party recipes, through evaluations or even proposing changes. 
+
+              We hope to encourage more people to opt for meatless food, thereby reducing the impacts on the environment, personal health, and animal welfare.
               </p>
             </div>
             <figure className="who-we-are-image">
               {/* <img src="./public/team.jpg" alt="Us"/> */}
             </figure>
           </section>
-          <section className="get-in-touch">
+          {/* <section className="get-in-touch">
             <div className="row get-in-touch-row">
               <div className="col-sm pt-5">
                 <h2 className='about-us-header'>Get in Touch</h2>
@@ -58,7 +61,7 @@ class AboutUs extends Component {
                 </div>
               </div>
             </div>
-          </section>
+          </section> */}
         </div>
       </div>
     )
