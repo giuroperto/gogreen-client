@@ -356,7 +356,7 @@ border: transparent;
 .text-container {
   position: relative;
   text-align: center;
-  margin: 10vh 10vw 0 10vw;
+  margin: 3vh 10vw 0 10vw;
   margin-bottom: 6vh;
 }
 
@@ -405,6 +405,35 @@ padding: 0 3vw;
 background-color: #fff;
 font-weight: bold;
 color: rgba(100, 96, 92, 0.9);
+}
+
+.btn2{
+  display: inline-block;
+  text-decoration: none;
+  color: rgba(152, 152, 152, 0.43);/*IconColor*/
+  width: 50px;
+  height: 50px;
+  line-height: 40px;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  text-align: center;
+  vertical-align: middle;
+  overflow: hidden;
+  font-weight: bold;
+  background-image: linear-gradient(#e8e8e8 0%, #d6d6d6 100%);
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.66); 
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.5), 0 2px 2px rgba(0, 0, 0, 0.19);
+  border-bottom: solid 2px #b5b5b5;
+}
+
+.btn2 .fa {
+  line-height: 40px;
+  color: rgba(0,0,0,.7);
+}
+.btn2:active {/*onClick*/
+  background-image: -webkit-linear-gradient(#efefef 0%, #d6d6d6 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 2px 2px rgba(0, 0, 0, 0.19);
+  border-bottom: none;
 }
 
 
@@ -725,10 +754,13 @@ color: rgba(100, 96, 92, 0.9);
 .recipe-details-picture > img {
   height: 45vh;
   object-fit: cover;
+  border: solid rgba(126, 124, 122, 0.9) 1px  ;
+  border-radius: 2px;
 }
 
 .recipe-details-name > h3 {
   font-weight: 700;
+  font-size: 2rem;
   margin: 3vh 0 1vh 0;
   color: rgba(121,192,85, 0.904);
   letter-spacing: 0.1rem;
@@ -738,13 +770,28 @@ color: rgba(100, 96, 92, 0.9);
   justify-content: space-around;
 }
 
+.individual-detail > p {
+  font-size: 1.3rem;
+  letter-spacing: 0.1rem;
+}
+
 .recipe-details-icon {
-  width: 1.8vw;
+  width: 2.4vw;
 }
 
 .instructions-div {
   width: 80%;
   margin: 0 auto !important;
+}
+
+.page-details li {
+  font-size: 1.3rem;
+  letter-spacing: 0.1rem;
+}
+
+.page-details p {
+  font-size: 1.3rem;
+  letter-spacing: 0.1rem;
 }
 
 /* EDIT RECIPE FORM */
@@ -756,6 +803,16 @@ color: rgba(100, 96, 92, 0.9);
 
 .master-form {
   width: 50%;
+}
+
+.master-form h2 {
+  letter-spacing: 0.2rem;
+  color: rgba(29, 28, 28, 0.9);
+}
+
+.master-form img {
+  width: 4vw;
+  margin-right: 2vw;
 }
 
 /* CONFIRM DELETE */
@@ -1102,7 +1159,7 @@ color: rgba(100, 96, 92, 0.9);
   }
 
   .recipe-details-icon {
-    width: 6vw;
+    width: 8vw;
     margin-right: 2vw;
   }
 
@@ -1121,7 +1178,7 @@ color: rgba(100, 96, 92, 0.9);
   }
 
   .individual-detail {
-    margin-bottom: 1vh;
+    margin-bottom: 2vh;
     display: flex;
 
   }
@@ -1160,6 +1217,11 @@ color: rgba(100, 96, 92, 0.9);
   
   .confirm-delete-buttons {
     width: 75%;
+  }
+
+  .master-form img {
+    width: 15vw;
+    margin-right: 4vw;
   }
 
 }

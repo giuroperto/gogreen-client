@@ -147,7 +147,11 @@ class MasterForm extends Component {
       {
         this.props.message && <Message successMessage={this.props.successMessage} message={this.props.message}/>
       }
-        <h2 className="mb-4">Add Recipe</h2>
+        <div className="d-flex justify-content-center align-items-center">
+        <img src="images/recipe-3.png" alt="recipe"/>
+        <h2 className="">Add Recipe</h2>
+        </div>
+
         <form className="my-5" onSubmit={this.handleSubmit}>
           <Step1 
             currentStep={this.state.currentStep} 
