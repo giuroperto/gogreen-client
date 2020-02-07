@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import APIAccess from './api/api-access';
-import Message from './Message';
+import Message from '../components/Message';
 import { Link } from 'react-router-dom';
 import Loader from "react-loader-spinner";
 
@@ -62,17 +62,20 @@ class EditProfile extends Component {
     event.preventDefault();
     let { firstName, lastName, email, usernameForm, oldPassword, newPassword, picture } = this.state;
     const { username } = this.props.match.params;
-
+    
     if (picture === '' || picture === null) {
       picture = 'https://res.cloudinary.com/dxatyucj2/image/upload/v1580833315/go-green/vegetalwhite.jpg.jpg'
     }
-
+    
     this.apiEndpoints.editUser(username, firstName, lastName, email, usernameForm, oldPassword, newPassword, picture)
-      .then(response => {
+    .then(response => {
         this.props.getMessage(response.status, response.data.message);
         this.redirectPage(this.props.successMessage, usernameForm);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        this.props.getMessage(err.response.status, err.response.data.message);
+        console.log(err);
+      });
   }
   
   handleUpload (event) {
@@ -98,9 +101,6 @@ class EditProfile extends Component {
           </div>
         ) : (
           <div>
-          {
-            this.props.message && <Message successMessage={this.props.successMessage} message={this.props.message}/>
-          }
             <form onSubmit={this.handleSubmit}>
               <h3 className="pb-2 title-edit-profile">Edit Profile</h3>
               <div className="form-row">
@@ -136,8 +136,10 @@ class EditProfile extends Component {
                 <label htmlFor="newPassword">New Password</label>
                 <input type="password" className="form-control" id="newPassword" name="newPassword" onChange={this.handleChange} value={this.state.newPassword}/>
               </div>
-              
-              <div className="d-flex justify-content-between">
+              {
+                this.props.message && <Message successMessage={this.props.successMessage} message={this.props.message}/>
+              }
+              <div className="d-flex justify-content-between mt-4">
                 <button type="submit" className="btn btn-primary">Save changes</button>
                 <Link to={`/user/${this.props.match.params.username}`}> Return </Link>
               </div>
