@@ -93,6 +93,7 @@ class Navbar extends Component {
             className="navbar-toggler"
             type="button"
             data-toggle="collapse"
+            // data-target=".navbar-collapse"
             data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent"
             aria-expanded="false"
@@ -103,6 +104,8 @@ class Navbar extends Component {
           <div
             className="collapse navbar-collapse justify-content-between"
             id="navbarSupportedContent"
+            data-target="#navbarSupportedContent"
+            data-toggle="collapse" 
           >
             <div className="d-md-flex flex-direction-start nav-buttons navbar-list">
               <NavLink className="nav-navbar nav-link px-0" to="/aboutus">
@@ -130,6 +133,7 @@ class Navbar extends Component {
                   <NavLink
                     className="nav-navbar nav-link d-flex align-items-center nav-icon-container px-0"
                     to="/login"
+                  
                   >
                     <img src="https://res.cloudinary.com/dxatyucj2/image/upload/v1580900039/go-green/recipe2_owkbb1.png" alt="chef-icon" />
                     <p className="text-nowrap">Login</p>
@@ -148,7 +152,7 @@ class Navbar extends Component {
                 <p>Add Recipe</p>
               </NavLink>
               <NavLink
-                className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
+                className="nav-navbar nav-link d-flex align-items-center nav-icon-container" 
                 to={`/user/${this.state.loggedInUser.username}`}
               >
                 <img src="https://res.cloudinary.com/dxatyucj2/image/upload/v1580900039/go-green/kitchen-pack_zlb5av.png" alt="profile-icon" />
@@ -156,6 +160,7 @@ class Navbar extends Component {
               </NavLink>
               <NavLink
                 className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
+                
                 onClick={this.logoutUser}
                 to="/"
               >
