@@ -977,15 +977,18 @@ color: rgba(100, 96, 92, 0.9);
     z-index: 10;
     background-color: rgba(230,230,230,1);
     flex-direction: column !important;
-    align-items: flex-end !important;
+    /* align-items: flex-end !important; */
     border-radius: 3px;
+    display: flex;
   }
 
   .navbar-collapse > div a {
     display: flex !important;
     flex-direction: column !important;
     align-items: flex-end;
+    letter-spacing: 0.5 vw;
     color: green;
+    border-bottom: solid 1px;
   }
 
   .nav-logo {

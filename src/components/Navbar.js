@@ -107,7 +107,7 @@ class Navbar extends Component {
           >
             <div className="d-md-flex flex-direction-start nav-buttons navbar-list">
               <NavLink className="nav-navbar nav-link px-0" to="/aboutus">
-                Why GoGreen?
+                Why Go Green?
               </NavLink>
             </div>
             <div className="d-flex flex-direction-between navbar-list">
