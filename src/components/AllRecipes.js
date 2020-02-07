@@ -5,17 +5,12 @@ import "aos/dist/aos.css";
 import RecipeCard from './RecipeCard.js';
 import Loader from "react-loader-spinner";
 import axios from 'axios';
-// const recipesCleanTestAlex = require('./AlexInput.js');
 
 AOS.init({ offset: 80 });
 
 class AllRecipes extends Component {
   constructor(props) {
     super(props)
-
-    this.state={
-      loader: true,
-    }
   }
 
 render(){

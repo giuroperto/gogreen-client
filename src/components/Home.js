@@ -169,7 +169,3 @@ class Home extends Component {
 }
 
 export default Home;
-
-
-// trazer getmessage e success message -> para rendererizar condicional
-// passar o message

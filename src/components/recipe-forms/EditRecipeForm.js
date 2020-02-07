@@ -37,7 +37,8 @@ class EditRecipeForm extends Component {
       picture: '',
       pictureName: '',
       ingredientsInputs: 1,
-      instructionsInputs: 3
+      instructionsInputs: 3,
+      loader: false,
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -110,6 +111,7 @@ class EditRecipeForm extends Component {
   
   handleSubmit = (event) => {
     event.preventDefault();
+    this.setState({loader: true});
     const { name, description, dishTypes, cuisines, servings, ingredients, instructions, vegan, picture } = this.state;
     let totalstepTimeMinutes = instructions.reduce((acc, item) => acc + parseInt(item.stepTimeMinutes), 0);
     instructions.map(item => item.stepTimeMinutes = parseInt(item.stepTimeMinutes))
@@ -120,7 +122,10 @@ class EditRecipeForm extends Component {
 
     this.apiEndpoints.editRecipe(recipeID, name, description, ingredients, dishTypesArr, vegan, cuisinesArr, totalstepTimeMinutes, servings, instructions, picture)
     .then(() => {
-      this.props.history.push(`/recipe/${recipeID}`)
+      this.props.history.push(`/recipe/${recipeID}`);
+      this.setState({
+        loader: false,
+      })
     })
     .catch(err => console.log(err));
   }
@@ -201,7 +206,7 @@ class EditRecipeForm extends Component {
   render() {
     return(
       <form onSubmit={this.handleSubmit} className="edit-recipe-form mb-5">
-        
+        <h3 className="pb-2 title-edit-profile">Edit Recipe</h3>
         <div className="form-group">
           <label htmlFor="name">Name</label>
           <input
