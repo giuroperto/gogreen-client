@@ -1061,20 +1061,26 @@ color: rgba(100, 96, 92, 0.9);
   .navbar-collapse {
     position: relative;
     z-index: 10;
-    background-color: rgba(230,230,230,1);
+    background-color: rgba(116, 202, 142, 0.9);
     flex-direction: column !important;
-    /* align-items: flex-end !important; */
-    border-radius: 3px;
+    align-items: flex-end !important;
+    border-radius: 10px;
     display: flex;
   }
 
   .navbar-collapse > div a {
+    font-size: 1.4rem;
     display: flex !important;
     flex-direction: column !important;
     align-items: flex-end;
-    letter-spacing: 0.5 vw;
-    color: green;
-    border-bottom: solid 1px;
+    letter-spacing: 0.5vw;
+    color: rgb(17, 88, 17);
+  }
+
+  .navbar-collapse > div p {
+    font-size: 1.4rem;
+    letter-spacing: 0.5vw;
+
   }
 
   .nav-logo {
