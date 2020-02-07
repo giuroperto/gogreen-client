@@ -28,7 +28,6 @@ class Login extends Component {
           username: "",
           password: ""
         });
-        console.log('response aqui:', response)
         this.props.getUser(response.data);
         this.props.getMessage(response.status, response.data.message);
         this.redirectPage(this.props.successMessage);
@@ -52,7 +51,14 @@ class Login extends Component {
     });
   }
 
+  isLoggedIn() {
+    if (this.props.loggedInUser) {
+      this.props.history.push(`/user/${this.props.loggedInUser.username}`);
+    }
+  }
+
   render() {
+    this.isLoggedIn();
     return (
       <div className="form-background">
         <div className="form-container d-flex flex-column justify-content-center align-items-center login-container">

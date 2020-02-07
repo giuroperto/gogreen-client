@@ -14,13 +14,13 @@ class AboutUs extends Component {
           <section className='our-mission'>
             <h2 className='about-us-header'>Our Mission</h2>
             <div className="div-bar"></div>
-            <p className="about-us-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae, repellendus ea! Ex soluta beatae minus, animi nesciunt voluptates porro amet adipisci voluptatem magnam iste! Magni assumenda magnam neque ratione velit.</p>
+            <p className="about-us-text"> Buscamos auxiliar pessoas que tenham interesse em adotar uma dieta vegetariana ou vegana, de forma a simplificar o acesso à diversas receitas dos mais variados níveis de dificuldade.</p>
           </section>
           <section className='who-we-are'>
             <h2 className='about-us-header'>Who We Are</h2>
             <div className="div-bar"></div>
             <div className="who-we-are-description">
-              <p className="about-us-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Et autem dolor architecto porro aliquid! Quidem, nesciunt odio deserunt nihil asperiores deleniti inventore mollitia vitae? Placeat architecto corrupti debitis officia sequi.</p>
+              <p className="about-us-text"> A Go Green foi fundada em 2020 por quatro amigos durante o curso de Web Development na Ironhack São Paulo. A empresa surgiu do interesse dos integrantes em reduzir o consumo de carne e do entendimento que essa transição de hábito alimentar é um processo consideravelmente difícil, seja pela necessidade de repor a proteína com base em outra fonte seja pela dificuldade em encontrar receitas saborosas e nutritivas. Oferecemos uma ferramenta onde as pessoas podem compartilhar suas receitas e também contribuir com receitas de terceiros, por meio de avaliações ou mesmo propondo alterações. Esperamos assim incentivar mais pessoas a optarem por uma alimentação sem carne e reduzir os impactos no meio-ambiente e no bem estar dos animais. </p>
             </div>
             <figure className="who-we-are-image">
               {/* <img src="./public/team.jpg" alt="Us"/> */}
