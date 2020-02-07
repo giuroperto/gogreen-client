@@ -55,16 +55,28 @@ class ConfirmDelete extends Component {
             <Loader type="Puff" color="#76ff03" height={200} width={200} />
           </div>
         ) : (
-          <div>
+          <>
+          <div className="confirm-delete-header mb-5">
             <div>
               {
                 this.props.message && <Message successMessage={this.props.successMessage} message={this.props.message}/>
               }
             </div>
             <h3> Are you sure you want to delete your account? </h3>
-            <Link to='/' onClick={this.deleteUser}>DELETE </Link>
-            <Link to={`/user/${this.props.loggedInUser.username}`}> CANCEL </Link>
           </div>
+          <div className="confirm-delete-buttons">
+          <div>
+              <Link to='/' onClick={this.deleteUser}>
+                <button type="button" className="btn btn-danger individual-button">DELETE</button>
+              </Link>
+            </div>
+            <div>
+              <Link to={`/user/${this.props.loggedInUser.username}`}>
+                <button type="button" className="btn btn-secondary individual-button">CANCEL</button>
+              </Link>
+            </div>
+          </div>
+          </>
         )
       }
       </div>

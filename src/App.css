@@ -758,6 +758,31 @@ color: rgba(100, 96, 92, 0.9);
   width: 50%;
 }
 
+/* CONFIRM DELETE */
+
+.confirm-delete {
+  min-height: 61vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.confirm-delete-header > h3 {
+  font-weight: 700;
+  color: #e65100;
+}
+
+.confirm-delete-buttons {
+  display: flex;
+  width: 20%;
+  justify-content: space-around;
+}
+
+.individual-button {
+  padding: 0.8rem 1.5rem !important;
+}
+
 /* FOOTER */
 
 .footer{
@@ -1121,6 +1146,20 @@ color: rgba(100, 96, 92, 0.9);
 
   .navbar-list a {
     letter-spacing: 0.05rem;
+  }
+
+  .confirm-delete {
+    min-height: 55vh;
+  }
+  
+  .confirm-delete-header > h3 {
+    font-weight: 700;
+    color: #e65100;
+    margin: 0 4vw;
+  }
+  
+  .confirm-delete-buttons {
+    width: 75%;
   }
 
 }
