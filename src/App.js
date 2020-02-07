@@ -330,7 +330,10 @@ class App extends Component {
                 path="/recipe/:recipeID"
                 render={(props) => (
                   <RecipeDetails
-                    allRecipes={this.state.allRecipes} message={this.state.message} successMessage={this.state.successMessage} loggedInUser={this.state.loggedInUser}
+                    allRecipes={this.state.allRecipes}
+                    message={this.state.message}
+                    successMessage={this.state.successMessage}
+                    loggedInUser={this.state.loggedInUser}
                     {...props}
                   />
                 )}
@@ -353,6 +356,7 @@ class App extends Component {
               <ProtectedRoute
                 exact
                 user={this.state.loggedInUser}
+                getUser={this.getUser}
                 loggedInUser={this.state.loggedInUser}
                 message={this.state.message}
                 successMessage={this.state.successMessage}

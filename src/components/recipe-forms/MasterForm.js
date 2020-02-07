@@ -67,10 +67,13 @@ class MasterForm extends Component {
   
   handleSubmit (event) {
     event.preventDefault();
-    const { name, description, dishTypes, cuisines, servings, ingredients, instructions, vegan, picture } = this.state;
+    let { name, description, dishTypes, cuisines, servings, ingredients, instructions, vegan, picture } = this.state;
     let totalTimeMinutes = instructions.reduce((acc, item) => acc + parseInt(item.stepTimeMinutes), 0);
     instructions.map(item => item.stepTimeMinutes = parseInt(item.stepTimeMinutes))
     let owner = this.props.allData.loggedInUser._id;
+    if (picture === '') {
+      picture = 'https://res.cloudinary.com/dxatyucj2/image/upload/v1580900039/go-green/logo_sbjwg4.png'
+    }
     let dishTypesArr = [dishTypes];
     let cuisinesArr = [cuisines];
     this.apiEndpoints.addNewRecipe(owner, name, description, ingredients, dishTypesArr, vegan, cuisinesArr, totalTimeMinutes, servings, instructions, picture)
@@ -79,7 +82,10 @@ class MasterForm extends Component {
       this.props.getMessage(response.status, response.data.message);
       this.redirectPage(this.props.successMessage, recipeID);
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      this.props.getMessage(err.response.status, err.response.data.message);
+      console.log(err)
+    });
 
   }
 

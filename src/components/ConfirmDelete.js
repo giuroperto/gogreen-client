@@ -36,7 +36,7 @@ class ConfirmDelete extends Component {
         });
       })
       .catch(err => {
-        this.props.getMessage(err.response.status, err.response.data.message);
+        this.props.getMessage(err.response.data.status, err.response.data.message);
       });
   }
 
