@@ -67,12 +67,12 @@ class RecipeDetails extends Component {
     let stepCount = 0;
     return(
       <>
+        {
+        this.props.message && <Message successMessage={this.props.successMessage} message={this.props.message}/>
+        }
       {this.state.uniqueRecipe.ingredients ? (
 
         <div id="detailed-recipe" className="container-fluid mb-3" style={{width: '85%'}}>
-          {
-          this.props.message && <Message successMessage={this.props.successMessage} message={this.props.message}/>
-          }
           <div className="row d-flex flex-column justify-content-center align-items-center mb-2 mt-4">
             <div className="recipe-details-picture">
                 <img src={this.state.uniqueRecipe.picture} alt={this.state.uniqueRecipe.name}></img>

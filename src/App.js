@@ -197,7 +197,7 @@ class App extends Component {
       successMessage: typeOfMessage,
     });
 
-    setTimeout(this.clearMessage, 5000);
+    setTimeout(this.clearMessage, 4000);
   }
 
   clearMessage(){
@@ -339,6 +339,9 @@ class App extends Component {
               <ProtectedRoute
                 exact
                 user={this.state.loggedInUser}
+                successMessage={this.state.successMessage}
+                getMessage={this.getMessage}
+                message={this.state.message}
                 loggedInUser={this.state.loggedInUser}
                 allData={this.state}
                 path='/recipe/:recipeID/edit'
