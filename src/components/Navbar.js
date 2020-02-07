@@ -63,9 +63,13 @@ class Navbar extends Component {
     }
   }
 
-  // componentDidMount() {
-  //   this.props.getUser(this.state.loggedInUser);
-  // }
+  componentDidMount() {
+    if (this.props.allData.loggedInUser) {
+      this.setState({ loggedInUser: this.props.allData.loggedInUser, showLoginAndSignupButtons: false, showLogoutAndOtherButtons: true, });
+    } else {
+      this.setState({ loggedInUser: this.props.allData.loggedInUser, showLoginAndSignupButtons: true, showLogoutAndOtherButtons: false, });
+    }
+  }
 
   // ajustar o getUser para ficar na Navbar
 
@@ -141,7 +145,7 @@ class Navbar extends Component {
                 className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
                 to="/addrecipe"
               >
-                <img className="mr-1" src="images/plus.png" alt="add-icon" />
+                <img className="mr-1" src="https://res.cloudinary.com/dxatyucj2/image/upload/v1581042703/go-green/plus_udujfi.png" alt="add-icon" />
                 <p>Add Recipe</p>
               </NavLink>
               <NavLink
