@@ -25,7 +25,7 @@ class Home extends Component {
                 <div className="section1-div d-flex flex-column align-items-center">
                   <h2>Go Green</h2>
                   <h4>Find and share vegetarian and vegan recipes</h4>
-                  <Link to="/allrecipes">
+                  <Link to="/login">
                     <button type="button" className="btn btn-success">
                       Let's begin
                     </button>
@@ -87,7 +87,7 @@ class Home extends Component {
 
           <div className="row">
             <div className="col-sm mb-4">
-              <Link to="/recipe/5e384386b742f83ceec52f23" className="recipe-link">
+              <Link to="/allrecipes" className="recipe-link">
                 <article
                   className="feat-recipe d-flex justify-content-center align-items-end"
                   style={{
@@ -112,7 +112,7 @@ class Home extends Component {
               </div>
             </div>
             <div className="col-sm mb-4">
-              <Link to="/recipe/5e384386b742f83ceec52f43" className="recipe-link">
+              <Link to="/allrecipes" className="recipe-link">
                 <article
                   className="feat-recipe d-flex justify-content-center align-items-end"
                   style={{
@@ -137,7 +137,7 @@ class Home extends Component {
               </div>
             </div>
             <div className="col-sm mb-4">
-              <Link to="/recipe/5e384386b742f83ceec530d8" className="recipe-link">
+              <Link to="/allrecipes" className="recipe-link">
                 <article
                   className="feat-recipe d-flex justify-content-center align-items-end"
                   style={{
@@ -150,7 +150,7 @@ class Home extends Component {
                 </article>
               </Link>
               <div className="difficulty-div">
-                <a href="">
+                <Link to="/allrecipes">
                   <div className="difficulty-icon-div">
                     <img className="difficulty-icon" src="./images/home-images/hard.png" alt="Hard" />
                   </div>
@@ -158,7 +158,7 @@ class Home extends Component {
                   <p className="difficulty-link">
                     See more <strong>Hard</strong> recipes
                   </p>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
