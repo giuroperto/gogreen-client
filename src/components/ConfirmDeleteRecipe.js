@@ -28,15 +28,16 @@ class ConfirmDeleteRecipe extends Component {
 
     this.apiEndpoints.deleteRecipe(recipeID)
       .then(response => {
-        this.props.getMessage(response.status, response.data.message);
-        this.redirectPage(this.props.successMessage);
+        console.log('response', response)
         this.props.getUser(null);
         this.setState({
           loader: false,
         });
+        this.props.getMessage(response.status, response.data.message);
+        this.redirectPage(this.props.successMessage);
       })
       .catch(err => {
-        this.props.getMessage(err.response.status, err.response.data.message);
+        this.props.getMessage(err.response.data.status, err.response.data.message);
       });
   }
 
