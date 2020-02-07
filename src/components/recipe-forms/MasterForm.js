@@ -154,7 +154,7 @@ class MasterForm extends Component {
         this.props.message && <Message successMessage={this.props.successMessage} message={this.props.message}/>
       }
         <div className="d-flex justify-content-center align-items-center">
-        <img src="images/recipe-3.png" alt="recipe"/>
+        <img src="https://res.cloudinary.com/dxatyucj2/image/upload/v1581095071/go-green/recipe-3_wwk3qh.png" alt="recipe"/>
         <h2 className="">Add Recipe</h2>
         </div>
 

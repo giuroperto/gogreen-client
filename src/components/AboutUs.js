@@ -14,19 +14,29 @@ class AboutUs extends Component {
           <section className='our-mission'>
             <h2 className='about-us-header'>Our Mission</h2>
             <div className="div-bar"></div>
-            <p className="about-us-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae, repellendus ea! Ex soluta beatae minus, animi nesciunt voluptates porro amet adipisci voluptatem magnam iste! Magni assumenda magnam neque ratione velit.</p>
+            <p className="about-us-text">
+            We seek to help people who are interested in adopting a vegetarian or vegan diet, in order to simplify access to diverse and delicious recipes.
+             </p>
           </section>
           <section className='who-we-are'>
             <h2 className='about-us-header'>Who We Are</h2>
             <div className="div-bar"></div>
             <div className="who-we-are-description">
-              <p className="about-us-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Et autem dolor architecto porro aliquid! Quidem, nesciunt odio deserunt nihil asperiores deleniti inventore mollitia vitae? Placeat architecto corrupti debitis officia sequi.</p>
+              <p className="about-us-text"> 
+              Go Green was founded in 2020 by four friends during the Web Development course at Ironhack São Paulo. 
+
+              The company was born from our interest in reducing meat consumption and making the transition as easy as possible for our users - chefs, cooks, and the curious!
+
+              We offer a tool where people can share their recipes and also contribute to third party recipes, through evaluations or even proposing changes. 
+
+              We hope to encourage more people to opt for meatless food, thereby reducing the impacts on the environment, personal health, and animal welfare.
+              </p>
             </div>
             <figure className="who-we-are-image">
               {/* <img src="./public/team.jpg" alt="Us"/> */}
             </figure>
           </section>
-          <section className="get-in-touch">
+          {/* <section className="get-in-touch">
             <div className="row get-in-touch-row">
               <div className="col-sm pt-5">
                 <h2 className='about-us-header'>Get in Touch</h2>
@@ -51,7 +61,7 @@ class AboutUs extends Component {
                 </div>
               </div>
             </div>
-          </section>
+          </section> */}
         </div>
       </div>
     )
