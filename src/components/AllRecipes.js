@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import AOS from "aos";
 import { Link } from 'react-router-dom';
 import "aos/dist/aos.css";
-import RecipeCard from './RecipeCard.js'
+import RecipeCard from './RecipeCard.js';
+import Loader from "react-loader-spinner";
 import axios from 'axios';
-const recipesCleanTestAlex = require('./AlexInput.js');
 
 AOS.init({ offset: 80 });
 
@@ -52,8 +52,9 @@ render(){
           </Link>
       </div>
       ) : (
-        <h1>Loading!!!</h1>
-        //Loader
+        <div className='d-flex align-items-center justify-content-center' style={{ height:'80vh'}}>
+          <Loader type="Puff" color="#76ff03" height={200} width={200} />
+        </div>
       )}
       </>
     )
@@ -61,6 +62,3 @@ render(){
 }
 
 export default AllRecipes;
-
-
-//TODO adjust dishtype and cleanlink to work properly + maybe load only 10 in ten, so add a button of LOAD MORE

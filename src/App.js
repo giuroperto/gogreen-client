@@ -197,7 +197,7 @@ class App extends Component {
       successMessage: typeOfMessage,
     });
 
-    setTimeout(this.clearMessage, 5000);
+    setTimeout(this.clearMessage, 4000);
   }
 
   clearMessage(){
@@ -243,7 +243,6 @@ class App extends Component {
   }
 
   render() {
-    console.log('state do app', this.state);
     this.fetchUser();
     return (
       <div className="App">
@@ -330,7 +329,10 @@ class App extends Component {
                 path="/recipe/:recipeID"
                 render={(props) => (
                   <RecipeDetails
-                    allRecipes={this.state.allRecipes} message={this.state.message} successMessage={this.state.successMessage} loggedInUser={this.state.loggedInUser}
+                    allRecipes={this.state.allRecipes}
+                    message={this.state.message}
+                    successMessage={this.state.successMessage}
+                    loggedInUser={this.state.loggedInUser}
                     {...props}
                   />
                 )}
@@ -339,6 +341,9 @@ class App extends Component {
               <ProtectedRoute
                 exact
                 user={this.state.loggedInUser}
+                successMessage={this.state.successMessage}
+                getMessage={this.getMessage}
+                message={this.state.message}
                 loggedInUser={this.state.loggedInUser}
                 allData={this.state}
                 path='/recipe/:recipeID/edit'
@@ -350,6 +355,7 @@ class App extends Component {
               <ProtectedRoute
                 exact
                 user={this.state.loggedInUser}
+                getUser={this.getUser}
                 loggedInUser={this.state.loggedInUser}
                 message={this.state.message}
                 successMessage={this.state.successMessage}

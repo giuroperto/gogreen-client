@@ -5,6 +5,7 @@ import Step3 from './Step3';
 import Step4 from './Step4';
 import APIAccess from '../api/api-access'
 import {Link} from 'react-router-dom';
+import Message from '../Message';
 
 class EditRecipeForm extends Component {
   constructor(props) {
@@ -37,7 +38,8 @@ class EditRecipeForm extends Component {
       picture: '',
       pictureName: '',
       ingredientsInputs: 1,
-      instructionsInputs: 3
+      instructionsInputs: 3,
+      loader: false,
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -107,9 +109,15 @@ class EditRecipeForm extends Component {
     }
   }
 
+  redirectPage(success, recipeID) {
+    if (success) {
+      this.props.history.push(`/recipe/${recipeID}`);
+    }
+  }
   
   handleSubmit = (event) => {
     event.preventDefault();
+    this.setState({loader: true});
     const { name, description, dishTypes, cuisines, servings, ingredients, instructions, vegan, picture } = this.state;
     let totalstepTimeMinutes = instructions.reduce((acc, item) => acc + parseInt(item.stepTimeMinutes), 0);
     instructions.map(item => item.stepTimeMinutes = parseInt(item.stepTimeMinutes))
@@ -119,10 +127,18 @@ class EditRecipeForm extends Component {
     let cuisinesArr = [cuisines];
 
     this.apiEndpoints.editRecipe(recipeID, name, description, ingredients, dishTypesArr, vegan, cuisinesArr, totalstepTimeMinutes, servings, instructions, picture)
-    .then(() => {
-      this.props.history.push(`/recipe/${recipeID}`)
+    .then(response => {
+      this.props.history.push(`/recipe/${recipeID}`);
+      this.setState({
+        loader: false,
+      });
+      this.props.getMessage(response.status, response.data.message);
+      this.redirectPage(this.props.successMessage, recipeID);
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      this.props.getMessage(err.response.status, err.response.data.message);
+      console.log(err)
+    });
   }
 
   renderIngredientsInputs() {
@@ -201,7 +217,7 @@ class EditRecipeForm extends Component {
   render() {
     return(
       <form onSubmit={this.handleSubmit} className="edit-recipe-form mb-5">
-        
+        <h3 className="pb-2 title-edit-profile">Edit Recipe</h3>
         <div className="form-group">
           <label htmlFor="name">Name</label>
           <input
@@ -320,11 +336,13 @@ class EditRecipeForm extends Component {
               type="button" onClick={() => this.addInput('inst')}>+</button>
           </div>
         </div>
-
+        {
+          this.props.message && <Message successMessage={this.props.successMessage} message={this.props.message}/>
+        }
         <div className='d-flex justify-content-between mt-5'>
           <div className="delete-button">
               <Link to={`/recipe/${this.props.match.params.recipeID}/delete`}>
-                <button type="button" class="btn btn-danger">
+                <button type="button" className="btn btn-danger">
                     Delete Recipe
                 </button>
               </Link>

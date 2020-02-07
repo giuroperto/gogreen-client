@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import SearchButtons from "./SearchButtons";
 import FilterRender from "./FilterRender";
 import AuthService from "./auth/auth-services";
@@ -63,14 +63,17 @@ class Navbar extends Component {
     }
   }
 
-  // componentDidMount() {
-  //   this.props.getUser(this.state.loggedInUser);
-  // }
+  componentDidMount() {
+    if (this.props.allData.loggedInUser) {
+      this.setState({ loggedInUser: this.props.allData.loggedInUser, showLoginAndSignupButtons: false, showLogoutAndOtherButtons: true, });
+    } else {
+      this.setState({ loggedInUser: this.props.allData.loggedInUser, showLoginAndSignupButtons: true, showLogoutAndOtherButtons: false, });
+    }
+  }
 
   // ajustar o getUser para ficar na Navbar
 
   render() {
-    console.log('state do navbar', this.state);
     let vegetarianString = '';
     let veganString = '';
     if (this.state.veganToggle){
@@ -103,7 +106,7 @@ class Navbar extends Component {
           >
             <div className="d-md-flex flex-direction-start nav-buttons navbar-list">
               <NavLink className="nav-navbar nav-link px-0" to="/aboutus">
-                Why GoGreen?
+                Why Go Green?
               </NavLink>
             </div>
             <div className="d-flex flex-direction-between navbar-list">
@@ -141,7 +144,7 @@ class Navbar extends Component {
                 className="nav-navbar nav-link d-flex align-items-center nav-icon-container"
                 to="/addrecipe"
               >
-                <img className="mr-1" src="images/plus.png" alt="add-icon" />
+                <img className="mr-1" src="https://res.cloudinary.com/dxatyucj2/image/upload/v1581042703/go-green/plus_udujfi.png" alt="add-icon" />
                 <p>Add Recipe</p>
               </NavLink>
               <NavLink

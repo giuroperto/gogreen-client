@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import APIAccess from './api/api-access';
-import Message from './Message';
+import Message from '../components/Message';
 import { Link } from 'react-router-dom';
+import Loader from "react-loader-spinner";
 
 class EditProfile extends Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class EditProfile extends Component {
       newPassword: '',
       picture: '',
       pictureName: '',
+      loader: true,
     }
 
     this.apiEndpoints = new APIAccess();
@@ -35,7 +37,8 @@ class EditProfile extends Component {
           lastName: response.data.lastName,
           email: response.data.email,
           usernameForm: response.data.username,
-          picture: response.data.picture
+          picture: response.data.picture,
+          loader: false,
         })
       })
       .catch(err => console.log(err));
@@ -59,17 +62,20 @@ class EditProfile extends Component {
     event.preventDefault();
     let { firstName, lastName, email, usernameForm, oldPassword, newPassword, picture } = this.state;
     const { username } = this.props.match.params;
-
+    
     if (picture === '' || picture === null) {
       picture = 'https://res.cloudinary.com/dxatyucj2/image/upload/v1580833315/go-green/vegetalwhite.jpg.jpg'
     }
-
+    
     this.apiEndpoints.editUser(username, firstName, lastName, email, usernameForm, oldPassword, newPassword, picture)
-      .then(response => {
+    .then(response => {
         this.props.getMessage(response.status, response.data.message);
         this.redirectPage(this.props.successMessage, usernameForm);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        this.props.getMessage(err.response.status, err.response.data.message);
+        console.log(err);
+      });
   }
   
   handleUpload (event) {
@@ -89,54 +95,61 @@ class EditProfile extends Component {
     return(
       <div className="container-fluid profile-edit-form" style={{width: '85%'}}>
       {
-        this.props.message && <Message successMessage={this.props.successMessage} message={this.props.message}/>
+        this.state.loader ? (
+          <div className='d-flex align-items-center justify-content-center' style={{ height:'80vh'}}>
+            <Loader type="Puff" color="#76ff03" height={200} width={200} />
+          </div>
+        ) : (
+          <div>
+            <form onSubmit={this.handleSubmit}>
+              <h3 className="pb-2 title-edit-profile">Edit Profile</h3>
+              <div className="form-row">
+                <div className="form-group col-md-6">
+                  <label htmlFor="firstName">First name</label>
+                  <input type="text" className="form-control" id="firstName" name="firstName" onChange={this.handleChange} value={this.state.firstName}/>
+                </div>
+                <div className="form-group col-md-6">
+                <label htmlFor="lastName">Last name</label>
+                <input type="text" className="form-control" id="lastName" name="lastName" onChange={this.handleChange} value={this.state.lastName}/>
+                </div>
+              </div>
+              <div className="input-group mb-3 d-flex flex-column">
+                <label htmlFor="file">Replace picture</label>
+                <div className="custom-file">
+                  <input type="file" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="profilePic" onChange={this.handleUpload}/>
+                  <label className="custom-file-label img-name" htmlFor="inputGroupFile01">{this.state.pictureName ? this.state.pictureName : 'Choose file...'}</label>
+                </div>
+              </div>
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input type="email" className="form-control" id="email" name="email" onChange={this.handleChange} value={this.state.email}/>
+              </div>
+              <div className="form-group">
+                <label htmlFor="usernameForm">Username</label>
+                <input type="text" className="form-control" id="usernameForm" name="usernameForm" onChange={this.handleChange} value={this.state.usernameForm}/>
+              </div>
+              <div className="form-group">
+                <label htmlFor="oldPassword">Current Password</label>
+                <input type="password" className="form-control" id="oldPassword" name="oldPassword" onChange={this.handleChange} value={this.state.oldPassword} required/>
+              </div>
+              <div className="form-group">
+                <label htmlFor="newPassword">New Password</label>
+                <input type="password" className="form-control" id="newPassword" name="newPassword" onChange={this.handleChange} value={this.state.newPassword}/>
+              </div>
+              {
+                this.props.message && <Message successMessage={this.props.successMessage} message={this.props.message}/>
+              }
+              <div className="d-flex justify-content-between mt-4">
+                <button type="submit" className="btn btn-primary">Save changes</button>
+                <Link to={`/user/${this.props.match.params.username}`}> Return </Link>
+              </div>
+            </form>
+          </div>
+        )
       }
-        <form onSubmit={this.handleSubmit}>
-          <h3 className="pb-2 title-edit-profile">Edit profile</h3>
-          <div className="form-row">
-            <div className="form-group col-md-6">
-              <label htmlFor="firstName">First name</label>
-              <input type="text" className="form-control" id="firstName" name="firstName" onChange={this.handleChange} value={this.state.firstName}/>
-            </div>
-            <div className="form-group col-md-6">
-            <label htmlFor="lastName">Last name</label>
-            <input type="text" className="form-control" id="lastName" name="lastName" onChange={this.handleChange} value={this.state.lastName}/>
-            </div>
-          </div>
-          <div className="input-group mb-3 d-flex flex-column">
-            <label htmlFor="file">Replace picture</label>
-            <div className="custom-file">
-              <input type="file" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="profilePic" onChange={this.handleUpload}/>
-              <label className="custom-file-label img-name" htmlFor="inputGroupFile01">{this.state.pictureName ? this.state.pictureName : 'Choose file...'}</label>
-            </div>
-          </div>
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input type="email" className="form-control" id="email" name="email" onChange={this.handleChange} value={this.state.email}/>
-          </div>
-          <div className="form-group">
-            <label htmlFor="usernameForm">Username</label>
-            <input type="text" className="form-control" id="usernameForm" name="usernameForm" onChange={this.handleChange} value={this.state.usernameForm}/>
-          </div>
-          <div className="form-group">
-            <label htmlFor="oldPassword">Current Password</label>
-            <input type="password" className="form-control" id="oldPassword" name="oldPassword" onChange={this.handleChange} value={this.state.oldPassword} required/>
-          </div>
-          <div className="form-group">
-            <label htmlFor="newPassword">New Password</label>
-            <input type="password" className="form-control" id="newPassword" name="newPassword" onChange={this.handleChange} value={this.state.newPassword}/>
-          </div>
-          
-          <div className="d-flex justify-content-between">
-            <button type="submit" className="btn btn-primary">Save changes</button>
-            <Link to={`/user/${this.props.match.params.username}`}> Return </Link>
-          </div>
-        </form> 
       </div>
     )
   }
 }
 
 export default EditProfile;
-
-//TODO add password to check when saving and new field to edit password

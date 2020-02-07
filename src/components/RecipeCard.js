@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Switch, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const RecipeCard = props => {
   return (
@@ -29,21 +29,21 @@ const RecipeCard = props => {
           </div>
           <div>
             <p>
-              <img className='recipe-card-img' src="images/hat-icon.png" alt="chef" />
+              <img className='recipe-card-img' src="https://res.cloudinary.com/dxatyucj2/image/upload/v1581042983/go-green/hat-icon_txapif.png" alt="chef" />
               <b>Created by:  </b>
               {props.owner}
             </p>
           </div>
           <div>
             <p>
-              <img className='recipe-card-img' src="images/clock.png" alt="clock" />
+              <img className='recipe-card-img' src="https://res.cloudinary.com/dxatyucj2/image/upload/v1581042982/go-green/clock_quyo32.png" alt="clock" />
               <b>Prep time: </b>
               {props.time} minutes
             </p>
           </div>
           <div>
             <p>
-              <img className='recipe-card-img' src="images/food2.png" alt="plate" />
+              <img className='recipe-card-img' src="https://res.cloudinary.com/dxatyucj2/image/upload/v1581042996/go-green/food2_qfzdzm.png" alt="plate" />
               <b>Dish type: </b>
               {props.dishTypes}
             </p>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Message from './Message';
 import {Link} from 'react-router-dom';
 import APIAccess from "./api/api-access";
+import Loader from "react-loader-spinner";
 
 class RecipeDetails extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class RecipeDetails extends Component {
       determinedOwner: '',
       cleanDishType: '',
       ingredients: '',
-      count: 0
+      count: 0,
     };
     this.apiEndpoints = new APIAccess();
   }
@@ -66,12 +67,12 @@ class RecipeDetails extends Component {
     let stepCount = 0;
     return(
       <>
+        {
+        this.props.message && <Message successMessage={this.props.successMessage} message={this.props.message}/>
+        }
       {this.state.uniqueRecipe.ingredients ? (
 
         <div id="detailed-recipe" className="container-fluid mb-3" style={{width: '85%'}}>
-          {
-          this.props.message && <Message successMessage={this.props.successMessage} message={this.props.message}/>
-          }
           <div className="row d-flex flex-column justify-content-center align-items-center mb-2 mt-4">
             <div className="recipe-details-picture">
                 <img src={this.state.uniqueRecipe.picture} alt={this.state.uniqueRecipe.name}></img>
@@ -188,8 +189,10 @@ class RecipeDetails extends Component {
           </Link>
         </div>
       ) : (
-      <h1>Loading!!!</h1>)
-      //Loader
+        <div className='d-flex align-items-center justify-content-center' style={{ height:'80vh'}}>
+          <Loader type="Puff" color="#76ff03" height={200} width={200} />
+        </div>
+      )
     }
     </>
     )
