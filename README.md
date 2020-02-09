@@ -24,7 +24,7 @@ Go Green consists in an information sharing platform and social network based on
 
 As a **public open-source application**, user do not need to sign in in order to see recipes details.
 
-On the other hand, the fast sign up form allow user to contribute adding new recipe and editing it when needed.
+On the other hand, the fast sign up form allow user to contribute **adding new recipe** and editing it when needed.
 
 #### Step-by-step
 
