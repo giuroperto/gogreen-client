@@ -6,6 +6,8 @@ This is the final project developed as part of IronHack Web Development Bootcamp
 
 #### App URL: https://go-green.netlify.com/
 
+![](/public/images/go-green.png)
+
 ## Why Go Green?
 
 Go Green was founded in 2020 by four friends during the Web Development course at Ironhack São Paulo. 
