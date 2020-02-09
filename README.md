@@ -60,7 +60,7 @@ On the other hand, the fast sign up form allow user to contribute adding new rec
 ## Contributing
 >This is an open-source and free software. Please, feel free to collaborate =).
 
-1. Fork it
+1. Fork it 
 2. Create your feature branch (`git checkout -b feature/fooBar`)
 3. Commit your changes (`git commit -am 'Add some fooBar'`)
 4. Push to the branch (`git push origin feature/fooBar`)
