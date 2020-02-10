@@ -15,7 +15,8 @@ class RecipeDetails extends Component {
       determinedOwner: "",
       cleanDishType: "",
       ingredients: "",
-      count: 0
+      count: 0,
+      allReviews: [],
     };
     this.apiEndpoints = new APIAccess();
   }
@@ -26,7 +27,7 @@ class RecipeDetails extends Component {
     this.apiEndpoints
       .getOneRecipe(this.props.match.params.recipeID)
       .then(response => {
-        console.log("im in");
+
         let givenUniqueRecipe = response.data;
         let givenDeterminedOwner = "";
         if (givenUniqueRecipe.owner === undefined) {
@@ -60,7 +61,8 @@ class RecipeDetails extends Component {
           determinedOwner: givenDeterminedOwner,
           cleanDishType: givenCleanDishType,
           cuisine: givenCuisine,
-          ingredients: givenIngredients
+          ingredients: givenIngredients,
+          allReviews: response.data.reviews,
         });
       })
       .catch(err => console.log(err));
@@ -228,9 +230,25 @@ class RecipeDetails extends Component {
                     </button>
                   </Link>
                 </div>
-                <div className="mt-5">
-                  <AddReview loggedInUser={this.props.loggedInUser} getMessage={this.props.getMessage} successMessage={this.props.successMessage} difficulty={this.props.difficulty} message={this.props.message} {...this.props} />
+                <div>
+                  {
+                    this.state.allReviews && this.state.allReviews.length > 0 && this.state.allReviews.map(review => (
+                        <div>
+                          <h3>User: {review.owner}</h3>
+                          <div>Score: {review.score}</div>
+                          <div>Difficulty: {review.difficulty}</div>
+                          <p>Comments: {review.comment}</p>
+                        </div>
+                      ))
+                  }
                 </div>
+                {
+                  this.props.loggedInUser && (
+                    <div className="mt-5">
+                      <AddReview loggedInUser={this.props.loggedInUser} getMessage={this.props.getMessage} successMessage={this.props.successMessage} difficulty={this.props.difficulty} message={this.props.message} {...this.props} />
+                    </div>
+                  )
+                }
               </div>
             </div>
           </div>
@@ -248,5 +266,3 @@ class RecipeDetails extends Component {
 }
 
 export default RecipeDetails;
-
-//add renderizacao condicional se estiver logado
