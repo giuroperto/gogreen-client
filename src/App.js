@@ -16,7 +16,8 @@ import ConfirmDeleteRecipe from "./components/ConfirmDeleteRecipe";
 import RecipeDetails from "./components/RecipeDetails";
 import AuthService from "./components/auth/auth-services";
 import APIAccess from "./components/api/api-access";
-import EditRecipe from './components/EditRecipe'
+import EditRecipe from './components/EditRecipe';
+import EditReview from './components/EditReview';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Footer from "./components/Footer";
 import ProtectedRoute from './components/auth/protected-route';
@@ -168,6 +169,7 @@ class App extends Component {
     this.getRecipes();
     this.filterNavBar();
   }
+
   getSearchWord(word) {
     this.setState({
       searchWord: word
@@ -175,6 +177,7 @@ class App extends Component {
     this.getRecipes();
     this.filterNavBar();
   }
+
   getVeganState(boolean) {
     this.setState({
       searchVeganOnly: boolean
@@ -206,10 +209,12 @@ class App extends Component {
       successMessage: false,
     });
   }
+
   getRecipes() {
     this.apiEndpoints
       .getAllRecipes()
       .then(response => {
+        console.log(response)
         this.setState({
           allRecipes: response.data,
           loader: false,
@@ -308,6 +313,8 @@ class App extends Component {
                 path="/addrecipe"
                 component={AddRecipe}
               />
+              //TODO add protected route
+              <Route exact path="/review/:id/edit" component={EditReview} />
               <Route
                 exact
                 path="/user/:username"
