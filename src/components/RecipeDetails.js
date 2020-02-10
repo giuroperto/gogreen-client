@@ -220,13 +220,17 @@ class RecipeDetails extends Component {
                   </div>
                 </div>
               )}
-              <Link className="my-3" to="/allrecipes">
-                <button type="button" className="btn btn-success">
-                  Return to all recipes
-                </button>
-              </Link>
-              <div>
-                <AddReview loggedInUser={this.props.loggedInUser} getMessage={this.props.getMessage} successMessage={this.props.successMessage} difficulty={this.props.difficulty} message={this.props.message} {...this.props} />
+              <div className="d-flex flex-column">
+                <div>
+                  <Link className="my-3" to="/allrecipes">
+                    <button type="button" className="btn btn-success">
+                      Return to all recipes
+                    </button>
+                  </Link>
+                </div>
+                <div className="mt-5">
+                  <AddReview loggedInUser={this.props.loggedInUser} getMessage={this.props.getMessage} successMessage={this.props.successMessage} difficulty={this.props.difficulty} message={this.props.message} {...this.props} />
+                </div>
               </div>
             </div>
           </div>
@@ -244,3 +248,5 @@ class RecipeDetails extends Component {
 }
 
 export default RecipeDetails;
+
+//add renderizacao condicional se estiver logado

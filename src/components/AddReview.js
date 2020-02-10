@@ -32,8 +32,8 @@ class AddReview extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const { owner, score, difficulty, comment } = this.state;
-    this.apiEndpoints.addReview(owner, score, difficulty, comment)
+    const {recipeID, owner, score, difficulty, comment } = this.state;
+    this.apiEndpoints.addReview(recipeID, owner, score, difficulty, comment)
       .then(response => {
         this.props.getMessage(response.status, response.data.message);
       })
@@ -56,7 +56,7 @@ class AddReview extends Component {
         <div>
           <form id="addreview" onSubmit={this.handleSubmit}>
           <h3>Add Review</h3>
-            <div className="form-row">
+            <div className="form-column">
               <div className="form-group">
                 <label htmlFor="score">Rating</label>
                 <input type="number" className="form-control" id="score" name="score" onChange={this.handleChange} value={this.state.score} min="0" max="5" required/>
