@@ -18,6 +18,7 @@ import AuthService from "./components/auth/auth-services";
 import APIAccess from "./components/api/api-access";
 import EditRecipe from './components/EditRecipe';
 import EditReview from './components/EditReview';
+import AddReview from './components/AddReview';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Footer from "./components/Footer";
 import ProtectedRoute from './components/auth/protected-route';
@@ -338,8 +339,10 @@ class App extends Component {
                   <RecipeDetails
                     allRecipes={this.state.allRecipes}
                     message={this.state.message}
+                    getMessage={this.getMessage}
                     successMessage={this.state.successMessage}
                     loggedInUser={this.state.loggedInUser}
+                    difficulty={this.state.difficultLevelArr}
                     {...props}
                   />
                 )}

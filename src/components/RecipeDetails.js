@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Message from "./Message";
+import AddReview from "../components/AddReview";
 import { Link } from "react-router-dom";
 import APIAccess from "./api/api-access";
 import Loader from "react-loader-spinner";
@@ -224,6 +225,9 @@ class RecipeDetails extends Component {
                   Return to all recipes
                 </button>
               </Link>
+              <div>
+                <AddReview loggedInUser={this.props.loggedInUser} getMessage={this.props.getMessage} successMessage={this.props.successMessage} difficulty={this.props.difficulty} message={this.props.message} {...this.props} />
+              </div>
             </div>
           </div>
         ) : (
