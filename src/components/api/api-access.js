@@ -53,8 +53,8 @@ class APIAccess {
     return this.APIAccess.get(`/review/${reviewID}`).then(response => response);
   }
 
-  writeReview(owner, score, difficulty, comment) {
-    return this.APIAccess.post('/addreview', { owner, score, difficulty, comment }).then(response => response);
+  addReview(recipeID, owner, score, difficulty, comment) {
+    return this.APIAccess.post('/addreview', { recipeID, owner, score, difficulty, comment }).then(response => response);
   }
 
   editReview(reviewID, score, difficulty, comment) {
