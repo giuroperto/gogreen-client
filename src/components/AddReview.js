@@ -36,11 +36,18 @@ class AddReview extends Component {
     this.apiEndpoints.addReview(recipeID, owner, score, difficulty, comment)
       .then(response => {
         this.props.getMessage(response.status, response.data.message);
+        this.props.updateReviews(response.data.newReview);
+        console.log(response);
       })
       .catch(err => {
         this.props.getMessage(err.response.status, err.response.data.message);
         console.log(err);
       });
+    this.setState({
+      score: 0,
+      difficulty: '',
+      comment: '',
+    });
   }
 
   handleChange(event) {

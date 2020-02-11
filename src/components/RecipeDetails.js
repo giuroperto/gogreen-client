@@ -19,6 +19,7 @@ class RecipeDetails extends Component {
       allReviews: [],
     };
     this.apiEndpoints = new APIAccess();
+    this.updateReviews = this.updateReviews.bind(this);
   }
 
   componentDidMount() {
@@ -66,6 +67,15 @@ class RecipeDetails extends Component {
         });
       })
       .catch(err => console.log(err));
+  }
+
+  updateReviews(newReview) {
+    let reviewsArr = this.state.allReviews;
+    reviewsArr.push(newReview);
+    console.log('inside update reviews');
+    this.setState({
+      allReviews: reviewsArr,
+    });
   }
 
   //TODO add fork button for logged users
@@ -245,7 +255,7 @@ class RecipeDetails extends Component {
                 {
                   this.props.loggedInUser && (
                     <div className="mt-5">
-                      <AddReview loggedInUser={this.props.loggedInUser} getMessage={this.props.getMessage} successMessage={this.props.successMessage} difficulty={this.props.difficulty} message={this.props.message} {...this.props} />
+                      <AddReview updateReviews={this.updateReviews} loggedInUser={this.props.loggedInUser} getMessage={this.props.getMessage} successMessage={this.props.successMessage} difficulty={this.props.difficulty} message={this.props.message} {...this.props} />
                     </div>
                   )
                 }
