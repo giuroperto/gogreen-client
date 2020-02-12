@@ -215,7 +215,6 @@ class App extends Component {
     this.apiEndpoints
       .getAllRecipes()
       .then(response => {
-        console.log(response)
         this.setState({
           allRecipes: response.data,
           loader: false,

@@ -72,7 +72,6 @@ class RecipeDetails extends Component {
   updateReviews(newReview) {
     let reviewsArr = this.state.allReviews;
     reviewsArr.push(newReview);
-    console.log('inside update reviews');
     this.setState({
       allReviews: reviewsArr,
     });
@@ -244,7 +243,7 @@ class RecipeDetails extends Component {
                   {
                     this.state.allReviews && this.state.allReviews.length > 0 && this.state.allReviews.map(review => (
                         <div>
-                          <h3>User: {review.owner}</h3>
+                          <h3>User: {review.owner.username}</h3>
                           <div>Score: {review.score}</div>
                           <div>Difficulty: {review.difficulty}</div>
                           <p>Comments: {review.comment}</p>
