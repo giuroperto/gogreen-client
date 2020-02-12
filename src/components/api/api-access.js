@@ -23,7 +23,6 @@ class APIAccess {
   //recipes endpoints
 
   getAllRecipes() {
-    console.log('getrecipessss');
     return this.APIAccess.get('/allrecipes').then(response => response);
   }
 

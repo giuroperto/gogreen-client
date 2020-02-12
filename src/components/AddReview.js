@@ -37,7 +37,6 @@ class AddReview extends Component {
       .then(response => {
         this.props.getMessage(response.status, response.data.message);
         this.props.updateReviews(response.data.newReview);
-        console.log(response);
       })
       .catch(err => {
         this.props.getMessage(err.response.status, err.response.data.message);
