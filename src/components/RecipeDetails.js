@@ -243,10 +243,21 @@ class RecipeDetails extends Component {
                   {
                     this.state.allReviews && this.state.allReviews.length > 0 && this.state.allReviews.map(review => (
                         <div>
-                          <h3>User: {review.owner.username}</h3>
-                          <div>Score: {review.score}</div>
-                          <div>Difficulty: {review.difficulty}</div>
-                          <p>Comments: {review.comment}</p>
+                          <div>
+                            <h3>User: {review.owner.username}</h3>
+                            <div>Score: {review.score}</div>
+                            <div>Difficulty: {review.difficulty}</div>
+                            <p>Comments: {review.comment}</p>
+                          </div>
+                          {
+                            this.props.loggedInUser && review.owner.username && review.owner.username === this.props.loggedInUser.username && (
+                              <div>
+                              {/* //TODO add links to delete and edit reviews */}
+                                <Link>Delete Review</Link>
+                                <Link>Edit Review</Link>
+                              </div>
+                            )
+                          }
                         </div>
                       ))
                   }
