@@ -248,7 +248,7 @@ border: transparent;
 }
 
 
-/* ALL RECEPIES */
+/* ALL RECIPES */
 
 .all-recipes-header {
   position: relative;
@@ -436,6 +436,9 @@ color: rgba(100, 96, 92, 0.9);
   border-bottom: none;
 }
 
+.heart {
+  color: red;
+}
 
 /* FEATURED RECIPES */
 

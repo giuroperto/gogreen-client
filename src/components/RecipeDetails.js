@@ -17,9 +17,11 @@ class RecipeDetails extends Component {
       ingredients: "",
       count: 0,
       allReviews: [],
+      isFavourite: false,
     };
     this.apiEndpoints = new APIAccess();
     this.updateReviews = this.updateReviews.bind(this);
+    this.isFavourite = this.isFavourite.bind(this);
   }
 
   componentDidMount() {
@@ -77,6 +79,14 @@ class RecipeDetails extends Component {
     });
   }
 
+  //TODO when mounting automatically add if it is favourite
+
+  isFavourite(event) {
+    this.setState({
+      isFavourite: !this.state.isFavourite,
+    })
+  }
+
   //TODO add fork button for logged users
 
   render() {
@@ -105,6 +115,9 @@ class RecipeDetails extends Component {
               <div className="mt-4">
                 <div className="recipe-details-name d-flex justify-content-center align-items-center">
                   <h3>{this.state.uniqueRecipe.name}</h3>
+                  {
+                    this.state.isFavourite ? <div onClick={this.isFavourite} style={{cursor:'pointer'}}><i className="fas fa-heart ml-3 fav-button h3 heart"></i></div> : <div onClick={this.isFavourite} style={{cursor:'pointer'}}><i className="far fa-heart ml-3 fav-button h3"></i></div>
+                  }
                   <div className="edit-button ml-3 mb-3">
                     {this.props.loggedInUser &&
                       this.state.uniqueRecipe.owner &&
