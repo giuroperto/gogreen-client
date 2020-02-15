@@ -46,6 +46,18 @@ class APIAccess {
     return this.APIAccess.post('/upload', theFile).then(res => res);
   }
 
+  //favourites endpoints
+
+  favourite(userID, recipeID) {
+    console.log('inside favourite call');
+    return this.APIAccess.post('/addfavourite', { userID, recipeID }).then(response => response);
+  }
+  
+  unfavourite(userID, recipeID) {
+    console.log('inside unfavourite call');
+    return this.APIAccess.put('/unfavourite', { userID, recipeID }).then(response => response);
+  }
+
   //reviews endpoints
 
   getOneReview(reviewID) {

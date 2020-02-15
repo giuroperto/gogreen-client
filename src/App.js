@@ -229,8 +229,9 @@ class App extends Component {
       this.service
         .loggedin()
         .then(response => {
+          console.log('looking for favs', response)
           this.setState({
-            loggedInUser: response.data
+            loggedInUser: response.data,
           });
         })
         .catch(err => {

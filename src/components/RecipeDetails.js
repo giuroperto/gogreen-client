@@ -17,13 +17,20 @@ class RecipeDetails extends Component {
       ingredients: "",
       count: 0,
       allReviews: [],
+      isFavourite: false,
     };
     this.apiEndpoints = new APIAccess();
     this.updateReviews = this.updateReviews.bind(this);
+    this.isFavourite = this.isFavourite.bind(this);
+    this.favourite = this.favourite.bind(this);
+    this.unfavourite = this.unfavourite.bind(this);
+    this.checkFavourites = this.checkFavourites.bind(this);
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
+
+    this.checkFavourites();
 
     this.apiEndpoints
       .getOneRecipe(this.props.match.params.recipeID)
@@ -77,9 +84,58 @@ class RecipeDetails extends Component {
     });
   }
 
+  checkFavourites() {
+    const { username } = this.props.loggedInUser;
+
+    this.apiEndpoints
+      .getOneUser(username)
+      .then((response) => {
+        let { recipeID } = this.props.match.params;
+        if (response.data.favourites.length > 0 && response.data.favourites.filter((e) => e._id === recipeID).length > 0) {
+          this.setState({
+            isFavourite: true,
+          });
+        }
+
+      })
+      .catch(err => console.log(err));
+  }
+
+  //TODO when mounting automatically add if it is favourite
+
+  isFavourite() {
+    if (this.state.isFavourite) {
+      this.unfavourite();
+    } else {
+      this.favourite();
+    }
+    this.setState({
+      isFavourite: !this.state.isFavourite,
+    })
+  }
+
+  favourite() {
+    this.apiEndpoints
+      .favourite(this.props.loggedInUser, this.props.match.params.recipeID)
+      .then(response => {
+        console.log('favoritando');
+      })
+      .catch(err => console.log(err));
+    }
+    
+    unfavourite() {
+      this.apiEndpoints
+      .unfavourite(this.props.loggedInUser, this.props.match.params.recipeID)
+      .then(response => {
+        console.log('desfavoritando');
+    })
+    .catch(err => console.log(err));
+  }
+
   //TODO add fork button for logged users
 
   render() {
+    console.log(this.props.loggedInUser);
     let stepCount = 0;
     return (
       <>
@@ -105,6 +161,11 @@ class RecipeDetails extends Component {
               <div className="mt-4">
                 <div className="recipe-details-name d-flex justify-content-center align-items-center">
                   <h3>{this.state.uniqueRecipe.name}</h3>
+                  {
+                    this.props.loggedInUser && (
+                    this.state.isFavourite ? <div onClick={this.isFavourite} style={{cursor:'pointer'}}><i className="fas fa-heart ml-3 fav-button h3 heart"></i></div> : <div onClick={this.isFavourite} style={{cursor:'pointer'}}><i className="far fa-heart ml-3 fav-button h3"></i></div>
+                    )
+                  }
                   <div className="edit-button ml-3 mb-3">
                     {this.props.loggedInUser &&
                       this.state.uniqueRecipe.owner &&
