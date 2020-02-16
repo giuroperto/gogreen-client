@@ -66,7 +66,7 @@ class Profile extends Component {
   }
 
   render() {
-    this.state.userAccount && console.log(this.state.userAccount.favourites)
+    this.state.userAccount && console.log(this.state.userAccount)
     return (
       <div>
           { this.state.loader ? (
@@ -188,13 +188,9 @@ class Profile extends Component {
                   <div className="recipes-cards-container py-5" style={{minHeight: '30vh'}}>
                     {this.state.userAccount && (
                       this.state.showFavourites
-                      ? this.state.userAccount.favourites.map((recipe, idx) => (
-                          <ProfileRecipeCard key={idx} {...recipe}/>
-                        ))
-                      : this.state.userRecipes.map((recipe, idx) => (
-                          <ProfileRecipeCard key={idx} {...recipe}/>
-                        )))}
-                    {/* //TODO add text to when there are no favs and recipes */}
+                      ? (this.state.userAccount.favourites.length > 0 ? this.state.userAccount.favourites.map((recipe, idx) => <ProfileRecipeCard key={idx} {...recipe}/>) : <div><h4>You haven't favourited any recipe yet! <i class="far fa-sad-tear"></i></h4><h4>Click <Link to="/allrecipes">here</Link> and I'm certain you'll find something you like!</h4></div>)
+                      : (this.state.userRecipes.length > 0 ? this.state.userRecipes.map((recipe, idx) => <ProfileRecipeCard key={idx} {...recipe}/> ) : <div><h4>You haven't started contributing yet!</h4><h4>Click <Link to='/addrecipe'>here</Link> to create your first recipe! <i class="far fa-grin-wink"></i></h4></div>)
+                    )}
                   </div>
                 </div>
               </div>
@@ -210,4 +206,4 @@ class Profile extends Component {
 
 export default Profile;
 
-//TODO adjust image, crete recipes and favourites to test, adjust button styling and add another case when there is no fav and no recipe to show
+//TODO adjust image and add another case when there is no fav and no recipe to show

@@ -1,14 +1,69 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import APIAccess from "./api/api-access";
 
 class RecipeCard extends Component {
   constructor(props) {
     super(props);
 
-    // this.state ={
-    //   favourite: false,
-    // }
+    this.state ={
+      isFavourite: false,
+    };
+    this.apiEndpoints = new APIAccess();
+    this.isFavourite = this.isFavourite.bind(this);
+    this.checkFavourites = this.checkFavourites.bind(this);
   }
+
+  isFavourite() {
+    if (this.state.isFavourite) {
+      this.unfavourite();
+    } else {
+      this.favourite();
+    }
+    this.setState({
+      isFavourite: !this.state.isFavourite,
+    })
+  }
+
+  componentDidMount() {
+    this.checkFavourites();
+  }
+
+  checkFavourites() {
+    const { username } = this.props.loggedInUser;
+
+    this.apiEndpoints
+      .getOneUser(username)
+      .then((response) => {
+        let { recipeID } = this.props;
+        if (response.data.favourites.length > 0 && response.data.favourites.filter((e) => e._id === recipeID).length > 0) {
+          this.setState({
+            isFavourite: true,
+          });
+        }
+
+      })
+      .catch(err => console.log(err));
+  }
+
+  favourite() {
+    this.apiEndpoints
+      .favourite(this.props.loggedInUser, this.props.recipeID)
+      .then(response => {
+        console.log('favoritando');
+      })
+      .catch(err => console.log(err));
+  }
+    
+  unfavourite() {
+    this.apiEndpoints
+      .unfavourite(this.props.loggedInUser, this.props.recipeID)
+      .then(response => {
+        console.log('desfavoritando');
+    })
+      .catch(err => console.log(err));
+  }
+
   render () {
     return (
       <div id="individual-recipe" className="container-fluid" style={{ width: "85%" }} >
@@ -27,7 +82,11 @@ class RecipeCard extends Component {
               <Link to={this.props.link}>
                 <h3>{this.props.name}</h3>
               </Link>
-              {/* <i className="far fa-heart ml-3"></i> */}
+              {
+                this.props.loggedInUser && (
+                    this.state.isFavourite ? <div onClick={this.isFavourite} style={{cursor:'pointer'}}><i className="fas fa-heart ml-3 fav-button h3 heart"></i></div> : <div onClick={this.isFavourite} style={{cursor:'pointer'}}><i className="far fa-heart ml-3 fav-button h3"></i></div>
+                )
+              }
             </div>
             <div>
               <h4>{this.props.description}</h4>
