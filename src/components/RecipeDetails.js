@@ -101,8 +101,6 @@ class RecipeDetails extends Component {
       .catch(err => console.log(err));
   }
 
-  //TODO when mounting automatically add if it is favourite
-
   isFavourite() {
     if (this.state.isFavourite) {
       this.unfavourite();
@@ -121,15 +119,15 @@ class RecipeDetails extends Component {
         console.log('favoritando');
       })
       .catch(err => console.log(err));
-    }
+  }
     
-    unfavourite() {
-      this.apiEndpoints
+  unfavourite() {
+    this.apiEndpoints
       .unfavourite(this.props.loggedInUser, this.props.match.params.recipeID)
       .then(response => {
         console.log('desfavoritando');
     })
-    .catch(err => console.log(err));
+      .catch(err => console.log(err));
   }
 
   //TODO add fork button for logged users
