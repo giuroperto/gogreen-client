@@ -205,5 +205,3 @@ class Profile extends Component {
 }
 
 export default Profile;
-
-//TODO adjust image and add another case when there is no fav and no recipe to show
