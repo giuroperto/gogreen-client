@@ -50,7 +50,7 @@ class APIAccess {
 
   favourite(userID, recipeID) {
     console.log('inside favourite call');
-    return this.APIAccess.post('/addfavourite', { userID, recipeID }).then(response => response);
+    return this.APIAccess.put('/addfavourite', { userID, recipeID }).then(response => response);
   }
   
   unfavourite(userID, recipeID) {
