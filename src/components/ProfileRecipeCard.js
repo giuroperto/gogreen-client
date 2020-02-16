@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from 'react-router-dom';
 
 const ProfileRecipeCard = props => {
+  // console.log('fdavsss', this.props);
     return (
         <div className="container individual-recipe">
             <div className="row d-flex flex-row justify-content-center align-items-center" style={{margin: '0 auto'}}>
