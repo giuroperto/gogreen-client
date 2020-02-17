@@ -8,10 +8,16 @@ class RecipeCard extends Component {
 
     this.state ={
       isFavourite: false,
+      difficulty: '',
+      imgDifficulty: '',
+      score: 0,
     };
     this.apiEndpoints = new APIAccess();
     this.isFavourite = this.isFavourite.bind(this);
     this.checkFavourites = this.checkFavourites.bind(this);
+    this.checkDifficulty = this.checkDifficulty.bind(this);
+    this.checkScore = this.checkScore.bind(this);
+    this.getDifficultyImg = this.getDifficultyImg.bind(this);
   }
 
   isFavourite() {
@@ -27,6 +33,8 @@ class RecipeCard extends Component {
 
   componentDidMount() {
     this.checkFavourites();
+    this.checkScore();
+    this.checkDifficulty();
   }
 
   checkFavourites() {
@@ -42,6 +50,66 @@ class RecipeCard extends Component {
           });
         }
 
+      })
+      .catch(err => console.log(err));
+  }
+
+  checkDifficulty() {
+    this.apiEndpoints
+      .getOneRecipe(this.props.recipeID)
+      .then(response => {
+        if (response.data.reviews.length > 0) {
+          let numberEasy = response.data.reviews.filter((review) => review.difficulty === 'Easy').length;
+          let numberMedium = response.data.reviews.filter((review) => review.difficulty === 'Medium').length;
+          let numberHard = response.data.reviews.filter((review) => review.difficulty === 'Hard').length;
+
+          if (numberEasy > numberMedium && numberEasy > numberHard) {
+            this.setState({
+              difficulty: 'Easy',
+            });
+          } else if (numberMedium > numberEasy && numberMedium > numberHard) {
+            this.setState({
+              difficulty: 'Medium',
+            });
+          } else {
+            this.setState({
+              difficulty: 'Hard',
+            });
+          }
+          this.getDifficultyImg();
+        }
+      })
+      .catch(err => console.log(err));
+  }
+
+  getDifficultyImg() {
+    if (this.state.difficulty === 'Easy') {
+      this.setState({
+        imgDifficulty: 'https://res.cloudinary.com/dxatyucj2/image/upload/v1581899404/go-green/easy_nztpqt.png',
+      });
+    } else if (this.state.difficulty === 'Medium') {
+      this.setState({
+        imgDifficulty: 'https://res.cloudinary.com/dxatyucj2/image/upload/v1581899404/go-green/medium_ydl6ei.png',
+      });
+    } else if (this.state.difficulty === 'Hard') {
+      this.setState({
+        imgDifficulty: 'https://res.cloudinary.com/dxatyucj2/image/upload/v1581899404/go-green/hard_rclonl.png',
+      });
+    }
+  }
+
+  checkScore() {
+    this.apiEndpoints
+      .getOneRecipe(this.props.recipeID)
+      .then(response => {
+        if (response.data.reviews.length > 0) {
+          let sumScore = response.data.reviews.reduce((total, next) => total + next.score, 0);
+          let numbScore = response.data.reviews.length;
+          let avgScore = (sumScore/numbScore).toFixed(2);
+          this.setState({
+            score: avgScore,
+          });
+        }
       })
       .catch(err => console.log(err));
   }
@@ -111,6 +179,18 @@ class RecipeCard extends Component {
                 <b>Dish type: </b>
                 {this.props.dishTypes}
               </p>
+            </div>
+            <div>
+              <p>
+              {/* <i class="fas fa-star"></i> */}
+                <b>Average Score: </b>
+                {this.state.score ? this.state.score : "No ratings yet!" }
+              </p>
+            </div>
+            <div>
+              <b>Level of Difficulty: </b>
+              {this.state.difficulty ? <img className='recipe-card-lvl' src={this.state.imgDifficulty} alt={this.state.difficulty} /> : "No ratings yet!" }
+              
             </div>
           </div>
         </div>
