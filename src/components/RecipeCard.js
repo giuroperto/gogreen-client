@@ -188,7 +188,6 @@ class RecipeCard extends Component {
               </p>
             </div>
             <div>
-              <b>Level of Difficulty: </b>
               {this.state.difficulty ? <img className='recipe-card-lvl' src={this.state.imgDifficulty} alt={this.state.difficulty} /> : "No ratings yet!" }
               
             </div>

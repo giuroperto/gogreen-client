@@ -323,7 +323,10 @@ border: transparent;
 .recipe-card-img {
   width: 2vw;
   margin-right: 2vw;
+}
 
+.recipe-card-lvl {
+  width: 10vw;
 }
 
 .profile-recipe-card-infos p {
@@ -771,6 +774,10 @@ color: rgba(100, 96, 92, 0.9);
   justify-content: space-around;
 }
 
+.recipe-score {
+  border: black 1px solid;
+}
+
 .individual-detail {
   align-items: center;
 }
@@ -1155,7 +1162,6 @@ color: rgba(100, 96, 92, 0.9);
     height: 100%;
     padding: 4vh 0;
   }
-
 
   .recipe-img {
     width: 80vw;
