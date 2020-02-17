@@ -49,12 +49,10 @@ class APIAccess {
   //favourites endpoints
 
   favourite(userID, recipeID) {
-    console.log('inside favourite call');
     return this.APIAccess.put('/addfavourite', { userID, recipeID }).then(response => response);
   }
   
   unfavourite(userID, recipeID) {
-    console.log('inside unfavourite call');
     return this.APIAccess.put('/unfavourite', { userID, recipeID }).then(response => response);
   }
 
