@@ -198,11 +198,20 @@ class RecipeDetails extends Component {
       .catch(err => console.log(err));
   }
 
+  renderStars() {
+    return <i className="fas fa-star"></i>
+  }
+
   //TODO add fork button for logged users
 
   render() {
-    console.log(this.props.loggedInUser);
     let stepCount = 0;
+    let stars = [];
+    for (let i = 1; i < 6; i++) {
+      if (this.state.score / i >= 1) {
+        stars.push(i);
+      }
+    }
     return (
       <>
         {this.props.message && (
@@ -227,6 +236,10 @@ class RecipeDetails extends Component {
               <div className="mt-4">
                 <div className="recipe-details-name d-flex justify-content-center align-items-center">
                   <h3>{this.state.uniqueRecipe.name}</h3>
+                  <div className="mx-4 d-flex align-items-center">
+                    { this.state.score ? stars.map(this.renderStars) : '' }
+                    <span className="ml-3 align-items-center">{this.state.allReviews && this.state.allReviews.length}</span>
+                  </div>
                   {
                     this.props.loggedInUser && (
                     this.state.isFavourite ? <div onClick={this.isFavourite} style={{cursor:'pointer'}}><i className="fas fa-heart ml-3 fav-button h3 heart"></i></div> : <div onClick={this.isFavourite} style={{cursor:'pointer'}}><i className="far fa-heart ml-3 fav-button h3"></i></div>
@@ -245,16 +258,6 @@ class RecipeDetails extends Component {
                           </button>
                         </Link>
                       )}
-                  </div>
-                </div>
-                <div>
-                <div>
-                    {this.state.difficulty ? <img className='recipe-card-lvl' src={this.state.imgDifficulty} alt={this.state.difficulty} /> : "No ratings yet!" }
-                  </div>
-                  <div className="m-2 individual-detail">
-                    {/* <i class="fas fa-star"></i> */}
-                    <b>Average Score: </b>
-                    {this.state.score ? this.state.score : "No ratings yet!" }
                   </div>
                 </div>
 
@@ -310,6 +313,11 @@ class RecipeDetails extends Component {
                   />
                   <p>{this.state.cuisine}</p>
                 </div>
+              </div>
+            </div>
+            <div>
+              <div>
+                {this.state.difficulty ? <img className='recipe-card-lvl' src={this.state.imgDifficulty} alt={this.state.difficulty} /> : "No ratings yet!" }
               </div>
             </div>
             <div className="align-center">

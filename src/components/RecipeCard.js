@@ -11,6 +11,7 @@ class RecipeCard extends Component {
       difficulty: '',
       imgDifficulty: '',
       score: 0,
+      nOfReviews: 0,
     };
     this.apiEndpoints = new APIAccess();
     this.isFavourite = this.isFavourite.bind(this);
@@ -77,6 +78,9 @@ class RecipeCard extends Component {
             });
           }
           this.getDifficultyImg();
+          this.setState({
+            nOfReviews: response.data.reviews.length,
+          });
         }
       })
       .catch(err => console.log(err));
@@ -132,7 +136,17 @@ class RecipeCard extends Component {
       .catch(err => console.log(err));
   }
 
+  renderStars() {
+    return <i className="fas fa-star"></i>
+  }
+
   render () {
+    let stars = [];
+    for (let i = 1; i < 6; i++) {
+      if (this.state.score / i >= 1) {
+        stars.push(i);
+      }
+    }
     return (
       <div id="individual-recipe" className="container-fluid" style={{ width: "85%" }} >
         <div className="row">
@@ -146,15 +160,21 @@ class RecipeCard extends Component {
             id="individual-right"
             className="recipe-card-infos col-md-6 d-flex flex-column align-items-start"
           >
-            <div className="mt-3 d-flex align-items-center">
-              <Link to={this.props.link}>
-                <h3>{this.props.name}</h3>
-              </Link>
-              {
-                this.props.loggedInUser && (
-                    this.state.isFavourite ? <div onClick={this.isFavourite} style={{cursor:'pointer'}}><i className="fas fa-heart ml-3 fav-button h3 heart"></i></div> : <div onClick={this.isFavourite} style={{cursor:'pointer'}}><i className="far fa-heart ml-3 fav-button h3"></i></div>
-                )
-              }
+            <div>
+              <div className="mt-3 d-flex align-items-center">
+                <Link to={this.props.link}>
+                  <h3>{this.props.name}</h3>
+                </Link>
+                {
+                  this.props.loggedInUser && (
+                      this.state.isFavourite ? <div onClick={this.isFavourite} style={{cursor:'pointer'}}><i className="fas fa-heart ml-3 fav-button h3 heart"></i></div> : <div onClick={this.isFavourite} style={{cursor:'pointer'}}><i className="far fa-heart ml-3 fav-button h3"></i></div>
+                  )
+                }
+              </div>
+              <div>
+                { this.state.score ? stars.map(this.renderStars) : '' }
+                <span className="ml-3">{this.state.nOfReviews && this.state.nOfReviews}</span>
+              </div>
             </div>
             <div>
               <h4>{this.props.description}</h4>
@@ -178,13 +198,6 @@ class RecipeCard extends Component {
                 <img className='recipe-card-img' src="https://res.cloudinary.com/dxatyucj2/image/upload/v1581042996/go-green/food2_qfzdzm.png" alt="plate" />
                 <b>Dish type: </b>
                 {this.props.dishTypes}
-              </p>
-            </div>
-            <div>
-              <p>
-              {/* <i class="fas fa-star"></i> */}
-                <b>Average Score: </b>
-                {this.state.score ? this.state.score : "No ratings yet!" }
               </p>
             </div>
             <div>
