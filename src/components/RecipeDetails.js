@@ -385,12 +385,13 @@ class RecipeDetails extends Component {
                     </button>
                   </Link>
                 </div>
-                <div>
+                <div className="d-flex flex-column m-3">
                   {
                     this.state.allReviews && this.state.allReviews.length > 0 && this.state.allReviews.map(review => (
                         <div>
-                          <div>
-                            <h3>User: {review.owner.username}</h3>
+                          <div className="d-flex flex-column">
+                            <h3>{review.title}</h3>
+                            <p>by {review.owner.username}</p>
                             <div>Score: {review.score}</div>
                             <div>Difficulty: {review.difficulty}</div>
                             <p>Comments: {review.comment}</p>
@@ -404,6 +405,7 @@ class RecipeDetails extends Component {
                               </div>
                             )
                           }
+                          <hr />
                         </div>
                       ))
                   }
