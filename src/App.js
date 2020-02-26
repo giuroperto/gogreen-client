@@ -19,6 +19,7 @@ import APIAccess from "./components/api/api-access";
 import EditRecipe from './components/EditRecipe';
 import EditReview from './components/EditReview';
 import AddReview from './components/AddReview';
+import ConfirmDeleteReview from './components/ConfirmDeleteReview';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Footer from "./components/Footer";
 import ProtectedRoute from './components/auth/protected-route';
@@ -384,6 +385,31 @@ class App extends Component {
                 getMessage={this.getMessage}
                 path="/user/:username/delete"
                 component={ConfirmDelete}
+              />
+
+              <ProtectedRoute
+                exact
+                user={this.state.loggedInUser}
+                loggedInUser={this.state.loggedInUser}
+                getUser={this.getUser}
+                successMessage={this.successMessage}
+                getMessage={this.getMessage}
+                path="/recipe/:recipeid/review/:reviewid/delete"
+                component={ConfirmDeleteReview}
+              />
+
+              <ProtectedRoute
+                exact
+                user={this.state.loggedInUser}
+                successMessage={this.state.successMessage}
+                getMessage={this.getMessage}
+                message={this.state.message}
+                loggedInUser={this.state.loggedInUser}
+                allData={this.state}
+                path='/recipe/:recipeid/review/:reviewid/edit'
+                component={EditReview}
+                  />
+                )}
               />
 
             </Switch>

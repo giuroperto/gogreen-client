@@ -386,6 +386,7 @@ class RecipeDetails extends Component {
                   </Link>
                 </div>
                 <div className="d-flex flex-column m-3">
+                  <h2>REVIEWS</h2>
                   {
                     this.state.allReviews && this.state.allReviews.length > 0 && this.state.allReviews.map(review => (
                         <div>
@@ -399,9 +400,8 @@ class RecipeDetails extends Component {
                           {
                             this.props.loggedInUser && review.owner.username && review.owner.username === this.props.loggedInUser.username && (
                               <div>
-                              {/* //TODO add links to delete and edit reviews */}
-                                <Link>Delete Review</Link>
-                                <Link>Edit Review</Link>
+                                <Link className="btn btn-primary m-2" to={`/recipe/${this.props.match.params.recipeID}/review/${review._id}/edit`}>Edit Review</Link>
+                                <Link className="btn btn-danger m-2" to={`/recipe/${this.props.match.params.recipeID}/review/${review._id}/delete`}>Delete Review</Link>
                               </div>
                             )
                           }
