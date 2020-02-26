@@ -62,12 +62,12 @@ class APIAccess {
     return this.APIAccess.get(`/review/${reviewID}`).then(response => response);
   }
 
-  addReview(recipeID, owner, score, difficulty, comment) {
-    return this.APIAccess.post('/addreview', { recipeID, owner, score, difficulty, comment }).then(response => response);
+  addReview(recipeID, owner, score, difficulty, title, comment) {
+    return this.APIAccess.post('/addreview', { recipeID, owner, score, difficulty, title, comment }).then(response => response);
   }
 
-  editReview(reviewID, score, difficulty, comment) {
-    return this.APIAccess.put(`/review/${reviewID}`, { score, difficulty, comment}).then(response => response);
+  editReview(reviewID, score, difficulty, title, comment) {
+    return this.APIAccess.put(`/review/${reviewID}`, { score, difficulty, title, comment}).then(response => response);
   }
 
   deleteReview(reviewID) {

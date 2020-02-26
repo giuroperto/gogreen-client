@@ -173,7 +173,7 @@ class RecipeCard extends Component {
               </div>
               <div>
                 { this.state.score ? stars.map(this.renderStars) : '' }
-                <span className="ml-3">{this.state.nOfReviews && this.state.nOfReviews}</span>
+                <span className="ml-3">{this.state.nOfReviews > 0 && this.state.nOfReviews}</span>
               </div>
             </div>
             <div>

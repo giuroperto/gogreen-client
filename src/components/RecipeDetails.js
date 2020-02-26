@@ -385,12 +385,14 @@ class RecipeDetails extends Component {
                     </button>
                   </Link>
                 </div>
-                <div>
+                <div className="d-flex flex-column m-3">
+                  <h2>REVIEWS</h2>
                   {
                     this.state.allReviews && this.state.allReviews.length > 0 && this.state.allReviews.map(review => (
                         <div>
-                          <div>
-                            <h3>User: {review.owner.username}</h3>
+                          <div className="d-flex flex-column">
+                            <h3>{review.title}</h3>
+                            <p>by {review.owner.username}</p>
                             <div>Score: {review.score}</div>
                             <div>Difficulty: {review.difficulty}</div>
                             <p>Comments: {review.comment}</p>
@@ -398,12 +400,12 @@ class RecipeDetails extends Component {
                           {
                             this.props.loggedInUser && review.owner.username && review.owner.username === this.props.loggedInUser.username && (
                               <div>
-                              {/* //TODO add links to delete and edit reviews */}
-                                <Link>Delete Review</Link>
-                                <Link>Edit Review</Link>
+                                <Link className="btn btn-primary m-2" to={`/recipe/${this.props.match.params.recipeID}/review/${review._id}/edit`}>Edit Review</Link>
+                                <Link className="btn btn-danger m-2" to={`/recipe/${this.props.match.params.recipeID}/review/${review._id}/delete`}>Delete Review</Link>
                               </div>
                             )
                           }
+                          <hr />
                         </div>
                       ))
                   }
