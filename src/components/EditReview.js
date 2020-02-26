@@ -11,27 +11,31 @@ class EditReview extends Component {
     this.state = {
       score: 0,
       difficulty: '',
+      title: '',
       comment: '',
       loader: true,
       recipeID: '',
     }
     
     this.apiEndpoints = new APIAccess();
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.redirectPage = this.redirectPage.bind(this);
   }
 
-  //TODO receber via props recipeID, message, get message, etc
-
   componentDidMount() {
-    const { reviewID } = this.props.match.params;
+    const { reviewid } = this.props.match.params;
 
-    this.apiEndpoints.getOneReview(reviewID)
+    this.apiEndpoints.getOneReview(reviewid)
       .then(response => {
+        console.log(response);
         this.setState({
-          score: response.score,
-          difficulty: response.difficulty,
-          comment: response.comment,
+          score: response.data.score,
+          difficulty: response.data.difficulty,
+          comment: response.data.comment,
+          title: response.data.title,
           loader: false,
-          recipeID: this.props.recipeID,
+          recipeID: this.props.match.params.recipeid,
         })
       })
       .catch(err => console.log(err));
@@ -41,9 +45,9 @@ class EditReview extends Component {
   handleSubmit(event) {
     event.preventDefault();
     this.setState({loader: true});
-    const { score, difficulty, comment } = this.state;
-    const { reviewID } = this.props.match.params;
-    this.apiEndpoints.editReview(reviewID, score, difficulty, comment)
+    const { score, difficulty, title, comment } = this.state;
+    const { reviewid } = this.props.match.params;
+    this.apiEndpoints.editReview(reviewid, score, difficulty, title, comment)
       .then(response => {
         this.setState({ loader: false });
         this.props.getMessage(response.status, response.data.message);
@@ -69,8 +73,10 @@ class EditReview extends Component {
   }
 
   render () {
+    console.log(this.props.match.params);
+    console.log(this.state);
     return (
-      <div>
+      <div className="container-fluid profile-edit-form" style={{width: '85%'}}>
       {
         this.state.loader ? (
           <div className='d-flex align-items-center justify-content-center' style={{ height:'80vh'}}>
@@ -79,15 +85,22 @@ class EditReview extends Component {
         ) : (
           <div>
             <form id="editreview" onSubmit={this.handleSubmit}>
-            <h3>Edit Review</h3>
-              <div className="form-row">
+            <h3 className="mt-3 pb-2 title-edit-profile">Edit Review</h3>
+              <div className="form-column">
+                <div className="form-group">
+                  <label htmlFor="title">Title</label>
+                  <input className="form-control" id="title" name="title" onChange={this.handleChange} value={this.state.title} required/>
+                </div>
                 <div className="form-group">
                   <label htmlFor="score">Rating</label>
                   <input type="number" className="form-control" id="score" name="score" onChange={this.handleChange} value={this.state.score} required/>
                 </div>
                 <div className="form-group">
                   <label htmlFor="difficulty">Difficulty</label>
-                  <select className="form-control" id="difficulty" name="difficulty" onChange={this.handleChange} value={this.state.difficulty} required/>
+                  <select value={this.state.difficulty} name="difficulty" id="difficulty" onChange={this.handleChange} multiple={false} className="custom-select form-control">
+                    <option value=''>Choose a difficulty level</option>
+                    {this.props.allData.difficultLevelArr.map((level, idx) => <option key={idx} value={level}>{level}</option>)}
+                  </select>
                 </div>
                 <div className="form-group">
                   <label htmlFor="comment">Comments</label>
