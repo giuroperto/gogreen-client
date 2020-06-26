@@ -68,7 +68,7 @@ On the other hand, the fast sign up form allow user to contribute **adding new r
 
 ## Our team
 
-Go Green was developed with :heart: by:
+Go Green was developed with :green_heart: by:
 
 - [**Alex Chivescu**](https://github.com/AlexChivvy)
 

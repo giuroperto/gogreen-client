@@ -60,12 +60,12 @@ class AddReview extends Component {
   render () {
     return (
       <div>
-        <div>
+        <div className="border p-4 mb-3">
           <form id="addreview" onSubmit={this.handleSubmit}>
           <h3>Add Review</h3>
             <div className="form-column">
               <div className="form-group">
-                <label htmlFor="title">Title:</label>
+                <label htmlFor="title">Title</label>
                 <input type="text" className="form-control" id="title" name="title" onChange={this.handleChange} value={this.state.title} placeholder="Review's Title" required/>
               </div>
             </div>
@@ -88,7 +88,7 @@ class AddReview extends Component {
               {
                 this.props.message && <Message successMessage={this.props.successMessage} message={this.props.message}/>
               }
-              <div className="d-flex justify-content-between mt-4">
+              <div className="d-flex justify-content-center mt-4">
                 <button type="submit" className="btn btn-primary">Save Review</button>
             </div>
             </div>
@@ -104,4 +104,3 @@ export default AddReview;
 
 // edit rating to stars
 // edit difficulty to carrots
-// do average of both to show in the recipes page

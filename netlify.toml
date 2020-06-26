@@ -3,3 +3,4 @@
   to = "/index.html"
   status = 200
   force = false
+  command = "CI= npm run build"
