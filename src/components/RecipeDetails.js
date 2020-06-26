@@ -21,6 +21,8 @@ class RecipeDetails extends Component {
       difficulty: '',
       imgDifficulty: '',
       score: 0,
+      dateMonth: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+      className: 'position-absolute absolute-form',
     };
     this.apiEndpoints = new APIAccess();
     this.updateReviews = this.updateReviews.bind(this);
@@ -30,11 +32,13 @@ class RecipeDetails extends Component {
     this.checkFavourites = this.checkFavourites.bind(this);
     this.checkDifficulty = this.checkDifficulty.bind(this);
     this.checkScore = this.checkScore.bind(this);
+    this.handleScroll = this.handleScroll.bind(this);
     this.getDifficultyImg = this.getDifficultyImg.bind(this);
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
+    window.addEventListener('scroll', this.handleScroll);
 
     this.checkFavourites();
     this.checkScore();
@@ -82,6 +86,28 @@ class RecipeDetails extends Component {
         });
       })
       .catch(err => console.log(err));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  handleScroll(event) {
+    console.log('top', document.documentElement.scrollTop);
+    console.log('height', document.documentElement.scrollHeight);
+    if (document.documentElement.scrollTop > 1000 && document.documentElement.scrollTop < 1560) {
+      this.setState({
+        className: 'position-absolute absolute-form',
+      });
+    } else if (document.documentElement.scrollTop >= 1560 && document.documentElement.scrollTop < (document.documentElement.scrollHeight - 850)) {
+      this.setState({
+        className: 'position-fixed fixed-form',
+      });
+    } else {
+      this.setState({
+        className: 'position-absolute absolute-form',
+      });
+    }
   }
 
   updateReviews(newReview) {
@@ -385,40 +411,48 @@ class RecipeDetails extends Component {
                     </button>
                   </Link>
                 </div>
-                <div className="d-flex flex-column m-3">
-                  <h2>REVIEWS</h2>
-                  {
-                    this.state.allReviews && this.state.allReviews.length > 0 && this.state.allReviews.map(review => (
-                        <div>
-                          <div className="d-flex flex-column">
-                            <h3>{review.title}</h3>
-                            <p>by {review.owner.username}</p>
-                            <div>Score: {review.score}</div>
-                            <div>Difficulty: {review.difficulty}</div>
-                            <p>Comments: {review.comment}</p>
-                          </div>
-                          {
-                            this.props.loggedInUser && review.owner.username && review.owner.username === this.props.loggedInUser.username && (
-                              <div>
-                                <Link className="btn btn-primary m-2" to={`/recipe/${this.props.match.params.recipeID}/review/${review._id}/edit`}>Edit Review</Link>
-                                <Link className="btn btn-danger m-2" to={`/recipe/${this.props.match.params.recipeID}/review/${review._id}/delete`}>Delete Review</Link>
-                              </div>
-                            )
-                          }
-                          <hr />
-                        </div>
-                      ))
-                  }
-                </div>
-                {
-                  this.props.loggedInUser && (
-                    <div className="mt-5">
-                      <AddReview updateReviews={this.updateReviews} loggedInUser={this.props.loggedInUser} getMessage={this.props.getMessage} successMessage={this.props.successMessage} difficulty={this.props.difficulty} message={this.props.message} {...this.props} />
-                    </div>
-                  )
-                }
               </div>
             </div>
+            <div className="d-flex flex-column justify-content-start reviews-box m-3 mb-5">
+              <h2 className="text-left">Reviews</h2>
+              {
+                this.state.allReviews && this.state.allReviews.length > 0 && this.state.allReviews.map(review => (
+                    <div>
+                      <div className="d-flex flex-column">
+                        <div className="d-flex flex-row">
+                          <img className="img-thumbnail rounded-circle w-25" src={review.owner.picture} alt="user profile pic" />
+                          <div className="d-flex flex-column ml-4 justify-content-center align-items-start">
+                            <span>{review.owner.username}</span>
+                            <span>{this.state.dateMonth[new Date(review.createdAt).getMonth()]} {new Date(review.createdAt).getFullYear()}</span>
+                          </div>
+                        </div>
+                        <div className="d-flex justify-content-around mb-2 mt-2">
+                          <div>Score: {review.score}</div>
+                          <div>Difficulty: {review.difficulty}</div>
+                        </div>
+                        <h3 className="text-left">{review.title}</h3>
+                        <p className="text-left">Comments: {review.comment}</p>
+                      </div>
+                      {
+                        this.props.loggedInUser && review.owner.username && review.owner.username === this.props.loggedInUser.username && (
+                          <div>
+                            <Link className="btn btn-primary m-2" to={`/recipe/${this.props.match.params.recipeID}/review/${review._id}/edit`}><i class="far fa-edit"></i></Link>
+                            <Link className="btn btn-danger m-2" to={`/recipe/${this.props.match.params.recipeID}/review/${review._id}/delete`}><i class="far fa-trash-alt"></i></Link>
+                          </div>
+                        )
+                      }
+                      <hr />
+                    </div>
+                  ))
+              }
+            </div>
+            {
+              this.props.loggedInUser && (
+                <div className={`mt-5 ${this.state.className}`}>
+                  <AddReview updateReviews={this.updateReviews} loggedInUser={this.props.loggedInUser} getMessage={this.props.getMessage} successMessage={this.props.successMessage} difficulty={this.props.difficulty} message={this.props.message} {...this.props} />
+                </div>
+              )
+            }
           </div>
         ) : (
           <div
