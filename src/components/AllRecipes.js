@@ -13,6 +13,10 @@ class AllRecipes extends Component {
     super(props)
   }
 
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
 render(){
     return(
       <>
@@ -40,10 +44,10 @@ render(){
                 } else {
                   cleanDishType = (element.dishTypes[0]).slice(0,1).toUpperCase()+(element.dishTypes[0]).slice(1,(element.dishTypes[0]).length)
                 }
-               
+
                 let cleanLink = "/recipe/"+ element._id
 
-                return (<div  data-aos="fade-right"><RecipeCard name={element.name} image={element.picture} description={element.description} owner={determinedOwner} link={cleanLink} time={element.totalTimeMinutes} vegan={element.vegan} cuisines={element.cuisines} dishTypes={cleanDishType} allRecipes = {this.props.allData.allRecipes}/></div>);
+                return (<div  data-aos="fade-right"><RecipeCard name={element.name} image={element.picture} description={element.description} owner={determinedOwner} link={cleanLink} time={element.totalTimeMinutes} vegan={element.vegan} cuisines={element.cuisines} dishTypes={cleanDishType} allRecipes = {this.props.allData.allRecipes} loggedInUser={this.props.allData.loggedInUser} recipeID={element._id} /></div>);
 
             })}  
           </div>

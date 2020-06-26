@@ -32,7 +32,7 @@ class Signup extends Component {
     let { username, password, firstName, lastName, email, picture } = this.state
 
     // default profile picture
-    if (picture === '') {picture = 'https://res.cloudinary.com/dxatyucj2/image/upload/v1580833315/go-green/vegetalwhite.jpg.jpg'}
+    if (picture === '') {picture = 'https://res.cloudinary.com/dxatyucj2/image/upload/v1581890599/go-green/a_lutheran_turned_vegetarian_kf7k2e.jpg'}
 
     // existe um problema de asincronicidade entre o upload de imagem
     // e o submit. caso o usuário envie os dados logo após selecionar
