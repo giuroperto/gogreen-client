@@ -818,8 +818,10 @@ color: rgba(100, 96, 92, 0.9);
 
 .absolute-form {
   right: 80px;
-  bottom: 1500px;
-  background-color: white;
+  bottom: 996px;
+  background-color: rgb(248, 247, 247);
+  border: rgb(146, 146, 146) solid 4px;
+  border-radius: 6px;
 }
 
 /* EDIT RECIPE FORM */

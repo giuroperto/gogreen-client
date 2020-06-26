@@ -93,11 +93,9 @@ class RecipeDetails extends Component {
   }
 
   handleScroll(event) {
-    console.log('top', document.documentElement.scrollTop);
-    console.log('height', document.documentElement.scrollHeight);
-    if (document.documentElement.scrollTop > 1000 && document.documentElement.scrollTop < 1560) {
+    if (document.documentElement.scrollTop > 1000) {
       this.setState({
-        className: 'position-absolute absolute-form',
+        className: 'position-fixed absolute-form',
       });
     } else if (document.documentElement.scrollTop >= 1560 && document.documentElement.scrollTop < (document.documentElement.scrollHeight - 850)) {
       this.setState({
@@ -105,7 +103,7 @@ class RecipeDetails extends Component {
       });
     } else {
       this.setState({
-        className: 'position-absolute absolute-form',
+        className: 'position-fixed absolute-form',
       });
     }
   }

@@ -60,7 +60,7 @@ class AddReview extends Component {
   render () {
     return (
       <div>
-        <div className="border p-4 mb-3">
+        <div className="p-4 mb-3">
           <form id="addreview" onSubmit={this.handleSubmit}>
           <h3>Add Review</h3>
             <div className="form-column">
