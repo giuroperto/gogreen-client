@@ -817,8 +817,8 @@ color: rgba(100, 96, 92, 0.9);
 }
 
 .absolute-form {
-  right: 80px;
-  bottom: 996px;
+  right: 50px;
+  bottom: 260px;
   background-color: rgb(248, 247, 247);
   border: rgb(146, 146, 146) solid 4px;
   border-radius: 6px;
