@@ -64,7 +64,7 @@ class EditProfile extends Component {
     const { username } = this.props.match.params;
     
     if (picture === '' || picture === null) {
-      picture = 'https://res.cloudinary.com/dxatyucj2/image/upload/v1580833315/go-green/vegetalwhite.jpg.jpg'
+      picture = 'https://res.cloudinary.com/dxatyucj2/image/upload/v1581890599/go-green/a_lutheran_turned_vegetarian_kf7k2e.jpg'
     }
     
     this.apiEndpoints.editUser(username, firstName, lastName, email, usernameForm, oldPassword, newPassword, picture)

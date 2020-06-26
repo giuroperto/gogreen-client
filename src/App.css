@@ -248,7 +248,7 @@ border: transparent;
 }
 
 
-/* ALL RECEPIES */
+/* ALL RECIPES */
 
 .all-recipes-header {
   position: relative;
@@ -323,7 +323,10 @@ border: transparent;
 .recipe-card-img {
   width: 2vw;
   margin-right: 2vw;
+}
 
+.recipe-card-lvl {
+  width: 10vw;
 }
 
 .profile-recipe-card-infos p {
@@ -436,6 +439,9 @@ color: rgba(100, 96, 92, 0.9);
   border-bottom: none;
 }
 
+.heart {
+  color: red;
+}
 
 /* FEATURED RECIPES */
 
@@ -607,8 +613,8 @@ color: rgba(100, 96, 92, 0.9);
 .input-container-picture {
   display: flex;
   flex-direction: column;
-  justify-content: start;
-  align-items: start;
+  justify-content: flex-start;
+  align-items: flex-start;
   color: rgb(141, 124, 108);
 }
 
@@ -659,9 +665,7 @@ color: rgba(100, 96, 92, 0.9);
 
 .profile-container img{
   border-radius: 50%;
-  width: 15vw;
-  border: solid rgba(126, 119, 115, 0.9) 0.2rem;
-  height: fit-content;
+  border: solid rgba(126, 119, 115, 0.9) 0.1rem;
 }
 
 .recipes-favourites-container {
@@ -770,6 +774,10 @@ color: rgba(100, 96, 92, 0.9);
   justify-content: space-around;
 }
 
+.recipe-score {
+  border: black 1px solid;
+}
+
 .individual-detail {
   align-items: center;
 }
@@ -796,6 +804,22 @@ color: rgba(100, 96, 92, 0.9);
 .page-details p {
   font-size: 1.3rem;
   letter-spacing: 0.1rem;
+}
+
+.reviews-box {
+  width: 50vw;
+}
+
+.fixed-form {
+  top: 50px;
+  right: 80px;
+  background-color: white;
+}
+
+.absolute-form {
+  right: 80px;
+  bottom: 1500px;
+  background-color: white;
 }
 
 /* EDIT RECIPE FORM */
@@ -1154,7 +1178,6 @@ color: rgba(100, 96, 92, 0.9);
     height: 100%;
     padding: 4vh 0;
   }
-
 
   .recipe-img {
     width: 80vw;

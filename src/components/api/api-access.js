@@ -3,7 +3,6 @@ import axios from 'axios';
 class APIAccess {
   constructor() {
     this.APIAccess = axios.create({
-      // baseURL: 'http://go-green-recipes.herokuapp.com/api',
       baseURL: process.env.REACT_APP_API_URL,
       withCredentials: true,
     });
@@ -45,6 +44,34 @@ class APIAccess {
 
   handleUpload (theFile) {
     return this.APIAccess.post('/upload', theFile).then(res => res);
+  }
+
+  //favourites endpoints
+
+  favourite(userID, recipeID) {
+    return this.APIAccess.put('/addfavourite', { userID, recipeID }).then(response => response);
+  }
+  
+  unfavourite(userID, recipeID) {
+    return this.APIAccess.put('/unfavourite', { userID, recipeID }).then(response => response);
+  }
+
+  //reviews endpoints
+
+  getOneReview(reviewID) {
+    return this.APIAccess.get(`/review/${reviewID}`).then(response => response);
+  }
+
+  addReview(recipeID, owner, score, difficulty, title, comment) {
+    return this.APIAccess.post('/addreview', { recipeID, owner, score, difficulty, title, comment }).then(response => response);
+  }
+
+  editReview(reviewID, score, difficulty, title, comment) {
+    return this.APIAccess.put(`/review/${reviewID}`, { score, difficulty, title, comment}).then(response => response);
+  }
+
+  deleteReview(reviewID) {
+    return this.APIAccess.delete(`/review/${reviewID}`).then(response => response);
   }
 
 }

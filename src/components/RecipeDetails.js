@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Message from "./Message";
+import AddReview from "../components/AddReview";
 import { Link } from "react-router-dom";
 import APIAccess from "./api/api-access";
 import Loader from "react-loader-spinner";
@@ -14,18 +15,39 @@ class RecipeDetails extends Component {
       determinedOwner: "",
       cleanDishType: "",
       ingredients: "",
-      count: 0
+      count: 0,
+      allReviews: [],
+      isFavourite: false,
+      difficulty: '',
+      imgDifficulty: '',
+      score: 0,
+      dateMonth: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+      className: 'position-absolute absolute-form',
     };
     this.apiEndpoints = new APIAccess();
+    this.updateReviews = this.updateReviews.bind(this);
+    this.isFavourite = this.isFavourite.bind(this);
+    this.favourite = this.favourite.bind(this);
+    this.unfavourite = this.unfavourite.bind(this);
+    this.checkFavourites = this.checkFavourites.bind(this);
+    this.checkDifficulty = this.checkDifficulty.bind(this);
+    this.checkScore = this.checkScore.bind(this);
+    this.handleScroll = this.handleScroll.bind(this);
+    this.getDifficultyImg = this.getDifficultyImg.bind(this);
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
+    window.addEventListener('scroll', this.handleScroll);
+
+    this.checkFavourites();
+    this.checkScore();
+    this.checkDifficulty();
 
     this.apiEndpoints
       .getOneRecipe(this.props.match.params.recipeID)
       .then(response => {
-        console.log("im in");
+
         let givenUniqueRecipe = response.data;
         let givenDeterminedOwner = "";
         if (givenUniqueRecipe.owner === undefined) {
@@ -59,16 +81,163 @@ class RecipeDetails extends Component {
           determinedOwner: givenDeterminedOwner,
           cleanDishType: givenCleanDishType,
           cuisine: givenCuisine,
-          ingredients: givenIngredients
+          ingredients: givenIngredients,
+          allReviews: response.data.reviews,
         });
       })
       .catch(err => console.log(err));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  handleScroll(event) {
+    console.log('top', document.documentElement.scrollTop);
+    console.log('height', document.documentElement.scrollHeight);
+    if (document.documentElement.scrollTop > 1000 && document.documentElement.scrollTop < 1560) {
+      this.setState({
+        className: 'position-absolute absolute-form',
+      });
+    } else if (document.documentElement.scrollTop >= 1560 && document.documentElement.scrollTop < (document.documentElement.scrollHeight - 850)) {
+      this.setState({
+        className: 'position-fixed fixed-form',
+      });
+    } else {
+      this.setState({
+        className: 'position-absolute absolute-form',
+      });
+    }
+  }
+
+  updateReviews(newReview) {
+    let reviewsArr = this.state.allReviews;
+    reviewsArr.push(newReview);
+    this.setState({
+      allReviews: reviewsArr,
+    });
+  }
+
+  checkFavourites() {
+    const { username } = this.props.loggedInUser;
+
+    this.apiEndpoints
+      .getOneUser(username)
+      .then((response) => {
+        let { recipeID } = this.props.match.params;
+        if (response.data.favourites.length > 0 && response.data.favourites.filter((e) => e._id === recipeID).length > 0) {
+          this.setState({
+            isFavourite: true,
+          });
+        }
+
+      })
+      .catch(err => console.log(err));
+  }
+
+  isFavourite() {
+    if (this.state.isFavourite) {
+      this.unfavourite();
+    } else {
+      this.favourite();
+    }
+    this.setState({
+      isFavourite: !this.state.isFavourite,
+    })
+  }
+
+  favourite() {
+    this.apiEndpoints
+      .favourite(this.props.loggedInUser, this.props.match.params.recipeID)
+      .then(response => {
+        console.log('favoritando');
+      })
+      .catch(err => console.log(err));
+  }
+    
+  unfavourite() {
+    this.apiEndpoints
+      .unfavourite(this.props.loggedInUser, this.props.match.params.recipeID)
+      .then(response => {
+        console.log('desfavoritando');
+    })
+      .catch(err => console.log(err));
+  }
+
+  checkDifficulty() {
+    this.apiEndpoints
+      .getOneRecipe(this.props.match.params.recipeID)
+      .then(response => {
+        if (response.data.reviews.length > 0) {
+          let numberEasy = response.data.reviews.filter((review) => review.difficulty === 'Easy').length;
+          let numberMedium = response.data.reviews.filter((review) => review.difficulty === 'Medium').length;
+          let numberHard = response.data.reviews.filter((review) => review.difficulty === 'Hard').length;
+
+          if (numberEasy > numberMedium && numberEasy > numberHard) {
+            this.setState({
+              difficulty: 'Easy',
+            });
+          } else if (numberMedium > numberEasy && numberMedium > numberHard) {
+            this.setState({
+              difficulty: 'Medium',
+            });
+          } else {
+            this.setState({
+              difficulty: 'Hard',
+            });
+          }
+          this.getDifficultyImg();
+        }
+      })
+      .catch(err => console.log(err));
+  }
+
+  getDifficultyImg() {
+    if (this.state.difficulty === 'Easy') {
+      this.setState({
+        imgDifficulty: 'https://res.cloudinary.com/dxatyucj2/image/upload/v1581899404/go-green/easy_nztpqt.png',
+      });
+    } else if (this.state.difficulty === 'Medium') {
+      this.setState({
+        imgDifficulty: 'https://res.cloudinary.com/dxatyucj2/image/upload/v1581899404/go-green/medium_ydl6ei.png',
+      });
+    } else if (this.state.difficulty === 'Hard') {
+      this.setState({
+        imgDifficulty: 'https://res.cloudinary.com/dxatyucj2/image/upload/v1581899404/go-green/hard_rclonl.png',
+      });
+    }
+  }
+
+  checkScore() {
+    this.apiEndpoints
+      .getOneRecipe(this.props.match.params.recipeID)
+      .then(response => {
+        if (response.data.reviews.length > 0) {
+          let sumScore = response.data.reviews.reduce((total, next) => total + next.score, 0);
+          let numbScore = response.data.reviews.length;
+          let avgScore = (sumScore/numbScore).toFixed(2);
+          this.setState({
+            score: avgScore,
+          });
+        }
+      })
+      .catch(err => console.log(err));
+  }
+
+  renderStars() {
+    return <i className="fas fa-star"></i>
   }
 
   //TODO add fork button for logged users
 
   render() {
     let stepCount = 0;
+    let stars = [];
+    for (let i = 1; i < 6; i++) {
+      if (this.state.score / i >= 1) {
+        stars.push(i);
+      }
+    }
     return (
       <>
         {this.props.message && (
@@ -93,6 +262,15 @@ class RecipeDetails extends Component {
               <div className="mt-4">
                 <div className="recipe-details-name d-flex justify-content-center align-items-center">
                   <h3>{this.state.uniqueRecipe.name}</h3>
+                  <div className="mx-4 d-flex align-items-center">
+                    { this.state.score ? stars.map(this.renderStars) : '' }
+                    <span className="ml-3 align-items-center">{this.state.allReviews && this.state.allReviews.length}</span>
+                  </div>
+                  {
+                    this.props.loggedInUser && (
+                    this.state.isFavourite ? <div onClick={this.isFavourite} style={{cursor:'pointer'}}><i className="fas fa-heart ml-3 fav-button h3 heart"></i></div> : <div onClick={this.isFavourite} style={{cursor:'pointer'}}><i className="far fa-heart ml-3 fav-button h3"></i></div>
+                    )
+                  }
                   <div className="edit-button ml-3 mb-3">
                     {this.props.loggedInUser &&
                       this.state.uniqueRecipe.owner &&
@@ -107,6 +285,8 @@ class RecipeDetails extends Component {
                         </Link>
                       )}
                   </div>
+                </div>
+
                   {/* <div className="edit-button ml-3">
                 {this.props.loggedInUser && (
                   <Link to={``}>
@@ -116,7 +296,6 @@ class RecipeDetails extends Component {
                   </Link>
                 )}
               </div> */}
-                </div>
               </div>
               <div>
                 <span className="recipe-description">
@@ -160,6 +339,11 @@ class RecipeDetails extends Component {
                   />
                   <p>{this.state.cuisine}</p>
                 </div>
+              </div>
+            </div>
+            <div>
+              <div>
+                {this.state.difficulty ? <img className='recipe-card-lvl' src={this.state.imgDifficulty} alt={this.state.difficulty} /> : "No ratings yet!" }
               </div>
             </div>
             <div className="align-center">
@@ -219,12 +403,56 @@ class RecipeDetails extends Component {
                   </div>
                 </div>
               )}
-              <Link className="my-3" to="/allrecipes">
-                <button type="button" className="btn btn-success">
-                  Return to all recipes
-                </button>
-              </Link>
+              <div className="d-flex flex-column">
+                <div>
+                  <Link className="my-3" to="/allrecipes">
+                    <button type="button" className="btn btn-success">
+                      Return to all recipes
+                    </button>
+                  </Link>
+                </div>
+              </div>
             </div>
+            <div className="d-flex flex-column justify-content-start reviews-box m-3 mb-5">
+              <h2 className="text-left">Reviews</h2>
+              {
+                this.state.allReviews && this.state.allReviews.length > 0 && this.state.allReviews.map(review => (
+                    <div>
+                      <div className="d-flex flex-column">
+                        <div className="d-flex flex-row">
+                          <img className="img-thumbnail rounded-circle w-25" src={review.owner.picture} alt="user profile pic" />
+                          <div className="d-flex flex-column ml-4 justify-content-center align-items-start">
+                            <span>{review.owner.username}</span>
+                            <span>{this.state.dateMonth[new Date(review.createdAt).getMonth()]} {new Date(review.createdAt).getFullYear()}</span>
+                          </div>
+                        </div>
+                        <div className="d-flex justify-content-around mb-2 mt-2">
+                          <div>Score: {review.score}</div>
+                          <div>Difficulty: {review.difficulty}</div>
+                        </div>
+                        <h3 className="text-left">{review.title}</h3>
+                        <p className="text-left">Comments: {review.comment}</p>
+                      </div>
+                      {
+                        this.props.loggedInUser && review.owner.username && review.owner.username === this.props.loggedInUser.username && (
+                          <div>
+                            <Link className="btn btn-primary m-2" to={`/recipe/${this.props.match.params.recipeID}/review/${review._id}/edit`}><i class="far fa-edit"></i></Link>
+                            <Link className="btn btn-danger m-2" to={`/recipe/${this.props.match.params.recipeID}/review/${review._id}/delete`}><i class="far fa-trash-alt"></i></Link>
+                          </div>
+                        )
+                      }
+                      <hr />
+                    </div>
+                  ))
+              }
+            </div>
+            {
+              this.props.loggedInUser && (
+                <div className={`mt-5 ${this.state.className}`}>
+                  <AddReview updateReviews={this.updateReviews} loggedInUser={this.props.loggedInUser} getMessage={this.props.getMessage} successMessage={this.props.successMessage} difficulty={this.props.difficulty} message={this.props.message} {...this.props} />
+                </div>
+              )
+            }
           </div>
         ) : (
           <div

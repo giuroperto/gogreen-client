@@ -38,7 +38,9 @@ const ProfileRecipeCard = props => {
                     <p>
                       <img className='profile-recipe-card-img' src="https://res.cloudinary.com/dxatyucj2/image/upload/v1581042983/go-green/hat-icon_txapif.png" alt="chef" />
                       <b>Created by:  </b>
-                      {props.owner.username}
+                      {
+                        props.owner ? props.owner.username : props.ownerAPI
+                      }
                     </p>
                   </div>
                   <div>

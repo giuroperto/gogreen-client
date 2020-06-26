@@ -16,7 +16,10 @@ import ConfirmDeleteRecipe from "./components/ConfirmDeleteRecipe";
 import RecipeDetails from "./components/RecipeDetails";
 import AuthService from "./components/auth/auth-services";
 import APIAccess from "./components/api/api-access";
-import EditRecipe from './components/EditRecipe'
+import EditRecipe from './components/EditRecipe';
+import EditReview from './components/EditReview';
+import AddReview from './components/AddReview';
+import ConfirmDeleteReview from './components/ConfirmDeleteReview';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Footer from "./components/Footer";
 import ProtectedRoute from './components/auth/protected-route';
@@ -168,6 +171,7 @@ class App extends Component {
     this.getRecipes();
     this.filterNavBar();
   }
+
   getSearchWord(word) {
     this.setState({
       searchWord: word
@@ -175,6 +179,7 @@ class App extends Component {
     this.getRecipes();
     this.filterNavBar();
   }
+
   getVeganState(boolean) {
     this.setState({
       searchVeganOnly: boolean
@@ -206,6 +211,7 @@ class App extends Component {
       successMessage: false,
     });
   }
+
   getRecipes() {
     this.apiEndpoints
       .getAllRecipes()
@@ -224,8 +230,9 @@ class App extends Component {
       this.service
         .loggedin()
         .then(response => {
+          console.log('looking for favs', response)
           this.setState({
-            loggedInUser: response.data
+            loggedInUser: response.data,
           });
         })
         .catch(err => {
@@ -243,6 +250,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.state.loggedInUser);
     this.fetchUser();
     return (
       <div className="App">
@@ -308,6 +316,8 @@ class App extends Component {
                 path="/addrecipe"
                 component={AddRecipe}
               />
+              //TODO add protected route
+              <Route exact path="/review/:id/edit" component={EditReview} />
               <Route
                 exact
                 path="/user/:username"
@@ -331,8 +341,10 @@ class App extends Component {
                   <RecipeDetails
                     allRecipes={this.state.allRecipes}
                     message={this.state.message}
+                    getMessage={this.getMessage}
                     successMessage={this.state.successMessage}
                     loggedInUser={this.state.loggedInUser}
+                    difficulty={this.state.difficultLevelArr}
                     {...props}
                   />
                 )}
@@ -373,6 +385,31 @@ class App extends Component {
                 getMessage={this.getMessage}
                 path="/user/:username/delete"
                 component={ConfirmDelete}
+              />
+
+              <ProtectedRoute
+                exact
+                user={this.state.loggedInUser}
+                loggedInUser={this.state.loggedInUser}
+                getUser={this.getUser}
+                successMessage={this.successMessage}
+                getMessage={this.getMessage}
+                path="/recipe/:recipeid/review/:reviewid/delete"
+                component={ConfirmDeleteReview}
+              />
+
+              <ProtectedRoute
+                exact
+                user={this.state.loggedInUser}
+                successMessage={this.state.successMessage}
+                getMessage={this.getMessage}
+                message={this.state.message}
+                loggedInUser={this.state.loggedInUser}
+                allData={this.state}
+                path='/recipe/:recipeid/review/:reviewid/edit'
+                component={EditReview}
+                  />
+                )}
               />
 
             </Switch>
